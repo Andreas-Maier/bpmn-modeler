@@ -36,17 +36,19 @@ public class CreateStartEventFeatureTest extends AbstractFeatureTest {
 		
 		IRectangle laneBounds = LayoutUtil.getAbsoluteBounds(laneShape);
 		
+		Point addPosition = point(40, 20);
+		
 		// when
 		addStartEvent(getDiagramTypeProvider())
-			.atLocation(40, 20)
+			.atLocation(addPosition)
 			.sized(36, 36)
 			.toContainer((ContainerShape) laneShape)
 			.execute();
 		
 		// then
 		Point expectedPosition = point(
-				laneBounds.getX() + 40 - 36 / 2, 
-				laneBounds.getY() + 20 - 36 / 2);
+				laneBounds.getX() + addPosition.getX() - 36 / 2, 
+				laneBounds.getY() + addPosition.getY() - 36 / 2);
 		
 		Shape startEventShape = Util.findShapeByBusinessObjectId(diagram, "StartEvent_1");
 		BPMNShape bpmnShape = DIUtils.getShape(startEventShape);

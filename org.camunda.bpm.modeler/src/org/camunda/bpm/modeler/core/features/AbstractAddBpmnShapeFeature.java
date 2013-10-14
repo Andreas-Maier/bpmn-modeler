@@ -17,6 +17,7 @@ import static org.camunda.bpm.modeler.core.layout.util.ConversionUtil.rectangle;
 import org.camunda.bpm.modeler.core.ModelHandler;
 import org.camunda.bpm.modeler.core.di.DIUtils;
 import org.camunda.bpm.modeler.core.layout.util.LayoutUtil;
+import org.camunda.bpm.modeler.core.layout.util.LayoutUtil.BoxingStrategy;
 import org.camunda.bpm.modeler.core.preferences.Bpmn2Preferences;
 import org.camunda.bpm.modeler.core.utils.AnchorUtil;
 import org.camunda.bpm.modeler.core.utils.FeatureSupport;
@@ -31,6 +32,7 @@ import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ITargetContext;
 import org.eclipse.graphiti.features.context.impl.AddContext;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 
@@ -278,11 +280,47 @@ public abstract class AbstractAddBpmnShapeFeature<T extends BaseElement> extends
 	protected void adjustLocation(IAddContext context, int width, int height) {
 		
 		if (context instanceof AddContext) {
-			int x = context.getX() - width / 2;
-			int y = context.getY() - height / 2;
-		
 			AddContext addContext = (AddContext) context;
+			
+			int x = addContext.getX() - width / 2;
+			int y = addContext.getY() - height / 2;
+		
 			addContext.setLocation(x, y);
+			
+			BoxingStrategy boxingStrategy = getBoxingStrategy(context);
+			if (boxingStrategy != BoxingStrategy.NONE) {
+				boxToParent(context, width, height, boxingStrategy);
+			}
+		}
+	}
+	
+	/**
+	 * Return true if add context
+	 * @param context
+	 * @return
+	 */
+	protected BoxingStrategy getBoxingStrategy(IAddContext context) {
+		return BoxingStrategy.NONE;
+	}
+	
+	protected void boxToParent(IAddContext context, int width, int height, BoxingStrategy strategy) {
+
+		if (context instanceof AddContext) {
+			AddContext addContext = (AddContext) context;
+
+			ContainerShape targetContainer = context.getTargetContainer();
+			
+			// do not perform boxing on diagram
+			if (targetContainer instanceof Diagram) {
+				return;
+			}
+			
+			IRectangle targetBounds = LayoutUtil.getRelativeBounds(targetContainer);
+			
+			IRectangle box = LayoutUtil.box(rectangle(addContext.getX(), addContext.getY(), width, height), targetBounds, 10, strategy);
+			
+			addContext.setLocation(box.getX(), box.getY());
+			addContext.setSize(box.getWidth(), box.getHeight());
 		}
 	}
 	
