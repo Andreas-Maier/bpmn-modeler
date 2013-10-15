@@ -90,8 +90,6 @@ public class BpmnToolBehaviourFeature extends DefaultToolBehaviorProvider
 	@Override
 	public IPaletteCompartmentEntry[] getPalette() {
 
-		BPMN2Editor editor = (BPMN2Editor) getDiagramTypeProvider()
-				.getDiagramEditor();
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
 		Object object = Graphiti.getLinkService()
 				.getBusinessObjectForLinkedPictogramElement(diagram);
@@ -380,8 +378,7 @@ public class BpmnToolBehaviourFeature extends DefaultToolBehaviorProvider
 
 	@Override
 	public void postExecute(IExecutionInfo executionInfo) {
-		BPMN2Editor editor = (BPMN2Editor) getDiagramTypeProvider()
-				.getDiagramEditor();
+		BPMN2Editor editor = (BPMN2Editor) getDiagramTypeProvider().getDiagramBehavior().getDiagramContainer();
 		for (IFeatureAndContext fc : executionInfo.getExecutionList()) {
 			IContext context = fc.getContext();
 			IFeature feature = fc.getFeature();
@@ -394,9 +391,8 @@ public class BpmnToolBehaviourFeature extends DefaultToolBehaviorProvider
 					((IBpmn2CreateFeature) feature).postExecute(executionInfo);
 				}
 			} else if (context instanceof UpdateContext) {
-				editor.setPictogramElementForSelection(((UpdateContext) context)
-						.getPictogramElement());
-				editor.refresh();
+				editor.setPictogramElementForSelection(((UpdateContext) context).getPictogramElement());
+				getDiagramTypeProvider().getDiagramBehavior().refresh();
 			}
 		}
 	}
@@ -485,7 +481,7 @@ public class BpmnToolBehaviourFeature extends DefaultToolBehaviorProvider
 						.setGraphicsAlgorithm(labelShape != null ? labelShape.getGraphicsAlgorithm() : customContext.getInnerGraphicsAlgorithm());
 				
 				directEditingInfo.setActive(true);
-				getDiagramEditor().refresh();
+				getDiagramBehavior().refresh();
 			}
 		};
 	}

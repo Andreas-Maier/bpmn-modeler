@@ -46,11 +46,11 @@ public class PropertiesLabelProvider extends LabelProvider {
 			PictogramElement pe = BusinessObjectUtil.getPictogramElementForSelection((ISelection)element);
 		    IFeature cf = fp.getCreateFeatureForPictogramElement(pe);
 			if (cf instanceof AbstractBpmn2CreateFeature) {
-				return GraphitiUi.getImageService().getImageForId(
+				return GraphitiUi.getImageService().getImageForId(editor.getDiagramTypeProvider().getContextId(),
 						((AbstractBpmn2CreateFeature)cf).getCreateImageId());
 			}
 			if (cf instanceof AbstractCreateFlowFeature) {
-				return GraphitiUi.getImageService().getImageForId(
+				return GraphitiUi.getImageService().getImageForId(editor.getDiagramTypeProvider().getContextId(),
 						((AbstractCreateFlowFeature)cf).getCreateImageId());
 			}
         }
