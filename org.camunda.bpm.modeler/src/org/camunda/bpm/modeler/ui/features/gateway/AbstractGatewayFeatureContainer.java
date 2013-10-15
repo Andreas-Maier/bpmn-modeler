@@ -115,7 +115,7 @@ public abstract class AbstractGatewayFeatureContainer extends BaseElementFeature
 
 		@Override
 		public boolean canUpdate(IUpdateContext context) {
-			IFeatureProvider featureProvider = getDiagramEditor().getDiagramTypeProvider().getFeatureProvider();
+			IFeatureProvider featureProvider = getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getFeatureProvider();
 
 			Shape gatewayShape = (Shape) context.getPictogramElement();
 			for (Anchor anchor : gatewayShape.getAnchors()) {
@@ -144,7 +144,7 @@ public abstract class AbstractGatewayFeatureContainer extends BaseElementFeature
 
 		@Override
 		public IReason updateNeeded(IUpdateContext context) {
-			IFeatureProvider featureProvider = getDiagramEditor().getDiagramTypeProvider().getFeatureProvider();
+			IFeatureProvider featureProvider = getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getFeatureProvider();
 
 			Shape gatewayShape = (Shape) context.getPictogramElement();
 			for (Anchor anchor : gatewayShape.getAnchors()) {
@@ -173,7 +173,7 @@ public abstract class AbstractGatewayFeatureContainer extends BaseElementFeature
 
 		@Override
 		public boolean update(IUpdateContext context) {
-			IFeatureProvider featureProvider = getDiagramEditor().getDiagramTypeProvider().getFeatureProvider();
+			IFeatureProvider featureProvider = getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getFeatureProvider();
 
 			ContainerShape gatewayShape = (ContainerShape) context.getPictogramElement();
 			for (Anchor anchor : gatewayShape.getAnchors()) {
