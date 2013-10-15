@@ -342,6 +342,6 @@ public class DefaultResizeBPMNShapeFeature extends DefaultResizeShapeFeature {
 	 * @return
 	 */
 	protected List<PictogramElement> getEditorSelection() {
-		return Arrays.asList(getDiagramEditor().getSelectedPictogramElements());
+		return Arrays.asList(getDiagramBehavior().getDiagramContainer().getSelectedPictogramElements());
 	}
 }
