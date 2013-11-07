@@ -381,4 +381,43 @@
 		<super type="org.eclipse.core.resources.problemmarker"></super>
 		<persistent value="false"></persistent>
 	</extension>
+ <extension
+       id="bpmn_modeler"
+       point="org.eclipse.core.runtime.products">
+    <product
+          application="org.eclipse.ui.ide.workbench"
+          name="BPMN Modeler">
+       <property
+             name="windowImages"
+             value="eclipse16.gif,eclipse32.gif,eclipse48.gif,eclipse16.png,eclipse32.png">
+       </property>
+       <property
+             name="aboutText"
+             value="%productBlurb">
+       </property>
+       <property
+             name="aboutImage"
+             value="eclipse_lg.gif">
+       </property>
+       <property
+             name="appName"
+             value="%productName">
+       </property>
+       <property
+             name="preferenceCustomization"
+             value="plugin_customization.ini">
+       </property>
+    </product>
+ </extension>
+ <extension
+       point="org.eclipse.ui.splashHandlers">
+    <splashHandler
+          class="de.cas.open.prozesse.modeler.splashHandlers.InteractiveSplashHandler"
+          id="de.cas.open.prozesse.modeler.splashHandlers.interactive">
+    </splashHandler>
+    <splashHandlerProductBinding
+          productId="org.camunda.bpm.modeler.bpmn_modeler"
+          splashId="de.cas.open.prozesse.modeler.splashHandlers.interactive">
+    </splashHandlerProductBinding>
+ </extension>
 </plugin>

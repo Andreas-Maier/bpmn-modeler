@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="%productName" uid="camunda-modeler" id="org.eclipse.platform.ide" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+<product name="%productName" uid="camunda-modeler" id="org.camunda.bpm.modeler.bpmn_modeler" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="eclipse_lg.gif"/>
@@ -22,19 +22,31 @@
    <windowImages i16="eclipse16.gif" i32="eclipse32.gif" i48="eclipse48.gif" i64="eclipse16.png" i128="eclipse32.png"/>
 
    <splash
-      startupProgressRect="2,290,448,10"
-      startupMessageRect="7,225,320,20"
-      startupForegroundColor="FFFFFF" />
+      handlerType="interactive" />
+   <launcher>
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
    <plugins>
       <plugin id="com.ibm.icu"/>
+      <plugin id="de.cas.open.prozesse.modeler.server"/>
+      <plugin id="de.cas.open.prozesse.modeler.validation"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
+      <plugin id="javax.servlet"/>
       <plugin id="javax.wsdl"/>
       <plugin id="javax.xml"/>
       <plugin id="lpg.runtime.java"/>
       <plugin id="org.apache.batik.css"/>
       <plugin id="org.apache.batik.util"/>
       <plugin id="org.apache.batik.util.gui"/>
+      <plugin id="org.apache.commons.lang"/>
       <plugin id="org.apache.xerces"/>
       <plugin id="org.apache.xml.resolver"/>
       <plugin id="org.apache.xml.serializer"/>
@@ -51,10 +63,12 @@
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filebuffers"/>
       <plugin id="org.eclipse.core.filesystem"/>
-      <plugin id="org.eclipse.core.filesystem.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.net"/>
+      <plugin id="org.eclipse.core.net.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.resources"/>
+      <plugin id="org.eclipse.core.resources.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
@@ -75,6 +89,7 @@
       <plugin id="org.eclipse.e4.ui.services"/>
       <plugin id="org.eclipse.e4.ui.widgets"/>
       <plugin id="org.eclipse.e4.ui.workbench"/>
+      <plugin id="org.eclipse.e4.ui.workbench.addons.swt"/>
       <plugin id="org.eclipse.e4.ui.workbench.renderers.swt"/>
       <plugin id="org.eclipse.e4.ui.workbench.swt"/>
       <plugin id="org.eclipse.e4.ui.workbench3"/>
@@ -91,6 +106,7 @@
       <plugin id="org.eclipse.emf.validation.ocl"/>
       <plugin id="org.eclipse.emf.workspace"/>
       <plugin id="org.eclipse.equinox.app"/>
+      <plugin id="org.eclipse.equinox.bidi"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.ds"/>
       <plugin id="org.eclipse.equinox.event"/>
@@ -102,6 +118,7 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
+      <plugin id="org.eclipse.equinox.security.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.equinox.util"/>
       <plugin id="org.eclipse.gef"/>
       <plugin id="org.eclipse.graphiti"/>
@@ -127,10 +144,9 @@
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.osgi.util"/>
-      <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.search"/>
       <plugin id="org.eclipse.swt"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.team.core"/>
       <plugin id="org.eclipse.team.ui"/>
       <plugin id="org.eclipse.text"/>
@@ -146,17 +162,20 @@
       <plugin id="org.eclipse.ui.navigator.resources"/>
       <plugin id="org.eclipse.ui.views"/>
       <plugin id="org.eclipse.ui.views.properties.tabbed"/>
+      <plugin id="org.eclipse.ui.win32" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
       <plugin id="org.eclipse.wst.common.core"/>
       <plugin id="org.eclipse.wst.common.environment"/>
       <plugin id="org.eclipse.wst.common.frameworks"/>
+      <plugin id="org.eclipse.wst.common.frameworks.ui"/>
       <plugin id="org.eclipse.wst.common.project.facet.core"/>
       <plugin id="org.eclipse.wst.common.ui"/>
       <plugin id="org.eclipse.wst.common.uriresolver"/>
       <plugin id="org.eclipse.wst.sse.core"/>
       <plugin id="org.eclipse.wst.sse.ui"/>
       <plugin id="org.eclipse.wst.validation"/>
+      <plugin id="org.eclipse.wst.validation.ui"/>
       <plugin id="org.eclipse.wst.wsdl"/>
       <plugin id="org.eclipse.wst.xml.core"/>
       <plugin id="org.eclipse.wst.xml.ui"/>
@@ -164,6 +183,7 @@
       <plugin id="org.eclipse.wst.xsd.ui"/>
       <plugin id="org.eclipse.xsd"/>
       <plugin id="org.eclipse.xsd.edit"/>
+      <plugin id="org.slf4j.api"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.events"/>
       <plugin id="org.w3c.dom.smil"/>
