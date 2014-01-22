@@ -4,7 +4,7 @@
 <product name="%productName" uid="camunda-modeler" id="org.camunda.bpm.modeler.bpmn_modeler" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="eclipse_lg.gif"/>
+      <image path="/org.camunda.bpm.modeler/icons/bpmn2_editor_16.png"/>
       <text>
          %productBlurb
       </text>
@@ -14,19 +14,26 @@
    </configIni>
 
    <launcherArgs>
-      <programArgs>-consoleLog</programArgs>
+      <programArgs>-perspective org.camunda.bpm.modeler.perspective</programArgs>
       <vmArgs>-XX:MaxPermSize=128m</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="eclipse16.gif" i32="eclipse32.gif" i48="eclipse48.gif" i64="eclipse16.png" i128="eclipse32.png"/>
+   <windowImages i16="/org.camunda.bpm.modeler/icons/bpmn2_editor_16.bmp" i32="/org.camunda.bpm.modeler/icons/bpmn2_editor_32.bmp" i48="/org.camunda.bpm.modeler/icons/bpmn2_editor_16.png" i64="/org.camunda.bpm.modeler/icons/bpmn2_editor_16.png" i128="/org.camunda.bpm.modeler/icons/bpmn2_editor_16.png"/>
 
    <splash
+      location="org.camunda.bpm.modeler"
       handlerType="interactive" />
-   <launcher>
+   <launcher name="BPMN-Modeler">
       <solaris/>
       <win useIco="false">
-         <bmp/>
+         <bmp
+            winSmallHigh="/org.camunda.bpm.modeler/icons/bpmn2_editor_16.bmp"
+            winSmallLow="/org.camunda.bpm.modeler/icons/bpmn2_editor_16.bmp"
+            winMediumHigh="/org.camunda.bpm.modeler/icons/bpmn2_editor_32.bmp"
+            winMediumLow="/org.camunda.bpm.modeler/icons/bpmn2_editor_32.bmp"
+            winLargeHigh="/org.camunda.bpm.modeler/icons/bpmn2_editor_48.bmp"
+            winLargeLow="/org.camunda.bpm.modeler/icons/bpmn2_editor_48.bmp"/>
       </win>
    </launcher>
 
@@ -34,7 +41,9 @@
    </vm>
 
    <plugins>
+      <plugin id="com.google.guava"/>
       <plugin id="com.ibm.icu"/>
+      <plugin id="de.cas.open.prozesse.modeler.client"/>
       <plugin id="de.cas.open.prozesse.modeler.server"/>
       <plugin id="de.cas.open.prozesse.modeler.validation"/>
       <plugin id="javax.annotation"/>
@@ -125,14 +134,7 @@
       <plugin id="org.eclipse.graphiti.mm"/>
       <plugin id="org.eclipse.graphiti.ui"/>
       <plugin id="org.eclipse.help"/>
-      <plugin id="org.eclipse.jdt"/>
-      <plugin id="org.eclipse.jdt.compiler.apt" fragment="true"/>
-      <plugin id="org.eclipse.jdt.compiler.tool" fragment="true"/>
-      <plugin id="org.eclipse.jdt.core"/>
-      <plugin id="org.eclipse.jdt.core.manipulation"/>
-      <plugin id="org.eclipse.jdt.debug"/>
-      <plugin id="org.eclipse.jdt.launching"/>
-      <plugin id="org.eclipse.jdt.ui"/>
+      <plugin id="org.eclipse.jdt.annotation"/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.jface.text"/>
@@ -165,6 +167,7 @@
       <plugin id="org.eclipse.ui.win32" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
+      <plugin id="org.eclipse.wb.core.lib"/>
       <plugin id="org.eclipse.wst.common.core"/>
       <plugin id="org.eclipse.wst.common.environment"/>
       <plugin id="org.eclipse.wst.common.frameworks"/>

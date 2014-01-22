@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.camunda.bpm.modeler.runtime.engine/src"
-    modelPluginID="org.camunda.bpm.modeler.runtime.engine.model" redirection=""
-    forceOverwrite="true" modelName="activitiExtensions" modelPluginClass="" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../org.eclipse.bpmn2/model/BPMN20.genmodel#//bpmn2 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di.1 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//dc">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.camunda.bpm.modeler/src" modelPluginID="org.camunda.bpm.modeler"
+    redirection="" forceOverwrite="true" modelName="activitiExtensions" modelPluginClass=""
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    usedGenPackages="../../org.eclipse.bpmn2/model/BPMN20.genmodel#//bpmn2 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di.1 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//dc"
+    interfaceNamePattern="">
   <foreignModel>activitiExtensions.ecore</foreignModel>
   <genPackages prefix="Model" basePackage="org.camunda.bpm.modeler.runtime.engine"
       resource="XML" disposableProviderFactory="true" ecorePackage="activitiExtensions.ecore#/">
@@ -56,7 +56,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//DocumentRoot/resultVariable"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//DocumentRoot/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//DocumentRoot/async"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//DocumentRoot/actExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//DocumentRoot/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//DocumentRoot/resultVariableName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference activitiExtensions.ecore#//DocumentRoot/failedJobRetryTimeCycle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference activitiExtensions.ecore#//DocumentRoot/clientOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference activitiExtensions.ecore#//DocumentRoot/formData"/>
     </genClasses>
+    <genClasses ecoreClass="activitiExtensions.ecore#//StartEvent"/>
     <genClasses ecoreClass="activitiExtensions.ecore#//ExecutionListenerType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//ExecutionListenerType/group"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference activitiExtensions.ecore#//ExecutionListenerType/field"/>
@@ -73,24 +80,31 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FieldType/stringValue"/>
     </genClasses>
     <genClasses ecoreClass="activitiExtensions.ecore#//FormPropertyType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference activitiExtensions.ecore#//FormPropertyType/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormPropertyType/datePattern"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormPropertyType/expression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormPropertyType/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormPropertyType/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormPropertyType/readable"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormPropertyType/required"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormPropertyType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormPropertyType/value1"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormPropertyType/variable"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormPropertyType/writable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormPropertyType/default"/>
     </genClasses>
     <genClasses ecoreClass="activitiExtensions.ecore#//InType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//InType/source"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//InType/sourceExpression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//InType/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//InType/variables"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//InType/businessKey"/>
     </genClasses>
     <genClasses ecoreClass="activitiExtensions.ecore#//OutType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//OutType/source"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//OutType/sourceExpression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//OutType/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//OutType/variables"/>
     </genClasses>
     <genClasses ecoreClass="activitiExtensions.ecore#//TaskListenerType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//TaskListenerType/group"/>
@@ -100,5 +114,70 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//TaskListenerType/event"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//TaskListenerType/expression"/>
     </genClasses>
+    <genClasses ecoreClass="activitiExtensions.ecore#//CallActivity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//CallActivity/calledElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//CallActivity/calledElementBinding"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//CallActivity/calledElementVersion"/>
+    </genClasses>
+    <genClasses ecoreClass="activitiExtensions.ecore#//BoundaryEvent"/>
+    <genClasses ecoreClass="activitiExtensions.ecore#//ValueType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//ValueType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//ValueType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="activitiExtensions.ecore#//FormDataType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference activitiExtensions.ecore#//FormDataType/formField"/>
+    </genClasses>
+    <genClasses ecoreClass="activitiExtensions.ecore#//FormFieldType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormFieldType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormFieldType/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormFieldType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//FormFieldType/defaultValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference activitiExtensions.ecore#//FormFieldType/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference activitiExtensions.ecore#//FormFieldType/validation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference activitiExtensions.ecore#//FormFieldType/value"/>
+    </genClasses>
+    <genClasses ecoreClass="activitiExtensions.ecore#//PropertiesType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference activitiExtensions.ecore#//PropertiesType/property"/>
+    </genClasses>
+    <genClasses ecoreClass="activitiExtensions.ecore#//PropertyType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//PropertyType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//PropertyType/value"/>
+    </genClasses>
+    <genClasses ecoreClass="activitiExtensions.ecore#//ValidationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference activitiExtensions.ecore#//ValidationType/constraint"/>
+    </genClasses>
+    <genClasses ecoreClass="activitiExtensions.ecore#//ConstraintType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//ConstraintType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//ConstraintType/config"/>
+    </genClasses>
+    <genClasses ecoreClass="activitiExtensions.ecore#//UserTask"/>
+    <genClasses ecoreClass="activitiExtensions.ecore#//FormDataContainer"/>
+    <nestedGenPackages prefix="Fox" basePackage="org.camunda.bpm.modeler.runtime.engine.model"
+        resource="XML" disposableProviderFactory="true" ecorePackage="activitiExtensions.ecore#//fox">
+      <genClasses ecoreClass="activitiExtensions.ecore#//fox/FailedJobRetryTimeCycleType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//fox/FailedJobRetryTimeCycleType/mixed"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//fox/FailedJobRetryTimeCycleType/text"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="CasOpen" basePackage="org.camunda.bpm.modeler.runtime.engine.model"
+        resource="XML" disposableProviderFactory="true" ecorePackage="activitiExtensions.ecore#//casOpen">
+      <genClasses ecoreClass="activitiExtensions.ecore#//casOpen/ClientOperation">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//casOpen/ClientOperation/clientOperationName"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference activitiExtensions.ecore#//casOpen/ClientOperation/parameters"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference activitiExtensions.ecore#//casOpen/ClientOperation/result"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//casOpen/ClientOperation/operationType"/>
+      </genClasses>
+      <genClasses ecoreClass="activitiExtensions.ecore#//casOpen/OperationParameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//casOpen/OperationParameter/parameterType"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//casOpen/OperationParameter/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//casOpen/OperationParameter/value"/>
+      </genClasses>
+      <genClasses ecoreClass="activitiExtensions.ecore#//casOpen/Result">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//casOpen/Result/resultVariableName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute activitiExtensions.ecore#//casOpen/Result/resultType"/>
+      </genClasses>
+    </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

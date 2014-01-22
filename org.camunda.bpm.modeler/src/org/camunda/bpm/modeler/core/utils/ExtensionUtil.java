@@ -42,7 +42,7 @@ public class ExtensionUtil {
 	 * 
 	 * @return
 	 */
-	public static Object getExtension(EObject object, EStructuralFeature feature, String attributeName) {
+	public static Object getExtension(final EObject object, final EStructuralFeature feature, final String attributeName) {
 		
 		String featureName = feature.getName();
 		
@@ -93,7 +93,7 @@ public class ExtensionUtil {
 	 * 
 	 * @return
 	 */
-	public static <T> List<T> getExtensions(EObject object, Class<T> cls) {
+	public static <T> List<T> getExtensions(final EObject object, final Class<T> cls) {
 		List<T> results = new ArrayList<T>();
 
 		EStructuralFeature extensionValuesFeature = object.eClass().getEStructuralFeature("extensionValues");
@@ -122,7 +122,7 @@ public class ExtensionUtil {
 	 * @param feature
 	 * @param value
 	 */
-	public static void addExtension(EObject object, EStructuralFeature feature, EObject value) {
+	public static void addExtension(final EObject object, final EStructuralFeature feature, final Object value) {
 		EStructuralFeature extensionValuesFeature = object.eClass().getEStructuralFeature("extensionValues");
 		EList<EObject> list = (EList<EObject>) object.eGet(extensionValuesFeature);
 		
@@ -147,7 +147,7 @@ public class ExtensionUtil {
 	 * @param object
 	 * @param feature
 	 */
-	public static void removeExtensionByFeature(EObject object, EStructuralFeature feature) {
+	public static void removeExtensionByFeature(final EObject object, final EStructuralFeature feature) {
 		
 		String featureName = feature.getName();
 		
@@ -170,7 +170,7 @@ public class ExtensionUtil {
 	 * @param object
 	 * @param extensionValue
 	 */
-	public static void removeExtensionByValue(EObject object, EObject extensionValue) {
+	public static void removeExtensionByValue(final EObject object, final EObject extensionValue) {
 
 		EStructuralFeature extensionValuesFeature = object.eClass().getEStructuralFeature("extensionValues");
 		EList<ExtensionAttributeValue> extensionAttributesList = (EList<ExtensionAttributeValue>) object.eGet(extensionValuesFeature);
@@ -201,7 +201,7 @@ public class ExtensionUtil {
 	 * @param valueFeature
 	 * @param rawValue
 	 */
-	public static void removeExtensionByValue(EObject object, EStructuralFeature containmentFeature, EStructuralFeature valueFeature, Object rawValue) {
+	public static void removeExtensionByValue(final EObject object, final EStructuralFeature containmentFeature, final EStructuralFeature valueFeature, final Object rawValue) {
 		EStructuralFeature extensionValuesFeature = object.eClass().getEStructuralFeature("extensionValues");
 		EList<ExtensionAttributeValue> extensionAttributesList = (EList<ExtensionAttributeValue>) object.eGet(extensionValuesFeature);
 
@@ -229,7 +229,7 @@ public class ExtensionUtil {
 	 * @param object
 	 * @return
 	 */
-	public static List<ExtensionAttributeValue> getExtensionAttributeValues(EObject object) {
+	public static List<ExtensionAttributeValue> getExtensionAttributeValues(final EObject object) {
 		
 		if (object instanceof BPMNDiagram) {
 			BPMNDiagram diagram = (BPMNDiagram) object;
@@ -279,7 +279,7 @@ public class ExtensionUtil {
 	 * @param object
 	 * @return
 	 */
-	public static ExtensionAttributeValue getExtensionAttributeValue(EObject object) {
+	public static ExtensionAttributeValue getExtensionAttributeValue(final EObject object) {
 
 		EStructuralFeature extensionValuesFeature = object.eClass().getEStructuralFeature("extensionValues");
 		EList<ExtensionAttributeValue> extensionAttributeValues = (EList<ExtensionAttributeValue>) object.eGet(extensionValuesFeature);
@@ -291,7 +291,7 @@ public class ExtensionUtil {
 		return null;
 	}
 
-	public static void updateExtension(EObject object, EStructuralFeature feature, EObject value) {
+	public static void updateExtension(final EObject object, final EStructuralFeature feature, final EObject value) {
 
 		List<ExtensionAttributeValue> extensionElements = getExtensionAttributeValues(object);
 		

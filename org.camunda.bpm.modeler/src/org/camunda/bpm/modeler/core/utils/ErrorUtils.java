@@ -12,10 +12,8 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.core.utils;
 
-import org.camunda.bpm.modeler.core.Activator;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.dialogs.ErrorDialog;
@@ -33,14 +31,12 @@ import org.eclipse.ui.PlatformUI;
 public class ErrorUtils {
 	public static void throwCoreException(String message) throws CoreException {
 		IStatus status = new Status(IStatus.ERROR,
-				Activator.PLUGIN_ID, IStatus.OK, message, null);
-		Platform.getLog(Activator.getDefault().getBundle()).log(status);
+				"org.camunda.bpm.modeler", IStatus.OK, message, null);
 		throw new CoreException(status);
 	}
 	
 
 	public static void showErrorWithLogging(IStatus status){
-		Platform.getLog(Activator.getDefault().getBundle()).log(status);
 		ErrorDialog.openError(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "An error occured", null, status);
 	}
 

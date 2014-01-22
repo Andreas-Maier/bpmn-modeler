@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.camunda.bpm.modeler.runtime.engine.model.ModelPackage;
 import org.camunda.bpm.modeler.ui.property.tabs.binding.ModelRadioBinding;
-import org.camunda.bpm.modeler.ui.property.tabs.dialog.ClassChooserDialog;
 import org.camunda.bpm.modeler.ui.property.tabs.radio.Radio.RadioGroup;
 import org.camunda.bpm.modeler.ui.property.tabs.util.Events;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
@@ -13,15 +12,12 @@ import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 /**
@@ -44,8 +40,8 @@ public class ServiceTypeControlsPropertiesBuilder extends AbstractPropertiesBuil
 	
 	private static final EStructuralFeature CLASS_FEATURE = TYPE_FEATURES[0];
 	
-	private RadioGroup<EStructuralFeature> radioGroup;
-	private Map<EStructuralFeature, Text> featureToInputMap; 
+	private final RadioGroup<EStructuralFeature> radioGroup;
+	private final Map<EStructuralFeature, Text> featureToInputMap; 
 	
 	/**
 	 * Creates a new factory from the given arguments
@@ -54,7 +50,7 @@ public class ServiceTypeControlsPropertiesBuilder extends AbstractPropertiesBuil
 	 * @param section
 	 * @param bo
 	 */
-	public ServiceTypeControlsPropertiesBuilder(Composite parent, GFPropertySection section, BaseElement bo) {
+	public ServiceTypeControlsPropertiesBuilder(final Composite parent, final GFPropertySection section, final BaseElement bo) {
 		super(parent, section, bo);
 		
 		this.radioGroup = new RadioGroup<EStructuralFeature>();
@@ -78,7 +74,8 @@ public class ServiceTypeControlsPropertiesBuilder extends AbstractPropertiesBuil
 			Button radioControl = radioGroup.getRadioControl(feature);
 			
 			ModelRadioBinding modelRadioBinding = new ModelRadioBinding(bo, feature, TYPE_FEATURES, radioControl) { 
-				protected void activateFeature(EStructuralFeature feature) {
+				@Override
+				protected void activateFeature(final EStructuralFeature feature) {
 					bo.eSet(feature, "");
 				};
 			};
@@ -116,23 +113,9 @@ public class ServiceTypeControlsPropertiesBuilder extends AbstractPropertiesBuil
 		radioButton.addListener(Events.MODEL_CHANGED, new Listener() {
 			
 			@Override
-			public void handleEvent(Event event) {
+			public void handleEvent(final Event event) {
 				boolean selected = radioButton.getSelection();
 				btnClassSelect.setEnabled(selected);
-			}
-		});
-		
-		btnClassSelect.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent evt) {
-				Shell shell = classText.getShell();
-				ClassChooserDialog dialog = new ClassChooserDialog(shell);
-				
-				// interrupting operation
-				String clsName = dialog.chooseClass();
-				
-				if (clsName != null) {
-					classText.setText(clsName);
-				}
 			}
 		});
 	}

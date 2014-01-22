@@ -26,9 +26,11 @@ import org.eclipse.bpmn2.Event;
 import org.eclipse.bpmn2.EventDefinition;
 import org.eclipse.bpmn2.FlowElement;
 import org.eclipse.bpmn2.FlowElementsContainer;
+import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.bpmn2.Participant;
 import org.eclipse.bpmn2.Process;
 import org.eclipse.bpmn2.RootElement;
+import org.eclipse.bpmn2.SequenceFlow;
 import org.eclipse.bpmn2.di.BPMNDiagram;
 import org.eclipse.bpmn2.di.BPMNPlane;
 import org.eclipse.emf.common.notify.Adapter;
@@ -77,7 +79,7 @@ public class ModelUtil {
 	 * @param res
 	 *          - the EMF Resource that was used to generate the ID strings.
 	 */
-	public static void clearIDs(Resource res, boolean all) {
+	public static void clearIDs(final Resource res, final boolean all) {
 		ids.remove(getKey(res));
 		if (all) {
 			defaultIds.clear();
@@ -93,9 +95,9 @@ public class ModelUtil {
 	 *          - the BPMN2 object
 	 * @return name string
 	 */
-	public static String getObjectName(EObject obj) {
+	public static String getObjectName(final EObject obj) {
 		String name;
-		EStructuralFeature feature = ((EObject) obj).eClass()
+		EStructuralFeature feature = obj.eClass()
 				.getEStructuralFeature("bpmnElement");
 		if (feature != null && obj.eGet(feature) != null) {
 			EObject bpmnElement = (EObject) obj.eGet(feature);
@@ -106,7 +108,7 @@ public class ModelUtil {
 		return name;
 	}
 
-	private static Object getKey(EObject obj) {
+	private static Object getKey(final EObject obj) {
 		Resource resource = getResource(obj);
 		if (resource == null) {
 			return null;
@@ -115,7 +117,7 @@ public class ModelUtil {
 		return getKey(resource);
 	}
 
-	private static Object getKey(Resource res) {
+	private static Object getKey(final Resource res) {
 		assert (res != null);
 		return res.getResourceSet();
 	}
@@ -130,7 +132,7 @@ public class ModelUtil {
 	 *          - the BPMN2 object
 	 * @return the ID string
 	 */
-	private static String generateDefaultID(EObject obj, String name) {
+	private static String generateDefaultID(final EObject obj, String name) {
 		if (name == null)
 			name = getObjectName(obj);
 		Integer value = defaultIds.get(name);
@@ -154,11 +156,11 @@ public class ModelUtil {
 	 *          - the Resource to which the object will be added
 	 * @return the ID string
 	 */
-	private static String generateID(EObject obj, Resource res) {
+	private static String generateID(final EObject obj, final Resource res) {
 		return generateID(obj, res, null);
 	}
 
-	public static String generateID(EObject obj, Resource res, String name) {
+	public static String generateID(final EObject obj, final Resource res, String name) {
 		Object key = (res == null ? getKey(obj) : getKey(res));
 		if (key != null) {
 			Hashtable<String, EObject> tab = ids.get(key);
@@ -191,8 +193,8 @@ public class ModelUtil {
 	 * 
 	 * @param obj the BPMN2 object
 	 */
-	public static void addID(EObject obj) {
-		EStructuralFeature feature = ((EObject) obj).eClass().getEStructuralFeature("id");
+	public static void addID(final EObject obj) {
+		EStructuralFeature feature = obj.eClass().getEStructuralFeature("id");
 		if (feature != null) {
 			Object value = obj.eGet(feature);
 			if (value != null) {
@@ -216,7 +218,7 @@ public class ModelUtil {
 	 * @param id
 	 *          - the object's ID string
 	 */
-	public static void addID(EObject obj, String id) {
+	public static void addID(final EObject obj, final String id) {
 		Object key = getKey(obj);
 		String name = getObjectName(obj);
 		if (key == null || id.startsWith("_" + name + "_")) {
@@ -248,7 +250,7 @@ public class ModelUtil {
 	 * @param obj
 	 *          - the BPMN2 object
 	 */
-	public static String setID(EObject obj) {
+	public static String setID(final EObject obj) {
 		return setID(obj, getResource(obj));
 	}
 
@@ -262,9 +264,9 @@ public class ModelUtil {
 	 * @param res
 	 *          - the Resource to which the object will be added
 	 */
-	public static String setID(EObject obj, Resource res) {
+	public static String setID(final EObject obj, final Resource res) {
 		String id = null;
-		EStructuralFeature feature = ((EObject) obj).eClass()
+		EStructuralFeature feature = obj.eClass()
 				.getEStructuralFeature("id");
 		if (feature != null) {
 			if (obj.eGet(feature) == null) {
@@ -289,8 +291,8 @@ public class ModelUtil {
 	 * @throws IllegalArgumentException
 	 *           if the object does not have a id feature
 	 */
-	public static String setID(EObject obj, String value) {
-		EStructuralFeature feature = ((EObject) obj).eClass()
+	public static String setID(final EObject obj, final String value) {
+		EStructuralFeature feature = obj.eClass()
 				.getEStructuralFeature("id");
 		if (feature != null) {
 			obj.eSet(feature, value);
@@ -302,8 +304,8 @@ public class ModelUtil {
 		}
 	}
 
-	public static String getFeature(EObject obj, String attribute) {
-		EStructuralFeature feature = ((EObject) obj).eClass()
+	public static String getFeature(final EObject obj, final String attribute) {
+		EStructuralFeature feature = obj.eClass()
 				.getEStructuralFeature(attribute);
 		if (feature != null) {
 			return (String) obj.eGet(feature);
@@ -312,7 +314,7 @@ public class ModelUtil {
 		}
 	}
 
-	public static int getIDNumber(String id) {
+	public static int getIDNumber(final String id) {
 		try {
 			int i = id.lastIndexOf("_");
 			return Integer.parseInt(id.substring(i + 1));
@@ -321,17 +323,24 @@ public class ModelUtil {
 		}
 	}
 
-	public static String getName(BaseElement element) {
+	public static String getName(final BaseElement element) {
 		if (element != null) {
-			EStructuralFeature feature = element.eClass().getEStructuralFeature(
-					"name");
-			if (feature != null && element.eGet(feature) instanceof String)
-				return (String) element.eGet(feature);
+			if (element instanceof SequenceFlow) {
+				EStructuralFeature feature = element.eClass().getEStructuralFeature(
+						"conditionExpression");
+				if (feature != null && element.eGet(feature) != null && ((FormalExpression) element.eGet(feature)).getBody() != null && !((FormalExpression) element.eGet(feature)).getBody().isEmpty())
+					return ((FormalExpression) element.eGet(feature)).getBody();
+			} else {
+				EStructuralFeature feature = element.eClass().getEStructuralFeature(
+						"name");
+				if (feature != null && element.eGet(feature) instanceof String)
+					return (String) element.eGet(feature);
+			}
 		}
 		return null;
 	}
 
-	public static boolean hasName(EObject obj) {
+	public static boolean hasName(final EObject obj) {
 		EStructuralFeature feature = obj.eClass().getEStructuralFeature("name");
 		return feature != null;
 	}
@@ -361,7 +370,7 @@ public class ModelUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<EventDefinition> getEventDefinitions(Event event) {
+	public static List<EventDefinition> getEventDefinitions(final Event event) {
 		if (event != null) {
 			EStructuralFeature feature = event.eClass().getEStructuralFeature(
 					"eventDefinitions");
@@ -381,7 +390,7 @@ public class ModelUtil {
 	 *          the event definition class
 	 * @return the first event definition definied for this event instance
 	 */
-	public static EventDefinition getEventDefinition(Event event, Class<?> clazz) {
+	public static EventDefinition getEventDefinition(final Event event, final Class<?> clazz) {
 		for (EventDefinition def : getEventDefinitions(event)) {
 			if (clazz.isInstance(def)) {
 				return def;
@@ -405,7 +414,7 @@ public class ModelUtil {
 		}
 	}
 
-	public static Bpmn2DiagramType getDiagramType(String name) {
+	public static Bpmn2DiagramType getDiagramType(final String name) {
 		for (Bpmn2DiagramType t : Bpmn2DiagramType.values()) {
 			if (t.toString().equalsIgnoreCase(name))
 				return t;
@@ -413,7 +422,7 @@ public class ModelUtil {
 		return Bpmn2DiagramType.NONE;
 	}
 
-	public static Bpmn2DiagramType getDiagramType(EObject object) {
+	public static Bpmn2DiagramType getDiagramType(final EObject object) {
 		if (object != null && getResource(object) != null) {
 			Definitions defs = getDefinitions(object);
 			if (defs.getDiagrams().size() >= 1) {
@@ -446,8 +455,8 @@ public class ModelUtil {
 		return Bpmn2DiagramType.NONE;
 	}
 
-	public static String getDiagramTypeName(BPMNDiagram object) {
-		Bpmn2DiagramType type = getDiagramType((BPMNDiagram) object);
+	public static String getDiagramTypeName(final BPMNDiagram object) {
+		Bpmn2DiagramType type = getDiagramType(object);
 		if (type == Bpmn2DiagramType.CHOREOGRAPHY) {
 			return "Choreography Diagram";
 		} else if (type == Bpmn2DiagramType.COLLABORATION) {
@@ -458,8 +467,8 @@ public class ModelUtil {
 		return "Unknown Diagram Type";
 	}
 
-	public static EAttribute createDynamicAttribute(EPackage pkg, EObject object,
-			String name, String type) {
+	public static EAttribute createDynamicAttribute(final EPackage pkg, final EObject object,
+			final String name, String type) {
 		EClass docRoot = ExtendedMetaData.INSTANCE.getDocumentRoot(pkg);
 		for (EStructuralFeature f : docRoot.getEStructuralFeatures()) {
 			if (f.getName().equals(name)) {
@@ -486,14 +495,14 @@ public class ModelUtil {
 		return attr;
 	}
 
-	public static EObject createStringWrapper(String value) {
+	public static EObject createStringWrapper(final String value) {
 		DynamicEObjectImpl de = new DynamicEObjectImpl();
 		de.eSetClass(EcorePackage.eINSTANCE.getEObject());
 		de.eSetProxyURI(URI.createURI(value));
 		return de;
 	}
 
-	public static String getStringWrapperValue(Object wrapper) {
+	public static String getStringWrapperValue(final Object wrapper) {
 		if (wrapper instanceof DynamicEObjectImpl) {
 			DynamicEObjectImpl de = (DynamicEObjectImpl) wrapper;
 			URI uri = de.eProxyURI();
@@ -504,11 +513,11 @@ public class ModelUtil {
 		return null;
 	}
 
-	public static Resource getResource(EObject object) {
+	public static Resource getResource(final EObject object) {
 		return object.eResource();
 	}
 
-	public static Definitions getDefinitions(EObject object) {
+	public static Definitions getDefinitions(final EObject object) {
 		Resource resource = getResource(object);
 		if (resource != null) {
 			Object defs = resource.getContents().get(0).eContents().get(0);
@@ -518,8 +527,8 @@ public class ModelUtil {
 		return null;
 	}
 
-	public static List<EObject> getAllReachableObjects(EObject object,
-			EStructuralFeature feature) {
+	public static List<EObject> getAllReachableObjects(final EObject object,
+			final EStructuralFeature feature) {
 		ArrayList<EObject> list = null;
 		if (object != null && feature.getEType() instanceof EClass) {
 			Resource resource = getResource(object);
@@ -539,7 +548,7 @@ public class ModelUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> List<T> getAllReachableObjects(EObject be, Class<T> cls) {
+	public static <T> List<T> getAllReachableObjects(final EObject be, final Class<T> cls) {
 		List<T> result = new ArrayList<T>();
 
 		if (cls.isInstance(be)) {
@@ -569,7 +578,7 @@ public class ModelUtil {
 	 * parent and transitive parents.
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> List<T> getAllReachableObjectsIncludingParents(EObject be, Class<T> cls) {
+	public static <T> List<T> getAllReachableObjectsIncludingParents(EObject be, final Class<T> cls) {
 		List<T> result = new ArrayList<T>();
 
 		if (be instanceof Participant) {
@@ -605,7 +614,7 @@ public class ModelUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> List<T> getAllRootElements(Definitions definitions, final Class<T> cls) {
+	public static <T> List<T> getAllRootElements(final Definitions definitions, final Class<T> cls) {
 		ArrayList<T> list = new ArrayList<T>();
 		for (RootElement re : definitions.getRootElements()) {
 			if (cls.isInstance(re)) {
@@ -616,7 +625,7 @@ public class ModelUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> List<T> getAllFlowElements(Process process, final Class<T> cls) {
+	public static <T> List<T> getAllFlowElements(final Process process, final Class<T> cls) {
 		ArrayList<T> list = new ArrayList<T>();
 		for (FlowElement fe : process.getFlowElements()) {
 			if (cls.isInstance(fe)) {
@@ -643,7 +652,7 @@ public class ModelUtil {
 		return null;
 	}
 
-	public static boolean compare(Object v1, Object v2) {
+	public static boolean compare(final Object v1, final Object v2) {
 		if (v1 == null) {
 			if (v2 != null)
 				return false;
@@ -657,7 +666,7 @@ public class ModelUtil {
 	/*
 	 * Various model object and feature UI property methods
 	 */
-	public static String getLabel(Object object) {
+	public static String getLabel(final Object object) {
 		String label = "";
 		
 		if (object instanceof EObject) {
@@ -670,7 +679,7 @@ public class ModelUtil {
 		return label;
 	}
 
-	public static String getDisplayName(Object object) {
+	public static String getDisplayName(final Object object) {
 		if (object instanceof EObject) {
 			EObject eObject = (EObject) object;
 			return getLongDisplayName(eObject);
@@ -679,7 +688,7 @@ public class ModelUtil {
 		return object == null ? null : object.toString();
 	}
 
-	public static void setValue(TransactionalEditingDomain domain, EObject object, EStructuralFeature feature, Object value) {
+	public static void setValue(final TransactionalEditingDomain domain, final EObject object, final EStructuralFeature feature, final Object value) {
 		domain.getCommandStack().execute(getUpdateCommand(domain, object, feature, value));
 	}
 
@@ -709,7 +718,7 @@ public class ModelUtil {
 		};
 	}
 
-	public static EObject createObject(Resource resource, Object object) {
+	public static EObject createObject(final Resource resource, final Object object) {
 		return null;
 	}
 
@@ -720,10 +729,10 @@ public class ModelUtil {
 	 * 
 	 * @return
 	 */
-	public static String getLongDisplayName(EObject object) {
+	public static String getLongDisplayName(final EObject object) {
 		String objName = null;
 		if (object instanceof BPMNDiagram) {
-			Bpmn2DiagramType type = getDiagramType((BPMNDiagram) object);
+			Bpmn2DiagramType type = getDiagramType(object);
 			if (type == Bpmn2DiagramType.CHOREOGRAPHY) {
 				objName = "Choreography Diagram";
 			} else if (type == Bpmn2DiagramType.COLLABORATION) {
@@ -759,7 +768,7 @@ public class ModelUtil {
 		return objName;
 	}
 
-	public static DiagramEditor getEditor(EObject object) {
+	public static DiagramEditor getEditor(final EObject object) {
 		Resource resource = getResource(object);
 		if (resource != null) {
 			return getEditor(resource.getResourceSet());
@@ -768,7 +777,7 @@ public class ModelUtil {
 		return null;
 	}
 
-	public static DiagramEditor getEditor(ResourceSet resourceSet) {
+	public static DiagramEditor getEditor(final ResourceSet resourceSet) {
 		Iterator<Adapter> it = resourceSet.eAdapters().iterator();
 		while (it.hasNext()) {
 			Object next = it.next();
@@ -786,7 +795,7 @@ public class ModelUtil {
 	 * @param displayName
 	 * @return
 	 */
-	public static String beautifyName(String displayName) {
+	public static String beautifyName(final String displayName) {
 		// strip \n from display names
 		return displayName.replaceAll("\n", " ").replaceAll("[\\s]+", " ");
 	}

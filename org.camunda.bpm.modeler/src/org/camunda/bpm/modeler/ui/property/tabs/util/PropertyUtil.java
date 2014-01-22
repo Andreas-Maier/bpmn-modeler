@@ -52,7 +52,7 @@ public class PropertyUtil {
 
 	private static final int DESCRIPTION_FONT_SIZE = 8;
 
-	public static Text createText(GFPropertySection section, Composite parent, String label,
+	public static Text createText(final GFPropertySection section, final Composite parent, final String label,
 			final EStructuralFeature feature, final EObject bo) {
 		Text text = createUnboundText(section, parent, label);
 
@@ -61,7 +61,7 @@ public class PropertyUtil {
 		return text;
 	}
 
-	public static Text createUnboundText(GFPropertySection section, Composite parent, String label) {
+	public static Text createUnboundText(final GFPropertySection section, final Composite parent, final String label) {
 		Composite composite = createStandardComposite(section, parent);
 		Text text = createSimpleText(section, composite, "");
 		
@@ -69,7 +69,7 @@ public class PropertyUtil {
 		return text;
 	}
 
-	public static CCombo createDropDown(GFPropertySection section, Composite parent, String label) {
+	public static CCombo createDropDown(final GFPropertySection section, final Composite parent, final String label) {
 		Composite composite = createStandardComposite(section, parent);
 		CCombo comboBox = createSimpleDropDown(section, composite);
 
@@ -77,7 +77,7 @@ public class PropertyUtil {
 		return comboBox;
 	}
 
-	public static CCombo createDropDown(GFPropertySection section, Composite parent, String label, int style) {
+	public static CCombo createDropDown(final GFPropertySection section, final Composite parent, final String label, final int style) {
 		Composite composite = createStandardComposite(section, parent);
 		CCombo comboBox = createSimpleDropDown(section, composite, style);
 
@@ -85,24 +85,24 @@ public class PropertyUtil {
 		return comboBox;
 	}
 
-	public static Text createMultiText(GFPropertySection section, Composite parent, String label,
+	public static Text createMultiText(final GFPropertySection section, final Composite parent, final String label,
 			final EStructuralFeature feature, final EObject bo) {
 		Composite composite = createStandardComposite(section, parent);
 
 		Text text = createSimpleMultiText(section, composite, "");
 
-		new StringTextBinding(bo, feature, text).establish();
+		addBinding(text, bo, feature);
 
 		createLabel(section, composite, label, text);
 
 		return text;
 	}
 
-	protected static CCombo createSimpleDropDown(GFPropertySection section, Composite parent) {
+	protected static CCombo createSimpleDropDown(final GFPropertySection section, final Composite parent) {
 		return createSimpleDropDown(section, parent, SWT.BORDER | SWT.READ_ONLY);
 	}
 
-	protected static CCombo createSimpleDropDown(GFPropertySection section, Composite parent, int style) {
+	protected static CCombo createSimpleDropDown(final GFPropertySection section, final Composite parent, final int style) {
 		TabbedPropertySheetWidgetFactory factory = section.getWidgetFactory();
 		final CCombo dropDown = factory.createCCombo(parent, style);
 		setStandardLayout(dropDown);
@@ -110,7 +110,7 @@ public class PropertyUtil {
 		return dropDown;
 	}
 
-	protected static Button createSimpleCheckbox(GFPropertySection section, Composite parent) {
+	protected static Button createSimpleCheckbox(final GFPropertySection section, final Composite parent) {
 		TabbedPropertySheetWidgetFactory factory = section.getWidgetFactory();
 		final Button checkbox = factory.createButton(parent, "", SWT.CHECK);
 		setStandardLayout(checkbox);
@@ -119,7 +119,7 @@ public class PropertyUtil {
 	}
 
 	// public static
-	public static Button createCheckbox(GFPropertySection section, Composite parent, String label,
+	public static Button createCheckbox(final GFPropertySection section, final Composite parent, final String label,
 			final EStructuralFeature feature, final EObject bo) {
 		Button checkbox = createUnboundCheckbox(section, parent, label);
 
@@ -128,7 +128,7 @@ public class PropertyUtil {
 		return checkbox;
 	}
 
-	public static Button createUnboundCheckbox(GFPropertySection section, Composite parent, String label) {
+	public static Button createUnboundCheckbox(final GFPropertySection section, final Composite parent, final String label) {
 		Composite composite = createStandardComposite(section, parent);
 
 		Button checkbox = createSimpleCheckbox(section, composite);
@@ -137,7 +137,7 @@ public class PropertyUtil {
 		return checkbox;
 	}
 
-	public static CLabel createLabel(GFPropertySection section, Composite parent, String label, Control control) {
+	public static CLabel createLabel(final GFPropertySection section, final Composite parent, final String label, final Control control) {
 		TabbedPropertySheetWidgetFactory factory = section.getWidgetFactory();
 		CLabel cLabel = factory.createCLabel(parent, label + ":"); //$NON-NLS-1$
 		FormData data = new FormData();
@@ -149,7 +149,7 @@ public class PropertyUtil {
 		return cLabel;
 	}
 
-	public static ToolTip createToolTipFor(Control element, String message) {
+	public static ToolTip createToolTipFor(final Control element, final String message) {
 
 		final ToolTip tip = new ToolTip(element.getShell(), SWT.NONE);
 		tip.setMessage(message);
@@ -157,12 +157,12 @@ public class PropertyUtil {
 		element.addFocusListener(new FocusListener() {
 
 			@Override
-			public void focusLost(FocusEvent e) {
+			public void focusLost(final FocusEvent e) {
 				tip.setVisible(false);
 			}
 
 			@Override
-			public void focusGained(FocusEvent e) {
+			public void focusGained(final FocusEvent e) {
 				Text actionWidget = (Text) e.widget;
 
 				Rectangle bounds = actionWidget.getBounds();
@@ -176,7 +176,7 @@ public class PropertyUtil {
 
 		element.addDisposeListener(new DisposeListener() {
 			@Override
-			public void widgetDisposed(DisposeEvent e) {
+			public void widgetDisposed(final DisposeEvent e) {
 				tip.dispose();
 			}
 		});
@@ -184,15 +184,15 @@ public class PropertyUtil {
 		return tip;
 	}
 
-	public static Composite createStandardComposite(GFPropertySection section, Composite parent) {
+	public static Composite createStandardComposite(final GFPropertySection section, final Composite parent) {
 		TabbedPropertySheetWidgetFactory factory = section.getWidgetFactory();
 		Composite composite = factory.createFlatFormComposite(parent);
-
+		
 		composite.setLayoutData(new GridData(SWT.FILL, GridData.CENTER, true, false));
 		return composite;
 	}
 
-	public static Composite createGridLayoutedComposite(GFPropertySection section, Composite parent) {
+	public static Composite createGridLayoutedComposite(final GFPropertySection section, final Composite parent) {
 		TabbedPropertySheetWidgetFactory factory = section.getWidgetFactory();
 		Composite composite = factory.createFlatFormComposite(parent);
 
@@ -208,8 +208,8 @@ public class PropertyUtil {
 		return composite;
 	}
 
-	public static Text createUnboundRadioText(GFPropertySection section, Composite parent, String label,
-			EStructuralFeature feature, RadioGroup<EStructuralFeature> radioGroup) {
+	public static Text createUnboundRadioText(final GFPropertySection section, final Composite parent, final String label,
+			final EStructuralFeature feature, final RadioGroup<EStructuralFeature> radioGroup) {
 
 		TabbedPropertySheetWidgetFactory factory = section.getWidgetFactory();
 
@@ -241,8 +241,8 @@ public class PropertyUtil {
 		return text;
 	}
 	
-	public static Text createRadioText(GFPropertySection section, Composite parent, String label,
-			final EStructuralFeature feature, RadioGroup<EStructuralFeature> radioGroup, final EObject bo) {
+	public static Text createRadioText(final GFPropertySection section, final Composite parent, final String label,
+			final EStructuralFeature feature, final RadioGroup<EStructuralFeature> radioGroup, final EObject bo) {
 
 		Text text = createUnboundRadioText(section, parent, label, feature, radioGroup);
 
@@ -256,31 +256,31 @@ public class PropertyUtil {
 		return text;
 	}
 
-	public static Text createSimpleText(GFPropertySection section, Composite parent, String value) {
+	public static Text createSimpleText(final GFPropertySection section, final Composite parent, final String value) {
 		TabbedPropertySheetWidgetFactory factory = section.getWidgetFactory();
 		final Text text = factory.createText(parent, value); //$NON-NLS-1$
 		setStandardLayout(text);
 		return text;
 	}
 
-	protected static Text createSimpleMultiText(GFPropertySection section, Composite parent, String value) {
+	protected static Text createSimpleMultiText(final GFPropertySection section, final Composite parent, final String value) {
 		TabbedPropertySheetWidgetFactory factory = section.getWidgetFactory();
 		final Text text = factory.createText(parent, value, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL); //$NON-NLS-1$
 
 		FormData data = getStandardLayout();
 
-		data.height = 106;
+		data.height = 60;
 		text.setLayoutData(data);
 		return text;
 	}
 
-	public static void setStandardLayout(Control control) {
+	public static void setStandardLayout(final Control control) {
 		control.setLayoutData(getStandardLayout());
 	}
 
 	// binding ///////////////////////////////////////////
 
-	private static void addBinding(Text text, EObject bo, EStructuralFeature feature) {
+	private static void addBinding(final Text text, final EObject bo, final EStructuralFeature feature) {
 		ModelTextBinding<?> binding = getBinding(text, bo, feature);
 
 		if (binding != null) {
@@ -288,7 +288,7 @@ public class PropertyUtil {
 		}
 	}
 
-	private static ModelTextBinding<?> getBinding(Text text, EObject bo, EStructuralFeature feature) {
+	private static ModelTextBinding<?> getBinding(final Text text, final EObject bo, final EStructuralFeature feature) {
 
 		EClassifier featureType = feature.getEType();
 
@@ -311,7 +311,7 @@ public class PropertyUtil {
 		return data;
 	}
 
-	public static Text attachNote(Control attachToControl, String note) {
+	public static Text attachNote(final Control attachToControl, final String note) {
 		Composite parent = attachToControl.getParent();
 		
 		final Text text = new Text(parent, SWT.READ_ONLY | SWT.MULTI | SWT.WRAP | SWT.NO_FOCUS); 
@@ -335,7 +335,7 @@ public class PropertyUtil {
 		return text;
 	}
 	
-	public static void makeDescription(Control control) {
+	public static void makeDescription(final Control control) {
 
 		Display display = Display.getCurrent();
 
@@ -352,13 +352,14 @@ public class PropertyUtil {
 
 		// Since you created the font, you must dispose it
 		control.addDisposeListener(new DisposeListener() {
-			public void widgetDisposed(DisposeEvent e) {
+			@Override
+			public void widgetDisposed(final DisposeEvent e) {
 				newFont.dispose();
 			}
 		});
 	}
 	
-	public static void attachNoteWithLink(GFPropertySection section, Control attachToControl, String note) {
+	public static void attachNoteWithLink(final GFPropertySection section, final Control attachToControl, final String note) {
 		Composite parent = attachToControl.getParent();
 
 		TabbedPropertySheetWidgetFactory factory = section.getWidgetFactory();
@@ -370,7 +371,7 @@ public class PropertyUtil {
 
 		link.addSelectionListener(new SelectionAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(final SelectionEvent e) {
 				Browser.open(e.text);
 			}
 		});
@@ -392,7 +393,7 @@ public class PropertyUtil {
 	 * @param parent
 	 * @param note
 	 */
-	public static void createNoteWithLink(GFPropertySection section, Composite parent, String note) {
+	public static void createNoteWithLink(final GFPropertySection section, final Composite parent, final String note) {
 		TabbedPropertySheetWidgetFactory factory = section.getWidgetFactory();
 		Composite composite = createStandardComposite(section, parent);
 
@@ -403,7 +404,7 @@ public class PropertyUtil {
 
 		link.addSelectionListener(new SelectionAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(final SelectionEvent e) {
 				Browser.open(e.text);
 			}
 		});

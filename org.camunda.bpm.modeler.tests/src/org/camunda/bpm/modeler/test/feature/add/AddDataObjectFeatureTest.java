@@ -5,6 +5,7 @@ import static org.camunda.bpm.modeler.test.util.assertions.Bpmn2ModelAssertions.
 import static org.camunda.bpm.modeler.test.util.assertions.Bpmn2ModelAssertions.elementOfType;
 import static org.camunda.bpm.modeler.test.util.operations.AddDataObjectOperation.addDataObjectReference;
 import static org.camunda.bpm.modeler.test.util.operations.MoveShapeOperation.move;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.camunda.bpm.modeler.core.layout.util.LayoutUtil;
 import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
@@ -12,7 +13,6 @@ import org.camunda.bpm.modeler.core.utils.LabelUtil;
 import org.camunda.bpm.modeler.test.feature.AbstractFeatureTest;
 import org.camunda.bpm.modeler.test.util.DiagramResource;
 import org.camunda.bpm.modeler.test.util.Util;
-import org.eclipse.bpmn2.DataObject;
 import org.eclipse.bpmn2.DataObjectReference;
 import org.eclipse.bpmn2.FlowElementsContainer;
 import org.eclipse.emf.common.util.EList;

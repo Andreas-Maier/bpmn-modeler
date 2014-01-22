@@ -8,17 +8,17 @@ import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 
 public class AssocationAnchorPointStrategy extends AnchorPointStrategy {
 	
-	public AssocationAnchorPointStrategy(FreeFormConnection connection) {
+	public AssocationAnchorPointStrategy(final FreeFormConnection connection) {
 		super(connection);
 	}
 	
 	@Override
-	public boolean appliesTo(FreeFormConnection connection) {
+	public boolean appliesTo(final FreeFormConnection connection) {
 		return isConnectionBpmnType(connection, Association.class) || isConnectionBpmnType(connection, DataAssociation.class);
 	}
 	
 	@Override
-	protected void typeSwitch(Sector targetElementSector, BaseElement sourceElement, BaseElement TargetElement) {
+	protected void typeSwitch(final Sector targetElementSector, final BaseElement sourceElement, final BaseElement TargetElement) {
 		
 		switch(targetElementSector) {
 		case TOP_LEFT:
@@ -59,7 +59,7 @@ public class AssocationAnchorPointStrategy extends AnchorPointStrategy {
 	}
 	
 	@Override
-	protected void sectorSwitch(Sector sector) {
+	protected void sectorSwitch(final Sector sector) {
 		// disable default sector switch
 	}
 }

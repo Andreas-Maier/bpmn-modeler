@@ -44,7 +44,6 @@ import org.eclipse.bpmn2.Participant;
 import org.eclipse.bpmn2.SubProcess;
 import org.eclipse.bpmn2.TextAnnotation;
 import org.eclipse.bpmn2.di.BPMNShape;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.datatypes.ILocation;
@@ -79,15 +78,15 @@ public class FeatureSupport {
 	
 	public static final String IS_HORIZONTAL_PROPERTY = "isHorizontal";
 
-	public static boolean isTargetSubProcess(ITargetContext context) {
+	public static boolean isTargetSubProcess(final ITargetContext context) {
 		return BusinessObjectUtil.containsElementOfType(context.getTargetContainer(), SubProcess.class);
 	}
 
-	public static boolean isTargetLane(ITargetContext context) {
+	public static boolean isTargetLane(final ITargetContext context) {
 		return isLane(context.getTargetContainer());
 	}
 
-	public static boolean isDiagram(PictogramElement shape) {
+	public static boolean isDiagram(final PictogramElement shape) {
 		Definitions definitions = BusinessObjectUtil.getFirstElementOfType(shape, Definitions.class);
 		
 		if (definitions!=null) {
@@ -97,38 +96,38 @@ public class FeatureSupport {
 		return BusinessObjectUtil.containsChildElementOfType(shape, Definitions.class);
 	}
 	
-	public static boolean isLane(PictogramElement element) {
+	public static boolean isLane(final PictogramElement element) {
 		return BusinessObjectUtil.containsElementOfType(element, Lane.class);
 	}
 
-	public static Lane getTargetLane(ITargetContext context) {
+	public static Lane getTargetLane(final ITargetContext context) {
 		PictogramElement element = context.getTargetContainer();
 		return BusinessObjectUtil.getFirstElementOfType(element, Lane.class);
 	}
 	
-	public static boolean isTargetParticipant(ITargetContext context) {
+	public static boolean isTargetParticipant(final ITargetContext context) {
 		return isParticipant(context.getTargetContainer());
 	}
 
-	public static boolean isParticipant(PictogramElement element) {
+	public static boolean isParticipant(final PictogramElement element) {
 		return BusinessObjectUtil.containsElementOfType(element, Participant.class);
 	}
 
-	public static Participant getTargetParticipant(ITargetContext context) {
+	public static Participant getTargetParticipant(final ITargetContext context) {
 		PictogramElement element = context.getTargetContainer();
 		return BusinessObjectUtil.getFirstElementOfType(element, Participant.class);
 	}
 	
-	public static boolean isLaneOnTop(Lane lane) {
+	public static boolean isLaneOnTop(final Lane lane) {
 		return lane.getChildLaneSet() == null || lane.getChildLaneSet().getLanes().isEmpty();
 	}
 
-	public static boolean isTargetLaneOnTop(ITargetContext context) {
+	public static boolean isTargetLaneOnTop(final ITargetContext context) {
 		Lane lane = BusinessObjectUtil.getFirstElementOfType(context.getTargetContainer(), Lane.class);
 		return lane.getChildLaneSet() == null || lane.getChildLaneSet().getLanes().isEmpty();
 	}
 
-	public static boolean isHorizontal(ContainerShape container) {
+	public static boolean isHorizontal(final ContainerShape container) {
 		EObject parent = container.eContainer();
 		if (parent instanceof PictogramElement) {
 			// participant bands are always "vertical" so that
@@ -143,14 +142,14 @@ public class FeatureSupport {
 		return Boolean.parseBoolean(v);
 	}
 	
-	public static void setHorizontal(ContainerShape container, boolean isHorizontal) {
+	public static void setHorizontal(final ContainerShape container, final boolean isHorizontal) {
 		Graphiti.getPeService().setPropertyValue(container, IS_HORIZONTAL_PROPERTY, Boolean.toString(isHorizontal));
 		BPMNShape bs = BusinessObjectUtil.getFirstElementOfType(container, BPMNShape.class);
 		if (bs!=null)
 			bs.setIsHorizontal(isHorizontal);
 	}
 	
-	public static boolean isHorizontal(IContext context) {
+	public static boolean isHorizontal(final IContext context) {
 		Object v = context.getProperty(IS_HORIZONTAL_PROPERTY);
 		if (v==null) {
 			// TODO: get default orientation from preferences
@@ -159,11 +158,11 @@ public class FeatureSupport {
 		return (Boolean)v;
 	}
 	
-	public static void setHorizontal(IContext context, boolean isHorizontal) {
+	public static void setHorizontal(final IContext context, final boolean isHorizontal) {
 		context.putProperty(IS_HORIZONTAL_PROPERTY, isHorizontal);
 	}
 	
-	public static List<PictogramElement> getContainerChildren(ContainerShape container) {
+	public static List<PictogramElement> getContainerChildren(final ContainerShape container) {
 		List<PictogramElement> list = new ArrayList<PictogramElement>();
 		for (PictogramElement pe : container.getChildren()) {
 			String value = Graphiti.getPeService().getPropertyValue(pe, ACTIVITY_DECORATOR);
@@ -175,7 +174,7 @@ public class FeatureSupport {
 		return list;
 	}
 
-	public static List<PictogramElement> getContainerDecorators(ContainerShape container) {
+	public static List<PictogramElement> getContainerDecorators(final ContainerShape container) {
 		List<PictogramElement> list = new ArrayList<PictogramElement>();
 		for (PictogramElement pe : container.getChildren()) {
 			String value = Graphiti.getPeService().getPropertyValue(pe, ACTIVITY_DECORATOR);
@@ -186,7 +185,7 @@ public class FeatureSupport {
 		return list;
 	}
 	
-	public static void setContainerChildrenVisible(ContainerShape container, boolean visible) {
+	public static void setContainerChildrenVisible(final ContainerShape container, final boolean visible) {
 		for (PictogramElement pe : getContainerChildren(container)) {
 			pe.setVisible(visible);
 			if (pe instanceof AnchorContainer) {
@@ -203,7 +202,7 @@ public class FeatureSupport {
 		}
 	}
 
-	public static void resizeChildren(ContainerShape container, ResizeDiff diff, IFeatureProvider featureProvider) {
+	public static void resizeChildren(final ContainerShape container, final ResizeDiff diff, final IFeatureProvider featureProvider) {
 
 		Sector direction = diff.getResizeDirection();
 		Point delta = diff.getResizeDelta();
@@ -217,7 +216,7 @@ public class FeatureSupport {
 		}
 	}
 	
-	public static void restoreFlowElementPositions(ContainerShape container, Map<Shape, IRectangle> preMoveBounds, IFeatureProvider featureProvider) {
+	public static void restoreFlowElementPositions(final ContainerShape container, final Map<Shape, IRectangle> preMoveBounds, final IFeatureProvider featureProvider) {
 		
 		for (Map.Entry<Shape, IRectangle> entry : preMoveBounds.entrySet()) {
 			
@@ -233,7 +232,7 @@ public class FeatureSupport {
 		}
 	}
 
-	private static void resizeChildrenHorizontally(ContainerShape container, boolean left, int dx, IFeatureProvider featureProvider) {
+	private static void resizeChildrenHorizontally(final ContainerShape container, final boolean left, final int dx, final IFeatureProvider featureProvider) {
 		
 		List<ContainerShape> childLanes = getChildLanes(container);
 		if (childLanes.isEmpty()) {
@@ -261,7 +260,7 @@ public class FeatureSupport {
 		}
 	}
 
-	private static void resizeChildrenVertically(ContainerShape container, boolean top, int dy, IFeatureProvider featureProvider) {
+	private static void resizeChildrenVertically(final ContainerShape container, final boolean top, final int dy, final IFeatureProvider featureProvider) {
 		
 		List<ContainerShape> childLanes = getChildLanes(container);
 		if (childLanes.isEmpty()) {
@@ -300,7 +299,7 @@ public class FeatureSupport {
 		}
 	}
 
-	public static Map<Shape, IRectangle> buildFlowElementPositionMap(ContainerShape container) {
+	public static Map<Shape, IRectangle> buildFlowElementPositionMap(final ContainerShape container) {
 		
 		HashMap<Shape, IRectangle> positionMap = new HashMap<Shape, IRectangle>();
 		
@@ -327,7 +326,7 @@ public class FeatureSupport {
 	 * 
 	 * @param container
 	 */
-	public static void resizeLaneSet(ContainerShape container) {
+	public static void resizeLaneSet(final ContainerShape container) {
 		
 		ContainerShape parentContainer = container.getContainer();
 		
@@ -438,21 +437,21 @@ public class FeatureSupport {
 		resizeLaneSet(parentContainer);
 	}
 	
-	public static void redrawLaneSet(ContainerShape container, IFeatureProvider featureProvider) {
+	public static void redrawLaneSet(final ContainerShape container, final IFeatureProvider featureProvider) {
 		resizeLaneSet(container);
 		
 		updateLaneSetDi(container);
 		layoutLaneSet(container, featureProvider);
 	}
 
-	public static void layoutLaneSet(ContainerShape container, final IFeatureProvider featureProvider) {
+	public static void layoutLaneSet(final ContainerShape container, final IFeatureProvider featureProvider) {
 
 		ContainerShape rootContainer = getRootContainer(container);
 
 		eachLaneExecute(rootContainer, new LaneSetOperation() {
 			
 			@Override
-			public void execute(Shape lane) {
+			public void execute(final Shape lane) {
 				
 				ILayoutContext layoutContext = new LayoutContext(lane);
 
@@ -464,20 +463,20 @@ public class FeatureSupport {
 		});
 	}
 	
-	private static void updateLaneSetDi(ContainerShape container) {
+	private static void updateLaneSetDi(final ContainerShape container) {
 		
 		ContainerShape rootContainer = getRootContainer(container);
 		
 		eachLaneExecute(rootContainer, new LaneSetOperation() {
 			
 			@Override
-			public void execute(Shape lane) {
+			public void execute(final Shape lane) {
 				DIUtils.updateDIShape(lane);
 			}
 		});
 	}
 
-	public static ContainerShape getRootContainer(ContainerShape container) {
+	public static ContainerShape getRootContainer(final ContainerShape container) {
 		ContainerShape parent = container.getContainer();
 		EObject bo = BusinessObjectUtil.getFirstElementOfType(parent, BaseElement.class);
 		if (bo != null && (bo instanceof Lane || bo instanceof Participant)) {
@@ -489,7 +488,7 @@ public class FeatureSupport {
 	/**
 	 * One can only resize lanes and participants
 	 */
-	private static boolean checkForResize(BaseElement currentBo, Shape s, Object bo) {
+	private static boolean checkForResize(final BaseElement currentBo, final Shape s, final Object bo) {
 		if (!(s instanceof ContainerShape)) {
 			return false;
 		}
@@ -502,7 +501,7 @@ public class FeatureSupport {
 		return !bo.equals(currentBo);
 	}
 	
-	private static void postResizeFixLenghts(ContainerShape root) {
+	private static void postResizeFixLenghts(final ContainerShape root) {
 		IGaService service = Graphiti.getGaService();
 		BaseElement elem = BusinessObjectUtil.getFirstElementOfType(root, BaseElement.class);
 		GraphicsAlgorithm ga = root.getGraphicsAlgorithm();
@@ -523,7 +522,7 @@ public class FeatureSupport {
 		}
 	}
 
-	public static String getShapeValue(IPictogramElementContext context) {
+	public static String getShapeValue(final IPictogramElementContext context) {
 		String value = null;
 
 		PictogramElement pe = context.getPictogramElement();
@@ -539,7 +538,7 @@ public class FeatureSupport {
 		return value;
 	}
 
-	public static String getBusinessValue(IPictogramElementContext context) {
+	public static String getBusinessValue(final IPictogramElementContext context) {
 		Object o = BusinessObjectUtil.getFirstElementOfType(context.getPictogramElement(), BaseElement.class);
 		if (o instanceof FlowElement) {
 			FlowElement e = (FlowElement) o;
@@ -557,7 +556,7 @@ public class FeatureSupport {
 		return null;
 	}
 
-	public static Participant getTargetParticipant(ITargetContext context, ModelHandler handler) {
+	public static Participant getTargetParticipant(final ITargetContext context, final ModelHandler handler) {
 		if (context.getTargetContainer() instanceof Diagram) {
 			return handler.getInternalParticipant();
 		}
@@ -571,7 +570,7 @@ public class FeatureSupport {
 		return handler.getParticipant(bo);
 	}
 
-	public static Shape getShape(ContainerShape container, String property, String expectedValue) {
+	public static Shape getShape(final ContainerShape container, final String property, final String expectedValue) {
 		IPeService peService = Graphiti.getPeService();
 		Iterator<Shape> iterator = peService.getAllContainedShapes(container).iterator();
 		while (iterator.hasNext()) {
@@ -585,7 +584,7 @@ public class FeatureSupport {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends EObject> T getChildElementOfType(PictogramElement container, String property, String expectedValue, Class<T> clazz) {
+	public static <T extends EObject> T getChildElementOfType(final PictogramElement container, final String property, final String expectedValue, final Class<T> clazz) {
 		IPeService peService = Graphiti.getPeService();
 		Iterator<PictogramElement> iterator = peService.getAllContainedPictogramElements(container).iterator();
 		while (iterator.hasNext()) {
@@ -606,7 +605,7 @@ public class FeatureSupport {
 	 * @param cls
 	 * @return
 	 */
-	public static List<Shape> getChildrenByBusinessObjectType(ContainerShape element, Class<?> businessObjectCls) {
+	public static List<Shape> getChildrenByBusinessObjectType(final ContainerShape element, final Class<?> businessObjectCls) {
 		return getChildrenTypedByBusinessObjectType(element, Shape.class, businessObjectCls);
 	}
 	
@@ -618,7 +617,7 @@ public class FeatureSupport {
 	 * @param cls
 	 * @return
 	 */
-	public static <T extends Shape> List<T> getChildrenTypedByBusinessObjectType(ContainerShape element, Class<T> childCls, Class<?> businessObjectCls) {
+	public static <T extends Shape> List<T> getChildrenTypedByBusinessObjectType(final ContainerShape element, final Class<T> childCls, final Class<?> businessObjectCls) {
 		List<T> result = new ArrayList<T>();
 		for (Shape currentShape : element.getChildren()) {
 			if (childCls.isInstance(currentShape) &&
@@ -630,7 +629,7 @@ public class FeatureSupport {
 		return result;
 	}
 	
-	public static ContainerShape getLaneBefore(ContainerShape container) {
+	public static ContainerShape getLaneBefore(final ContainerShape container) {
 		if (!BusinessObjectUtil.containsElementOfType(container, Lane.class)) {
 			return null;
 		}
@@ -678,7 +677,7 @@ public class FeatureSupport {
 		return result;
 	}
 	
-	public static ContainerShape getLaneAfter(ContainerShape container) {
+	public static ContainerShape getLaneAfter(final ContainerShape container) {
 		if (!BusinessObjectUtil.containsElementOfType(container, Lane.class)) {
 			return null;
 		}
@@ -726,19 +725,19 @@ public class FeatureSupport {
 		return result;
 	}
 	
-	public static boolean isSourceParticipant(IMoveShapeContext context) {
+	public static boolean isSourceParticipant(final IMoveShapeContext context) {
 		return isParticipant(context.getSourceContainer());
 	}
 
-	public static boolean isSourceLane(IMoveShapeContext context) {
+	public static boolean isSourceLane(final IMoveShapeContext context) {
 		return isLane(context.getSourceContainer());
 	}
 
-	public static boolean isTargetDiagram(ITargetContext context) {
+	public static boolean isTargetDiagram(final ITargetContext context) {
 		return isDiagram(context.getTargetContainer());
 	}
 	
-	public static boolean isSourceDiagram(IMoveShapeContext context) {
+	public static boolean isSourceDiagram(final IMoveShapeContext context) {
 		return isDiagram(context.getSourceContainer());
 	}
 
@@ -749,7 +748,7 @@ public class FeatureSupport {
 	 * @param delta
 	 * @param featureProvider
 	 */
-	public static void moveChildren(ContainerShape container, Point delta, IFeatureProvider featureProvider) {
+	public static void moveChildren(final ContainerShape container, final Point delta, final IFeatureProvider featureProvider) {
 		moveShapes(new ArrayList<Shape>(container.getChildren()), delta, featureProvider);
 	}
 
@@ -760,7 +759,7 @@ public class FeatureSupport {
 	 * @param delta
 	 * @param featureProvider
 	 */
-	public static void moveShapes(ArrayList<Shape> shapes, Point delta, IFeatureProvider featureProvider) {
+	public static void moveShapes(final ArrayList<Shape> shapes, final Point delta, final IFeatureProvider featureProvider) {
 		for (Shape shape : shapes) {
 		
 			if (!isBpmn20Shape(shape)) {
@@ -771,7 +770,7 @@ public class FeatureSupport {
 		}
 	}
 	
-	private static void moveShapeNoLayout(Shape shape, Point delta, IFeatureProvider featureProvider) {
+	private static void moveShapeNoLayout(final Shape shape, final Point delta, final IFeatureProvider featureProvider) {
 
 		ILocation location = LayoutUtil.getRelativeBounds(shape);
 		
@@ -789,7 +788,7 @@ public class FeatureSupport {
 		executeFeature(moveShapeFeature, moveContext);
 	}
 
-	public static boolean isBpmn20Shape(EObject element) {
+	public static boolean isBpmn20Shape(final EObject element) {
 		if (element instanceof ContainerShape) {
 			BaseElement be = BusinessObjectUtil.getFirstBaseElement((Shape) element);
 			return be != null;
@@ -806,7 +805,7 @@ public class FeatureSupport {
 	 * 
 	 * @throws IllegalArgumentException if the feature is null or it does not execute in the given context.
 	 */
-	public static void executeFeature(IFeature feature, IContext context) {
+	public static void executeFeature(final IFeature feature, final IContext context) {
 
 		if (feature == null) {
 			throw new IllegalArgumentException(String.format("No executable feature for context %s", context));
@@ -825,7 +824,7 @@ public class FeatureSupport {
 	 * @param rootShape
 	 * @return
 	 */
-	public static List<Shape> getTopLevelLanes(ContainerShape rootShape) {
+	public static List<Shape> getTopLevelLanes(final ContainerShape rootShape) {
 		
 		// get direct child lanes
 		List<ContainerShape> directChildLanes = getChildLanes(rootShape);
@@ -854,7 +853,7 @@ public class FeatureSupport {
 	 * @param container
 	 * @return
 	 */
-	public static List<ContainerShape> getChildLanes(ContainerShape container) {
+	public static List<ContainerShape> getChildLanes(final ContainerShape container) {
 		
 		List<ContainerShape> childLanes = FeatureSupport.getChildrenTypedByBusinessObjectType(container, ContainerShape.class, Lane.class);
 		if (childLanes.isEmpty()) {
@@ -864,7 +863,7 @@ public class FeatureSupport {
 		// sort from top to bottom
 		Collections.sort(childLanes, new Comparator<Shape>() {
 			@Override
-			public int compare(Shape a, Shape b) {
+			public int compare(final Shape a, final Shape b) {
 				int ya = a.getGraphicsAlgorithm().getY();
 				int yb = b.getGraphicsAlgorithm().getY();
 				
@@ -875,7 +874,7 @@ public class FeatureSupport {
 		return childLanes;
 	}
 	
-	public static void eachLaneExecute(ContainerShape container, LaneSetOperation operation) {
+	public static void eachLaneExecute(final ContainerShape container, final LaneSetOperation operation) {
 		
 		List<ContainerShape> lanes = getChildLanes(container);
 		

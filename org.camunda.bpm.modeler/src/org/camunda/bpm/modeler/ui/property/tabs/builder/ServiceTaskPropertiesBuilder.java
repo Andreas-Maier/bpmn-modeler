@@ -6,6 +6,7 @@ import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 
 /**
  * 
@@ -22,7 +23,7 @@ public class ServiceTaskPropertiesBuilder extends AbstractPropertiesBuilder<Base
 	 * @param section
 	 * @param bo
 	 */
-	public ServiceTaskPropertiesBuilder(Composite parent, GFPropertySection section, BaseElement bo) {
+	public ServiceTaskPropertiesBuilder(final Composite parent, final GFPropertySection section, final BaseElement bo) {
 		super(parent, section, bo);
 	}
 
@@ -32,6 +33,7 @@ public class ServiceTaskPropertiesBuilder extends AbstractPropertiesBuilder<Base
 	@Override
 	public void create() {
 		EStructuralFeature propertyFeature = bo.eGet(ModelPackage.eINSTANCE.getDocumentRoot_ResultVariableName()) != null ? ModelPackage.eINSTANCE.getDocumentRoot_ResultVariableName() : ModelPackage.eINSTANCE.getDocumentRoot_ResultVariable();
-		PropertyUtil.createText(section, parent, "Result Variable", propertyFeature, bo);	
+		Text text = PropertyUtil.createText(section, parent, "Result Variable", propertyFeature, bo);
+		text.setEditable(false);
 	}
 }

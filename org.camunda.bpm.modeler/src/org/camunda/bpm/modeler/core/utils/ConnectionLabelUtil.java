@@ -18,15 +18,15 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 
 public class ConnectionLabelUtil {
 
-	public static void updateLabelRefAfterMove(Connection connection) {
+	public static void updateLabelRefAfterMove(final Connection connection) {
 		updateConnectionLabelRef(connection);
 	}
 
-	public static void updateLabelRefAfterAdd(Connection connection) {
+	public static void updateLabelRefAfterAdd(final Connection connection) {
 		updateConnectionLabelRef(connection);
 	}
 	
-	private static void updateConnectionLabelRef(Connection connection) {
+	private static void updateConnectionLabelRef(final Connection connection) {
 
 		Shape labelShape = LabelUtil.getLabelShape(connection, connection.getParent());
 		if (labelShape == null) {
@@ -51,7 +51,7 @@ public class ConnectionLabelUtil {
 	 * @param labelShape
 	 * @param length
 	 */
-	public static void setLabelRefLength(Shape labelShape, double length) {
+	public static void setLabelRefLength(final Shape labelShape, final double length) {
 		set(labelShape, PropertyNames.CONNECTION_LABEL_REF_LENGTH, length);
 	}
 	
@@ -61,7 +61,7 @@ public class ConnectionLabelUtil {
 	 * @param labelShape
 	 * @return
 	 */
-	public static double getLabelRefLength(Shape labelShape) {
+	public static double getLabelRefLength(final Shape labelShape) {
 		Double length = get(labelShape, PropertyNames.CONNECTION_LABEL_REF_LENGTH, Double.class);
 		
 		if (length == null) {
@@ -77,12 +77,12 @@ public class ConnectionLabelUtil {
 	 * @param connection
 	 * @return
 	 */
-	public static Point getDefaultLabelPosition(Connection connection) {		
+	public static Point getDefaultLabelPosition(final Connection connection) {		
 		List<Point> waypoints = LayoutUtil.getConnectionWaypoints(connection);
 		return ConnectionUtil.getMidPoint(waypoints);
 	}
 
-	public static Point getAdjustedLabelPosition(Shape labelShape, Connection labeledConnection) {
+	public static Point getAdjustedLabelPosition(final Shape labelShape, final Connection labeledConnection) {
 		Point storedLabelOffset = LabelUtil.getStoredLabelOffset(labelShape);
 		double labelRefLength = getLabelRefLength(labelShape);
 		
@@ -94,7 +94,7 @@ public class ConnectionLabelUtil {
 		return point(add(vector(point), vector(storedLabelOffset)));
 	}
 
-	protected static Point getPointAtLength(Connection connection, double length) {
+	protected static Point getPointAtLength(final Connection connection, final double length) {
 		List<Point> waypoints = LayoutUtil.getConnectionWaypoints(connection);
 		return ConnectionUtil.getPointAtLength(waypoints, length);
 	}

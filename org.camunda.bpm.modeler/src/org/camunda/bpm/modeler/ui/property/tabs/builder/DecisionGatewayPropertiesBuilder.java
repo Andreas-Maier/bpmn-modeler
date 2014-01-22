@@ -2,6 +2,7 @@ package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
 import org.camunda.bpm.modeler.ui.property.tabs.binding.BaseElementIdComboBinding;
 import org.camunda.bpm.modeler.ui.property.tabs.binding.change.EAttributeChangeSupport;
 import org.camunda.bpm.modeler.ui.property.tabs.binding.change.EObjectChangeSupport.ModelChangedEvent;
@@ -31,7 +32,7 @@ public class DecisionGatewayPropertiesBuilder extends AbstractPropertiesBuilder<
 	
 	private final EStructuralFeature DEFAULT_FLOW_FEATURE;
 	
-	public DecisionGatewayPropertiesBuilder(Composite parent, GFPropertySection section, Gateway bo) {
+	public DecisionGatewayPropertiesBuilder(final Composite parent, final GFPropertySection section, final Gateway bo) {
 		super(parent, section, bo);
 		
 		if (bo instanceof ExclusiveGateway) {
@@ -54,7 +55,7 @@ public class DecisionGatewayPropertiesBuilder extends AbstractPropertiesBuilder<
 		dropDown.addListener(Events.MODEL_CHANGED, new Listener() {
 			
 			@Override
-			public void handleEvent(Event e) {
+			public void handleEvent(final Event e) {
 				ModelChangedEvent event = (ModelChangedEvent) e;
 				if (FLOW_NODE_OUTGOING.equals(event.getFeature())) {
 					updateDropdownLabels(dropDown);
@@ -64,7 +65,7 @@ public class DecisionGatewayPropertiesBuilder extends AbstractPropertiesBuilder<
 		
 		BaseElementIdComboBinding<SequenceFlow> dropDownBinding = new BaseElementIdComboBinding<SequenceFlow>(bo, DEFAULT_FLOW_FEATURE, dropDown) {
 			@Override
-			protected SequenceFlow getModelById(String id) {
+			protected SequenceFlow getModelById(final String id) {
 				return getSequenceFlowById(id);
 			}
 		};
@@ -72,6 +73,10 @@ public class DecisionGatewayPropertiesBuilder extends AbstractPropertiesBuilder<
 		dropDownBinding.establish();
 		
 		updateDropdownLabels(dropDown);
+		
+		if (bo instanceof ExclusiveGateway) {
+			PropertyUtil.createCheckbox(section, parent, "User Decision", CasOpenPackage.eINSTANCE.getDocumentRoot_IsUserInteractable(), bo);
+		}
 	}
 	
 	/**
@@ -81,7 +86,7 @@ public class DecisionGatewayPropertiesBuilder extends AbstractPropertiesBuilder<
 	 * @param id
 	 * @return
 	 */
-	private SequenceFlow getSequenceFlowById(String id) {
+	private SequenceFlow getSequenceFlowById(final String id) {
 		List<SequenceFlow> flows = getSequenceFlows();
 		for (SequenceFlow outgoing: flows) {
 			String nodeId = outgoing.getId();
@@ -97,7 +102,7 @@ public class DecisionGatewayPropertiesBuilder extends AbstractPropertiesBuilder<
 		return (List<SequenceFlow>) bo.eGet(FLOW_NODE_OUTGOING);
 	}
 	
-	private void updateDropdownLabels(CCombo dropDown) {
+	private void updateDropdownLabels(final CCombo dropDown) {
 		
 		// We need to avoid that the combo box fires a SWT.Modify event 
 		// while updating the drop down labels.

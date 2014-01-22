@@ -62,17 +62,17 @@ public class CreateParticipantFeature extends AbstractBpmn2CreateFeature<Partici
 	private static final int marginY = 40;
 	private static final int marginX = 40;
 	
-	public CreateParticipantFeature(IFeatureProvider fp) {
+	public CreateParticipantFeature(final IFeatureProvider fp) {
 	    super(fp, "Pool", "Container for partitioning a set of activities");
     }
 
 	@Override
-    public boolean canCreate(ICreateContext context) {
+    public boolean canCreate(final ICreateContext context) {
 		return context.getTargetContainer() instanceof Diagram;
     }
 
 	@Override
-	public Object[] create(ICreateContext context) {
+	public Object[] create(final ICreateContext context) {
 		
 		Diagram diagram = getDiagram();
 		BaseElement rootElement = BusinessObjectUtil.getFirstBaseElement(diagram);
@@ -111,6 +111,7 @@ public class CreateParticipantFeature extends AbstractBpmn2CreateFeature<Partici
 			link(diagram, new Object[] { newCollaboration, bpmnDiagram });
 			
 			// create graphiti representation
+			newParticipant.setName("Pool ohne Namen");
 			createGraphitiRepresentation(context, newParticipant);
 		} else {
 			throw new IllegalStateException("Diagram liked to unrecognized element: " + rootElement);
@@ -118,12 +119,11 @@ public class CreateParticipantFeature extends AbstractBpmn2CreateFeature<Partici
 		
 		ScrollUtil.addScrollShape(getDiagram());
 		
-		newParticipant.setName("Pool");
 		return new Object[] { newParticipant };
 	}
 
 
-	private void createGraphitiRepresentation(ICreateContext context, Participant newParticipant) {
+	private void createGraphitiRepresentation(final ICreateContext context, final Participant newParticipant) {
 		Diagram diagram = getDiagram();
 		
 		IRectangle bounds = LayoutUtil.getChildrenBBox(diagram, null, paddingX, paddingY);
@@ -161,7 +161,7 @@ public class CreateParticipantFeature extends AbstractBpmn2CreateFeature<Partici
 		Graphiti.getPeService().sendToBack(participantContainer);
 	}
 
-	private void offsetChildrenPosition(IRectangle bounds, ContainerShape participantContainer) {
+	private void offsetChildrenPosition(final IRectangle bounds, final ContainerShape participantContainer) {
 		
 		List<Shape> childShapes = new ArrayList<Shape>(participantContainer.getChildren());
 		Shape scrollShape = ScrollUtil.getScrollShape(getDiagram());
@@ -207,7 +207,7 @@ public class CreateParticipantFeature extends AbstractBpmn2CreateFeature<Partici
 		layoutPictogramElement(participantContainer);
 	}
 
-	private CreateContext contextFromBounds(ICreateContext oldContext, IRectangle bounds) {
+	private CreateContext contextFromBounds(final ICreateContext oldContext, final IRectangle bounds) {
 		
 		CreateContext newContext = new CreateContext();
 		newContext.setTargetConnection(oldContext.getTargetConnection());
@@ -221,7 +221,7 @@ public class CreateParticipantFeature extends AbstractBpmn2CreateFeature<Partici
 		return newContext;
 	}
 	
-	private Participant createParticipant(Process process, Collaboration collaboration) {
+	private Participant createParticipant(final Process process, final Collaboration collaboration) {
 		Participant newParticipant;
 		newParticipant = Bpmn2Factory.eINSTANCE.createParticipant();
 		ModelUtil.setID(newParticipant);
@@ -231,7 +231,7 @@ public class CreateParticipantFeature extends AbstractBpmn2CreateFeature<Partici
 		return newParticipant;
 	}
 
-	private Collaboration createCollaboration(Definitions definitions, BPMNPlane bpmnPlane) {
+	private Collaboration createCollaboration(final Definitions definitions, final BPMNPlane bpmnPlane) {
 		Collaboration newCollaboration = Bpmn2Factory.eINSTANCE.createCollaboration();
 		ModelUtil.setID(newCollaboration);
 		

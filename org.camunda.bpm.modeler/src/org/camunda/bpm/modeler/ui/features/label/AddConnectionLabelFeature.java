@@ -14,12 +14,12 @@ import org.eclipse.graphiti.mm.pictograms.ContainerShape;
  */
 public class AddConnectionLabelFeature extends AbstractAddLabelFeature {
 
-	public AddConnectionLabelFeature(IFeatureProvider fp) {
+	public AddConnectionLabelFeature(final IFeatureProvider fp) {
 		super(fp);
 	}
 	
 	@Override
-	protected void postAddHook(IAddContext context, ContainerShape newLabelShape) {
+	protected void postAddHook(final IAddContext context, final ContainerShape newLabelShape) {
 		super.postAddHook(context, newLabelShape);
 
 		Connection connection = (Connection) LabelUtil.getNonLabelPictogramElement(newLabelShape, getDiagram());

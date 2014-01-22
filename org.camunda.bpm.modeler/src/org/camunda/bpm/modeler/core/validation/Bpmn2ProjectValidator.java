@@ -64,7 +64,7 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 	public static final String BPMN2_MARKER_ID = "org.camunda.bpm.modeler.problemMarker";
 
 	@Override
-	public ValidationResult validate(ValidationEvent event, ValidationState state, IProgressMonitor monitor) {
+	public ValidationResult validate(final ValidationEvent event, final ValidationState state, final IProgressMonitor monitor) {
 
 		ValidationResult result = new ValidationResult();
 		
@@ -99,13 +99,13 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 		return result;
 	}
 
-	private ValidatorMessage createValidatorMessage(String message, IFile file) {
+	private ValidatorMessage createValidatorMessage(final String message, final IFile file) {
 		ValidatorMessage m = ValidatorMessage.create(message, file);
 		m.setType(BPMN2_MARKER_ID);
 		return m;
 	}
 
-	private void deleteValidationMarkers(IFile file) {
+	private void deleteValidationMarkers(final IFile file) {
 		try {
 			// delete validation markers
 			file.deleteMarkers(BPMN2_MARKER_ID, false, IProject.DEPTH_INFINITE);
@@ -114,11 +114,11 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 		}
 	}
 
-	private boolean isDerived(IResource file) {
+	private boolean isDerived(final IResource file) {
 		return file.isDerived(IResource.CHECK_ANCESTORS);
 	}
 
-	private boolean isFileRemoved(ValidationEvent event) {
+	private boolean isFileRemoved(final ValidationEvent event) {
 		return (event.getKind() & IResourceDelta.REMOVED) != 0;
 	}
 
@@ -130,12 +130,12 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 	 * 
 	 * @return
 	 */
-	public static ValidationResult validate(IResource resource, IProgressMonitor monitor) {
+	public static ValidationResult validate(final IResource resource, final IProgressMonitor monitor) {
 		if (!isBPMN2File(resource)) {
 			return null;
 		}
 		
-		Validator[] validators = ValidationFramework.getDefault().getValidatorsFor(resource);
+		Validator[] validators = ValidationFramework.getDefault().getValidators();
 		for (Validator v : validators) {
 			if (Bpmn2ProjectValidator.class.getName().equals(v.getValidatorClassname())) {
 				return v.validate(resource, IResourceDelta.CHANGED, null, monitor);
@@ -145,7 +145,7 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 		return null;
 	}
 
-	public static void validate(IResourceDelta delta, IProgressMonitor monitor) {
+	public static void validate(final IResourceDelta delta, final IProgressMonitor monitor) {
 		IResource resource = delta.getResource();
 		if (isBPMN2File(resource)) {
 			Validator[] validators = ValidationFramework.getDefault().getValidatorsFor(resource);
@@ -158,7 +158,7 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 		}
 	}
 
-	public static boolean isBPMN2File(IResource resource) {
+	public static boolean isBPMN2File(final IResource resource) {
 		if (resource instanceof IFile) {
 			try {
 				IContentDescription cd = ((IFile) resource).getContentDescription();
@@ -171,14 +171,13 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 		return false;
 	}
 
-	public static boolean validateResource(Resource resource, IProgressMonitor monitor) {
+	public static ValidationResult validateResource(final Resource resource, final IProgressMonitor monitor) {
 		IFile file = getFile(resource);
-		validate(file, monitor);
 		
-		return true;
+		return validate(file, monitor);
 	}
 	
-	public static boolean validateAfterSave(Resource resource, IProgressMonitor monitor) {
+	public static boolean validateAfterSave(final Resource resource, final IProgressMonitor monitor) {
 
 		boolean needValidation = false;
 		
@@ -236,13 +235,13 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 		return false;
 	}
 
-	private static IFile getFile(Resource resource) {
+	private static IFile getFile(final Resource resource) {
 		String pathString = resource.getURI().toPlatformString(true);
 		IPath path = Path.fromOSString(pathString);
 		return ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 	}
 
-	public static void processStatus(IStatus status, IResource resource, ValidationResult result) {
+	public static void processStatus(final IStatus status, final IResource resource, final ValidationResult result) {
 		if (status.isMultiStatus()) {
 			for (IStatus child : status.getChildren()) {
 				processStatus(child, resource, result);
@@ -252,7 +251,7 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 		}
 	}
 
-	public static ValidatorMessage createValidationMessage(IStatus status, IResource resource) {
+	public static ValidatorMessage createValidationMessage(final IStatus status, final IResource resource) {
 		ValidatorMessage message = ValidatorMessage.create(status.getMessage(), resource);
 		switch (status.getSeverity()) {
 		case IStatus.INFO:
@@ -288,7 +287,7 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 	}
 
 	@Override
-	public void clean(IProject project, ValidationState state, IProgressMonitor monitor) {
+	public void clean(final IProject project, final ValidationState state, final IProgressMonitor monitor) {
 		super.clean(project, state, monitor);
 		try {
 			project.deleteMarkers(BPMN2_MARKER_ID, false, IProject.DEPTH_INFINITE);

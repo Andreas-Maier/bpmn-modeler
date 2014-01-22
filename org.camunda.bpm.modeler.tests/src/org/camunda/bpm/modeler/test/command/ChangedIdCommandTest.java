@@ -1,5 +1,7 @@
 package org.camunda.bpm.modeler.test.command;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+
 import org.camunda.bpm.modeler.core.di.DIUtils;
 import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
 import org.camunda.bpm.modeler.core.utils.ModelUtil;
@@ -10,8 +12,6 @@ import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.junit.Test;
-
-import static org.fest.assertions.api.Assertions.assertThat;
 
 public class ChangedIdCommandTest extends AbstractFeatureTest {
 

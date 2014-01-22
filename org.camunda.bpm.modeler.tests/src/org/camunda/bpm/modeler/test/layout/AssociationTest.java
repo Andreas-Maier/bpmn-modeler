@@ -1,8 +1,8 @@
 package org.camunda.bpm.modeler.test.layout;
 
-import static org.camunda.bpm.modeler.test.util.assertions.Bpmn2ModelAssertions.assertThat;
 import static org.camunda.bpm.modeler.test.util.operations.CreateDataAssocationOperation.createDataAssocation;
 import static org.camunda.bpm.modeler.test.util.operations.MoveShapeOperation.move;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
 import org.camunda.bpm.modeler.test.feature.AbstractFeatureTest;

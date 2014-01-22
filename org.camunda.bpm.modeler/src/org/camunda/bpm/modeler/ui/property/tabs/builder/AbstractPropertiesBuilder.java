@@ -18,7 +18,7 @@ public abstract class AbstractPropertiesBuilder<T extends BaseElement> {
 	protected T bo;
 	protected Composite parent;
 
-	public AbstractPropertiesBuilder(Composite parent, GFPropertySection section, T bo) {
+	public AbstractPropertiesBuilder(final Composite parent, final GFPropertySection section, final T bo) {
 		this.section = section;
 		this.bo = bo;
 		this.parent = parent;
@@ -62,7 +62,7 @@ public abstract class AbstractPropertiesBuilder<T extends BaseElement> {
 	 * @param parent
 	 * @return
 	 */
-	private Composite getScrollableComposite(Composite parent) {
+	private Composite getScrollableComposite(final Composite parent) {
 		if (parent instanceof ScrolledComposite) {
 			return parent;
 		} else {

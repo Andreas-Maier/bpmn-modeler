@@ -39,7 +39,7 @@ public abstract class AbstractMorphFlowNodeOperation<T extends ICustomFeature, V
 	
 	@SuppressWarnings("unchecked")
 	public T getFeature() {
-		return (T) createFeature(context);
+		return createFeature(context);
 	}
 	
 

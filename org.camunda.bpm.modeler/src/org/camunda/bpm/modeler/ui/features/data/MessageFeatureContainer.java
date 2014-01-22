@@ -19,8 +19,8 @@ import org.camunda.bpm.modeler.core.features.UpdateBaseElementNameFeature;
 import org.camunda.bpm.modeler.core.features.container.BaseElementFeatureContainer;
 import org.camunda.bpm.modeler.core.features.data.AbstractCreateRootElementFeature;
 import org.camunda.bpm.modeler.core.utils.GraphicsUtil;
-import org.camunda.bpm.modeler.core.utils.StyleUtil;
 import org.camunda.bpm.modeler.core.utils.GraphicsUtil.Envelope;
+import org.camunda.bpm.modeler.core.utils.StyleUtil;
 import org.camunda.bpm.modeler.ui.ImageProvider;
 import org.camunda.bpm.modeler.ui.features.LayoutBaseElementTextFeature;
 import org.camunda.bpm.modeler.ui.features.choreography.UpdateChoreographyMessageFlowFeature;
@@ -52,26 +52,26 @@ public class MessageFeatureContainer extends BaseElementFeatureContainer {
 	public static final int ENVELOPE_HEIGHT = 20;
 
 	@Override
-	public boolean canApplyTo(Object o) {
+	public boolean canApplyTo(final Object o) {
 		return super.canApplyTo(o) && o instanceof Message;
 	}
 
 	@Override
-	public ICreateFeature getCreateFeature(IFeatureProvider fp) {
+	public ICreateFeature getCreateFeature(final IFeatureProvider fp) {
 		return new CreateMessageFeature(fp);
 	}
 
 	@Override
-	public IAddFeature getAddFeature(IFeatureProvider fp) {
+	public IAddFeature getAddFeature(final IFeatureProvider fp) {
 		return new AbstractBpmn2AddShapeFeature<Message>(fp) {
 
 			@Override
-			public boolean canAdd(IAddContext context) {
+			public boolean canAdd(final IAddContext context) {
 				return true;
 			}
 
 			@Override
-			protected ContainerShape createPictogramElement(IAddContext context, IRectangle bounds) {
+			protected ContainerShape createPictogramElement(final IAddContext context, final IRectangle bounds) {
 				
 				Message msg = getBusinessObject(context);
 				
@@ -89,7 +89,7 @@ public class MessageFeatureContainer extends BaseElementFeatureContainer {
 
 				Envelope envelope = GraphicsUtil.createEnvelope(invisibleRect, 0, 0, width, height);
 				envelope.rect.setFilled(true);
-				StyleUtil.applyStyle(envelope.rect, msg);
+//				StyleUtil.applyStyle(envelope.rect, msg);
 				envelope.line.setForeground(manageColor(StyleUtil.CLASS_FOREGROUND));
 				
 				return newShape;
@@ -114,7 +114,7 @@ public class MessageFeatureContainer extends BaseElementFeatureContainer {
 	}
 
 	@Override
-	public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
+	public IUpdateFeature getUpdateFeature(final IFeatureProvider fp) {
 		// because ChoreographyTasks have an associated Message visual,
 		// we need to allow these to update themselves also.
 		MultiUpdateFeature multiUpdate = new MultiUpdateFeature(fp);
@@ -124,12 +124,12 @@ public class MessageFeatureContainer extends BaseElementFeatureContainer {
 	}
 
 	@Override
-	public IDirectEditingFeature getDirectEditingFeature(IFeatureProvider fp) {
+	public IDirectEditingFeature getDirectEditingFeature(final IFeatureProvider fp) {
 		return null;
 	}
 
 	@Override
-	public ILayoutFeature getLayoutFeature(IFeatureProvider fp) {
+	public ILayoutFeature getLayoutFeature(final IFeatureProvider fp) {
 		return new LayoutBaseElementTextFeature(fp) {
 			@Override
 			public int getMinimumWidth() {
@@ -139,15 +139,15 @@ public class MessageFeatureContainer extends BaseElementFeatureContainer {
 	}
 
 	@Override
-	public IMoveShapeFeature getMoveFeature(IFeatureProvider fp) {
+	public IMoveShapeFeature getMoveFeature(final IFeatureProvider fp) {
 		return new DefaultBpmn2MoveShapeFeature(fp);
 	}
 
 	@Override
-	public IResizeShapeFeature getResizeFeature(IFeatureProvider fp) {
+	public IResizeShapeFeature getResizeFeature(final IFeatureProvider fp) {
 		return new DefaultResizeShapeFeature(fp) {
 			@Override
-			public boolean canResizeShape(IResizeShapeContext context) {
+			public boolean canResizeShape(final IResizeShapeContext context) {
 				return false;
 			}
 		};
@@ -155,7 +155,7 @@ public class MessageFeatureContainer extends BaseElementFeatureContainer {
 
 	public static class CreateMessageFeature extends AbstractCreateRootElementFeature<Message> {
 
-		public CreateMessageFeature(IFeatureProvider fp) {
+		public CreateMessageFeature(final IFeatureProvider fp) {
 			super(fp, "Message", "Represents the content of a communication between two Participants");
 		}
 
@@ -174,7 +174,7 @@ public class MessageFeatureContainer extends BaseElementFeatureContainer {
 	}
 
 	@Override
-	public IDeleteFeature getDeleteFeature(IFeatureProvider context) {
+	public IDeleteFeature getDeleteFeature(final IFeatureProvider context) {
 		return null;
 	}
 }

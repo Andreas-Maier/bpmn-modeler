@@ -14,7 +14,6 @@ package org.camunda.bpm.modeler.ui.features.lane;
 
 import org.camunda.bpm.modeler.core.features.container.BaseElementFeatureContainer;
 import org.camunda.bpm.modeler.core.features.lane.AddLaneFeature;
-import org.camunda.bpm.modeler.core.features.lane.DirectEditLaneFeature;
 import org.camunda.bpm.modeler.core.features.lane.LayoutLaneFeature;
 import org.camunda.bpm.modeler.core.features.lane.MoveLaneFeature;
 import org.camunda.bpm.modeler.core.features.lane.ResizeLaneFeature;
@@ -34,52 +33,52 @@ import org.eclipse.graphiti.features.custom.ICustomFeature;
 public class LaneFeatureContainer extends BaseElementFeatureContainer {
 
 	@Override
-	public boolean canApplyTo(Object o) {
+	public boolean canApplyTo(final Object o) {
 		return super.canApplyTo(o) && o instanceof Lane;
 	}
 
 	@Override
-	public ICreateFeature getCreateFeature(IFeatureProvider fp) {
+	public ICreateFeature getCreateFeature(final IFeatureProvider fp) {
 		return new CreateLaneFeature(fp);
 	}
 
 	@Override
-	public IAddFeature getAddFeature(IFeatureProvider fp) {
+	public IAddFeature getAddFeature(final IFeatureProvider fp) {
 		return new AddLaneFeature(fp);
 	}
 
 	@Override
-	public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
+	public IUpdateFeature getUpdateFeature(final IFeatureProvider fp) {
 		return new UpdateLaneFeature(fp);
 	}
 
 	@Override
-	public IDirectEditingFeature getDirectEditingFeature(IFeatureProvider fp) {
-		return new DirectEditLaneFeature(fp);
+	public IDirectEditingFeature getDirectEditingFeature(final IFeatureProvider fp) {
+		return null;
 	}
 
 	@Override
-	public ILayoutFeature getLayoutFeature(IFeatureProvider fp) {
+	public ILayoutFeature getLayoutFeature(final IFeatureProvider fp) {
 		return new LayoutLaneFeature(fp);
 	}
 
 	@Override
-	public IMoveShapeFeature getMoveFeature(IFeatureProvider fp) {
+	public IMoveShapeFeature getMoveFeature(final IFeatureProvider fp) {
 		return new MoveLaneFeature(fp);
 	}
 
 	@Override
-	public IResizeShapeFeature getResizeFeature(IFeatureProvider fp) {
+	public IResizeShapeFeature getResizeFeature(final IFeatureProvider fp) {
 		return new ResizeLaneFeature(fp);
 	}
 
 	@Override
-	public IDeleteFeature getDeleteFeature(IFeatureProvider fp) {
+	public IDeleteFeature getDeleteFeature(final IFeatureProvider fp) {
 		return new DeleteLaneFeature(fp);
 	}
 
 	@Override
-	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
+	public ICustomFeature[] getCustomFeatures(final IFeatureProvider fp) {
 		ICustomFeature[] superFeatures = super.getCustomFeatures(fp);
 		ICustomFeature[] thisFeatures = new ICustomFeature[1 + superFeatures.length];
 		int i;

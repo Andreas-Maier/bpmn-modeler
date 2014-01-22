@@ -13,24 +13,33 @@
 package org.camunda.bpm.modeler.core.features.data;
 
 import org.camunda.bpm.modeler.core.features.AbstractBpmn2CreateFeature;
+import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
+import org.camunda.bpm.modeler.core.utils.ModelUtil;
+import org.eclipse.bpmn2.Definitions;
 import org.eclipse.bpmn2.RootElement;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICreateContext;
 
 public abstract class AbstractCreateRootElementFeature<T extends RootElement> extends AbstractBpmn2CreateFeature<T> {
 
-	public AbstractCreateRootElementFeature(IFeatureProvider fp, String name, String description) {
+	public AbstractCreateRootElementFeature(final IFeatureProvider fp, final String name, final String description) {
 	    super(fp, name, description);
     }
 
 	@Override
-    public boolean canCreate(ICreateContext context) {
+    public boolean canCreate(final ICreateContext context) {
 	    return true;
     }
 
 	@Override
-    public Object[] create(ICreateContext context) {
+    public Object[] create(final ICreateContext context) {
 		RootElement element = createBusinessObject(context);
+		// Fix for message(root element) handling. Those had not been added to
+		// the process and therefore no resource attached.
+		Definitions defs = ModelUtil.getDefinitions(BusinessObjectUtil
+				.getBusinessObjectForPictogramElement(context
+						.getTargetContainer()));
+		defs.getRootElements().add(element);
 		addGraphicalRepresentation(context, element);
 		return new Object[] { element };
     }

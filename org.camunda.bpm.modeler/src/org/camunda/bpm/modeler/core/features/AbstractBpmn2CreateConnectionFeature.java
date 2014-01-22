@@ -98,15 +98,18 @@ public abstract class AbstractBpmn2CreateConnectionFeature<T extends BaseElement
 		return "Create " + ModelUtil.toDisplayName( getBusinessObjectClass().getName());
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public T getBusinessObject(ICreateConnectionContext context) {
 		return (T) context.getProperty(PropertyNames.BUSINESS_OBJECT);
 	}
 	
+	@Override
 	public void putBusinessObject(ICreateConnectionContext context, T businessObject) {
 		context.putProperty(PropertyNames.BUSINESS_OBJECT, businessObject);
 	}
 
+	@Override
 	public void postExecute(IExecutionInfo executionInfo) {
 		
 	}

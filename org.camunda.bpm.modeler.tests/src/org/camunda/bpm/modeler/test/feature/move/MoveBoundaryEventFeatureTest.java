@@ -1,8 +1,9 @@
 package org.camunda.bpm.modeler.test.feature.move;
 
 import static org.camunda.bpm.modeler.core.layout.util.ConversionUtil.point;
-import static org.camunda.bpm.modeler.test.util.assertions.Bpmn2ModelAssertions.*;
+import static org.camunda.bpm.modeler.test.util.assertions.Bpmn2ModelAssertions.assertThat;
 import static org.camunda.bpm.modeler.test.util.operations.MoveShapeOperation.move;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.camunda.bpm.modeler.core.layout.util.BoundaryEventUtil;
 import org.camunda.bpm.modeler.core.layout.util.LayoutUtil;
@@ -16,7 +17,6 @@ import org.camunda.bpm.modeler.ui.features.event.MoveBoundaryEventFeature;
 import org.eclipse.bpmn2.BoundaryEvent;
 import org.eclipse.bpmn2.Participant;
 import org.eclipse.bpmn2.Task;
-import org.eclipse.bpmn2.Process;
 import org.eclipse.graphiti.datatypes.IRectangle;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;

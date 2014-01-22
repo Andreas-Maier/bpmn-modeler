@@ -28,8 +28,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.camunda.bpm.modeler.core.model.Bpmn2ModelerResourceSetImpl;
-import org.camunda.bpm.modeler.ui.diagram.editor.Bpmn2Editor;
 import org.camunda.bpm.modeler.ui.diagram.editor.Bpmn2DiagramEditorInput;
+import org.camunda.bpm.modeler.ui.diagram.editor.Bpmn2Editor;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -55,7 +55,7 @@ import org.eclipse.ui.part.FileEditorInput;
 
 public class FileService {
 
-	public static TransactionalEditingDomain createEmfFileForDiagram(URI diagramResourceUri, final Diagram diagram, Bpmn2Editor diagramEditor) {
+	public static TransactionalEditingDomain createEmfFileForDiagram(final URI diagramResourceUri, final Diagram diagram, final Bpmn2Editor diagramEditor) {
 
 		ResourceSet resourceSet = null;
 		TransactionalEditingDomain editingDomain = null;
@@ -90,7 +90,7 @@ public class FileService {
 		return editingDomain;
 	}
 
-	private static void save(TransactionalEditingDomain editingDomain, Map<Resource, Map<?, ?>> options) {
+	private static void save(final TransactionalEditingDomain editingDomain, final Map<Resource, Map<?, ?>> options) {
 		saveInWorkspaceRunnable(editingDomain, options);
 	}
 
@@ -166,7 +166,7 @@ public class FileService {
 		}
 	}
 
-	private static String createMessage(Map<URI, Throwable> failedSaves) {
+	private static String createMessage(final Map<URI, Throwable> failedSaves) {
 		final StringBuilder buf = new StringBuilder("The following resources could not be saved:");
 		for (final Entry<URI, Throwable> entry : failedSaves.entrySet()) {
 			buf.append("\nURI: ").append(entry.getKey().toString()).append(", cause: \n")
@@ -175,7 +175,7 @@ public class FileService {
 		return buf.toString();
 	}
 
-	private static String getExceptionAsString(Throwable t) {
+	private static String getExceptionAsString(final Throwable t) {
 		final StringWriter stringWriter = new StringWriter();
 		final PrintWriter printWriter = new PrintWriter(stringWriter);
 		t.printStackTrace(printWriter);
@@ -189,7 +189,7 @@ public class FileService {
 		return result;
 	}
 
-	public static InputStream getInputContents(IEditorInput input) {
+	public static InputStream getInputContents(final IEditorInput input) {
 		try {
 			if (input instanceof Bpmn2DiagramEditorInput) {
 				URI uri = getInputUri(input);
@@ -217,7 +217,7 @@ public class FileService {
 		return null;
 	}
 	
-	public static URI getInputUri(IEditorInput input) {
+	public static URI getInputUri(final IEditorInput input) {
 		if (input instanceof Bpmn2DiagramEditorInput) {
 			URI uri = ((Bpmn2DiagramEditorInput) input).getModelUri();
 			return uri.trimFragment();
@@ -246,13 +246,13 @@ public class FileService {
 		return null;
 	}
 	
-	public static String createTempName(String name) {
+	public static String createTempName(final String name) {
 		String tempDir = System.getProperty("java.io.tmpdir");
 		String tempName = tempDir + File.separatorChar + name + "." + EcoreUtil.generateUUID();
 		return tempName;
 	}
 	
-	public static File createTempFile(String name, InputStream istream) {
+	public static File createTempFile(final String name, final InputStream istream) {
 		File tempFile = null;
 		try {
 			tempFile = File.createTempFile(name, ".bpmn");

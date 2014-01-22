@@ -1,10 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: camunda modeler
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.camunda.bpm.modeler;singleton:=true
 Bundle-Version: 2.2.0.qualifier
+Bundle-ClassPath: .
 Bundle-Activator: org.camunda.bpm.modeler.core.Activator
-Bundle-Vendor: camunda.org
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Require-Bundle: org.eclipse.emf.transaction,
  org.eclipse.emf.edit.ui,
  org.eclipse.emf.validation.ocl,
@@ -16,28 +18,25 @@ Require-Bundle: org.eclipse.emf.transaction,
  org.eclipse.wst.wsdl;bundle-version="[1.1.200,2.0.0)",
  org.eclipse.wst.xml.core;bundle-version="[1.1.300,2.0.0)",
  org.eclipse.xsd;bundle-version="[2.4.0,3.0.0)",
- org.eclipse.wst.sse.ui;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.wst.sse.core;bundle-version="[1.1.300,2.0.0)",
- javax.wsdl;bundle-version="[1.5.0,1.6.0)";visibility:=reexport,
- org.eclipse.wst.xsd.ui;bundle-version="[1.2.101,2.0.0)",
- org.eclipse.wst.xml.ui;bundle-version="[1.0.400,2.0.0)",
+ javax.wsdl;visibility:=reexport;bundle-version="[1.5.0,1.6.0)",
  org.eclipse.ui.ide,
  org.eclipse.core.commands,
- org.eclipse.jdt,
- org.eclipse.jdt.core,
- org.eclipse.jdt.launching,
  org.eclipse.ui.views.properties.tabbed,
  org.eclipse.jface.databinding,
  org.eclipse.core.databinding,
  org.eclipse.core.resources,
  org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.ui,
  org.eclipse.jface.text,
- org.eclipse.emf.workspace,
- org.eclipse.jdt.ui,
- org.eclipse.ui.navigator,
  org.eclipse.bpmn2,
- org.eclipse.bpmn2.edit
+ org.eclipse.bpmn2.edit,
+ org.eclipse.ui.navigator.resources,
+ org.eclipse.emf.workspace;bundle-version="1.5.1",
+ org.eclipse.ui.editors;bundle-version="3.8.100",
+ de.cas.open.prozesse.modeler.server
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.camunda.bpm.modeler.core,
@@ -72,6 +71,9 @@ Export-Package: org.camunda.bpm.modeler.core,
  org.camunda.bpm.modeler.plugin.core,
  org.camunda.bpm.modeler.runtime.engine,
  org.camunda.bpm.modeler.runtime.engine.model,
+ org.camunda.bpm.modeler.runtime.engine.model.casOpen,
+ org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl,
+ org.camunda.bpm.modeler.runtime.engine.model.casOpen.util,
  org.camunda.bpm.modeler.runtime.engine.model.fox,
  org.camunda.bpm.modeler.runtime.engine.model.fox.impl,
  org.camunda.bpm.modeler.runtime.engine.model.fox.util,
@@ -82,11 +84,13 @@ Export-Package: org.camunda.bpm.modeler.core,
  org.camunda.bpm.modeler.ui.change,
  org.camunda.bpm.modeler.ui.change.filter,
  org.camunda.bpm.modeler.ui.diagram,
+ org.camunda.bpm.modeler.ui.diagram.editor,
  org.camunda.bpm.modeler.ui.features,
  org.camunda.bpm.modeler.ui.features.activity,
  org.camunda.bpm.modeler.ui.features.activity.subprocess,
  org.camunda.bpm.modeler.ui.features.activity.task,
  org.camunda.bpm.modeler.ui.features.artifact,
+ org.camunda.bpm.modeler.ui.features.context,
  org.camunda.bpm.modeler.ui.features.data,
  org.camunda.bpm.modeler.ui.features.event,
  org.camunda.bpm.modeler.ui.features.flow,
@@ -96,11 +100,16 @@ Export-Package: org.camunda.bpm.modeler.core,
  org.camunda.bpm.modeler.ui.features.participant,
  org.camunda.bpm.modeler.ui.property,
  org.camunda.bpm.modeler.ui.property.tabs,
- org.camunda.bpm.modeler.ui.property.tabs.builder
-Import-Package: 
- de.cas.open.prozesse.modeler.server.authenticate,
+ org.camunda.bpm.modeler.ui.property.tabs.builder,
+ org.camunda.bpm.modeler.ui.property.tabs.util,
+ org.camunda.bpm.modeler.ui.wizards
+Import-Package: de.cas.open.prozesse.modeler.server.eimInterface,
  de.cas.open.prozesse.modeler.server.preferences,
- de.cas.open.prozesse.modeler.validation.cycles,
+ de.cas.open.prozesse.modeler.server.utils,
+ de.cas.open.server.api.business,
+ de.cas.open.server.api.eiminterface,
+ de.cas.open.server.api.types,
+ de.cas.open.server.processes.types,
  org.eclipse.graphiti.ui.features,
  org.eclipse.jface.preference,
  org.eclipse.jface.util,

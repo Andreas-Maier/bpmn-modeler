@@ -15,7 +15,6 @@ package org.camunda.bpm.modeler.ui.features.participant;
 import org.camunda.bpm.modeler.core.features.MultiUpdateFeature;
 import org.camunda.bpm.modeler.core.features.container.BaseElementFeatureContainer;
 import org.camunda.bpm.modeler.core.features.participant.AddParticipantFeature;
-import org.camunda.bpm.modeler.core.features.participant.DirectEditParticipantFeature;
 import org.camunda.bpm.modeler.core.features.participant.LayoutParticipantFeature;
 import org.camunda.bpm.modeler.core.features.participant.ResizeParticipantFeature;
 import org.camunda.bpm.modeler.core.features.participant.UpdateParticipantFeature;
@@ -42,22 +41,22 @@ import org.eclipse.graphiti.features.custom.ICustomFeature;
 public class ParticipantFeatureContainer extends BaseElementFeatureContainer {
 
 	@Override
-	public boolean canApplyTo(Object o) {
+	public boolean canApplyTo(final Object o) {
 		return super.canApplyTo(o) && o instanceof Participant;
 	}
 
 	@Override
-	public ICreateFeature getCreateFeature(IFeatureProvider fp) {
+	public ICreateFeature getCreateFeature(final IFeatureProvider fp) {
 		return new CreateParticipantFeature(fp);
 	}
 
 	@Override
-	public IAddFeature getAddFeature(IFeatureProvider fp) {
+	public IAddFeature getAddFeature(final IFeatureProvider fp) {
 		return new AddParticipantFeature(fp);
 	}
 
 	@Override
-	public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
+	public IUpdateFeature getUpdateFeature(final IFeatureProvider fp) {
 		MultiUpdateFeature multiUpdate = new MultiUpdateFeature(fp);
 		multiUpdate.addUpdateFeature(new UpdateParticipantFeature(fp));
 		multiUpdate.addUpdateFeature(new UpdateParticipantMultiplicityFeature(fp));
@@ -66,37 +65,38 @@ public class ParticipantFeatureContainer extends BaseElementFeatureContainer {
 	}
 
 	@Override
-	public IDirectEditingFeature getDirectEditingFeature(IFeatureProvider fp) {
-		return new DirectEditParticipantFeature(fp);
+	public IDirectEditingFeature getDirectEditingFeature(final IFeatureProvider fp) {
+		return null;
+//		return new DirectEditParticipantFeature(fp);
 	}
 
 	@Override
-	public ILayoutFeature getLayoutFeature(IFeatureProvider fp) {
+	public ILayoutFeature getLayoutFeature(final IFeatureProvider fp) {
 		return new LayoutParticipantFeature(fp);
 	}
 
 	@Override
-	public IMoveShapeFeature getMoveFeature(IFeatureProvider fp) {
+	public IMoveShapeFeature getMoveFeature(final IFeatureProvider fp) {
 		return new MoveParticipantFeature(fp);
 	}
 
 	@Override
-	public IResizeShapeFeature getResizeFeature(IFeatureProvider fp) {
+	public IResizeShapeFeature getResizeFeature(final IFeatureProvider fp) {
 		return new ResizeParticipantFeature(fp);
 	}
 
 	@Override
-	public IDeleteFeature getDeleteFeature(IFeatureProvider fp) {
+	public IDeleteFeature getDeleteFeature(final IFeatureProvider fp) {
 		return new DeleteParticipantFeature(fp);
 	}
 
 	@Override
-	public IRemoveFeature getRemoveFeature(IFeatureProvider fp) {
+	public IRemoveFeature getRemoveFeature(final IFeatureProvider fp) {
 		return new RemoveChoreographyParticipantFeature(fp);
 	}
 
 	@Override
-	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
+	public ICustomFeature[] getCustomFeatures(final IFeatureProvider fp) {
 		ICustomFeature[] superFeatures = super.getCustomFeatures(fp);
 		ICustomFeature[] thisFeatures = new ICustomFeature[5 + superFeatures.length];
 		thisFeatures[0] = new ShowDiagramPageFeature(fp);

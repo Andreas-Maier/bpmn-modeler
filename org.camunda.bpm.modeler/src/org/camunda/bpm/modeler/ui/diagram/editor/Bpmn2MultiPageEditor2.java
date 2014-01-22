@@ -59,17 +59,16 @@ import org.eclipse.ui.part.MultiPageEditorSite;
 public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoMarker {
 
 	DesignEditor designEditor;
-	SourceViewer sourceViewer;
 	private CTabFolder tabFolder;
 	private int defaultTabHeight;
-	private List<BPMNDiagram> bpmnDiagrams = new ArrayList<BPMNDiagram>();
+	private final List<BPMNDiagram> bpmnDiagrams = new ArrayList<BPMNDiagram>();
 	
 	public Bpmn2MultiPageEditor2() {
 		super();
 	}
 
 	@Override
-	protected IEditorSite createSite(IEditorPart editor) {
+	protected IEditorSite createSite(final IEditorPart editor) {
 		if (editor instanceof DesignEditor)
 			return new DesignEditorSite(this, editor);
 		return new MultiPageEditorSite(this, editor);
@@ -95,7 +94,7 @@ public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoM
      * @param marker Marker to look for
      */
     @Override
-    public void gotoMarker(IMarker marker) {
+    public void gotoMarker(final IMarker marker) {
         if (getActivePage() < 0) {
             setActivePage(0);
         }
@@ -110,31 +109,29 @@ public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoM
 		tabFolder.addCTabFolder2Listener( new CTabFolder2Listener() {
 
 			@Override
-			public void close(CTabFolderEvent event) {
-				if (event.item.getData() == sourceViewer)
-					removeSourceViewer();
+			public void close(final CTabFolderEvent event) {
 			}
 
 			@Override
-			public void minimize(CTabFolderEvent event) {
+			public void minimize(final CTabFolderEvent event) {
 			}
 
 			@Override
-			public void maximize(CTabFolderEvent event) {
+			public void maximize(final CTabFolderEvent event) {
 			}
 
 			@Override
-			public void restore(CTabFolderEvent event) {
+			public void restore(final CTabFolderEvent event) {
 			}
 
 			@Override
-			public void showList(CTabFolderEvent event) {
+			public void showList(final CTabFolderEvent event) {
 			}
 			
 		});
 		tabFolder.addSelectionListener( new SelectionAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(final SelectionEvent e) {
 				int pageIndex = tabFolder.getSelectionIndex();
 				if (pageIndex>=0 && pageIndex<bpmnDiagrams.size() && designEditor!=null) {
 					BPMNDiagram bpmnDiagram = bpmnDiagrams.get(pageIndex);
@@ -149,6 +146,7 @@ public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoM
 		createDesignEditor();
 		
 		Display.getDefault().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				setActivePage(0);
 				designEditor.selectBpmnDiagram(bpmnDiagrams.get(0));
@@ -165,8 +163,6 @@ public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoM
 			
 			try {
 				int pageIndex = tabFolder.getItemCount();
-				if (sourceViewer!=null)
-					--pageIndex;
 				addPage(pageIndex, designEditor, Bpmn2MultiPageEditor2.this.getEditorInput());
 				defaultTabHeight = tabFolder.getTabHeight();
 				setPageText(pageIndex,ModelUtil.getDiagramTypeName( designEditor.getBpmnDiagram() ));
@@ -188,12 +184,11 @@ public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoM
 	protected void addDesignPage(final BPMNDiagram bpmnDiagram) {
 		createDesignEditor();
 			Display.getDefault().asyncExec(new Runnable() {
+				@Override
 				public void run() {
 					try {
 			
 						int pageIndex = tabFolder.getItemCount();
-						if (sourceViewer!=null)
-							--pageIndex;
 						Bpmn2DiagramEditorInput input = (Bpmn2DiagramEditorInput)designEditor.getEditorInput();
 						input.setBpmnDiagram(bpmnDiagram);
 						addPage(pageIndex, designEditor, input);
@@ -252,28 +247,12 @@ public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoM
 
 	public int getDesignPageCount() {
 		int count = getPageCount();
-		if (sourceViewer!=null)
-			--count;
 		return count;
 	}
 
 	
-	public SourceViewer getSourceViewer() {
-		return sourceViewer;
-	}
-
-	public void removeSourceViewer() {
-		// there will only be one source page and it will always be the last page in the tab folder
-		if (sourceViewer!=null) {
-			int pageIndex = tabFolder.getItemCount() - 1;
-			if (pageIndex>0) {
-				removePage(pageIndex);
-				sourceViewer = null;
-			}
-		}
-	}
-
-	public void addPage(int pageIndex, IEditorPart editor, IEditorInput input)
+	@Override
+	public void addPage(final int pageIndex, final IEditorPart editor, final IEditorInput input)
 			throws PartInitException {
 		super.addPage(pageIndex,editor,input);
 		if (editor instanceof DesignEditor) {
@@ -282,7 +261,7 @@ public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoM
 	}
 	
 	@Override
-	public void removePage(int pageIndex) {
+	public void removePage(final int pageIndex) {
 		Object page = tabFolder.getItem(pageIndex).getData();
 		super.removePage(pageIndex);
 		updateTabs();
@@ -292,7 +271,7 @@ public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoM
 	}
 
 	@Override
-	protected void pageChange(int newPageIndex) {
+	protected void pageChange(final int newPageIndex) {
 		super.pageChange(newPageIndex);
 
 		IEditorPart editor = getEditor(newPageIndex);
@@ -305,15 +284,16 @@ public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoM
 		}
 	}
 
+	@Override
 	public int getPageCount() {
 		return tabFolder.getItemCount();
 	}
 	
-	public CTabItem getTabItem(int pageIndex) {
+	public CTabItem getTabItem(final int pageIndex) {
 		return tabFolder.getItem(pageIndex);
 	}
 	
-	public BPMNDiagram getBpmnDiagram(int i) {
+	public BPMNDiagram getBpmnDiagram(final int i) {
 		if (i>=0 && i<bpmnDiagrams.size()) {
 			return bpmnDiagrams.get(i);
 		}
@@ -339,7 +319,7 @@ public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoM
 	 * @see org.eclipse.ui.part.EditorPart#doSave(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public void doSave(IProgressMonitor monitor) {
+	public void doSave(final IProgressMonitor monitor) {
 		designEditor.doSave(monitor);
 	}
 
@@ -369,7 +349,5 @@ public class Bpmn2MultiPageEditor2 extends MultiPageEditorPart implements IGotoM
 	@Override
 	public void dispose() {
 		designEditor.dispose();
-		if (sourceViewer!=null)
-			sourceViewer.dispose();
 	}
 }

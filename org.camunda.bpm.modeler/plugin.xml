@@ -3,6 +3,7 @@
 <plugin>
 	<extension-point id="org.camunda.bpm.modeler.runtime" name="BPMN2 Modeler Runtime Specialization" schema="schema/org.camunda.bpm.modeler.runtime.exsd"/>
  <extension-point id="org.camunda.bpm.modeler.plugin.customtask" name="CustomTask" schema="schema/org.camunda.bpm.modeler.plugin.customtask.exsd"/>
+ <extension-point id="de.cas.open.prozesse.modeler.wizard" name="Wizards" schema="schema/de.cas.open.prozesse.modeler.wizard.exsd"/>
 
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package
@@ -11,6 +12,43 @@
 			uri="http://www.activiti.org">
 		</package>
 	</extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated activitiExtensions -->
+      <parser
+            type="model"
+            class="org.camunda.bpm.modeler.runtime.engine.model.util.ModelResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated activitiExtensions -->
+      <package
+            uri="http://www.camunda.com/fox"
+            class="org.camunda.bpm.modeler.runtime.engine.model.fox.FoxPackage"
+            genModel="model/activitiExtensions.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated activitiExtensions -->
+      <parser
+            type="fox"
+            class="org.camunda.bpm.modeler.runtime.engine.model.fox.util.FoxResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated activitiExtensions -->
+      <package
+            uri="http://www.cas.de/open"
+            class="org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage"
+            genModel="model/activitiExtensions.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated activitiExtensions -->
+      <parser
+            type="casopen"
+            class="org.camunda.bpm.modeler.runtime.engine.model.casOpen.util.CasOpenResourceFactoryImpl"/>
+   </extension>
 
 	<extension point="org.camunda.bpm.modeler.runtime">
 		<runtime name="camunda fox activiti" versions="5.4,5.5,5.6,5.7,5.8"
@@ -54,8 +92,6 @@
 			wizardId="org.camunda.bpm.modeler.ui.diagram">
 			<enablement>
 				<or>
-					<instanceof value="org.eclipse.jdt.core.IPackageFragment"/>
-					<instanceof value="org.eclipse.core.resources.IFolder" />
 					<instanceof value="org.eclipse.core.resources.IProject" />
 				</or>
 			</enablement>
@@ -215,7 +251,6 @@
 					statusCode="1">
 					<message>{0}</message>
 					<description>Diagram Validation Errors</description>
-					<target class="BPMNDiagram"/>
 					<target class="Definitions"/>
 					<target class="BaseElement"/>
 				</constraint>
@@ -230,7 +265,6 @@
 					statusCode="1">
 					<message>{0}</message>
 					<description>Diagram Validation Warnings</description>
-					<target class="BPMNDiagram"/>
 					<target class="Definitions"/>
 					<target class="BaseElement"/>
 				</constraint>
@@ -250,24 +284,6 @@
 					</description>
 					<target
 						class="Task">
-					</target>
-				</constraint>
-				<constraint
-					class="org.camunda.bpm.modeler.core.validation.FormalExpressionConstraint"
-					id="org.camunda.bpm.modeler.validation.FormalExpressionConstraint"
-					lang="java"
-					mode="Batch"
-					name="FormalExpressionConstraint"
-					severity="ERROR"
-					statusCode="1">
-					<message>
-						Expression and Language must not be blank
-					</message>
-					<description>
-						Expression and Language must not be blank
-					</description>
-					<target
-						class="FormalExpression">
 					</target>
 				</constraint>
 
@@ -386,10 +402,10 @@
        point="org.eclipse.core.runtime.products">
     <product
           application="org.eclipse.ui.ide.workbench"
-          name="BPMN Modeler">
+          name="%productName">
        <property
              name="windowImages"
-             value="eclipse16.gif,eclipse32.gif,eclipse48.gif,eclipse16.png,eclipse32.png">
+             value="icons/bpmn2_editor_16.bmp,icons/bpmn2_editor_32.bmp,icons/bpmn2_editor_16.png,icons/bpmn2_editor_16.png,icons/bpmn2_editor_16.png">
        </property>
        <property
              name="aboutText"
@@ -397,7 +413,7 @@
        </property>
        <property
              name="aboutImage"
-             value="eclipse_lg.gif">
+             value="icons/bpmn2_editor_16.png">
        </property>
        <property
              name="appName"
@@ -412,12 +428,29 @@
  <extension
        point="org.eclipse.ui.splashHandlers">
     <splashHandler
-          class="de.cas.open.prozesse.modeler.splashHandlers.InteractiveSplashHandler"
-          id="de.cas.open.prozesse.modeler.splashHandlers.interactive">
+          class="org.camunda.bpm.modeler.splashHandlers.InteractiveSplashHandler"
+          id="org.camunda.bpm.modeler.splashHandlers.interactive">
     </splashHandler>
     <splashHandlerProductBinding
           productId="org.camunda.bpm.modeler.bpmn_modeler"
-          splashId="de.cas.open.prozesse.modeler.splashHandlers.interactive">
+          splashId="org.camunda.bpm.modeler.splashHandlers.interactive">
     </splashHandlerProductBinding>
+ </extension>
+ <extension
+       point="org.eclipse.ui.elementFactories">
+    <factory
+          class="org.camunda.bpm.modeler.ui.diagram.editor.Bpmn2DiagramEditorInputFactory"
+          id="org.camunda.bpm.modeler.ui.diagram.editor.Bpmn2DiagramEditorInputFactory">
+    </factory>
+ </extension>
+ <extension
+       point="org.eclipse.ui.perspectives">
+    <perspective
+          class="org.camunda.bpm.modeler.PerspectiveFactory"
+          fixed="true"
+          icon="icons/bpmn2_editor_16.png"
+          id="de.cas.open.prozesse.modeler.perspective"
+          name="BPMN Perspective">
+    </perspective>
  </extension>
 </plugin>

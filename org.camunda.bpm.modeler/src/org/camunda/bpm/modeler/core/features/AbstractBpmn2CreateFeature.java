@@ -47,22 +47,22 @@ public abstract class AbstractBpmn2CreateFeature<T extends BaseElement>
 	 * @param name
 	 * @param description
 	 */
-	public AbstractBpmn2CreateFeature(IFeatureProvider fp, String name, String description) {
+	public AbstractBpmn2CreateFeature(final IFeatureProvider fp, final String name, final String description) {
 		super(fp, name, description);
 	}
 
 	@Override
-	public boolean canCreate(ICreateContext context) {
+	public boolean canCreate(final ICreateContext context) {
 		return false;
 	}
 
 	@Override
-	public Object[] create(ICreateContext context) {
+	public Object[] create(final ICreateContext context) {
 		return null;
 	}
 
 	@Override
-	public boolean isAvailable(IContext context) {
+	public boolean isAvailable(final IContext context) {
 		List<ModelEnablementDescriptor> enablements = TargetRuntime.getCurrentRuntime().getModelEnablements();
 		for (ModelEnablementDescriptor e : enablements) {
 			if (e.isEnabled(getBusinessObjectClass()))
@@ -79,13 +79,13 @@ public abstract class AbstractBpmn2CreateFeature<T extends BaseElement>
 		return "Create " + ModelUtil.toDisplayName(getBusinessObjectClass().getName());
 	}
 	
+	@Override
 	@SuppressWarnings({ "unchecked" })
-	public T createBusinessObject(ICreateContext context) {
+	public T createBusinessObject(final ICreateContext context) {
 		Shape shape = context.getTargetContainer();
 		
 		EObject container = BusinessObjectUtil.getBusinessObjectForPictogramElement(shape);
 		Resource resource = container.eResource();
-		
 		EClass eCls = getBusinessObjectClass();
 		
 		EClass actualECls = ((Bpmn2FeatureProvider) getFeatureProvider()).getActualEClass(eCls);
@@ -100,17 +100,19 @@ public abstract class AbstractBpmn2CreateFeature<T extends BaseElement>
 		return newObject;
 	}
 	
+	@Override
 	@SuppressWarnings("unchecked")
-	public T getBusinessObject(ICreateContext context) {
+	public T getBusinessObject(final ICreateContext context) {
 		return (T) context.getProperty(PropertyNames.BUSINESS_OBJECT);
 	}
 	
-	public void putBusinessObject(ICreateContext context, T businessObject) {
+	@Override
+	public void putBusinessObject(final ICreateContext context, final T businessObject) {
 		context.putProperty(PropertyNames.BUSINESS_OBJECT, businessObject);
 	}
 	
 	@Override
-	public void postExecute(IExecutionInfo executionInfo) {
+	public void postExecute(final IExecutionInfo executionInfo) {
 		
 	}
 }

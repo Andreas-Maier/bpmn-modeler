@@ -40,23 +40,22 @@ import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
-import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeService;
 
 public abstract class AbstractAddFlowFeature<T extends BaseElement> extends AbstractBpmn2AddElementFeature<T, FreeFormConnection> {
 	
-	public AbstractAddFlowFeature(IFeatureProvider fp) {
+	public AbstractAddFlowFeature(final IFeatureProvider fp) {
 		super(fp);
 	}
 
 	@Override
-	public boolean canAdd(IAddContext context) {
+	public boolean canAdd(final IAddContext context) {
 		return context instanceof IAddConnectionContext
 				&& getBusinessObjectClass().getInstanceClass().isAssignableFrom(getBusinessObject(context).getClass());
 	}
 
 	@Override
-	public PictogramElement add(IAddContext ctx) {
+	public PictogramElement add(final IAddContext ctx) {
 		
 		IPeService peService = Graphiti.getPeService();
 
@@ -101,13 +100,13 @@ public abstract class AbstractAddFlowFeature<T extends BaseElement> extends Abst
 		return connection;
 	}
 
-	protected void layoutAfterCreate(FreeFormConnection connection, IAddConnectionContext addContext) {
+	protected void layoutAfterCreate(final FreeFormConnection connection, final IAddConnectionContext addContext) {
 		Layouter.layoutAfterCreate(connection, getFeatureProvider());
 	}
 
 	protected abstract EClass getBusinessObjectClass();
 
-	protected Polyline createConnectionLine(Connection connection) {
+	protected Polyline createConnectionLine(final Connection connection) {
 		BaseElement be = BusinessObjectUtil.getFirstBaseElement(connection);
 		Polyline connectionLine = Graphiti.getGaService().createPolyline(connection);
 		StyleUtil.applyStyle(connectionLine, be);
@@ -123,7 +122,7 @@ public abstract class AbstractAddFlowFeature<T extends BaseElement> extends Abst
 	 * @param context
 	 * @param newShape
 	 */
-	protected void createLabel(IAddContext context, Connection connection) {
+	protected void createLabel(final IAddContext context, final Connection connection) {
 		
 		// create label if the add shape feature wishes to do so
 		if (isCreateExternalLabel()) {
@@ -144,7 +143,7 @@ public abstract class AbstractAddFlowFeature<T extends BaseElement> extends Abst
 	 * @param newShapeBounds
 	 * @return
 	 */
-	protected IAddContext getAddLabelContext(IAddContext context, Connection connection) {
+	protected IAddContext getAddLabelContext(final IAddContext context, final Connection connection) {
 		AddContext labelAddContext = new AddContext();
 		
 		if (isImport(context)) {

@@ -29,7 +29,7 @@ public final class Bpmn2DiagramEditorInput extends DiagramEditorInput {
 	private BPMNDiagram bpmnDiagram;
 	private URI modelUri;
 	
-	public Bpmn2DiagramEditorInput(URI modelUri, URI diagramUri, TransactionalEditingDomain domain, String providerId) {
+	public Bpmn2DiagramEditorInput(final URI modelUri, final URI diagramUri, final TransactionalEditingDomain domain, final String providerId) {
 		// means : DiagramEditorInput.uri = diagramUri
 		super(diagramUri, providerId);
 		this.domain = domain;
@@ -40,7 +40,7 @@ public final class Bpmn2DiagramEditorInput extends DiagramEditorInput {
 		return initialDiagramType;
 	}
 
-	public void setInitialDiagramType(Bpmn2DiagramType initialDiagramType) {
+	public void setInitialDiagramType(final Bpmn2DiagramType initialDiagramType) {
 		this.initialDiagramType = initialDiagramType;
 	}
 
@@ -48,7 +48,7 @@ public final class Bpmn2DiagramEditorInput extends DiagramEditorInput {
 		return targetNamespace;
 	}
 
-	public void setTargetNamespace(String targetNamespace) {
+	public void setTargetNamespace(final String targetNamespace) {
 		this.targetNamespace = targetNamespace;
 	}
 
@@ -64,15 +64,18 @@ public final class Bpmn2DiagramEditorInput extends DiagramEditorInput {
 		return getUri();
 	}
 	
+	@Override
 	public String getToolTipText() {
 		return modelUri.toPlatformString(true);
 	}
 	
+	@Override
 	public String getName() {
 		return URI.decode(modelUri.trimFileExtension().lastSegment());
 	}
 	
-	public void updateUri(URI diagramFileUri) {
+	@Override
+	public void updateUri(final URI diagramFileUri) {
 		if (diagramFileUri.isPlatformResource()) {
 			modelUri = diagramFileUri;
 		}
@@ -81,7 +84,7 @@ public final class Bpmn2DiagramEditorInput extends DiagramEditorInput {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		boolean superEquals = super.equals(obj);
 		if (superEquals) {
 			return true;
@@ -113,12 +116,18 @@ public final class Bpmn2DiagramEditorInput extends DiagramEditorInput {
 		return bpmnDiagram;
 	}
 
-	public void setBpmnDiagram(BPMNDiagram bpmnDiagram) {
+	public void setBpmnDiagram(final BPMNDiagram bpmnDiagram) {
 		this.bpmnDiagram = bpmnDiagram;
 	}
 	
 	@Override
-	public void saveState(IMemento memento) {
+	public String getFactoryId() {
+		return Bpmn2DiagramEditorInputFactory.class.getName();
+		
+	}
+	
+	@Override
+	public void saveState(final IMemento memento) {
 		super.saveState(memento);
 		/**
 		 * We are storing the modelUri in the uri field of the DiagramEditorInput

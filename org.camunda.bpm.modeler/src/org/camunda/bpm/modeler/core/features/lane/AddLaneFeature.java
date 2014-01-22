@@ -56,12 +56,12 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 	public static final int DEFAULT_LANE_WIDTH = 600;
 	public static final int DEFAULT_LANE_HEIGHT = 100;
 
-	public AddLaneFeature(IFeatureProvider fp) {
+	public AddLaneFeature(final IFeatureProvider fp) {
 		super(fp);
 	}
 
 	@Override
-	public boolean canAdd(IAddContext context) {
+	public boolean canAdd(final IAddContext context) {
 		boolean isLane = getBusinessObject(context) instanceof Lane;
 		boolean intoLane = FeatureSupport.isTargetLane(context);
 		boolean intoParticipant = FeatureSupport.isTargetParticipant(context);
@@ -69,7 +69,7 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 	}
 	
 	@Override
-	protected ContainerShape createPictogramElement(IAddContext context, IRectangle bounds) {
+	protected ContainerShape createPictogramElement(final IAddContext context, final IRectangle bounds) {
 
 		// adding a lane is a two step process  
 		// we add the basic shape here and will
@@ -95,7 +95,7 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 	}
 	
 	@Override
-	protected void postAddHook(IAddContext context, ContainerShape newLaneShape) {
+	protected void postAddHook(final IAddContext context, final ContainerShape newLaneShape) {
 		super.postAddHook(context, newLaneShape);
 		
 		Lane lane = getBusinessObject(context);
@@ -166,7 +166,7 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 		ScrollUtil.updateScrollShape(getDiagram());
 	}
 
-	private void createLaneLabel(ContainerShape newShape, Lane lane, boolean horizontal) {
+	private void createLaneLabel(final ContainerShape newShape, final Lane lane, final boolean horizontal) {
 		
 		IGaService gaService = Graphiti.getGaService();
 		IPeService peService = Graphiti.getPeService();
@@ -191,7 +191,7 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 		link(textShape, lane);
 	}
 
-	private void compensateShapeMovements(ContainerShape shape) {
+	private void compensateShapeMovements(final ContainerShape shape) {
 		
 		ContainerShape parentShape = shape.getContainer();
 
@@ -251,7 +251,7 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 		return true;
 	}
 	
-	private void moveFlowNodes(Process targetProcess, Lane lane) {
+	private void moveFlowNodes(final Process targetProcess, final Lane lane) {
 		for (FlowElement element : targetProcess.getFlowElements()) {
 			if (element instanceof FlowNode) {
 				lane.getFlowNodeRefs().add((FlowNode) element);
@@ -259,7 +259,7 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 		}
 	}
 
-	private List<Shape> getContainedBaseElementShapes(ContainerShape container) {
+	private List<Shape> getContainedBaseElementShapes(final ContainerShape container) {
 
 		List<Shape> flowElementShapes = new ArrayList<Shape>();
 		
@@ -275,7 +275,7 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 	}
 
 	@Override
-	protected void adjustLocation(IAddContext context, int width, int height) {
+	protected void adjustLocation(final IAddContext context, final int width, final int height) {
 		
 		if (context instanceof AddContext) {
 			AddContext addContext = (AddContext) context;
@@ -293,7 +293,7 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 		}
 	}
 	
-	private IRectangle getPreviouslyAddedLaneBounds(ContainerShape targetContainer) {
+	private IRectangle getPreviouslyAddedLaneBounds(final ContainerShape targetContainer) {
 		List<ContainerShape> childLanes = FeatureSupport.getChildLanes(targetContainer);
 		if (childLanes.isEmpty()) {
 			return null;
@@ -304,7 +304,7 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 	
 	
 	@Override
-	protected int getHeight(IAddContext context) {
+	protected int getHeight(final IAddContext context) {
 		if (isImport(context)) {
 			return context.getHeight();
 		}
@@ -320,14 +320,14 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 		
 		IRectangle previousBounds = getPreviouslyAddedLaneBounds(targetContainer);
 		if (previousBounds != null) {
-			height = (int) previousBounds.getHeight();
+			height = previousBounds.getHeight();
 		}
 		
 		return height;
 	}
 	
 	@Override
-	public int getWidth(IAddContext context) {
+	public int getWidth(final IAddContext context) {
 		if (isImport(context)) {
 			return context.getWidth();
 		}
@@ -338,7 +338,7 @@ public class AddLaneFeature extends AbstractBpmn2AddShapeFeature<Lane> {
 		
 		IRectangle bounds = getPreviouslyAddedLaneBounds(targetContainer);
 		if (bounds != null) {
-			width = (int) bounds.getWidth();
+			width = bounds.getWidth();
 		}
 		
 		return width;

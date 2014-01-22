@@ -1,9 +1,9 @@
 package org.camunda.bpm.modeler.test.layout;
 
 import static org.camunda.bpm.modeler.core.layout.util.ConversionUtil.location;
-import static org.camunda.bpm.modeler.test.util.assertions.Bpmn2ModelAssertions.assertThat;
 import static org.camunda.bpm.modeler.test.util.operations.MoveShapeOperation.move;
 import static org.camunda.bpm.modeler.test.util.operations.ReconnectConnectionOperation.reconnectEnd;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.util.List;
 

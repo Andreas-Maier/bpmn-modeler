@@ -6,7 +6,13 @@
  */
 package org.camunda.bpm.modeler.runtime.engine.model;
 
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentMetaData;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.RequestObject;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ResponseObject;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation;
 import org.camunda.bpm.modeler.runtime.engine.model.fox.FailedJobRetryTimeCycleType;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +47,12 @@ import org.camunda.bpm.modeler.runtime.engine.model.fox.FailedJobRetryTimeCycleT
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getPriority <em>Priority</em>}</li>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getResultVariableName <em>Result Variable Name</em>}</li>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getFailedJobRetryTimeCycle <em>Failed Job Retry Time Cycle</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getClientOperation <em>Client Operation</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getServiceOperation <em>Service Operation</em>}</li>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getFormData <em>Form Data</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getDocumentMetaData <em>Document Meta Data</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getRequestObject <em>Request Object</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getResponseObject <em>Response Object</em>}</li>
  * </ul>
  * </p>
  *
@@ -761,6 +772,60 @@ public interface DocumentRoot extends org.eclipse.bpmn2.DocumentRoot {
   void setFailedJobRetryTimeCycle(FailedJobRetryTimeCycleType value);
 
 		/**
+	 * Returns the value of the '<em><b>Client Operation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Client Operation</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Client Operation</em>' containment reference.
+	 * @see #setClientOperation(ClientOperation)
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.ModelPackage#getDocumentRoot_ClientOperation()
+	 * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
+	 *        extendedMetaData="kind='element' name='clientOperation' namespace='http://www.cas.de/open'"
+	 * @generated
+	 */
+	ClientOperation getClientOperation();
+
+		/**
+	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getClientOperation <em>Client Operation</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Client Operation</em>' containment reference.
+	 * @see #getClientOperation()
+	 * @generated
+	 */
+	void setClientOperation(ClientOperation value);
+
+		/**
+	 * Returns the value of the '<em><b>Service Operation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Service Operation</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Service Operation</em>' containment reference.
+	 * @see #setServiceOperation(ServiceOperation)
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.ModelPackage#getDocumentRoot_ServiceOperation()
+	 * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
+	 *        extendedMetaData="kind='element' name='serviceOperation' namespace='http://www.cas.de/open'"
+	 * @generated
+	 */
+	ServiceOperation getServiceOperation();
+
+		/**
+	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getServiceOperation <em>Service Operation</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Service Operation</em>' containment reference.
+	 * @see #getServiceOperation()
+	 * @generated
+	 */
+	void setServiceOperation(ServiceOperation value);
+
+		/**
 	 * Returns the value of the '<em><b>Form Data</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -786,5 +851,86 @@ public interface DocumentRoot extends org.eclipse.bpmn2.DocumentRoot {
 	 * @generated
 	 */
 	void setFormData(FormDataType value);
+
+		/**
+	 * Returns the value of the '<em><b>Document Meta Data</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Document Meta Data</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Document Meta Data</em>' containment reference.
+	 * @see #setDocumentMetaData(DocumentMetaData)
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.ModelPackage#getDocumentRoot_DocumentMetaData()
+	 * @model containment="true" transient="true" volatile="true" derived="true"
+	 *        extendedMetaData="kind='element' namespace='http://www.cas.de/open'"
+	 * @generated
+	 */
+	DocumentMetaData getDocumentMetaData();
+
+		/**
+	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getDocumentMetaData <em>Document Meta Data</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Document Meta Data</em>' containment reference.
+	 * @see #getDocumentMetaData()
+	 * @generated
+	 */
+	void setDocumentMetaData(DocumentMetaData value);
+
+		/**
+	 * Returns the value of the '<em><b>Request Object</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Request Object</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Request Object</em>' containment reference.
+	 * @see #setRequestObject(RequestObject)
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.ModelPackage#getDocumentRoot_RequestObject()
+	 * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
+	 *        extendedMetaData="kind='element' name='requestObject' namespace='http://www.cas.de/open'"
+	 * @generated
+	 */
+	RequestObject getRequestObject();
+
+		/**
+	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getRequestObject <em>Request Object</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Request Object</em>' containment reference.
+	 * @see #getRequestObject()
+	 * @generated
+	 */
+	void setRequestObject(RequestObject value);
+
+		/**
+	 * Returns the value of the '<em><b>Response Object</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Response Object</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Response Object</em>' containment reference.
+	 * @see #setResponseObject(ResponseObject)
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.ModelPackage#getDocumentRoot_ResponseObject()
+	 * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
+	 *        extendedMetaData="kind='element' name='responseObject' namespace='http://www.cas.de/open'"
+	 * @generated
+	 */
+	ResponseObject getResponseObject();
+
+		/**
+	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getResponseObject <em>Response Object</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Response Object</em>' containment reference.
+	 * @see #getResponseObject()
+	 * @generated
+	 */
+	void setResponseObject(ResponseObject value);
 
 } // DocumentRoot

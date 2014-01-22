@@ -3,13 +3,11 @@ package org.camunda.bpm.modeler.test.feature.resize;
 import static org.camunda.bpm.modeler.core.layout.util.ConversionUtil.point;
 import static org.camunda.bpm.modeler.test.util.assertions.Bpmn2ModelAssertions.assertThat;
 import static org.camunda.bpm.modeler.test.util.operations.ResizeShapeOperation.resize;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.camunda.bpm.modeler.core.layout.util.LayoutUtil;
-import org.camunda.bpm.modeler.core.layout.util.RectangleUtil;
 import org.camunda.bpm.modeler.core.layout.util.LayoutUtil.Sector;
 import org.camunda.bpm.modeler.core.utils.FeatureSupport;
 import org.camunda.bpm.modeler.test.util.DiagramResource;
@@ -17,7 +15,6 @@ import org.camunda.bpm.modeler.test.util.Util;
 import org.eclipse.graphiti.datatypes.IRectangle;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
-import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.junit.Ignore;
 import org.junit.Test;

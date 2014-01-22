@@ -3,11 +3,11 @@ package org.camunda.bpm.modeler.test.feature.move;
 import static org.camunda.bpm.modeler.core.layout.util.ConversionUtil.point;
 import static org.camunda.bpm.modeler.test.util.assertions.Bpmn2ModelAssertions.assertThat;
 import static org.camunda.bpm.modeler.test.util.operations.MoveShapeOperation.move;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.camunda.bpm.modeler.core.layout.util.LayoutUtil;
 import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
 import org.camunda.bpm.modeler.core.utils.LabelUtil;
-import org.camunda.bpm.modeler.core.utils.ModelUtil;
 import org.camunda.bpm.modeler.test.feature.AbstractFeatureTest;
 import org.camunda.bpm.modeler.test.util.DiagramResource;
 import org.camunda.bpm.modeler.test.util.StringUtil;
@@ -36,7 +36,7 @@ public class MoveFlowNodeFeatureTest extends AbstractFeatureTest {
 		// find shapes
 		Shape userTaskShape = Util.findShapeByBusinessObjectId(diagram, "UserTask_1");
 		ContainerShape subProcessShape = (ContainerShape) Util.findShapeByBusinessObjectId(diagram, "SubProcess_1");
-		ContainerShape processShape = (ContainerShape) diagram;
+		ContainerShape processShape = diagram;
 		BaseElement subProcessElement = BusinessObjectUtil.getFirstBaseElement(subProcessShape);
 
 		// first, the usertask is contained in the subprocess
@@ -65,7 +65,7 @@ public class MoveFlowNodeFeatureTest extends AbstractFeatureTest {
 		// find shapes
 		Shape userTaskShape = Util.findShapeByBusinessObjectId(diagram, "UserTask_1");
 		ContainerShape subProcessShape = (ContainerShape) Util.findShapeByBusinessObjectId(diagram, "SubProcess_1");
-		ContainerShape processShape = (ContainerShape) diagram;
+		ContainerShape processShape = diagram;
 		BaseElement subProcessElement = BusinessObjectUtil.getFirstBaseElement(subProcessShape);
 
 		// first, the usertask is contained in the process
@@ -91,7 +91,7 @@ public class MoveFlowNodeFeatureTest extends AbstractFeatureTest {
 		// find shapes
 		Shape textAnnotationShape = Util.findShapeByBusinessObjectId(diagram, "TextAnnotation_1");
 		ContainerShape subProcessShape = (ContainerShape) Util.findShapeByBusinessObjectId(diagram, "SubProcess_1");
-		ContainerShape processShape = (ContainerShape) diagram;
+		ContainerShape processShape = diagram;
 		BaseElement subProcessElement = BusinessObjectUtil.getFirstBaseElement(subProcessShape);
 
 		// first, the annotation is contained in the process

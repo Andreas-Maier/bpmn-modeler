@@ -4,6 +4,8 @@ package org.camunda.bpm.modeler.runtime.engine.model.fox.impl;
 
 import org.camunda.bpm.modeler.runtime.engine.model.ModelPackage;
 
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl;
 import org.camunda.bpm.modeler.runtime.engine.model.fox.FailedJobRetryTimeCycleType;
 import org.camunda.bpm.modeler.runtime.engine.model.fox.FoxFactory;
 import org.camunda.bpm.modeler.runtime.engine.model.fox.FoxPackage;
@@ -92,14 +94,17 @@ public class FoxPackageImpl extends EPackageImpl implements FoxPackage {
 
 		// Obtain or create and register interdependencies
 		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
+		CasOpenPackageImpl theCasOpenPackage = (CasOpenPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CasOpenPackage.eNS_URI) instanceof CasOpenPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CasOpenPackage.eNS_URI) : CasOpenPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theFoxPackage.createPackageContents();
 		theModelPackage.createPackageContents();
+		theCasOpenPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theFoxPackage.initializePackageContents();
 		theModelPackage.initializePackageContents();
+		theCasOpenPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theFoxPackage.freeze();

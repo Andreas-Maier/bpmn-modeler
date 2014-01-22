@@ -3,11 +3,9 @@ package org.camunda.bpm.modeler.core.validation;
 import java.util.List;
 
 import org.eclipse.bpmn2.BaseElement;
-import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.CallActivity;
 import org.eclipse.bpmn2.CatchEvent;
 import org.eclipse.bpmn2.CompensateEventDefinition;
-import org.eclipse.bpmn2.ComplexGateway;
 import org.eclipse.bpmn2.ConditionalEventDefinition;
 import org.eclipse.bpmn2.DataObject;
 import org.eclipse.bpmn2.Definitions;
@@ -16,19 +14,14 @@ import org.eclipse.bpmn2.Error;
 import org.eclipse.bpmn2.ErrorEventDefinition;
 import org.eclipse.bpmn2.Escalation;
 import org.eclipse.bpmn2.EscalationEventDefinition;
-import org.eclipse.bpmn2.EventBasedGateway;
 import org.eclipse.bpmn2.EventDefinition;
-import org.eclipse.bpmn2.ExclusiveGateway;
 import org.eclipse.bpmn2.FlowElement;
 import org.eclipse.bpmn2.FlowNode;
 import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.bpmn2.Gateway;
-import org.eclipse.bpmn2.GatewayDirection;
-import org.eclipse.bpmn2.InclusiveGateway;
 import org.eclipse.bpmn2.ItemDefinition;
 import org.eclipse.bpmn2.Message;
 import org.eclipse.bpmn2.MessageEventDefinition;
-import org.eclipse.bpmn2.ParallelGateway;
 import org.eclipse.bpmn2.Process;
 import org.eclipse.bpmn2.RootElement;
 import org.eclipse.bpmn2.ScriptTask;
@@ -57,7 +50,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 	}
 
 	@Override
-	public IStatus validate(IValidationContext ctx) {
+	public IStatus validate(final IValidationContext ctx) {
 		EObject eObj = ctx.getTarget();
 		EMFEventType eType = ctx.getEventType();
 		String id = ctx.getCurrentConstraintId();
@@ -83,12 +76,12 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 		return ctx.createSuccessStatus();
 	}
 
-	private IStatus validateDiagram(IValidationContext ctx, BPMNDiagram obj) {
+	private IStatus validateDiagram(final IValidationContext ctx, final BPMNDiagram obj) {
 		Definitions defs = (Definitions) obj.eContainer();
 		return validateDefinitions(ctx, defs);
 	}
 
-	private IStatus validateDefinitions(IValidationContext ctx, Definitions def) {
+	private IStatus validateDefinitions(final IValidationContext ctx, final Definitions def) {
 		List<RootElement> rootElements = def.getRootElements();
 		for (RootElement root : rootElements) {
 			if (root instanceof Process) {
@@ -168,7 +161,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 		return ctx.createSuccessStatus();
 	}
 
-	private IStatus validateBaseElement(IValidationContext ctx, BaseElement fe) {
+	private IStatus validateBaseElement(final IValidationContext ctx, final BaseElement fe) {
 
 		if (fe instanceof StartEvent) {
 			StartEvent se = (StartEvent) fe;
@@ -326,45 +319,45 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 			Gateway gw = (Gateway) fe;
 
 			if (!warnings) {
-				if (gw.getGatewayDirection() == null
-						|| gw.getGatewayDirection().getValue() == GatewayDirection.UNSPECIFIED.getValue()) {
-					ctx.addResult(Bpmn2Package.eINSTANCE.getGateway_GatewayDirection());
-					return ctx.createFailureStatus("Gateway does not specify a valid direction");
-				}
-				if (gw instanceof ExclusiveGateway) {
-					if (gw.getGatewayDirection().getValue() != GatewayDirection.DIVERGING.getValue()
-							&& gw.getGatewayDirection().getValue() != GatewayDirection.CONVERGING.getValue()) {
-						return ctx.createFailureStatus(
-								"Invalid Gateway direction for Exclusing Gateway. It should be 'Converging' or 'Diverging'");
-					}
-				}
-				if (gw instanceof EventBasedGateway) {
-					if (gw.getGatewayDirection().getValue() != GatewayDirection.DIVERGING.getValue()) {
-						return ctx.createFailureStatus(
-								"Invalid Gateway direction for EventBased Gateway. It should be 'Diverging'");
-					}
-				}
-				if (gw instanceof ParallelGateway) {
-					if (gw.getGatewayDirection().getValue() != GatewayDirection.DIVERGING.getValue()
-							&& gw.getGatewayDirection().getValue() != GatewayDirection.CONVERGING.getValue()) {
-						return ctx.createFailureStatus(
-								"Invalid Gateway direction for Parallel Gateway. It should be 'Converging' or 'Diverging'");
-					}
-				}
-				if (gw instanceof InclusiveGateway) {
-					if (gw.getGatewayDirection().getValue() != GatewayDirection.DIVERGING.getValue()
-							&& gw.getGatewayDirection().getValue() != GatewayDirection.CONVERGING.getValue()) {
-						return ctx.createFailureStatus(
-								"Invalid Gateway direction for Inclusive Gateway. It should be 'Converging' or 'Diverging'");
-					}
-				}
-				if (gw instanceof ComplexGateway) {
-					if (gw.getGatewayDirection().getValue() != GatewayDirection.DIVERGING.getValue()
-							&& gw.getGatewayDirection().getValue() != GatewayDirection.CONVERGING.getValue()) {
-						return ctx.createFailureStatus(
-								"Invalid Gateway direction for Complex Gateway. It should be 'Converging' or 'Diverging'");
-					}
-				}
+//				if (gw.getGatewayDirection() == null
+//						|| gw.getGatewayDirection().getValue() == GatewayDirection.UNSPECIFIED.getValue()) {
+//					ctx.addResult(Bpmn2Package.eINSTANCE.getGateway_GatewayDirection());
+//					return ctx.createFailureStatus("Gateway does not specify a valid direction");
+//				}
+//				if (gw instanceof ExclusiveGateway) {
+//					if (gw.getGatewayDirection().getValue() != GatewayDirection.DIVERGING.getValue()
+//							&& gw.getGatewayDirection().getValue() != GatewayDirection.CONVERGING.getValue()) {
+//						return ctx.createFailureStatus(
+//								"Invalid Gateway direction for Exclusing Gateway. It should be 'Converging' or 'Diverging'");
+//					}
+//				}
+//				if (gw instanceof EventBasedGateway) {
+//					if (gw.getGatewayDirection().getValue() != GatewayDirection.DIVERGING.getValue()) {
+//						return ctx.createFailureStatus(
+//								"Invalid Gateway direction for EventBased Gateway. It should be 'Diverging'");
+//					}
+//				}
+//				if (gw instanceof ParallelGateway) {
+//					if (gw.getGatewayDirection().getValue() != GatewayDirection.DIVERGING.getValue()
+//							&& gw.getGatewayDirection().getValue() != GatewayDirection.CONVERGING.getValue()) {
+//						return ctx.createFailureStatus(
+//								"Invalid Gateway direction for Parallel Gateway. It should be 'Converging' or 'Diverging'");
+//					}
+//				}
+//				if (gw instanceof InclusiveGateway) {
+//					if (gw.getGatewayDirection().getValue() != GatewayDirection.DIVERGING.getValue()
+//							&& gw.getGatewayDirection().getValue() != GatewayDirection.CONVERGING.getValue()) {
+//						return ctx.createFailureStatus(
+//								"Invalid Gateway direction for Inclusive Gateway. It should be 'Converging' or 'Diverging'");
+//					}
+//				}
+//				if (gw instanceof ComplexGateway) {
+//					if (gw.getGatewayDirection().getValue() != GatewayDirection.DIVERGING.getValue()
+//							&& gw.getGatewayDirection().getValue() != GatewayDirection.CONVERGING.getValue()) {
+//						return ctx.createFailureStatus(
+//								"Invalid Gateway direction for Complex Gateway. It should be 'Converging' or 'Diverging'");
+//					}
+//				}
 			}
 		}
 		else if (fe instanceof CallActivity) {
@@ -395,7 +388,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 		return ctx.createSuccessStatus();
 	}
 
-	private IStatus validateFlowNode(IValidationContext ctx, FlowNode fn) {
+	private IStatus validateFlowNode(final IValidationContext ctx, final FlowNode fn) {
 		if (!warnings) {
 			boolean needIncoming = true;
 			boolean needOutgoing = true;
@@ -419,11 +412,11 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 		return ctx.createSuccessStatus();
 	}
 
-	private static boolean isEmpty(String str) {
+	private static boolean isEmpty(final String str) {
 		return str == null || str.isEmpty();
 	}
 
-	private boolean containsWhiteSpace(String testString) {
+	private boolean containsWhiteSpace(final String testString) {
 		if (testString != null) {
 			for (int i = 0; i < testString.length(); i++) {
 				if (Character.isWhitespace(testString.charAt(i))) {

@@ -30,7 +30,7 @@ import org.eclipse.graphiti.ui.services.GraphitiUi;
 
 public class Bpmn2DiagramCreator {
 	
-	public static Bpmn2Resource createBpmn2Resource(URI uri) {
+	public static Bpmn2Resource createBpmn2Resource(final URI uri) {
 		Definitions definitions = createDefinitions(uri);
 		
 		try {
@@ -42,7 +42,7 @@ public class Bpmn2DiagramCreator {
 		return (Bpmn2Resource) definitions.eResource();
 	}
 	
-	public static Definitions createDefinitions(URI uri) {
+	public static Definitions createDefinitions(final URI uri) {
 		// set targetNamespace because it is a mandatory field
 		// the process engine can not deploy the process model without targetNamespace 
 		Definitions definitions = new Bpmn2ResourceFactoryImpl().createAndInitResource(uri);
@@ -50,11 +50,11 @@ public class Bpmn2DiagramCreator {
 		return definitions;
 	}
 	
-	public static Bpmn2DiagramEditorInput createDiagramInput(URI uri, Bpmn2DiagramType diagramType, String targetNamespace) throws CoreException {
+	public static Bpmn2DiagramEditorInput createDiagramInput(final URI uri, final Bpmn2DiagramType diagramType, final String targetNamespace) throws CoreException {
 		return createDiagramInput(uri, diagramType, targetNamespace, null);
 	}
 
-	public static Bpmn2DiagramEditorInput createDiagramInput(URI modelUri, Bpmn2DiagramType diagramType, String targetNamespace, Bpmn2Editor diagramEditor) throws CoreException {
+	public static Bpmn2DiagramEditorInput createDiagramInput(final URI modelUri, final Bpmn2DiagramType diagramType, final String targetNamespace, final Bpmn2Editor diagramEditor) throws CoreException {
 
 		if (modelUri == null) {
 			throw new RuntimeException("Unresolvable model uri; Please clean workspace");

@@ -27,6 +27,8 @@ import org.camunda.bpm.modeler.runtime.engine.model.TypeType;
 import org.camunda.bpm.modeler.runtime.engine.model.UserTask;
 import org.camunda.bpm.modeler.runtime.engine.model.ValidationType;
 import org.camunda.bpm.modeler.runtime.engine.model.ValueType;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl;
 import org.camunda.bpm.modeler.runtime.engine.model.fox.FoxPackage;
 import org.camunda.bpm.modeler.runtime.engine.model.fox.impl.FoxPackageImpl;
 import org.camunda.bpm.modeler.runtime.engine.model.util.ModelValidator;
@@ -316,14 +318,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Obtain or create and register interdependencies
 		FoxPackageImpl theFoxPackage = (FoxPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(FoxPackage.eNS_URI) instanceof FoxPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(FoxPackage.eNS_URI) : FoxPackage.eINSTANCE);
+		CasOpenPackageImpl theCasOpenPackage = (CasOpenPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CasOpenPackage.eNS_URI) instanceof CasOpenPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CasOpenPackage.eNS_URI) : CasOpenPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theModelPackage.createPackageContents();
 		theFoxPackage.createPackageContents();
+		theCasOpenPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theModelPackage.initializePackageContents();
 		theFoxPackage.initializePackageContents();
+		theCasOpenPackage.initializePackageContents();
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
@@ -348,7 +353,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getDocumentRoot() {
+  @Override
+public EClass getDocumentRoot() {
 		return documentRootEClass;
 	}
 
@@ -357,7 +363,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getDocumentRoot_ExecutionListener() {
+  @Override
+public EReference getDocumentRoot_ExecutionListener() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -366,7 +373,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getDocumentRoot_Field() {
+  @Override
+public EReference getDocumentRoot_Field() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -375,7 +383,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getDocumentRoot_FormProperty() {
+  @Override
+public EReference getDocumentRoot_FormProperty() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -384,7 +393,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getDocumentRoot_In() {
+  @Override
+public EReference getDocumentRoot_In() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -393,7 +403,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getDocumentRoot_Out() {
+  @Override
+public EReference getDocumentRoot_Out() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -402,7 +413,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getDocumentRoot_TaskListener() {
+  @Override
+public EReference getDocumentRoot_TaskListener() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -411,7 +423,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_Assignee() {
+  @Override
+public EAttribute getDocumentRoot_Assignee() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -420,7 +433,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_CandidateGroups() {
+  @Override
+public EAttribute getDocumentRoot_CandidateGroups() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -429,7 +443,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_CandidateUsers() {
+  @Override
+public EAttribute getDocumentRoot_CandidateUsers() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -438,7 +453,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_Class() {
+  @Override
+public EAttribute getDocumentRoot_Class() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -447,7 +463,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_Collection() {
+  @Override
+public EAttribute getDocumentRoot_Collection() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -456,7 +473,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_DelegateExpression() {
+  @Override
+public EAttribute getDocumentRoot_DelegateExpression() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -465,7 +483,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_DueDate() {
+  @Override
+public EAttribute getDocumentRoot_DueDate() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -474,7 +493,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_ElementVariable() {
+  @Override
+public EAttribute getDocumentRoot_ElementVariable() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -483,7 +503,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_FormHandlerClass() {
+  @Override
+public EAttribute getDocumentRoot_FormHandlerClass() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -492,7 +513,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_FormKey() {
+  @Override
+public EAttribute getDocumentRoot_FormKey() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(15);
 	}
 
@@ -501,7 +523,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_History() {
+  @Override
+public EAttribute getDocumentRoot_History() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(16);
 	}
 
@@ -510,7 +533,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_Initiator() {
+  @Override
+public EAttribute getDocumentRoot_Initiator() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(17);
 	}
 
@@ -519,7 +543,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_ResultVariable() {
+  @Override
+public EAttribute getDocumentRoot_ResultVariable() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(18);
 	}
 
@@ -528,7 +553,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_Type() {
+  @Override
+public EAttribute getDocumentRoot_Type() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(19);
 	}
 
@@ -537,7 +563,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_Async() {
+  @Override
+public EAttribute getDocumentRoot_Async() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(20);
 	}
 
@@ -546,7 +573,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_ActExpression() {
+  @Override
+public EAttribute getDocumentRoot_ActExpression() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(21);
 	}
 
@@ -555,7 +583,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_Priority() {
+  @Override
+public EAttribute getDocumentRoot_Priority() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(22);
 	}
 
@@ -564,7 +593,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getDocumentRoot_ResultVariableName() {
+  @Override
+public EAttribute getDocumentRoot_ResultVariableName() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(23);
 	}
 
@@ -573,7 +603,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getDocumentRoot_FailedJobRetryTimeCycle() {
+  @Override
+public EReference getDocumentRoot_FailedJobRetryTimeCycle() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(24);
 	}
 
@@ -582,7 +613,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDocumentRoot_FormData() {
+	@Override
+	public EReference getDocumentRoot_ClientOperation() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(25);
 	}
 
@@ -591,6 +623,53 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDocumentRoot_ServiceOperation() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(26);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDocumentRoot_FormData() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(27);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDocumentRoot_DocumentMetaData() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(28);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDocumentRoot_RequestObject() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(29);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDocumentRoot_ResponseObject() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(30);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getStartEvent() {
 		return startEventEClass;
 	}
@@ -600,7 +679,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getExecutionListenerType() {
+  @Override
+public EClass getExecutionListenerType() {
 		return executionListenerTypeEClass;
 	}
 
@@ -609,7 +689,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getExecutionListenerType_Group() {
+  @Override
+public EAttribute getExecutionListenerType_Group() {
 		return (EAttribute)executionListenerTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -618,7 +699,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getExecutionListenerType_Field() {
+  @Override
+public EReference getExecutionListenerType_Field() {
 		return (EReference)executionListenerTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -627,7 +709,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getExecutionListenerType_Class() {
+  @Override
+public EAttribute getExecutionListenerType_Class() {
 		return (EAttribute)executionListenerTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -636,7 +719,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getExecutionListenerType_DelegateExpression() {
+  @Override
+public EAttribute getExecutionListenerType_DelegateExpression() {
 		return (EAttribute)executionListenerTypeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -645,7 +729,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getExecutionListenerType_Event() {
+  @Override
+public EAttribute getExecutionListenerType_Event() {
 		return (EAttribute)executionListenerTypeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -654,7 +739,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getExecutionListenerType_Expression() {
+  @Override
+public EAttribute getExecutionListenerType_Expression() {
 		return (EAttribute)executionListenerTypeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -663,7 +749,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getFieldType() {
+  @Override
+public EClass getFieldType() {
 		return fieldTypeEClass;
 	}
 
@@ -672,7 +759,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFieldType_String() {
+  @Override
+public EAttribute getFieldType_String() {
 		return (EAttribute)fieldTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -681,7 +769,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFieldType_Expression() {
+  @Override
+public EAttribute getFieldType_Expression() {
 		return (EAttribute)fieldTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -690,7 +779,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFieldType_Expression1() {
+  @Override
+public EAttribute getFieldType_Expression1() {
 		return (EAttribute)fieldTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -699,7 +789,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFieldType_Name() {
+  @Override
+public EAttribute getFieldType_Name() {
 		return (EAttribute)fieldTypeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -708,7 +799,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFieldType_StringValue() {
+  @Override
+public EAttribute getFieldType_StringValue() {
 		return (EAttribute)fieldTypeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -717,7 +809,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getFormPropertyType() {
+  @Override
+public EClass getFormPropertyType() {
 		return formPropertyTypeEClass;
 	}
 
@@ -726,7 +819,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getFormPropertyType_Value() {
+  @Override
+public EReference getFormPropertyType_Value() {
 		return (EReference)formPropertyTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -735,7 +829,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFormPropertyType_DatePattern() {
+  @Override
+public EAttribute getFormPropertyType_DatePattern() {
 		return (EAttribute)formPropertyTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -744,7 +839,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFormPropertyType_Expression() {
+  @Override
+public EAttribute getFormPropertyType_Expression() {
 		return (EAttribute)formPropertyTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -753,7 +849,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFormPropertyType_Id() {
+  @Override
+public EAttribute getFormPropertyType_Id() {
 		return (EAttribute)formPropertyTypeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -762,7 +859,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFormPropertyType_Name() {
+  @Override
+public EAttribute getFormPropertyType_Name() {
 		return (EAttribute)formPropertyTypeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -771,7 +869,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFormPropertyType_Readable() {
+  @Override
+public EAttribute getFormPropertyType_Readable() {
 		return (EAttribute)formPropertyTypeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -780,7 +879,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFormPropertyType_Required() {
+  @Override
+public EAttribute getFormPropertyType_Required() {
 		return (EAttribute)formPropertyTypeEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -789,7 +889,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFormPropertyType_Type() {
+  @Override
+public EAttribute getFormPropertyType_Type() {
 		return (EAttribute)formPropertyTypeEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -798,7 +899,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFormPropertyType_Value1() {
+  @Override
+public EAttribute getFormPropertyType_Value1() {
 		return (EAttribute)formPropertyTypeEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -807,7 +909,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFormPropertyType_Variable() {
+  @Override
+public EAttribute getFormPropertyType_Variable() {
 		return (EAttribute)formPropertyTypeEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -816,7 +919,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFormPropertyType_Writable() {
+  @Override
+public EAttribute getFormPropertyType_Writable() {
 		return (EAttribute)formPropertyTypeEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -825,7 +929,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getFormPropertyType_Default() {
+  @Override
+public EAttribute getFormPropertyType_Default() {
 		return (EAttribute)formPropertyTypeEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -834,7 +939,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getInType() {
+  @Override
+public EClass getInType() {
 		return inTypeEClass;
 	}
 
@@ -843,7 +949,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getInType_Source() {
+  @Override
+public EAttribute getInType_Source() {
 		return (EAttribute)inTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -852,7 +959,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getInType_SourceExpression() {
+  @Override
+public EAttribute getInType_SourceExpression() {
 		return (EAttribute)inTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -861,7 +969,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getInType_Target() {
+  @Override
+public EAttribute getInType_Target() {
 		return (EAttribute)inTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -870,7 +979,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getInType_Variables() {
+  @Override
+public EAttribute getInType_Variables() {
 		return (EAttribute)inTypeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -879,7 +989,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getInType_BusinessKey() {
+  @Override
+public EAttribute getInType_BusinessKey() {
 		return (EAttribute)inTypeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -888,7 +999,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getOutType() {
+  @Override
+public EClass getOutType() {
 		return outTypeEClass;
 	}
 
@@ -897,7 +1009,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getOutType_Source() {
+  @Override
+public EAttribute getOutType_Source() {
 		return (EAttribute)outTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -906,7 +1019,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getOutType_SourceExpression() {
+  @Override
+public EAttribute getOutType_SourceExpression() {
 		return (EAttribute)outTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -915,7 +1029,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getOutType_Target() {
+  @Override
+public EAttribute getOutType_Target() {
 		return (EAttribute)outTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -924,7 +1039,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getOutType_Variables() {
+  @Override
+public EAttribute getOutType_Variables() {
 		return (EAttribute)outTypeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -933,7 +1049,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getTaskListenerType() {
+  @Override
+public EClass getTaskListenerType() {
 		return taskListenerTypeEClass;
 	}
 
@@ -942,7 +1059,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getTaskListenerType_Group() {
+  @Override
+public EAttribute getTaskListenerType_Group() {
 		return (EAttribute)taskListenerTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -951,7 +1069,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getTaskListenerType_Field() {
+  @Override
+public EReference getTaskListenerType_Field() {
 		return (EReference)taskListenerTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -960,7 +1079,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getTaskListenerType_Class() {
+  @Override
+public EAttribute getTaskListenerType_Class() {
 		return (EAttribute)taskListenerTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -969,7 +1089,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getTaskListenerType_DelegateExpression() {
+  @Override
+public EAttribute getTaskListenerType_DelegateExpression() {
 		return (EAttribute)taskListenerTypeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -978,7 +1099,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getTaskListenerType_Event() {
+  @Override
+public EAttribute getTaskListenerType_Event() {
 		return (EAttribute)taskListenerTypeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -987,7 +1109,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getTaskListenerType_Expression() {
+  @Override
+public EAttribute getTaskListenerType_Expression() {
 		return (EAttribute)taskListenerTypeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -996,7 +1119,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getCallActivity() {
+  @Override
+public EClass getCallActivity() {
 		return callActivityEClass;
 	}
 
@@ -1005,7 +1129,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getCallActivity_CalledElement() {
+  @Override
+public EAttribute getCallActivity_CalledElement() {
 		return (EAttribute)callActivityEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1014,7 +1139,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getCallActivity_CalledElementBinding() {
+  @Override
+public EAttribute getCallActivity_CalledElementBinding() {
 		return (EAttribute)callActivityEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1023,7 +1149,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getCallActivity_CalledElementVersion() {
+  @Override
+public EAttribute getCallActivity_CalledElementVersion() {
 		return (EAttribute)callActivityEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1032,7 +1159,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getBoundaryEvent() {
+  @Override
+public EClass getBoundaryEvent() {
 		return boundaryEventEClass;
 	}
 
@@ -1041,7 +1169,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getValueType() {
+  @Override
+public EClass getValueType() {
 		return valueTypeEClass;
 	}
 
@@ -1050,7 +1179,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getValueType_Id() {
+  @Override
+public EAttribute getValueType_Id() {
 		return (EAttribute)valueTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1059,7 +1189,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getValueType_Name() {
+  @Override
+public EAttribute getValueType_Name() {
 		return (EAttribute)valueTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1068,6 +1199,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFormDataType() {
 		return formDataTypeEClass;
 	}
@@ -1077,6 +1209,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFormDataType_FormField() {
 		return (EReference)formDataTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -1086,6 +1219,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFormFieldType() {
 		return formFieldTypeEClass;
 	}
@@ -1095,6 +1229,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFormFieldType_Id() {
 		return (EAttribute)formFieldTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -1104,6 +1239,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFormFieldType_Label() {
 		return (EAttribute)formFieldTypeEClass.getEStructuralFeatures().get(1);
 	}
@@ -1113,6 +1249,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFormFieldType_Type() {
 		return (EAttribute)formFieldTypeEClass.getEStructuralFeatures().get(2);
 	}
@@ -1122,6 +1259,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFormFieldType_DefaultValue() {
 		return (EAttribute)formFieldTypeEClass.getEStructuralFeatures().get(3);
 	}
@@ -1131,6 +1269,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFormFieldType_Properties() {
 		return (EReference)formFieldTypeEClass.getEStructuralFeatures().get(4);
 	}
@@ -1140,6 +1279,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFormFieldType_Validation() {
 		return (EReference)formFieldTypeEClass.getEStructuralFeatures().get(5);
 	}
@@ -1149,6 +1289,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFormFieldType_Value() {
 		return (EReference)formFieldTypeEClass.getEStructuralFeatures().get(6);
 	}
@@ -1158,6 +1299,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPropertiesType() {
 		return propertiesTypeEClass;
 	}
@@ -1167,6 +1309,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPropertiesType_Property() {
 		return (EReference)propertiesTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -1176,6 +1319,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPropertyType() {
 		return propertyTypeEClass;
 	}
@@ -1185,6 +1329,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPropertyType_Id() {
 		return (EAttribute)propertyTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -1194,6 +1339,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPropertyType_Value() {
 		return (EAttribute)propertyTypeEClass.getEStructuralFeatures().get(1);
 	}
@@ -1203,6 +1349,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getValidationType() {
 		return validationTypeEClass;
 	}
@@ -1212,6 +1359,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getValidationType_Constraint() {
 		return (EReference)validationTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -1221,6 +1369,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConstraintType() {
 		return constraintTypeEClass;
 	}
@@ -1230,6 +1379,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getConstraintType_Name() {
 		return (EAttribute)constraintTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -1239,6 +1389,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getConstraintType_Config() {
 		return (EAttribute)constraintTypeEClass.getEStructuralFeatures().get(1);
 	}
@@ -1248,6 +1399,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUserTask() {
 		return userTaskEClass;
 	}
@@ -1257,6 +1409,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFormDataContainer() {
 		return formDataContainerEClass;
 	}
@@ -1266,7 +1419,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EEnum getEventType() {
+  @Override
+public EEnum getEventType() {
 		return eventTypeEEnum;
 	}
 
@@ -1275,7 +1429,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EEnum getEventType1() {
+  @Override
+public EEnum getEventType1() {
 		return eventType1EEnum;
 	}
 
@@ -1284,7 +1439,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EEnum getHistoryType() {
+  @Override
+public EEnum getHistoryType() {
 		return historyTypeEEnum;
 	}
 
@@ -1293,7 +1449,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EEnum getTypeType() {
+  @Override
+public EEnum getTypeType() {
 		return typeTypeEEnum;
 	}
 
@@ -1302,7 +1459,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EDataType getClassType() {
+  @Override
+public EDataType getClassType() {
 		return classTypeEDataType;
 	}
 
@@ -1311,7 +1469,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EDataType getEventTypeObject() {
+  @Override
+public EDataType getEventTypeObject() {
 		return eventTypeObjectEDataType;
 	}
 
@@ -1320,7 +1479,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EDataType getEventTypeObject1() {
+  @Override
+public EDataType getEventTypeObject1() {
 		return eventTypeObject1EDataType;
 	}
 
@@ -1329,7 +1489,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EDataType getFormHandlerClassType() {
+  @Override
+public EDataType getFormHandlerClassType() {
 		return formHandlerClassTypeEDataType;
 	}
 
@@ -1338,7 +1499,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EDataType getHistoryTypeObject() {
+  @Override
+public EDataType getHistoryTypeObject() {
 		return historyTypeObjectEDataType;
 	}
 
@@ -1347,7 +1509,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EDataType getTExpression() {
+  @Override
+public EDataType getTExpression() {
 		return tExpressionEDataType;
 	}
 
@@ -1356,7 +1519,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EDataType getTypeTypeObject() {
+  @Override
+public EDataType getTypeTypeObject() {
 		return typeTypeObjectEDataType;
 	}
 
@@ -1365,7 +1529,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public ModelFactory getModelFactory() {
+  @Override
+public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
 
@@ -1414,7 +1579,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__PRIORITY);
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__RESULT_VARIABLE_NAME);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__CLIENT_OPERATION);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__SERVICE_OPERATION);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__FORM_DATA);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__DOCUMENT_META_DATA);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__REQUEST_OBJECT);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__RESPONSE_OBJECT);
 
 		startEventEClass = createEClass(START_EVENT);
 
@@ -1550,11 +1720,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Obtain other dependent packages
 		FoxPackage theFoxPackage = (FoxPackage)EPackage.Registry.INSTANCE.getEPackage(FoxPackage.eNS_URI);
+		CasOpenPackage theCasOpenPackage = (CasOpenPackage)EPackage.Registry.INSTANCE.getEPackage(CasOpenPackage.eNS_URI);
 		Bpmn2Package theBpmn2Package = (Bpmn2Package)EPackage.Registry.INSTANCE.getEPackage(Bpmn2Package.eNS_URI);
 		XMLTypePackage theXMLTypePackage = (XMLTypePackage)EPackage.Registry.INSTANCE.getEPackage(XMLTypePackage.eNS_URI);
 
 		// Add subpackages
 		getESubpackages().add(theFoxPackage);
+		getESubpackages().add(theCasOpenPackage);
 
 		// Create type parameters
 
@@ -1596,7 +1768,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getDocumentRoot_Priority(), ecorePackage.getEString(), "priority", "", 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDocumentRoot_ResultVariableName(), ecorePackage.getEString(), "resultVariableName", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_FailedJobRetryTimeCycle(), theFoxPackage.getFailedJobRetryTimeCycleType(), null, "failedJobRetryTimeCycle", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_ClientOperation(), theCasOpenPackage.getClientOperation(), null, "clientOperation", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_ServiceOperation(), theCasOpenPackage.getServiceOperation(), null, "serviceOperation", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_FormData(), this.getFormDataType(), null, "formData", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_DocumentMetaData(), theCasOpenPackage.getDocumentMetaData(), null, "documentMetaData", null, 0, 1, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_RequestObject(), theCasOpenPackage.getRequestObject(), null, "requestObject", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_ResponseObject(), theCasOpenPackage.getResponseObject(), null, "responseObject", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(startEventEClass, StartEvent.class, "StartEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1945,12 +2122,51 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "namespace", "http://www.camunda.com/fox"
 		   });		
 		addAnnotation
+		  (getDocumentRoot_ClientOperation(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "name", "clientOperation",
+			 "namespace", "http://www.cas.de/open"
+		   });		
+		addAnnotation
+		  (getDocumentRoot_ServiceOperation(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "name", "serviceOperation",
+			 "namespace", "http://www.cas.de/open"
+		   });		
+		addAnnotation
 		  (getDocumentRoot_FormData(), 
 		   source, 
 		   new String[] {
 			 "kind", "element",
 			 "name", "formData",
 			 "namespace", "##targetNamespace"
+		   });		
+		addAnnotation
+		  (getDocumentRoot_DocumentMetaData(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "namespace", "http://www.cas.de/open"
+		   });		
+		addAnnotation
+		  (getDocumentRoot_RequestObject(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "name", "requestObject",
+			 "namespace", "http://www.cas.de/open"
+		   });		
+		addAnnotation
+		  (getDocumentRoot_ResponseObject(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "name", "responseObject",
+			 "namespace", "http://www.cas.de/open"
 		   });		
 		addAnnotation
 		  (classTypeEDataType, 
@@ -2529,6 +2745,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "kind", "attribute",
 			 "name", "config"
+		   });		
+		addAnnotation
+		  (userTaskEClass, 
+		   source, 
+		   new String[] {
+			 "name", "",
+			 "kind", "mixed",
+			 "namespace", "##targetNamespace"
 		   });
 	}
 

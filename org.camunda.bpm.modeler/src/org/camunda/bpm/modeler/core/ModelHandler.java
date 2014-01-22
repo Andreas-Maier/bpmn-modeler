@@ -26,13 +26,11 @@ import org.eclipse.bpmn2.Activity;
 import org.eclipse.bpmn2.Artifact;
 import org.eclipse.bpmn2.Association;
 import org.eclipse.bpmn2.BaseElement;
-import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.CatchEvent;
 import org.eclipse.bpmn2.Choreography;
 import org.eclipse.bpmn2.ChoreographyTask;
 import org.eclipse.bpmn2.Collaboration;
-import org.eclipse.bpmn2.ConditionalEventDefinition;
 import org.eclipse.bpmn2.ConversationLink;
 import org.eclipse.bpmn2.ConversationNode;
 import org.eclipse.bpmn2.DataAssociation;
@@ -44,7 +42,6 @@ import org.eclipse.bpmn2.DataOutputAssociation;
 import org.eclipse.bpmn2.Definitions;
 import org.eclipse.bpmn2.DocumentRoot;
 import org.eclipse.bpmn2.EndEvent;
-import org.eclipse.bpmn2.Expression;
 import org.eclipse.bpmn2.FlowElement;
 import org.eclipse.bpmn2.FlowElementsContainer;
 import org.eclipse.bpmn2.FlowNode;
@@ -92,7 +89,7 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 
 public class ModelHandler {
 
-	private Bpmn2ResourceImpl resource;
+	private final Bpmn2ResourceImpl resource;
 	private Bpmn2Preferences prefs;
 	
 	private ModelHandler(Bpmn2ResourceImpl resource) {
@@ -1045,7 +1042,7 @@ public class ModelHandler {
 	}
 
 	public <T extends EObject> T create(Class<T> clazz) {
-		return (T) create(this.resource, clazz);
+		return create(this.resource, clazz);
 	}
 
 	public void initialize(EObject newObject) {

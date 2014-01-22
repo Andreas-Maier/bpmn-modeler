@@ -46,7 +46,7 @@ public class Activator extends AbstractUIPlugin {
 	private static Activator INSTANCE;
 
 	// plugin extensions
-	private ExtensionRegistry extensions;
+	private final ExtensionRegistry extensions;
 
 	
 	public Activator() {
@@ -56,7 +56,8 @@ public class Activator extends AbstractUIPlugin {
 	
 	//// live cycle support
 	
-	public void start(BundleContext context) throws Exception {
+	@Override
+	public void start(final BundleContext context) throws Exception {
 		super.start(context);
 		
 		INSTANCE = this;
@@ -65,7 +66,8 @@ public class Activator extends AbstractUIPlugin {
 		loadExtensions();
 	}
 
-	public void stop(BundleContext context) throws Exception {
+	@Override
+	public void stop(final BundleContext context) throws Exception {
 		INSTANCE = null;
 		super.stop(context);
 	}
@@ -99,15 +101,15 @@ public class Activator extends AbstractUIPlugin {
 	
 	//// logging helpers
 	
-	public static void logStatus(IStatus status) {
+	public static void logStatus(final IStatus status) {
 		Platform.getLog(INSTANCE.getBundle()).log(status);
 	}
 	
-	public static void logError(Exception e) {
+	public static void logError(final Exception e) {
 		logStatus(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
 	}
 
-	public static void showErrorWithLogging(Exception e){
+	public static void showErrorWithLogging(final Exception e){
 		Status s = createStatus(e);
 		logStatus(s);
 		ErrorDialog.openError(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "An error occured", null, s);
@@ -146,7 +148,7 @@ public class Activator extends AbstractUIPlugin {
 	/**
 	 * Creates an image descriptor and places it in the image registry.
 	 */
-	private void createImageDescriptor(ImageRegistry registry, String id, URL baseURL) {
+	private void createImageDescriptor(final ImageRegistry registry, final String id, final URL baseURL) {
 		URL url = null;
 		try {
 			url = new URL(baseURL, IConstants.ICON_PATH + id);
@@ -157,15 +159,15 @@ public class Activator extends AbstractUIPlugin {
 		registry.put(id, desc);
 	}
 
-	public Image getImage(String id) {
+	public Image getImage(final String id) {
 		return getImageRegistry().get(id);
 	}
 	
-	public ImageDescriptor getImageDescriptor(String id) {
+	public ImageDescriptor getImageDescriptor(final String id) {
 		return getImageRegistry().getDescriptor(id);
 	}
 
-	private static Status createStatus(Exception e) {
+	private static Status createStatus(final Exception e) {
 		return new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e);
 	}
 }

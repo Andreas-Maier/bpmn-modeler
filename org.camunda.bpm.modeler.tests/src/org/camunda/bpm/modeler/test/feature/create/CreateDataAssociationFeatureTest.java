@@ -10,7 +10,6 @@ import org.camunda.bpm.modeler.test.util.StringUtil;
 import org.camunda.bpm.modeler.test.util.Util;
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.DataInputAssociation;
-import org.eclipse.bpmn2.DataObject;
 import org.eclipse.bpmn2.DataObjectReference;
 import org.eclipse.bpmn2.DataOutputAssociation;
 import org.eclipse.bpmn2.Task;

@@ -997,7 +997,7 @@ public class ChangeSupportTest extends AbstractNonTransactionalFeatureTest {
 	
 	private class CustomResourceSetListener extends AbstractEObjectChangeSupport {
 
-		private List<ResourceSetChangeEvent> capturedEvents = new ArrayList<ResourceSetChangeEvent>();
+		private final List<ResourceSetChangeEvent> capturedEvents = new ArrayList<ResourceSetChangeEvent>();
 
 		public CustomResourceSetListener(EObject object, NotificationFilter filter) {
 			super(object);

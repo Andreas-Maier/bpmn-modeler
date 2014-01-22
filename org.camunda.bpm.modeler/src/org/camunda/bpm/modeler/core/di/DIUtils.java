@@ -22,7 +22,6 @@ import org.camunda.bpm.modeler.core.preferences.Bpmn2Preferences;
 import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
 import org.camunda.bpm.modeler.core.utils.LabelUtil;
 import org.camunda.bpm.modeler.core.utils.ModelUtil;
-import org.camunda.bpm.modeler.core.utils.ScrollUtil;
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Definitions;
 import org.eclipse.bpmn2.DocumentRoot;
@@ -366,6 +365,7 @@ public class DIUtils {
 		final Resource resource = dtp.getDiagram().eResource();
 		TransactionalEditingDomain domain = editor.getEditingDomain();
 		domain.getCommandStack().execute(new RecordingCommand(domain) {
+			@Override
 			protected void doExecute() {
 				resource.getContents().add(newDiagram);
 				newDiagram.setActive(true);
@@ -450,7 +450,7 @@ public class DIUtils {
 								DocumentRoot root = (DocumentRoot)o;
 								Definitions defs = root.getDefinitions();
 								for (BPMNDiagram d : defs.getDiagrams()) {
-									BPMNDiagram bpmnDiagram = (BPMNDiagram)d;
+									BPMNDiagram bpmnDiagram = d;
 									BaseElement bpmnElement = bpmnDiagram.getPlane().getBpmnElement();
 									if (bpmnElement == baseElement)
 										return bpmnDiagram;

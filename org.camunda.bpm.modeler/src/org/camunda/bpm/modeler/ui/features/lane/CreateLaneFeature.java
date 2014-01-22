@@ -15,7 +15,6 @@ package org.camunda.bpm.modeler.ui.features.lane;
 import org.camunda.bpm.modeler.core.ModelHandler;
 import org.camunda.bpm.modeler.core.features.AbstractBpmn2CreateFeature;
 import org.camunda.bpm.modeler.core.utils.FeatureSupport;
-import org.camunda.bpm.modeler.core.utils.ModelUtil;
 import org.camunda.bpm.modeler.ui.ImageProvider;
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.Lane;
@@ -27,12 +26,12 @@ public class CreateLaneFeature extends AbstractBpmn2CreateFeature<Lane> {
 
 	private static int index = 1;
 
-	public CreateLaneFeature(IFeatureProvider fp) {
+	public CreateLaneFeature(final IFeatureProvider fp) {
 		super(fp, "Lane", "A sub-partition in a process that helps to organize and categorize activities");
 	}
 
 	@Override
-	public boolean canCreate(ICreateContext context) {
+	public boolean canCreate(final ICreateContext context) {
 		boolean intoDiagram = context.getTargetContainer().equals(getDiagram());
 		boolean intoLane = FeatureSupport.isTargetLane(context);
 		boolean intoParticipant = FeatureSupport.isTargetParticipant(context);
@@ -42,9 +41,9 @@ public class CreateLaneFeature extends AbstractBpmn2CreateFeature<Lane> {
 	}
 
 	@Override
-	public Object[] create(ICreateContext context) {
+	public Object[] create(final ICreateContext context) {
 		Lane lane = createBusinessObject(context);
-		lane.setName("Lane "+ModelUtil.getIDNumber(lane.getId()));
+		lane.setName("Lane ohne Namen");
 		addGraphicalRepresentation(context, lane);
 		return new Object[] { lane };
 	}
@@ -68,7 +67,7 @@ public class CreateLaneFeature extends AbstractBpmn2CreateFeature<Lane> {
 	}
 
 	@Override
-	public Lane createBusinessObject(ICreateContext context) {
+	public Lane createBusinessObject(final ICreateContext context) {
 		Lane bo = null;
 		ModelHandler mh = ModelHandler.getInstance(getDiagram());
 		Object o = getBusinessObjectForPictogramElement(context.getTargetContainer());

@@ -24,7 +24,6 @@ import org.eclipse.bpmn2.LinkEventDefinition;
 import org.eclipse.bpmn2.MessageEventDefinition;
 import org.eclipse.bpmn2.SignalEventDefinition;
 import org.eclipse.bpmn2.StartEvent;
-import org.eclipse.bpmn2.ThrowEvent;
 import org.eclipse.bpmn2.TimerEventDefinition;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
 import org.eclipse.swt.widgets.Composite;
@@ -36,12 +35,12 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class EventTabCompositeFactory extends AbstractTabCompositeFactory<Event> {
 	
-	public EventTabCompositeFactory(GFPropertySection section, Composite parent) {
+	public EventTabCompositeFactory(final GFPropertySection section, final Composite parent) {
 		super(section, parent);
 	}
 	
 	@Override
-	public Composite createCompositeForBusinessObject(Event event) {
+	public Composite createCompositeForBusinessObject(final Event event) {
 		
 		List<EventDefinition> eventDefinitions = ModelUtil.getEventDefinitions(event);
 
@@ -60,7 +59,7 @@ public class EventTabCompositeFactory extends AbstractTabCompositeFactory<Event>
 			createTimerDefinitionComposite(timerDef);
 		}
 		
-		if (messageDef != null && !(event instanceof ThrowEvent)) {
+		if (messageDef != null) {
 			createMessageDefinitionComposite(messageDef);
 		}
 
@@ -86,11 +85,11 @@ public class EventTabCompositeFactory extends AbstractTabCompositeFactory<Event>
 		return parent;
 	}
 
-	private void createBoundaryEventComposite(BoundaryEvent event) {
+	private void createBoundaryEventComposite(final BoundaryEvent event) {
 		new BoundaryEventDefinitionComposite(parent, section, event).create();
 	}
 
-	private <T extends EventDefinition> T getEventDefinition(Class<T> cls, List<EventDefinition> eventDefinitions) {
+	private <T extends EventDefinition> T getEventDefinition(final Class<T> cls, final List<EventDefinition> eventDefinitions) {
 		for (EventDefinition eventDefinition : eventDefinitions) {
 			if (cls.isInstance(eventDefinition)) {
 				return cls.cast(eventDefinition);
@@ -100,28 +99,28 @@ public class EventTabCompositeFactory extends AbstractTabCompositeFactory<Event>
 		return null;
 	}
 
-	private void createSignalDefinitionComposite(SignalEventDefinition signalDef) {
+	private void createSignalDefinitionComposite(final SignalEventDefinition signalDef) {
 		new SignalDefinitionPropertyBuilder(parent, section, signalDef).create();
 	}
 	
-	private void createErrorDefinitionComposite(ErrorEventDefinition errorDef) {
+	private void createErrorDefinitionComposite(final ErrorEventDefinition errorDef) {
 		new ErrorDefinitionPropertyBuilder(parent, section, errorDef).create();
 	}
 	
-	private void createTimerDefinitionComposite(TimerEventDefinition eventDefinition) {
+	private void createTimerDefinitionComposite(final TimerEventDefinition eventDefinition) {
 		new TimerEventDefinitionPropertiesBuilder(parent, section, eventDefinition).create();
 	}
 	
-	private void createMessageDefinitionComposite(MessageEventDefinition messageDef) {
+	private void createMessageDefinitionComposite(final MessageEventDefinition messageDef) {
 		new MessageDefinitionPropertyBuilder(parent, section, messageDef).create();
 	}
 
-	private void createLinkDefinitionComposite(LinkEventDefinition linkDef) {
+	private void createLinkDefinitionComposite(final LinkEventDefinition linkDef) {
 		new IdPropertyBuilder(parent, section, linkDef, "Link Id").create();
 		new NamePropertyBuilder(parent, section, linkDef, "Link Name", HelpText.LINK_EVENT_DEFINITION_NAME).create();
 	}
 
-	private void createCompensateDefinitionComposite(CompensateEventDefinition compensateDef) {
+	private void createCompensateDefinitionComposite(final CompensateEventDefinition compensateDef) {
 		new IdPropertyBuilder(parent, section, compensateDef).create();
 		new CompensateEventDefinitionPropertiesBuilder(parent, section, compensateDef).create();
 	}

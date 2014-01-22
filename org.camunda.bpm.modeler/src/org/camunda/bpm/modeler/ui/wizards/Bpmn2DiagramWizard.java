@@ -77,7 +77,7 @@ public class Bpmn2DiagramWizard extends Wizard implements INewWizard {
 
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			@Override
-			public void run(IProgressMonitor monitor) throws InvocationTargetException {
+			public void run(final IProgressMonitor monitor) throws InvocationTargetException {
 				try {
 					IPath path = container.getFullPath().append(fileName);
 					URI uri = URI.createPlatformResourceURI(path.toString(), true);
@@ -120,17 +120,17 @@ public class Bpmn2DiagramWizard extends Wizard implements INewWizard {
 	 * @see IWorkbenchWizard#init(IWorkbench, IStructuredSelection)
 	 */
 	@Override
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
+	public void init(final IWorkbench workbench, final IStructuredSelection selection) {
 		this.selection = selection;
 	}
 
-	public static void openEditor(final IEditorInput editorInput) {
+	public static void openEditor(final IEditorInput editorInput, final boolean activate) {
 		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 			@Override
 			public void run() {
 				try {
 					IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-					activePage.openEditor(editorInput, Bpmn2Editor.EDITOR_ID);
+					activePage.openEditor(editorInput, Bpmn2Editor.EDITOR_ID, activate);
 					
 					/**
 					 * open the properties view or bring it to the top, so the use can start modeling immediately
@@ -150,5 +150,9 @@ public class Bpmn2DiagramWizard extends Wizard implements INewWizard {
 				}
 			}
 		});
+	}
+	
+	public static void openEditor(final IEditorInput editorInput) {
+		openEditor(editorInput, false);
 	}
 }

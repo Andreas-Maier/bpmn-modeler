@@ -10,7 +10,7 @@ package org.camunda.bpm.modeler.runtime.engine.model;
  *
  *
  * @see org.camunda.bpm.modeler.runtime.engine.model.ModelPackage#getUserTask()
- * @model
+ * @model extendedMetaData="name='' kind='mixed' namespace='##targetNamespace'"
  * @generated
  */
 public interface UserTask extends org.eclipse.bpmn2.UserTask, FormDataContainer {

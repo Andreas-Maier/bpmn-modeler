@@ -242,7 +242,7 @@ public class Bpmn2ModelerResourceImpl extends Bpmn2ResourceImpl {
 				TreeIterator<EObject> iter = o.eAllContents();
 				while (iter.hasNext()) {
 					EObject obj = iter.next();
-					EStructuralFeature feature = ((EObject) obj).eClass().getEIDAttribute();
+					EStructuralFeature feature = obj.eClass().getEIDAttribute();
 					if (feature != null && obj.eGet(feature) != null) {
 						Object id = obj.eGet(feature);
 						if (id != null && id.equals(ids)) {

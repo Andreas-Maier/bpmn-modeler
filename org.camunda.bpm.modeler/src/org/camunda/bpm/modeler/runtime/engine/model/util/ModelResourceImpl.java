@@ -42,17 +42,23 @@ import org.eclipse.dd.dc.Bounds;
 import org.eclipse.dd.dc.Point;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.ecore.xmi.XMLLoad;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.XMLSave;
 import org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLString;
+import org.eclipse.emf.ecore.xml.type.AnyType;
+import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -75,7 +81,7 @@ public class ModelResourceImpl extends Bpmn2ModelerResourceImpl {
 	 *          the URI of the new resource.
 	 * @generated NOT
 	 */
-	public ModelResourceImpl(URI uri) {
+	public ModelResourceImpl(final URI uri) {
 		super(uri);
 	}
 
@@ -107,7 +113,8 @@ public class ModelResourceImpl extends Bpmn2ModelerResourceImpl {
 
 		return new Bpmn2ModelerXMLSave(createXMLHelper()) {
 			@Override
-			protected void saveTypeAttribute(EClass eClass) {
+			protected void saveTypeAttribute(final EClass eClass) {
+				// DON'T add the casOpen namespace here, too!
 				if (!eClass.getEPackage().getNsPrefix().equals("activiti")
 						&& !eClass.getEPackage().getNsPrefix().equals("camunda") &&
 
@@ -120,7 +127,7 @@ public class ModelResourceImpl extends Bpmn2ModelerResourceImpl {
 			}
 
 			@Override
-			protected boolean shouldSaveFeature(EObject o, EStructuralFeature f) {
+			protected boolean shouldSaveFeature(final EObject o, final EStructuralFeature f) {
 				if (f == ModelPackage.eINSTANCE.getExecutionListenerType_Event()
 						|| f == ModelPackage.eINSTANCE.getTaskListenerType_Event()) {
 
@@ -156,11 +163,11 @@ public class ModelResourceImpl extends Bpmn2ModelerResourceImpl {
 			}
 
 			@Override
-			protected void init(XMLResource resource, Map<?, ?> options) {
+			protected void init(final XMLResource resource, final Map<?, ?> options) {
 				super.init(resource, options);
 		        doc = new XMLString(Integer.MAX_VALUE, publicId, systemId, null) {
 		        	@Override
-		        	public void addAttribute(String name, String value) {
+		        	public void addAttribute(final String name, String value) {
 		        		if (XSI_SCHEMA_LOCATION.equals(name)) {
 		        			value = "http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd";
 		        		}
@@ -168,12 +175,163 @@ public class ModelResourceImpl extends Bpmn2ModelerResourceImpl {
 		        	}
 		        };
 			}
+			
+			@Override
+			protected void saveElement(final EObject o, EStructuralFeature f)
+			  {
+			    EClass eClass = o.eClass();
+			    EClassifier eType = f.getEType();
+
+			    if (extendedMetaData != null && eClass != eType)
+			    {
+			      // Check if it's an anonymous type.
+			      //
+			      String name = extendedMetaData.getName(eClass);
+			      if (name.endsWith("_._type"))
+			      {
+			        String elementName = name.substring(0, name.indexOf("_._"));
+			        String prefix = helper.getPrefix(eClass.getEPackage());
+			        if (!"".equals(prefix))
+			        {
+			          elementName = prefix + ":" + elementName;
+			        }
+			        if (!toDOM)
+			        {
+			          doc.startElement(elementName);
+			        }
+			        else
+			        {
+			          currentNode = currentNode.appendChild(document.createElementNS(helper.getNamespaceURI(prefix), elementName));
+			          handler.recordValues(currentNode, o.eContainer(), f, o);
+			        }
+			        saveElementID(o);
+			        return;
+			      }
+			    }
+
+			    if (map != null)
+			    {
+			      XMLResource.XMLInfo info = map.getInfo(eClass);
+			      if (info != null && info.getXMLRepresentation() == XMLResource.XMLInfo.ELEMENT)
+			      {
+			        if (!toDOM)
+			        {
+			          String elementName = helper.getQName(eClass);
+			          doc.startElement(elementName);
+			        }
+			        else
+			        {
+			          helper.populateNameInfo(nameInfo, eClass);
+			          if (currentNode == null)
+			          {
+			            currentNode = document.createElementNS(nameInfo.getNamespaceURI(), nameInfo.getQualifiedName());
+			            document.appendChild(currentNode);
+			            handler.recordValues(currentNode, o.eContainer(), f, o);
+			          }
+			          else
+			          {
+			            currentNode = currentNode.appendChild(document.createElementNS(nameInfo.getNamespaceURI(), nameInfo.getQualifiedName()));
+			            handler.recordValues(currentNode, o.eContainer(), f, o);
+			          }
+			        }
+			        saveElementID(o);
+			        return;
+			      }
+			    }
+			    boolean isAnyType = false;
+			    if (o instanceof AnyType)
+			    {
+			      isAnyType = true;
+			      helper.pushContext();
+			      for (FeatureMap.Entry entry : ((AnyType)o).getAnyAttribute())
+			      {
+			        if (ExtendedMetaData.XMLNS_URI.equals(extendedMetaData.getNamespace(entry.getEStructuralFeature())))
+			        {
+			          String uri = (String)entry.getValue();
+			          helper.addPrefix(extendedMetaData.getName(entry.getEStructuralFeature()), uri == null ? "" : uri);
+			        }
+			      }
+			    }
+			    boolean shouldSaveType = 
+			      saveTypeInfo ? 
+			        xmlTypeInfo.shouldSaveType(eClass, eType, f) : 
+			        eClass != eType && 
+			         (eClass != anyType || 
+			            extendedMetaData == null || 
+			            eType != EcorePackage.Literals.EOBJECT || 
+			            extendedMetaData.getFeatureKind(f) == ExtendedMetaData.UNSPECIFIED_FEATURE);
+			    EDataType eDataType = null;
+			    if (shouldSaveType)
+			    {
+			      EClassifier eClassifier =
+			        eClass == anySimpleType ?
+			          eDataType = ((SimpleAnyType)o).getInstanceType() :
+			          eClass;
+			      if (elementHandler != null)
+			      {
+			        EStructuralFeature substitutionGroup = featureTable.getSubstitutionGroup(f, eClassifier);
+			        if (substitutionGroup != null)
+			        {
+			          f = substitutionGroup;
+			          shouldSaveType = substitutionGroup.getEType() != eClassifier;
+			        }
+			      }
+			    }
+
+			    if (!toDOM)
+			    {
+			      String featureName = helper.getQName(f);
+			      doc.startElement(featureName);
+			    }
+			    else
+			    {
+			      helper.populateNameInfo(nameInfo, f);
+			      if (currentNode == null)
+			      {
+			        // this is a root element
+			        currentNode = document.createElementNS(nameInfo.getNamespaceURI(), nameInfo.getQualifiedName());
+			        document.appendChild(currentNode);
+			        handler.recordValues(currentNode, o.eContainer(), f, o);
+			      }
+			      else
+			      {
+			        currentNode = currentNode.appendChild(document.createElementNS(nameInfo.getNamespaceURI(), nameInfo.getQualifiedName()));
+			        handler.recordValues(currentNode, o.eContainer(), f, o);
+			      }
+			    }
+			    // TODO: Check if that problem can be handled.
+				// SubstitutionGroup ExtensionElements suppresses the printing
+				// of the "correct" type.
+				// Even if the ClientOperation inherits ExtensionAttributeValue
+				// and is passed in the valueRef the type is not correct.
+				// The incorrect type causes the interpretation as xsd:anytype
+				// when loading the resource, what causes the loading of the
+				// extension to fail.
+			    if (shouldSaveType || eClass.getName().equalsIgnoreCase("clientoperation"))
+			    {
+			      if (eDataType != null)
+			      {
+			        saveTypeAttribute(eDataType);
+			      }
+			      else
+			      {
+			        saveTypeAttribute(eClass);
+			      }
+			    }
+
+			    saveElementID(o);
+			    if (isAnyType)
+			    {
+			      helper.popContext();
+			    }
+			  }
+			
 		};
 	}
 
 	private boolean isGenerateDiagramImage() {
 		return Bpmn2Preferences.getInstance().getBoolean(
-				Bpmn2Preferences.PREF_TOGGLE_DIAGRAM_GENERATION, true);
+				Bpmn2Preferences.PREF_TOGGLE_DIAGRAM_GENERATION, false);
 	}
 
 	/**
@@ -185,13 +343,13 @@ public class ModelResourceImpl extends Bpmn2ModelerResourceImpl {
 	protected static class ModelXmlHandler extends Bpmn2ModelerXmlHandler {
 		Logger log = Logger.getLogger(getClass().getSimpleName());
 
-		public ModelXmlHandler(XMLResource xmiResource, XMLHelper helper,
-				Map<?, ?> options) {
+		public ModelXmlHandler(final XMLResource xmiResource, final XMLHelper helper,
+				final Map<?, ?> options) {
 			super(xmiResource, helper, options);
 		}
 
 		@Override
-		protected void handleForwardReferences(boolean isEndDocument) {
+		protected void handleForwardReferences(final boolean isEndDocument) {
 			try {
 				if (isEndDocument) {
 
@@ -242,19 +400,19 @@ public class ModelResourceImpl extends Bpmn2ModelerResourceImpl {
 		}
 
 		@Override
-		protected void handleProxy(InternalEObject proxy, String uriLiteral) {
+		protected void handleProxy(final InternalEObject proxy, final String uriLiteral) {
 			super.handleProxy(proxy, uriLiteral);
 		}
 
 		@SuppressWarnings("unchecked")
 		@Override
-		protected void processElement(String name, String prefix, String localName) {
+		protected void processElement(final String name, final String prefix, final String localName) {
 			super.processElement(name, prefix, localName);
 		}
 
 		@Override
-		protected EStructuralFeature getFeature(EObject object, String prefix,
-				String name, boolean isElement) {
+		protected EStructuralFeature getFeature(final EObject object, final String prefix,
+				final String name, final boolean isElement) {
 			return super.getFeature(object, prefix, name, isElement);
 		}
 

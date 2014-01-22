@@ -2,6 +2,7 @@
  */
 package org.camunda.bpm.modeler.runtime.engine.model.impl;
 
+import java.util.Collection;
 import org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot;
 import org.camunda.bpm.modeler.runtime.engine.model.ExecutionListenerType;
 import org.camunda.bpm.modeler.runtime.engine.model.FieldType;
@@ -14,17 +15,24 @@ import org.camunda.bpm.modeler.runtime.engine.model.OutType;
 import org.camunda.bpm.modeler.runtime.engine.model.TaskListenerType;
 import org.camunda.bpm.modeler.runtime.engine.model.TypeType;
 
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentMetaData;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.RequestObject;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ResponseObject;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation;
 import org.camunda.bpm.modeler.runtime.engine.model.fox.FailedJobRetryTimeCycleType;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,7 +66,12 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getPriority <em>Priority</em>}</li>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getResultVariableName <em>Result Variable Name</em>}</li>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getFailedJobRetryTimeCycle <em>Failed Job Retry Time Cycle</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getClientOperation <em>Client Operation</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getServiceOperation <em>Service Operation</em>}</li>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getFormData <em>Form Data</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getDocumentMetaData <em>Document Meta Data</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getRequestObject <em>Request Object</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getResponseObject <em>Response Object</em>}</li>
  * </ul>
  * </p>
  *
@@ -1094,6 +1107,60 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ClientOperation getClientOperation() {
+		return (ClientOperation)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__CLIENT_OPERATION, true);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetClientOperation(ClientOperation newClientOperation, NotificationChain msgs) {
+		return ((FeatureMap.Internal)getMixed()).basicAdd(ModelPackage.Literals.DOCUMENT_ROOT__CLIENT_OPERATION, newClientOperation, msgs);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setClientOperation(ClientOperation newClientOperation) {
+		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__CLIENT_OPERATION, newClientOperation);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ServiceOperation getServiceOperation() {
+		return (ServiceOperation)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__SERVICE_OPERATION, true);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetServiceOperation(ServiceOperation newServiceOperation, NotificationChain msgs) {
+		return ((FeatureMap.Internal)getMixed()).basicAdd(ModelPackage.Literals.DOCUMENT_ROOT__SERVICE_OPERATION, newServiceOperation, msgs);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setServiceOperation(ServiceOperation newServiceOperation) {
+		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__SERVICE_OPERATION, newServiceOperation);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public FormDataType getFormData() {
 		return formData;
 	}
@@ -1134,6 +1201,87 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 
 		/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DocumentMetaData getDocumentMetaData() {
+		return (DocumentMetaData)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__DOCUMENT_META_DATA, true);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDocumentMetaData(DocumentMetaData newDocumentMetaData, NotificationChain msgs) {
+		return ((FeatureMap.Internal)getMixed()).basicAdd(ModelPackage.Literals.DOCUMENT_ROOT__DOCUMENT_META_DATA, newDocumentMetaData, msgs);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDocumentMetaData(DocumentMetaData newDocumentMetaData) {
+		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__DOCUMENT_META_DATA, newDocumentMetaData);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RequestObject getRequestObject() {
+		return (RequestObject)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__REQUEST_OBJECT, true);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetRequestObject(RequestObject newRequestObject, NotificationChain msgs) {
+		return ((FeatureMap.Internal)getMixed()).basicAdd(ModelPackage.Literals.DOCUMENT_ROOT__REQUEST_OBJECT, newRequestObject, msgs);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRequestObject(RequestObject newRequestObject) {
+		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__REQUEST_OBJECT, newRequestObject);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ResponseObject getResponseObject() {
+		return (ResponseObject)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__RESPONSE_OBJECT, true);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetResponseObject(ResponseObject newResponseObject, NotificationChain msgs) {
+		return ((FeatureMap.Internal)getMixed()).basicAdd(ModelPackage.Literals.DOCUMENT_ROOT__RESPONSE_OBJECT, newResponseObject, msgs);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResponseObject(ResponseObject newResponseObject) {
+		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__RESPONSE_OBJECT, newResponseObject);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -1154,8 +1302,18 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 				return basicSetTaskListener(null, msgs);
 			case ModelPackage.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE:
 				return basicSetFailedJobRetryTimeCycle(null, msgs);
+			case ModelPackage.DOCUMENT_ROOT__CLIENT_OPERATION:
+				return basicSetClientOperation(null, msgs);
+			case ModelPackage.DOCUMENT_ROOT__SERVICE_OPERATION:
+				return basicSetServiceOperation(null, msgs);
 			case ModelPackage.DOCUMENT_ROOT__FORM_DATA:
 				return basicSetFormData(null, msgs);
+			case ModelPackage.DOCUMENT_ROOT__DOCUMENT_META_DATA:
+				return basicSetDocumentMetaData(null, msgs);
+			case ModelPackage.DOCUMENT_ROOT__REQUEST_OBJECT:
+				return basicSetRequestObject(null, msgs);
+			case ModelPackage.DOCUMENT_ROOT__RESPONSE_OBJECT:
+				return basicSetResponseObject(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1218,8 +1376,18 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 				return getResultVariableName();
 			case ModelPackage.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE:
 				return getFailedJobRetryTimeCycle();
+			case ModelPackage.DOCUMENT_ROOT__CLIENT_OPERATION:
+				return getClientOperation();
+			case ModelPackage.DOCUMENT_ROOT__SERVICE_OPERATION:
+				return getServiceOperation();
 			case ModelPackage.DOCUMENT_ROOT__FORM_DATA:
 				return getFormData();
+			case ModelPackage.DOCUMENT_ROOT__DOCUMENT_META_DATA:
+				return getDocumentMetaData();
+			case ModelPackage.DOCUMENT_ROOT__REQUEST_OBJECT:
+				return getRequestObject();
+			case ModelPackage.DOCUMENT_ROOT__RESPONSE_OBJECT:
+				return getResponseObject();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1229,7 +1397,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
+  @SuppressWarnings("unchecked")
+		@Override
   public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.DOCUMENT_ROOT__EXECUTION_LISTENER:
@@ -1307,8 +1476,23 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 			case ModelPackage.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE:
 				setFailedJobRetryTimeCycle((FailedJobRetryTimeCycleType)newValue);
 				return;
+			case ModelPackage.DOCUMENT_ROOT__CLIENT_OPERATION:
+				setClientOperation((ClientOperation)newValue);
+				return;
+			case ModelPackage.DOCUMENT_ROOT__SERVICE_OPERATION:
+				setServiceOperation((ServiceOperation)newValue);
+				return;
 			case ModelPackage.DOCUMENT_ROOT__FORM_DATA:
 				setFormData((FormDataType)newValue);
+				return;
+			case ModelPackage.DOCUMENT_ROOT__DOCUMENT_META_DATA:
+				setDocumentMetaData((DocumentMetaData)newValue);
+				return;
+			case ModelPackage.DOCUMENT_ROOT__REQUEST_OBJECT:
+				setRequestObject((RequestObject)newValue);
+				return;
+			case ModelPackage.DOCUMENT_ROOT__RESPONSE_OBJECT:
+				setResponseObject((ResponseObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1397,8 +1581,23 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 			case ModelPackage.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE:
 				setFailedJobRetryTimeCycle((FailedJobRetryTimeCycleType)null);
 				return;
+			case ModelPackage.DOCUMENT_ROOT__CLIENT_OPERATION:
+				setClientOperation((ClientOperation)null);
+				return;
+			case ModelPackage.DOCUMENT_ROOT__SERVICE_OPERATION:
+				setServiceOperation((ServiceOperation)null);
+				return;
 			case ModelPackage.DOCUMENT_ROOT__FORM_DATA:
 				setFormData((FormDataType)null);
+				return;
+			case ModelPackage.DOCUMENT_ROOT__DOCUMENT_META_DATA:
+				setDocumentMetaData((DocumentMetaData)null);
+				return;
+			case ModelPackage.DOCUMENT_ROOT__REQUEST_OBJECT:
+				setRequestObject((RequestObject)null);
+				return;
+			case ModelPackage.DOCUMENT_ROOT__RESPONSE_OBJECT:
+				setResponseObject((ResponseObject)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -1462,8 +1661,18 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 				return RESULT_VARIABLE_NAME_EDEFAULT == null ? resultVariableName != null : !RESULT_VARIABLE_NAME_EDEFAULT.equals(resultVariableName);
 			case ModelPackage.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE:
 				return getFailedJobRetryTimeCycle() != null;
+			case ModelPackage.DOCUMENT_ROOT__CLIENT_OPERATION:
+				return getClientOperation() != null;
+			case ModelPackage.DOCUMENT_ROOT__SERVICE_OPERATION:
+				return getServiceOperation() != null;
 			case ModelPackage.DOCUMENT_ROOT__FORM_DATA:
 				return formData != null;
+			case ModelPackage.DOCUMENT_ROOT__DOCUMENT_META_DATA:
+				return getDocumentMetaData() != null;
+			case ModelPackage.DOCUMENT_ROOT__REQUEST_OBJECT:
+				return getRequestObject() != null;
+			case ModelPackage.DOCUMENT_ROOT__RESPONSE_OBJECT:
+				return getResponseObject() != null;
 		}
 		return super.eIsSet(featureID);
 	}

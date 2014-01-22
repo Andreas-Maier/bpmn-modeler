@@ -1,5 +1,9 @@
 package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.camunda.bpm.modeler.ui.property.tabs.binding.NameAttributeComboBinding;
 import org.camunda.bpm.modeler.ui.property.tabs.binding.StringTextBinding;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
 import org.eclipse.bpmn2.BaseElement;
@@ -18,11 +22,20 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
 import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
+
+import com.google.common.base.Strings;
+
+import de.cas.open.prozesse.modeler.server.eimInterface.EIMInterfaceHolder;
+import de.cas.open.prozesse.modeler.server.exceptions.ServerException;
+import de.cas.open.server.api.exceptions.BusinessException;
+import de.cas.open.server.api.exceptions.DataLayerException;
 
 /**
  * Builder for the name property
@@ -35,16 +48,16 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 
 	private EStructuralFeature NAME_FEATURE;
 	
-	private String label;
+	private final String label;
 	private String helpText;
 
-	public NamePropertyBuilder(Composite parent, GFPropertySection section, BaseElement bo, String label, String helpText) {
+	public NamePropertyBuilder(final Composite parent, final GFPropertySection section, final BaseElement bo, final String label, final String helpText) {
 		this(parent, section, bo, label);
 
 		this.helpText = helpText;
 	}
 
-	public NamePropertyBuilder(Composite parent, GFPropertySection section, BaseElement bo, String label) {
+	public NamePropertyBuilder(final Composite parent, final GFPropertySection section, final BaseElement bo, final String label) {
 		super(parent, section, bo);
 		
 		this.label = label;
@@ -77,13 +90,17 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 		}
 	}
 	
-	public NamePropertyBuilder(Composite parent, GFPropertySection section, BaseElement bo) {
+	public NamePropertyBuilder(final Composite parent, final GFPropertySection section, final BaseElement bo) {
 		this(parent, section, bo, "Name");
 	}
 	
 	@Override
 	public void create() {
-		if (NAME_FEATURE != null) {
+		if (bo instanceof Lane) {
+			createLaneNameCombo();
+		} else if (bo instanceof Participant) {
+			createParticipantNameCombo();
+		} else if (NAME_FEATURE != null) {
 			final Text multiText = createAutoResizingMultiText(section, parent, label, NAME_FEATURE, bo);
 			if (helpText != null) {
 				PropertyUtil.attachNoteWithLink(section, multiText, helpText);
@@ -91,8 +108,50 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 		}
 	}
 
-	private Text createAutoResizingMultiText(GFPropertySection section, final Composite parent, String label,
-			EStructuralFeature feature, BaseElement bo) {
+	private void createParticipantNameCombo() {
+		CCombo participantNameCombo = PropertyUtil.createDropDown(section, parent, "Name");
+		// Add elements
+		List<String> participantNames = new LinkedList<>();
+		try {
+			participantNames = EIMInterfaceHolder.getAllClients();
+		} catch (DataLayerException | BusinessException | ServerException e) {
+			MessageDialog.openError(parent.getShell(), "No clients available", "There are currently no clients available!");
+			return;
+		}
+		for (String userGroupName : participantNames) {
+			if (!Strings.isNullOrEmpty(userGroupName)) {
+				participantNameCombo.add(userGroupName);
+			}
+		}
+		// Add binding
+		NameAttributeComboBinding binding = new NameAttributeComboBinding(bo, NAME_FEATURE, participantNameCombo);
+
+		binding.establish();
+	}
+	
+	private void createLaneNameCombo() {
+		CCombo laneNameCombo = PropertyUtil.createDropDown(section, parent, "Name");
+		// Add elements
+		List<String> userGroupNames = new LinkedList<>();
+		try {
+			userGroupNames = EIMInterfaceHolder.getAllUserGroups();
+		} catch (DataLayerException | BusinessException | ServerException e) {
+			MessageDialog.openError(parent.getShell(), "No groups available", "There are currently no groups available!");
+			return;
+		}
+		for (String userGroupName : userGroupNames) {
+			if (!Strings.isNullOrEmpty(userGroupName)) {
+				laneNameCombo.add(userGroupName);
+			}
+		}
+		// Add binding
+		NameAttributeComboBinding binding = new NameAttributeComboBinding(bo, NAME_FEATURE, laneNameCombo);
+
+		binding.establish();
+	}
+
+	private Text createAutoResizingMultiText(final GFPropertySection section, final Composite parent, final String label,
+			final EStructuralFeature feature, final BaseElement bo) {
 		
 		Composite composite = PropertyUtil.createStandardComposite(section, parent);
 		TabbedPropertySheetWidgetFactory factory = section.getWidgetFactory();
@@ -110,7 +169,7 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 		multiTextObservable.addValueChangeListener(new IValueChangeListener() {
 			
 			@Override
-			public void handleValueChange(ValueChangeEvent event) {
+			public void handleValueChange(final ValueChangeEvent event) {
 				
 				String text = (String) event.diff.getNewValue();
 				int crCount = crCount(text);
@@ -130,7 +189,7 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 		return multiText;
 	}
 	
-	public int crCount(String s) {
+	public int crCount(final String s) {
 		int i = -1;
 		int c = 0;
 		

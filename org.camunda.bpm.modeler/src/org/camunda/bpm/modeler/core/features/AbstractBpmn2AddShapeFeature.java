@@ -41,7 +41,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 
 	public static final int BOX_PADDING = 10;
 	
-	public AbstractBpmn2AddShapeFeature(IFeatureProvider fp) {
+	public AbstractBpmn2AddShapeFeature(final IFeatureProvider fp) {
 		super(fp);
 	}
 	
@@ -60,7 +60,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * @param context
 	 * @param newShape
 	 */
-	protected void createAnchors(IAddContext context, ContainerShape newShape) {
+	protected void createAnchors(final IAddContext context, final ContainerShape newShape) {
 
 		// per default, create chopbox anchor and
 		// four fix point anchors on all four sides of the shape (North-East-South-West)
@@ -76,7 +76,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * 
 	 * @return
 	 */
-	protected ContainerShape createShape(IAddContext context, IRectangle newShapeBounds) {
+	protected ContainerShape createShape(final IAddContext context, final IRectangle newShapeBounds) {
 		ContainerShape newShape = createPictogramElement(context, newShapeBounds);
 		
 		postCreateHook(context, newShapeBounds, newShape);
@@ -94,7 +94,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * @param context
 	 * @param newShape
 	 */
-	protected void decorate(IAddContext context, ContainerShape newShape) {
+	protected void decorate(final IAddContext context, final ContainerShape newShape) {
 		
 	}
 
@@ -105,7 +105,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * 
 	 * @return
 	 */
-	protected IRectangle getAddBounds(IAddContext context) {
+	protected IRectangle getAddBounds(final IAddContext context) {
 		
 		adjustLocationAndSize(context, getWidth(context), getHeight(context));
 		
@@ -125,7 +125,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * 
 	 * @return the bpmn shape
 	 */
-	protected BPMNShape createDi(Shape shape, BaseElement baseElement, IAddContext context) {
+	protected BPMNShape createDi(final Shape shape, final BaseElement baseElement, final IAddContext context) {
 		boolean isImport = isImport(context);
 		
 		return createDIShape(shape, baseElement, findDIShape(baseElement), !isImport);
@@ -140,7 +140,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * @param applyDefaults
 	 * @return
 	 */
-	protected BPMNShape createDIShape(Shape shape, BaseElement elem, BPMNShape bpmnShape, boolean applyDefaults) {
+	protected BPMNShape createDIShape(final Shape shape, final BaseElement elem, BPMNShape bpmnShape, final boolean applyDefaults) {
 		if (bpmnShape == null) {
 			IRectangle bounds = LayoutUtil.getAbsoluteBounds(shape);
 			bpmnShape = DIUtils.createDIShape(elem, bounds, getDiagram());
@@ -155,7 +155,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 		return bpmnShape;
 	}
 
-	protected BPMNShape findDIShape(BaseElement element) {
+	protected BPMNShape findDIShape(final BaseElement element) {
 		return (BPMNShape) ModelHandler.findDIElement(getDiagram(), element);
 	}
 
@@ -169,7 +169,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * 
 	 * @set {@link #postAddHook(IAddContext, PictogramElement)}
 	 */
-	protected void postAddHook(IAddContext context, ContainerShape newShape, IRectangle elementBounds) {
+	protected void postAddHook(final IAddContext context, final ContainerShape newShape, final IRectangle elementBounds) {
 		postAddHook(context, newShape);
 	}
 	
@@ -180,7 +180,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * @param newShapeBounds
 	 * @return
 	 */
-	protected IAddContext getAddLabelContext(IAddContext context, ContainerShape newShape, IRectangle newShapeBounds) {
+	protected IAddContext getAddLabelContext(final IAddContext context, final ContainerShape newShape, final IRectangle newShapeBounds) {
 
 		GraphicsUtil.prepareLabelAddContext(context, 
 			newShape, 
@@ -191,7 +191,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	}
 	
 	@Override
-	public PictogramElement add(IAddContext context) {
+	public PictogramElement add(final IAddContext context) {
 		T activity = getBusinessObject(context);
 
 		// compute actual add bounds
@@ -221,7 +221,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 		return newShape;
 	}
 
-	protected void sendToFront(ContainerShape newShape) {
+	protected void sendToFront(final ContainerShape newShape) {
 		GraphicsUtil.sendToFront(newShape);
 	}
 
@@ -231,7 +231,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * @param newShape
 	 * @param context
 	 */
-	protected void updateAndLayout(ContainerShape newShape, IAddContext context) {
+	protected void updateAndLayout(final ContainerShape newShape, final IAddContext context) {
 		// update
 		updatePictogramElement(newShape);
 		
@@ -258,7 +258,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * @param context
 	 * @param newShape
 	 */
-	protected void createLabel(IAddContext context, ContainerShape newShape, IRectangle newShapeBounds) {
+	protected void createLabel(final IAddContext context, final ContainerShape newShape, final IRectangle newShapeBounds) {
 		
 		if (context.getProperty(AbstractMorphNodeFeature.MORPH_ELEMENT) != null && context.getProperty(AbstractMorphNodeFeature.MORPH_ELEMENT) == Boolean.TRUE) {
 			return;
@@ -280,7 +280,7 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * @param width
 	 * @param height
 	 */
-	protected void adjustLocationAndSize(IAddContext context, int width, int height) {
+	protected void adjustLocationAndSize(final IAddContext context, final int width, final int height) {
 		
 		if (isImport(context)) {
 			return;
@@ -295,14 +295,14 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 		}
 	}
 	
-	protected void adjustSize(IAddContext context, int width, int height) {
+	protected void adjustSize(final IAddContext context, final int width, final int height) {
 		if (context instanceof AddContext) {
 			AddContext addContext = (AddContext) context;
 			addContext.setSize(width, height);
 		}
 	}
 
-	protected void adjustLocation(IAddContext context, int width, int height) {
+	protected void adjustLocation(final IAddContext context, final int width, final int height) {
 		
 		if (context instanceof AddContext) {
 			AddContext addContext = (AddContext) context;
@@ -322,11 +322,11 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 	 * @param context
 	 * @return
 	 */
-	protected BoxingStrategy getBoxingStrategy(IAddContext context) {
+	protected BoxingStrategy getBoxingStrategy(final IAddContext context) {
 		return BoxingStrategy.NONE;
 	}
 	
-	protected void boxToParent(IAddContext context, int width, int height, BoxingStrategy strategy) {
+	protected void boxToParent(final IAddContext context, final int width, final int height, final BoxingStrategy strategy) {
 
 		if (context instanceof AddContext) {
 			AddContext addContext = (AddContext) context;
@@ -359,17 +359,17 @@ public abstract class AbstractBpmn2AddShapeFeature<T extends BaseElement> extend
 		}
 	}
 	
-	protected int getHeight(IAddContext context) {
+	protected int getHeight(final IAddContext context) {
 		return context.getHeight() > 0 ? context.getHeight() :
 			(isHorizontal(context) ? getDefaultHeight() : getDefaultWidth());
 	}
 	
-	protected int getWidth(IAddContext context) {
+	protected int getWidth(final IAddContext context) {
 		return context.getWidth() > 0 ? context.getWidth() :
 			(isHorizontal(context) ? getDefaultWidth() : getDefaultHeight());
 	}
 
-	protected boolean isHorizontal(ITargetContext context) {
+	protected boolean isHorizontal(final ITargetContext context) {
 		if (!isImport(context)) {
 			// not importing - set isHorizontal to be the same as parent Pool
 			if (FeatureSupport.isTargetParticipant(context)) {

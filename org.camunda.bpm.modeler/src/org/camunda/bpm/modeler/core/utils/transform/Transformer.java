@@ -5,13 +5,15 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.camunda.bpm.modeler.core.utils.ExtensionUtil;
+import org.camunda.bpm.modeler.runtime.engine.model.ModelPackage;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
@@ -37,16 +39,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
 @SuppressWarnings({ "unchecked", "serial" })
 public class Transformer {
 
-	private CopyProblemLog log = new CopyProblemLog();
+	private final CopyProblemLog log = new CopyProblemLog();
 	
-	private EObject target;
+	private final EObject target;
 
 	/**
 	 * Creates a new transformer with the given {@link EObject} as the target.
 	 * 
 	 * @param target
 	 */
-	public Transformer(EObject target) {
+	public Transformer(final EObject target) {
 		this.target = target;
 	}
 	
@@ -61,7 +63,7 @@ public class Transformer {
 	 * 
 	 * @return the morphed object
 	 */
-	public EObject morph(EClass newCls) {
+	public EObject morph(final EClass newCls) {
 		EObject newObj = copyChangeCls(newCls);
 		
 		swapCrossReferences(newObj);
@@ -77,10 +79,10 @@ public class Transformer {
 	 * 
 	 * @param replacement
 	 */
-	public void swapCrossReferences(EObject replacement) {
+	public void swapCrossReferences(final EObject replacement) {
 		
 		// replace references
-		Collection<Setting> references = UsageCrossReferencer.find(target, ((Resource) target.eResource()).getResourceSet());
+		Collection<Setting> references = UsageCrossReferencer.find(target, target.eResource().getResourceSet());
 		for (Setting reference : references) {
 			if (reference instanceof EObjectEList) {
 				// update is-many ref
@@ -114,8 +116,21 @@ public class Transformer {
 	 * @param newCls
 	 * @return
 	 */
-	public EObject copyChangeCls(EClass newCls) {
-
+	public EObject copyChangeCls(final EClass newCls) {
+		ExtensionUtil.removeExtensionByFeature(target, ModelPackage.eINSTANCE.getDocumentRoot_ClientOperation());
+		ExtensionUtil.removeExtensionByFeature(target, ModelPackage.eINSTANCE.getDocumentRoot_ServiceOperation());
+		ExtensionUtil.removeExtensionByFeature(target, ModelPackage.eINSTANCE.getDocumentRoot_RequestObject());
+		ExtensionUtil.removeExtensionByFeature(target, ModelPackage.eINSTANCE.getDocumentRoot_ResponseObject());
+		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getDocumentRoot_IsUserInteractable());
+		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getClientOperation_Parameter());
+		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getClientOperation_Result());
+		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getProperty_DefiningElement());
+		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getRequestObject_Parameters());
+		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getRequestParameter_ValueReference());
+		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getResponseObject_ResponseParameters());
+		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getResponseParameter_ResponseParameters());
+		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getServiceOperation_Parameter());
+		
 		// morph-copy object and all attributes
 		MorphingCopier copier = new MorphingCopier(target, newCls);
 		copier.setWarningHandler(log);
@@ -123,7 +138,7 @@ public class Transformer {
 		return copier.copy(target);
 	}
 	
-	protected void replace(EObject object, EObject replacement) {
+	protected void replace(final EObject object, final EObject replacement) {
 		EcoreUtil.replace(object, replacement);
 	}
 	
@@ -142,15 +157,16 @@ public class Transformer {
 
 	public static class MorphingCopier extends DeepCopier {
 
-		private EObject target;
-		private EClass newCls;
+		private final EObject target;
+		private final EClass newCls;
 
-		public MorphingCopier(EObject target, EClass newCls) {
+		public MorphingCopier(final EObject target, final EClass newCls) {
 			this.target = target;
 			this.newCls = newCls;
 		}
 
-		protected EObject createCopy(EObject eObject) {
+		@Override
+		protected EObject createCopy(final EObject eObject) {
 			EClass eClass = getTarget(eObject.equals(target) ? newCls : eObject.eClass());
 			return EcoreUtil.create(eClass);
 		}
@@ -164,7 +180,7 @@ public class Transformer {
 			super(true, true);
 		}
 
-		protected EStructuralFeature getTarget(EObject copyEObject, EStructuralFeature sourceFeature) {
+		protected EStructuralFeature getTarget(final EObject copyEObject, final EStructuralFeature sourceFeature) {
 			if (copyEObject.eClass().getEAllStructuralFeatures().contains(sourceFeature)) {
 				return sourceFeature;
 			}
@@ -172,7 +188,7 @@ public class Transformer {
 			return null;
 		}
 
-		public void setWarningHandler(NotificationHandler<CopyProblem> handler) {
+		public void setWarningHandler(final NotificationHandler<CopyProblem> handler) {
 			this.problemsHandler = handler;
 		}
 
@@ -187,7 +203,8 @@ public class Transformer {
 		 * @param copyEObject
 		 *            the object to copy to.
 		 */
-		protected void copyAttribute(EAttribute eAttribute, EObject eObject, EObject copyEObject) {
+		@Override
+		protected void copyAttribute(final EAttribute eAttribute, final EObject eObject, final EObject copyEObject) {
 			
 			// need to handle set attributes only
 			if (!eObject.eIsSet(eAttribute)) {
@@ -246,7 +263,8 @@ public class Transformer {
 		 *            the object to copy.
 		 * @return the copy.
 		 */
-		public EObject copy(EObject eObject) {
+		@Override
+		public EObject copy(final EObject eObject) {
 			if (eObject == null) {
 				return null;
 			}
@@ -275,7 +293,7 @@ public class Transformer {
 			return copyEObject;
 		}
 		
-		protected void moveContainment(EReference eReference, EObject eObject, EObject copyEObject) {
+		protected void moveContainment(final EReference eReference, final EObject eObject, final EObject copyEObject) {
 			
 			if (eObject.eIsSet(eReference)) {
 
@@ -315,7 +333,8 @@ public class Transformer {
 		 * @param copyEObject
 		 *            the object to copy to.
 		 */
-		protected void copyReference(EReference eReference, EObject eObject, EObject copyEObject) {
+		@Override
+		protected void copyReference(final EReference eReference, final EObject eObject, final EObject copyEObject) {
 			
 			// need to copy existing references only
 			if (!eObject.eIsSet(eReference)) {
@@ -379,7 +398,7 @@ public class Transformer {
 			}
 		}
 
-		protected void handleProblem(CopyProblem problem) {
+		protected void handleProblem(final CopyProblem problem) {
 			if (problemsHandler != null) {
 				problemsHandler.handle(problem);
 			} else {
@@ -390,10 +409,10 @@ public class Transformer {
 
 	public static class CopyProblemLog implements NotificationHandler<CopyProblem> {
 
-		private List<CopyProblem> problems = new ArrayList<CopyProblem>();
+		private final List<CopyProblem> problems = new ArrayList<CopyProblem>();
 
 		@Override
-		public void handle(CopyProblem error) {
+		public void handle(final CopyProblem error) {
 			problems.add(error);
 		}
 
@@ -404,12 +423,12 @@ public class Transformer {
 
 	public static class IgnoredStructuralFeature implements CopyProblem {
 
-		private EObject src;
-		private EStructuralFeature srcFeature;
-		private Object srcAttrValue;
-		private EObject target;
+		private final EObject src;
+		private final EStructuralFeature srcFeature;
+		private final Object srcAttrValue;
+		private final EObject target;
 
-		public IgnoredStructuralFeature(EObject src, EStructuralFeature srcFeature, Object srcFeatureValue, EObject target) {
+		public IgnoredStructuralFeature(final EObject src, final EStructuralFeature srcFeature, final Object srcFeatureValue, final EObject target) {
 
 			this.src = src;
 			this.srcFeature = srcFeature;
