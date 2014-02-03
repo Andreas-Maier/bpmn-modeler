@@ -1,7 +1,13 @@
 
 package org.camunda.bpm.modeler.splashHandlers;
 
+import java.lang.reflect.InvocationTargetException;
+
+import org.camunda.bpm.modeler.Messages;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -79,21 +85,23 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 		configureUISplash();
 		// Create UI
 		createUI();		
-		// Create UI listeners
-		createUIListeners();
-		// Force the splash screen to layout
-		splash.layout(true);
-		splash.addTraverseListener(new TraverseListener() {
-			@Override
-			public void keyTraversed(final TraverseEvent event) {
-				if (event.detail == SWT.TRAVERSE_RETURN) {
-				    handleButtonOKWidgetSelected();
+		if (!fAuthenticated) {
+			// Create UI listeners
+			createUIListeners();
+			// Force the splash screen to layout
+			splash.layout(true);
+			splash.addTraverseListener(new TraverseListener() {
+				@Override
+				public void keyTraversed(final TraverseEvent event) {
+					if (event.detail == SWT.TRAVERSE_RETURN) {
+					    handleButtonOKWidgetSelected();
+					}
 				}
-			}
-		});
-		// Keep the splash screen visible and prevent the RCP application from 
-		// loading until the close button is clicked.
-		doEventLoop();
+			});
+			// Keep the splash screen visible and prevent the RCP application from 
+			// loading until the close button is clicked.
+			doEventLoop();
+		}
 	}
 	
 	/**
@@ -170,25 +178,38 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 			// Try to authenticate.
 			fAuthenticated = login(serverUrl, mandant, username, password);
 			if (!fAuthenticated) {
-				MessageDialog.openError(getSplash(), "Authentication failed!", "Authentication failed!");
+				MessageDialog.openError(getSplash(), Messages.InteractiveSplashHandler_0, Messages.InteractiveSplashHandler_1);
 			}
 		} 
 	}
 
 	private boolean login(final String serverUrl, final String mandant, final String username, final String password) {
+		ProgressMonitorDialog progress = new ProgressMonitorDialog(getSplash());
+		progress.getProgressMonitor().setTaskName(Messages.InteractiveSplashHandler_8);
+		
 		try {
-			if (AuthenticationUtil.getEimInterfaceAndAuthenticate(serverUrl, mandant,
-					username, password) == null) {
-				MessageDialog
-						.openWarning(
-								getSplash(),
-								"No Server Url specified!",
-								"No Server Url has been specified. Only limited functionality available! Please specify a valid server url.");
-			}
-			return true;
-		} catch (Exception e1) {
+			progress.run(false, false, new IRunnableWithProgress() {
+				@Override
+				public void run(final IProgressMonitor monitor) throws InvocationTargetException,
+						InterruptedException {
+					try {
+						if (AuthenticationUtil.getEimInterfaceAndAuthenticate(serverUrl, mandant,
+								username, password) == null) {
+							MessageDialog
+									.openWarning(
+											getSplash(),
+											Messages.InteractiveSplashHandler_2,
+											Messages.InteractiveSplashHandler_3);
+						}
+					} catch (Exception e) {
+						throw new InvocationTargetException(e);
+					}
+				}
+			});
+		} catch (InvocationTargetException | InterruptedException e) {
 			return false;
 		}
+		return true;
 	}
 	
 	/**
@@ -206,7 +227,7 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 			} catch (Exception e) {
 				// nothing to do -> causes the test field to be empty
 			}
-			password = "";
+			password = ""; //$NON-NLS-1$
 			if (passwordBytes != null) {
 				password = new String(passwordBytes);
 			}
@@ -300,7 +321,7 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 			} catch (Exception e) {
 				// nothing to do -> causes the test field to be empty
 			}
-			String passwordString = "";
+			String passwordString = ""; //$NON-NLS-1$
 			if (passwordBytes != null) {
 				passwordString = new String(passwordBytes);
 			}
@@ -314,7 +335,7 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 	private void createUILabelPassword() {
 		// Create the label
 		Label label = new Label(fCompositeLogin, SWT.NONE);
-		label.setText("&Password:"); //$NON-NLS-1$
+		label.setText(Messages.InteractiveSplashHandler_4); 
 		// Configure layout data
 		GridData data = new GridData();
 		data.horizontalIndent = F_LABEL_HORIZONTAL_INDENT;
@@ -344,7 +365,7 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 	private void createUILabelUserName() {
 		// Create the label
 		Label label = new Label(fCompositeLogin, SWT.NONE);
-		label.setText("&User Name:"); //$NON-NLS-1$
+		label.setText(Messages.InteractiveSplashHandler_5);
 		// Configure layout data
 		GridData data = new GridData();
 		data.horizontalIndent = F_LABEL_HORIZONTAL_INDENT;
@@ -374,7 +395,7 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 	private void createUILabelMandant() {
 		// Create the label
 		Label label = new Label(fCompositeLogin, SWT.NONE);
-		label.setText("Mandant:"); //$NON-NLS-1$
+		label.setText(Messages.InteractiveSplashHandler_6); 
 		// Configure layout data
 		GridData data = new GridData();
 		data.horizontalIndent = F_LABEL_HORIZONTAL_INDENT;
@@ -404,7 +425,7 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 	private void createUILabelServerUrl() {
 		// Create the label
 		Label label = new Label(fCompositeLogin, SWT.NONE);
-		label.setText("Server URL:"); //$NON-NLS-1$
+		label.setText(Messages.InteractiveSplashHandler_7); 
 		// Configure layout data
 		GridData data = new GridData();
 		data.horizontalIndent = F_LABEL_HORIZONTAL_INDENT;

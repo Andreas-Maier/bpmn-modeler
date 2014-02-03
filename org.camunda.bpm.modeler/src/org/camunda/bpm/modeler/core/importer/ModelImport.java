@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.di.DIUtils;
 import org.camunda.bpm.modeler.core.importer.handlers.AbstractDiagramElementHandler;
 import org.camunda.bpm.modeler.core.importer.handlers.AbstractShapeHandler;
@@ -165,14 +166,14 @@ public class ModelImport {
 			EList<EObject> contents = resource.getContents();
 			
 			if (contents.isEmpty()) {
-				throw new ResourceImportException("No document root in resource bundle");
+				throw new ResourceImportException(Messages.ModelImport_0);
 			} else {
 				DocumentRoot documentRoot = (DocumentRoot) contents.get(0);
 				handleDocumentRoot(documentRoot);
 				
 				if (contents.size() > 1) {
 					// TODO: is there a possibility for a resource to have multiple DocumentRoots?
-					InvalidContentException exception = new InvalidContentException("Multiple document roots in resource");
+					InvalidContentException exception = new InvalidContentException(Messages.ModelImport_1);
 					log(exception);
 				}
 			}
@@ -185,7 +186,7 @@ public class ModelImport {
 	protected void handleDocumentRoot(DocumentRoot documentRoot) {
 		Definitions definitions = documentRoot.getDefinitions();
 		if (definitions == null) {
-			throw new InvalidContentException("Document Root has no definitions", documentRoot);
+			throw new InvalidContentException(Messages.ModelImport_2, documentRoot);
 		} else {
 			handleDefinitions(definitions);
 		}
@@ -201,7 +202,7 @@ public class ModelImport {
 				processes.add((Process) rootElement);
 			} else if (rootElement instanceof Collaboration) {
 				if (collaboration != null) {
-					UnsupportedFeatureException exception = new UnsupportedFeatureException("Multiple collaborations not supported. Displaying first one only", definitions);
+					UnsupportedFeatureException exception = new UnsupportedFeatureException(Messages.ModelImport_3, definitions);
 					log(exception);
 				} else {
 					collaboration = (Collaboration) rootElement;
@@ -292,12 +293,12 @@ public class ModelImport {
 		
 		if (collaboration != null) {
 			if (!collaboration.equals(bpmnElement)) {
-				log(new ImportException("BPMNPlane not associated with collaboration"));
+				log(new ImportException(Messages.ModelImport_4));
 			}
 		} else {
 			Process process = processes.get(0);
 			if (!process.equals(bpmnElement)) {
-				log(new ImportException("BPMNPlane not associated with process"));
+				log(new ImportException(Messages.ModelImport_5));
 			}
 		}
 	}
@@ -358,7 +359,7 @@ public class ModelImport {
 		List<Participant> participants = collaboration.getParticipants();
 		
 		if (participants.isEmpty()) {
-			InvalidContentException exception = new InvalidContentException("No participants in collaboration", collaboration);
+			InvalidContentException exception = new InvalidContentException(Messages.ModelImport_6, collaboration);
 			logAndThrow(exception);
 		}
 		
@@ -381,7 +382,7 @@ public class ModelImport {
 		
 		Process process = participant.getProcessRef();
 		if (process != null && process.eIsProxy()) {
-			throw new InvalidContentException("Invalid process referenced by participant", participant);
+			throw new InvalidContentException(Messages.ModelImport_7, participant);
 		}
 		
 		// TODO: process.isIsClosed == !collapsed ?
@@ -442,7 +443,7 @@ public class ModelImport {
 			} else {
 				if (getPictogramElementOrNull(e) == null) {
 					if (e instanceof FlowNode) {
-						log(new UnmappedElementException("element not assigned to lane", e));
+						log(new UnmappedElementException(Messages.ModelImport_8, e));
 					}
 					
 					unreferencedFlowElements.add(e);
@@ -492,7 +493,7 @@ public class ModelImport {
 		
 		List<Lane> lanes = laneSet.getLanes();
 		if (lanes.isEmpty()) {
-			log(new InvalidContentException("LaneSet has no lanes specified", laneSet));
+			log(new InvalidContentException(Messages.ModelImport_9, laneSet));
 		}
 		
 		for (Lane lane: lanes) {
@@ -715,7 +716,7 @@ public class ModelImport {
 			DiagramElement bpmnShape = getDiagramElementMap().remove(dataObject.getId());
 			getDiagramElementMap().put(dataObjectReference.getId(), bpmnShape);
 			
-			log(new AutomaticConversionWarning("DataObjectReference has been inserted for DataObject", dataObject, dataObjectReference));
+			log(new AutomaticConversionWarning(Messages.ModelImport_10, dataObject, dataObjectReference));
 			
 			// render data object reference instead
 			handleDataObjectReference(dataObjectReference, container);
@@ -799,7 +800,7 @@ public class ModelImport {
 		
 		BPMNPlane plane = bpmnDiagram.getPlane();
 		if (plane == null) {
-			throw new InvalidContentException("BPMNDiagram has no BPMNPlane", bpmnDiagram);
+			throw new InvalidContentException(Messages.ModelImport_11, bpmnDiagram);
 		} else {
 			handleDIBpmnPlane(plane);
 		}
@@ -813,7 +814,7 @@ public class ModelImport {
 			if(collaboration == null && processes.size() == 1) {
 				bpmnElement = processes.get(0);
 			}else {
-				throw new UnmappedElementException("BPMNPlane references unexisting bpmnElement", plane);	
+				throw new UnmappedElementException(Messages.ModelImport_12, plane);	
 			}
 		}
 		
@@ -838,7 +839,7 @@ public class ModelImport {
 	protected void handleDIEdge(BPMNEdge diagramElement) {
 		BaseElement bpmnElement = diagramElement.getBpmnElement();
 		if (bpmnElement == null || bpmnElement.eIsProxy()) {
-			ImportException exception = new UnmappedElementException("BPMNEdge references unexisting bpmnElement", diagramElement);
+			ImportException exception = new UnmappedElementException(Messages.ModelImport_13, diagramElement);
 			log(exception);
 		} else {
 			linkInDiagramElementMap(diagramElement, bpmnElement);
@@ -848,7 +849,7 @@ public class ModelImport {
 	protected void handleDIShape(BPMNShape diagramElement) {
 		BaseElement bpmnElement = diagramElement.getBpmnElement();
 		if (bpmnElement == null || bpmnElement.eIsProxy()) {
-			ImportException exception = new UnmappedElementException("BPMNShape references unexisting bpmnElement", diagramElement);
+			ImportException exception = new UnmappedElementException(Messages.ModelImport_14, diagramElement);
 			log(exception);
 		} else {
 			linkInDiagramElementMap(diagramElement, bpmnElement);
@@ -901,7 +902,7 @@ public class ModelImport {
 				XMIException ex = (XMIException) diagnostic;
 				// see if we deal with a xml load error
 				if (ex.getCause() instanceof SAXException) {
-					ImportException e = new ResourceImportException("Failed to load model xml", diagnostic);
+					ImportException e = new ResourceImportException(Messages.ModelImport_15, diagnostic);
 					logAndThrow(e);
 				}
 			}
@@ -909,7 +910,7 @@ public class ModelImport {
 		
 		// log all other warnings
 		for (Diagnostic diagnostic: resourceErrors) {
-			logSilently(new ResourceImportException("Import warning", diagnostic));
+			logSilently(new ResourceImportException(Messages.ModelImport_16, diagnostic));
 		}
 	}
 	
@@ -927,7 +928,7 @@ public class ModelImport {
 	public DiagramElement getDiagramElement(BaseElement bpmnElement) {
 		DiagramElement element = diagramElementMap.get(bpmnElement.getId());
 		if (element == null) {
-			UnmappedElementException exception = new UnmappedElementException("Diagram element not found, element will not be shown", bpmnElement);
+			UnmappedElementException exception = new UnmappedElementException(Messages.ModelImport_17, bpmnElement);
 			log(exception);
 			return null;
 		}
@@ -965,7 +966,7 @@ public class ModelImport {
 	public PictogramElement getPictogramElement(BaseElement node) {
 		PictogramElement element = getPictogramElementOrNull(node);
 		if (element == null) {
-			UnmappedElementException exception = new UnmappedElementException("Container or Pictogram element not yet processed, containment might be invalid", node);
+			UnmappedElementException exception = new UnmappedElementException(Messages.ModelImport_18, node);
 			log(exception);
 			return null;
 		}

@@ -2,6 +2,7 @@ package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
 import org.camunda.bpm.modeler.ui.property.tabs.binding.BaseElementIdComboBinding;
 import org.camunda.bpm.modeler.ui.property.tabs.binding.change.EAttributeChangeSupport;
@@ -41,13 +42,13 @@ public class DecisionGatewayPropertiesBuilder extends AbstractPropertiesBuilder<
 		if (bo instanceof InclusiveGateway) {
 			DEFAULT_FLOW_FEATURE = Bpmn2Package.eINSTANCE.getInclusiveGateway_Default();
 		} else {
-			throw new IllegalArgumentException("Unsupported gateway: " + bo);
+			throw new IllegalArgumentException(Messages.DecisionGatewayPropertiesBuilder_0 + bo);
 		}
 	}
 
 	@Override
 	public void create() {
-		final CCombo dropDown = PropertyUtil.createDropDown(section, parent, "Default Flow");
+		final CCombo dropDown = PropertyUtil.createDropDown(section, parent, Messages.DecisionGatewayPropertiesBuilder_1);
 		
 		// register change support
 		EAttributeChangeSupport.ensureAdded(bo, FLOW_NODE_OUTGOING, dropDown);
@@ -75,7 +76,7 @@ public class DecisionGatewayPropertiesBuilder extends AbstractPropertiesBuilder<
 		updateDropdownLabels(dropDown);
 		
 		if (bo instanceof ExclusiveGateway) {
-			PropertyUtil.createCheckbox(section, parent, "User Decision", CasOpenPackage.eINSTANCE.getDocumentRoot_IsUserInteractable(), bo);
+			PropertyUtil.createCheckbox(section, parent, Messages.DecisionGatewayPropertiesBuilder_2, CasOpenPackage.eINSTANCE.getDocumentRoot_IsUserInteractable(), bo);
 		}
 	}
 	
@@ -116,7 +117,7 @@ public class DecisionGatewayPropertiesBuilder extends AbstractPropertiesBuilder<
 		
 		EObject defaultFlow = (EObject) bo.eGet(DEFAULT_FLOW_FEATURE);
 		
-		dropDown.add("");
+		dropDown.add(""); //$NON-NLS-1$
 		
 		for (SequenceFlow outgoing: flows) {
 			String nodeId = outgoing.getId();

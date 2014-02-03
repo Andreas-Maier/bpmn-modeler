@@ -26,6 +26,7 @@ import org.camunda.bpm.modeler.core.runtime.TargetRuntime;
 import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
 import org.camunda.bpm.modeler.core.utils.GraphicsUtil;
 import org.camunda.bpm.modeler.core.utils.ModelUtil;
+import org.camunda.bpm.modeler.ui.FeatureMap;
 import org.camunda.bpm.modeler.ui.diagram.Bpmn2FeatureProvider;
 import org.eclipse.bpmn2.Activity;
 import org.eclipse.bpmn2.BaseElement;
@@ -76,26 +77,32 @@ public abstract class AbstractAppendNodeNodeFeature<T extends FlowNode> extends 
 	// label provider for the popup menu that displays allowable Activity subclasses
 	private static ILabelProvider labelProvider = new ILabelProvider() {
 
-		public void removeListener(ILabelProviderListener listener) {
+		@Override
+		public void removeListener(final ILabelProviderListener listener) {
 		}
 
-		public boolean isLabelProperty(Object element, String property) {
+		@Override
+		public boolean isLabelProperty(final Object element, final String property) {
 			return false;
 		}
 
+		@Override
 		public void dispose() {
 
 		}
 
-		public void addListener(ILabelProviderListener listener) {
+		@Override
+		public void addListener(final ILabelProviderListener listener) {
 
 		}
 
-		public String getText(Object element) {
+		@Override
+		public String getText(final Object element) {
 			return ModelUtil.toDisplayName(((EClass)element).getName());
 		}
 
-		public Image getImage(Object element) {
+		@Override
+		public Image getImage(final Object element) {
 			return null;
 		}
 
@@ -104,17 +111,17 @@ public abstract class AbstractAppendNodeNodeFeature<T extends FlowNode> extends 
 	/**
 	 * @param fp
 	 */
-	public AbstractAppendNodeNodeFeature(IFeatureProvider fp) {
+	public AbstractAppendNodeNodeFeature(final IFeatureProvider fp) {
 		super(fp);
 	}
 
 	@Override
-	public boolean canExecute(ICustomContext context) {
+	public boolean canExecute(final ICustomContext context) {
 		return true;
 	}
 
 	@Override
-	public boolean isAvailable(IContext context) {
+	public boolean isAvailable(final IContext context) {
 		return true;
 	}
 
@@ -122,7 +129,7 @@ public abstract class AbstractAppendNodeNodeFeature<T extends FlowNode> extends 
 	 * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.graphiti.features.context.ICustomContext)
 	 */
 	@Override
-	public void execute(ICustomContext context) {
+	public void execute(final ICustomContext context) {
 		PictogramElement[] pes = context.getPictogramElements();
 		if (pes != null && pes.length == 1) {
 			PictogramElement pe = pes[0];
@@ -152,15 +159,24 @@ public abstract class AbstractAppendNodeNodeFeature<T extends FlowNode> extends 
 		}
 	}
 	
-	protected EClass selectNewObjectType(EObject oldObject) {
+	protected EClass selectNewObjectType(final EObject oldObject) {
 		ModelEnablementDescriptor enablements = TargetRuntime.getCurrentRuntime().getModelEnablements(oldObject);
 		EClass newType = getBusinessObjectClass();
 
 		// build a list of possible subclasses for the popup menu
+		List<EClass> excludedTypes = new ArrayList<>();
+		excludedTypes.addAll(FeatureMap.EXCLUDE_CONNECTORS);
+		excludedTypes.addAll(FeatureMap.EXCLUDE_DATA);
+		excludedTypes.addAll(FeatureMap.EXCLUDE_EVENT_DEFINITIONS);
+		excludedTypes.addAll(FeatureMap.EXCLUDE_EVENTS);
+		excludedTypes.addAll(FeatureMap.EXCLUDE_GATEWAYS);
+		excludedTypes.addAll(FeatureMap.EXCLUDE_OTHER);
+		excludedTypes.addAll(FeatureMap.EXCLUDE_TASKS);
+		
 		List<EClass> subtypes = new ArrayList<EClass>();
 		for (EClassifier ec : Bpmn2Package.eINSTANCE.getEClassifiers() ) {
 			if (ec instanceof EClass) {
-				if ( ((EClass) ec).isAbstract()) {
+				if ( ((EClass) ec).isAbstract() || excludedTypes.contains(ec)) {
 					continue;
 				}
 				EList<EClass>superTypes = ((EClass)ec).getEAllSuperTypes(); 
@@ -191,7 +207,7 @@ public abstract class AbstractAppendNodeNodeFeature<T extends FlowNode> extends 
 		return null;
 	}
 
-	protected ContainerShape createNewShape(ModelHandler mh, ContainerShape oldShape, EClass newType) {
+	protected ContainerShape createNewShape(final ModelHandler mh, final ContainerShape oldShape, final EClass newType) {
 		ILayoutService layoutService = Graphiti.getLayoutService();
 		boolean horz = Bpmn2Preferences.getInstance().isHorizontalDefault();
 
@@ -286,7 +302,7 @@ public abstract class AbstractAppendNodeNodeFeature<T extends FlowNode> extends 
 		return (ContainerShape) getFeatureProvider().addIfPossible(ac);
 	}
 
-	protected List<Shape> getFlowElementChildren(ContainerShape containerShape) {
+	protected List<Shape> getFlowElementChildren(final ContainerShape containerShape) {
 		List<Shape> children = new ArrayList<Shape>();
 		for (Shape s : containerShape.getChildren()) {
 			FlowElement bo = BusinessObjectUtil.getFirstElementOfType(s, FlowElement.class);
@@ -297,7 +313,7 @@ public abstract class AbstractAppendNodeNodeFeature<T extends FlowNode> extends 
 		return children;
 	}
 	
-	protected Connection createNewConnection(ModelHandler mh, ContainerShape oldShape, ContainerShape newShape) {
+	protected Connection createNewConnection(final ModelHandler mh, final ContainerShape oldShape, final ContainerShape newShape) {
 		
 		Anchor sourceAnchor = LayoutUtil.getCenterAnchor(oldShape);
 		Anchor targetAnchor = LayoutUtil.getCenterAnchor(newShape);
@@ -338,7 +354,7 @@ public abstract class AbstractAppendNodeNodeFeature<T extends FlowNode> extends 
 		return changesDone;
 	}
 	
-	protected final boolean isCompensationBoundaryEvent(ICustomContext context) {
+	protected final boolean isCompensationBoundaryEvent(final ICustomContext context) {
 		PictogramElement[] pictogramElements = context.getPictogramElements();
 		
 		if (pictogramElements == null || pictogramElements.length != 1) {
@@ -352,7 +368,7 @@ public abstract class AbstractAppendNodeNodeFeature<T extends FlowNode> extends 
 		return isCompensationBoundaryEvent(bo);
 	}
 	
-	private boolean isCompensationBoundaryEvent(EObject bo) {
+	private boolean isCompensationBoundaryEvent(final EObject bo) {
 		if (!(bo instanceof BoundaryEvent)) {
 			return false;
 		}

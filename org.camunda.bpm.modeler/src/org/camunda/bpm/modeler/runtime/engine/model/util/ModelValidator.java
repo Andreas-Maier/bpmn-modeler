@@ -131,8 +131,6 @@ public class ModelValidator extends EObjectValidator {
 				return validateValidationType((ValidationType)value, diagnostics, context);
 			case ModelPackage.CONSTRAINT_TYPE:
 				return validateConstraintType((ConstraintType)value, diagnostics, context);
-			case ModelPackage.USER_TASK:
-				return validateUserTask((UserTask)value, diagnostics, context);
 			case ModelPackage.FORM_DATA_CONTAINER:
 				return validateFormDataContainer((FormDataContainer)value, diagnostics, context);
 			case ModelPackage.EVENT_TYPE:
@@ -313,15 +311,6 @@ public class ModelValidator extends EObjectValidator {
 	 */
 	public boolean validateConstraintType(ConstraintType constraintType, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(constraintType, diagnostics, context);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateUserTask(UserTask userTask, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(userTask, diagnostics, context);
 	}
 
 		/**

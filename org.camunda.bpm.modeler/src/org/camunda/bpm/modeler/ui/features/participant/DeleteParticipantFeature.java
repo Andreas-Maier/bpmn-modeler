@@ -15,6 +15,7 @@ package org.camunda.bpm.modeler.ui.features.participant;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.DefaultBpmn2DeleteShapeFeature;
 import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
 import org.camunda.bpm.modeler.core.utils.ModelUtil;
@@ -106,7 +107,7 @@ public class DeleteParticipantFeature extends DefaultBpmn2DeleteShapeFeature {
 					link(getDiagram(), new Object[] { newProcess, newDiagram }); // we need to relink, the old diagram is gone
 				} else {
 					throw new IllegalStateException(
-							"Unable to handle multiple collaborations diagrams.s");
+							Messages.DeleteParticipantFeature_0);
 				}
 
 			}

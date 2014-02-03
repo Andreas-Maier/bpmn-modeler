@@ -12,11 +12,10 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.activity.task;
 
-import org.camunda.bpm.modeler.core.features.activity.ActivityDecorateFeature;
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.activity.task.AbstractCreateTaskFeature;
 import org.camunda.bpm.modeler.core.features.activity.task.AddTaskFeature;
 import org.camunda.bpm.modeler.core.features.api.IDecorateFeature;
-import org.camunda.bpm.modeler.core.utils.GraphicsUtil;
 import org.camunda.bpm.modeler.ui.ImageProvider;
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.UserTask;
@@ -24,31 +23,27 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
-import org.eclipse.graphiti.mm.algorithms.Image;
-import org.eclipse.graphiti.mm.algorithms.Rectangle;
-import org.eclipse.graphiti.services.Graphiti;
-import org.eclipse.graphiti.services.IGaService;
 
 public class UserTaskFeatureContainer extends AbstractTaskFeatureContainer {
 
 	@Override
-	public boolean canApplyTo(Object o) {
+	public boolean canApplyTo(final Object o) {
 		return super.canApplyTo(o) && o instanceof UserTask;
 	}
 
 	@Override
-	public ICreateFeature getCreateFeature(IFeatureProvider fp) {
+	public ICreateFeature getCreateFeature(final IFeatureProvider fp) {
 		return new CreateUserTaskFeature(fp);
 	}
 
 	@Override
-	public IAddFeature getAddFeature(IFeatureProvider fp) {
+	public IAddFeature getAddFeature(final IFeatureProvider fp) {
 		return new AddTaskFeature<UserTask>(fp);
 	}
 	
 
 	@Override
-	public IDecorateFeature getDecorateFeature(IFeatureProvider fp) {
+	public IDecorateFeature getDecorateFeature(final IFeatureProvider fp) {
 		return new AbstractTaskDecorateFeature(fp) {
 			@Override
 			public String getIconId() {
@@ -59,12 +54,9 @@ public class UserTaskFeatureContainer extends AbstractTaskFeatureContainer {
 
 	public static class CreateUserTaskFeature extends AbstractCreateTaskFeature<UserTask> {
 
-		public CreateUserTaskFeature(IFeatureProvider fp) {
-			super(fp, "User Task",
-					"A User Task is a typical \"workflow\" Task where a human"
-					+" performer performs the Task with the assistance of a"
-					+" software application and is scheduled through a modelObject"
-					+" list manager of some sort.");
+		public CreateUserTaskFeature(final IFeatureProvider fp) {
+			super(fp, Messages.UserTaskFeatureContainer_0,
+					Messages.UserTaskFeatureContainer_1);
 		}
 
 		@Override

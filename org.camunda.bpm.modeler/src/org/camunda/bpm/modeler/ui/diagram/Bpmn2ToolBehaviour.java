@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.activity.ActivitySelectionBehavior;
 import org.camunda.bpm.modeler.core.features.api.IBpmn2AddFeature;
 import org.camunda.bpm.modeler.core.features.api.IBpmn2CreateFeature;
@@ -80,7 +81,7 @@ import org.eclipse.graphiti.tb.ImageDecorator;
 
 public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements IFeatureCheckerHolder {
 
-	public Bpmn2ToolBehaviour(Bpmn2DiagramTypeProvider diagramTypeProvider) {
+	public Bpmn2ToolBehaviour(final Bpmn2DiagramTypeProvider diagramTypeProvider) {
 		super(diagramTypeProvider);
 	}
 
@@ -92,7 +93,6 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 	@Override
 	public IPaletteCompartmentEntry[] getPalette() {
 
-		Bpmn2Editor editor = (Bpmn2Editor) getDiagramTypeProvider().getDiagramEditor();
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
 		Object object = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
 
@@ -105,16 +105,16 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 			createGatewaysCompartments(palette);
 			createEventsCompartments(palette);
 			createEventDefinitionsCompartments(palette);
-			createDataCompartments(palette);
+//			createDataCompartments(palette);
 			createOtherCompartments(palette);
 		}
 
 		return palette.toArray(new IPaletteCompartmentEntry[palette.size()]);
 	}
 
-	private void createEventsCompartments(List<IPaletteCompartmentEntry> palette) {
+	private void createEventsCompartments(final List<IPaletteCompartmentEntry> palette) {
 		PaletteCompartmentEntry compartmentEntry = new PaletteCompartmentEntry(
-				"Events", null);
+				Messages.Bpmn2ToolBehaviour_0, null);
 
 		createEntriesForBusinessObjectClasses(FeatureMap.EVENTS, compartmentEntry);
 
@@ -123,9 +123,9 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 		}
 	}
 
-	private void createOtherCompartments(List<IPaletteCompartmentEntry> palette) {
+	private void createOtherCompartments(final List<IPaletteCompartmentEntry> palette) {
 		PaletteCompartmentEntry compartmentEntry = new PaletteCompartmentEntry(
-				"Other", null);
+				Messages.Bpmn2ToolBehaviour_1, null);
 		compartmentEntry.setInitiallyOpen(false);
 
 		createEntriesForBusinessObjectClasses(FeatureMap.OTHER, compartmentEntry);
@@ -135,9 +135,9 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 		}
 	}
 
-	private void createDataCompartments(List<IPaletteCompartmentEntry> palette) {
+	private void createDataCompartments(final List<IPaletteCompartmentEntry> palette) {
 		PaletteCompartmentEntry compartmentEntry = new PaletteCompartmentEntry(
-				"Data Items", null);
+				Messages.Bpmn2ToolBehaviour_2, null);
 		compartmentEntry.setInitiallyOpen(false);
 
 		createEntriesForBusinessObjectClasses(FeatureMap.DATA, compartmentEntry);
@@ -148,9 +148,9 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 	}
 
 	private void createEventDefinitionsCompartments(
-			List<IPaletteCompartmentEntry> palette) {
+			final List<IPaletteCompartmentEntry> palette) {
 		PaletteCompartmentEntry compartmentEntry = new PaletteCompartmentEntry(
-				"Event Definitions", null);
+				Messages.Bpmn2ToolBehaviour_3, null);
 		compartmentEntry.setInitiallyOpen(false);
 
 		createEntriesForBusinessObjectClasses(FeatureMap.EVENT_DEFINITIONS, compartmentEntry);
@@ -161,9 +161,9 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 	}
 
 	private void createGatewaysCompartments(
-			List<IPaletteCompartmentEntry> palette) {
+			final List<IPaletteCompartmentEntry> palette) {
 		PaletteCompartmentEntry compartmentEntry = new PaletteCompartmentEntry(
-				"Gateways", null);
+				Messages.Bpmn2ToolBehaviour_4, null);
 
 		createEntriesForBusinessObjectClasses(FeatureMap.GATEWAYS, compartmentEntry);
 
@@ -172,8 +172,8 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 		}
 	}
 
-	private void createTasksCompartments(List<IPaletteCompartmentEntry> palette) {
-		PaletteCompartmentEntry compartmentEntry = new PaletteCompartmentEntry("Tasks", null);
+	private void createTasksCompartments(final List<IPaletteCompartmentEntry> palette) {
+		PaletteCompartmentEntry compartmentEntry = new PaletteCompartmentEntry(Messages.Bpmn2ToolBehaviour_5, null);
 
 		createEntriesForBusinessObjectClasses(FeatureMap.TASKS, compartmentEntry);
 
@@ -184,9 +184,9 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 		}
 	}
 
-	private void createConnectors(List<IPaletteCompartmentEntry> palette) {
+	private void createConnectors(final List<IPaletteCompartmentEntry> palette) {
 		PaletteCompartmentEntry compartmentEntry = new PaletteCompartmentEntry(
-				"Connectors", null);
+				Messages.Bpmn2ToolBehaviour_6, null);
 
 		createEntriesForBusinessObjectClasses(FeatureMap.CONNECTORS, compartmentEntry);
 
@@ -195,13 +195,13 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 		}
 	}
 
-	private void createCustomEntries(List<IFeature> features, PaletteCompartmentEntry compartmentEntry) {
+	private void createCustomEntries(final List<IFeature> features, final PaletteCompartmentEntry compartmentEntry) {
 		for (IFeature feature : features) {
 			createEntry(feature, compartmentEntry);
 		}
 	}
 	
-	private void createEntriesForBusinessObjectClasses(List<EClass> classes, PaletteCompartmentEntry compartmentEntry) {
+	private void createEntriesForBusinessObjectClasses(final List<EClass> classes, final PaletteCompartmentEntry compartmentEntry) {
 		
 		for (EClass eClass: classes) {
 			IFeature feature = getFeatureProvider().getCreateFeatureForBusinessObject(eClass);
@@ -209,7 +209,7 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 		}
 	}
 
-	private void createEntry(IFeature feature, PaletteCompartmentEntry compartmentEntry) {
+	private void createEntry(final IFeature feature, final PaletteCompartmentEntry compartmentEntry) {
 		if (feature instanceof ICreateFeature) {
 			ICreateFeature cf = (ICreateFeature) feature;
 			
@@ -235,7 +235,7 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 	public IFeatureChecker getFeatureChecker() {
 		return new FeatureCheckerAdapter(false) {
 			@Override
-			public boolean allowAdd(IContext context) {
+			public boolean allowAdd(final IContext context) {
 				return super.allowAdd(context);
 			}
 
@@ -247,7 +247,7 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 	}
 	
 	@Override
-	public boolean equalsBusinessObjects(Object o1, Object o2) {
+	public boolean equalsBusinessObjects(final Object o1, final Object o2) {
 		/** multiInstanceLoopCharacteristics is an extension to an activity
 		  * e.g.
 		  * <bpmn2:serviceTask id="ServiceTask_1" camunda:class="" name="Service Task">
@@ -267,7 +267,7 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 	}
 
 	@Override
-	public GraphicsAlgorithm[] getClickArea(PictogramElement pe) {
+	public GraphicsAlgorithm[] getClickArea(final PictogramElement pe) {
 		if (ActivitySelectionBehavior.canApplyTo(pe)) {
 			return ActivitySelectionBehavior.getClickArea(pe);
 		} else if (EventSelectionBehavior.canApplyTo(pe)) {
@@ -282,7 +282,7 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 	}
 
 	@Override
-	public GraphicsAlgorithm getSelectionBorder(PictogramElement pe) {
+	public GraphicsAlgorithm getSelectionBorder(final PictogramElement pe) {
 		if (ActivitySelectionBehavior.canApplyTo(pe)) {
 			return ActivitySelectionBehavior.getSelectionBorder(pe);
 		} else if (EventSelectionBehavior.canApplyTo(pe)) {
@@ -309,7 +309,7 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 	}
 
 	@Override
-	public IContextButtonPadData getContextButtonPad(IPictogramElementContext context) {
+	public IContextButtonPadData getContextButtonPad(final IPictogramElementContext context) {
 		
 		IContextButtonPadData data = super.getContextButtonPad(context);
 		PictogramElement pe = context.getPictogramElement();
@@ -383,12 +383,12 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 		// 3.c. build a reasonable description for the context button action
 		for (int i = 0; i < names.size(); ++i) {
 			if (description == null)
-				description = "Click and drag to create a\n";
+				description = Messages.Bpmn2ToolBehaviour_7;
 			description += names.get(i);
 			if (i + 2 == names.size())
-				description += " or ";
+				description += Messages.Bpmn2ToolBehaviour_8;
 			else if (i + 1 < names.size())
-				description += ", ";
+				description += Messages.Bpmn2ToolBehaviour_9;
 		}
 		button.setDescription(description);
 
@@ -402,7 +402,7 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 	}
 
 	@Override
-	public void postExecute(IExecutionInfo executionInfo) {
+	public void postExecute(final IExecutionInfo executionInfo) {
 		Bpmn2Editor editor = (Bpmn2Editor) getDiagramTypeProvider().getDiagramEditor();
 		for (IFeatureAndContext fc : executionInfo.getExecutionList()) {
 			IContext context = fc.getContext();
@@ -424,7 +424,7 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 	}
 
 	@Override
-	public IDecorator[] getDecorators(PictogramElement pe) {
+	public IDecorator[] getDecorators(final PictogramElement pe) {
 		List<IDecorator> decorators = new ArrayList<IDecorator>();
 
 		if (LabelUtil.isLabel(pe)) {
@@ -474,16 +474,16 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 	}
 
 	@Override
-	public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
+	public ICustomFeature getDoubleClickFeature(final IDoubleClickContext context) {
 		return new AbstractCustomFeature(getFeatureProvider()) {
 
 			@Override
-			public boolean canExecute(ICustomContext context) {
+			public boolean canExecute(final ICustomContext context) {
 				return true;
 			}
 
 			@Override
-			public void execute(ICustomContext customContext) {
+			public void execute(final ICustomContext customContext) {
 				if (Arrays.asList(customContext.getPictogramElements()).isEmpty()) {
 					return;
 				}

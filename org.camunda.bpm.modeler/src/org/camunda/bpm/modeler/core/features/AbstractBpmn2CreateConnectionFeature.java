@@ -13,6 +13,7 @@
 
 package org.camunda.bpm.modeler.core.features;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.api.IBpmn2CreateFeature;
 import org.camunda.bpm.modeler.core.runtime.ModelEnablementDescriptor;
 import org.camunda.bpm.modeler.core.runtime.TargetRuntime;
@@ -95,7 +96,7 @@ public abstract class AbstractBpmn2CreateConnectionFeature<T extends BaseElement
 
 	@Override
 	public String getCreateDescription() {
-		return "Create " + ModelUtil.toDisplayName( getBusinessObjectClass().getName());
+		return Messages.AbstractBpmn2CreateConnectionFeature_0 + ModelUtil.toDisplayName( getBusinessObjectClass().getName());
 	}
 
 	@Override

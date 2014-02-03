@@ -6,10 +6,7 @@ import java.util.List;
 
 import org.camunda.bpm.modeler.core.utils.ModelUtil;
 import org.eclipse.bpmn2.Bpmn2Package;
-import org.eclipse.bpmn2.CompensateEventDefinition;
 import org.eclipse.bpmn2.ConditionalEventDefinition;
-import org.eclipse.bpmn2.ErrorEventDefinition;
-import org.eclipse.bpmn2.EscalationEventDefinition;
 import org.eclipse.bpmn2.EventDefinition;
 import org.eclipse.bpmn2.MessageEventDefinition;
 import org.eclipse.bpmn2.SignalEventDefinition;
@@ -22,12 +19,12 @@ import org.eclipse.graphiti.features.context.ICustomContext;
 
 public class MorphStartEventFeature extends AbstractMorphEventFeature {
 
-	public MorphStartEventFeature(IFeatureProvider fp) {
+	public MorphStartEventFeature(final IFeatureProvider fp) {
 		super(fp);
 	}
 
 	@Override
-	public boolean canExecute(ICustomContext context) {
+	public boolean canExecute(final ICustomContext context) {
 		if (!super.canExecute(context)) {
 			return false;
 		}
@@ -43,7 +40,7 @@ public class MorphStartEventFeature extends AbstractMorphEventFeature {
 	}
 	
 	@Override
-	public List<MorphOption> getOptions(EObject bo) {
+	public List<MorphOption> getOptions(final EObject bo) {
 		if (!(bo instanceof StartEvent)) {
 			return Collections.emptyList();
 		}
@@ -71,52 +68,52 @@ public class MorphStartEventFeature extends AbstractMorphEventFeature {
 			options.add(newOption);
 		}
 		
-		if (messageDef == null || eventDefinitions.size() > 1) {
-			MorphOption newOption = new MorphEventOption("Message", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getMessageEventDefinition());
-			options.add(newOption);
-		}
+//		if (messageDef == null || eventDefinitions.size() > 1) {
+//			MorphOption newOption = new MorphEventOption("Message", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getMessageEventDefinition());
+//			options.add(newOption);
+//		}
 
 		if (timerDef == null || eventDefinitions.size() > 1) {
 			MorphOption newOption = new MorphEventOption("Timer", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getTimerEventDefinition());
 			options.add(newOption);
 		}
 
-		if (signalDef == null || eventDefinitions.size() > 1) {
-			MorphOption newOption = new MorphEventOption("Signal", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getSignalEventDefinition());
-			options.add(newOption);
-		}
+//		if (signalDef == null || eventDefinitions.size() > 1) {
+//			MorphOption newOption = new MorphEventOption("Signal", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getSignalEventDefinition());
+//			options.add(newOption);
+//		}
 		
 		if (conditionDef == null || eventDefinitions.size() > 1) {
 			MorphOption newOption = new MorphEventOption("Conditional", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getConditionalEventDefinition());
 			options.add(newOption);
 		}
 		
-		if (subProcessContainer != null && subProcessContainer.isTriggeredByEvent()) {
-			
-			EscalationEventDefinition escalationDef = getEventDefinition(EscalationEventDefinition.class, eventDefinitions);
-			
-			if (escalationDef == null || eventDefinitions.size() > 1) {
-				MorphOption newOption = new MorphEventOption("Escalation", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getEscalationEventDefinition());
-				options.add(newOption);				
-			}
-			
-			if (startEvent.isIsInterrupting()) {
-				ErrorEventDefinition errorDef = getEventDefinition(ErrorEventDefinition.class, eventDefinitions);
-				CompensateEventDefinition compensationDef = getEventDefinition(CompensateEventDefinition.class, eventDefinitions);
-				
-				if (errorDef == null || eventDefinitions.size() > 1) {
-					MorphOption newOption = new MorphEventOption("Error", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getErrorEventDefinition());
-					options.add(newOption);				
-				}
-				
-				if (compensationDef == null || eventDefinitions.size() > 1) {
-					MorphOption newOption = new MorphEventOption("Compensate", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getCompensateEventDefinition());
-					options.add(newOption);				
-				}				
-				
-			}
-			
-		}
+//		if (subProcessContainer != null && subProcessContainer.isTriggeredByEvent()) {
+//			
+//			EscalationEventDefinition escalationDef = getEventDefinition(EscalationEventDefinition.class, eventDefinitions);
+//			
+//			if (escalationDef == null || eventDefinitions.size() > 1) {
+//				MorphOption newOption = new MorphEventOption("Escalation", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getEscalationEventDefinition());
+//				options.add(newOption);				
+//			}
+//			
+//			if (startEvent.isIsInterrupting()) {
+//				ErrorEventDefinition errorDef = getEventDefinition(ErrorEventDefinition.class, eventDefinitions);
+//				CompensateEventDefinition compensationDef = getEventDefinition(CompensateEventDefinition.class, eventDefinitions);
+//				
+//				if (errorDef == null || eventDefinitions.size() > 1) {
+//					MorphOption newOption = new MorphEventOption("Error", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getErrorEventDefinition());
+//					options.add(newOption);				
+//				}
+//				
+//				if (compensationDef == null || eventDefinitions.size() > 1) {
+//					MorphOption newOption = new MorphEventOption("Compensate", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getCompensateEventDefinition());
+//					options.add(newOption);				
+//				}				
+//				
+//			}
+//			
+//		}
 		return options;
 	}
 

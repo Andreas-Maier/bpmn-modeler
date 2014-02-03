@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.gateway;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.api.IDecorateFeature;
 import org.camunda.bpm.modeler.core.features.gateway.AbstractCreateGatewayFeature;
 import org.camunda.bpm.modeler.core.features.gateway.AddGatewayFeature;
@@ -59,7 +60,7 @@ public class ParallelGatewayFeatureContainer extends AbstractGatewayFeatureConta
 	public static class CreateParallelGatewayFeature extends AbstractCreateGatewayFeature<ParallelGateway> {
 
 		public CreateParallelGatewayFeature(IFeatureProvider fp) {
-			super(fp, "Parallel Gateway", "Used to combine or create parallel flows");
+			super(fp, Messages.ParallelGatewayFeatureContainer_0, Messages.ParallelGatewayFeatureContainer_1);
 		}
 
 		@Override

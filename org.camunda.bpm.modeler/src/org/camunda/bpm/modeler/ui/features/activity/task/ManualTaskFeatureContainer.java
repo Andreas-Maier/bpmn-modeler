@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.activity.task;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.activity.task.AbstractCreateTaskFeature;
 import org.camunda.bpm.modeler.core.features.activity.task.AddTaskFeature;
 import org.camunda.bpm.modeler.core.features.api.IDecorateFeature;
@@ -53,8 +54,8 @@ public class ManualTaskFeatureContainer extends AbstractTaskFeatureContainer {
 	public static class CreateManualTaskFeature extends AbstractCreateTaskFeature<ManualTask> {
 
 		public CreateManualTaskFeature(IFeatureProvider fp) {
-			super(fp, "Manual Task",
-					"Task that is expected to perform without the aid of any business process execution activiti or any application");
+			super(fp, Messages.ManualTaskFeatureContainer_0,
+					Messages.ManualTaskFeatureContainer_1);
 		}
 
 		@Override

@@ -10,6 +10,7 @@
 
 package org.camunda.bpm.modeler.core.importer.handlers;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.importer.ImportException;
 import org.camunda.bpm.modeler.core.importer.InvalidContentException;
 import org.camunda.bpm.modeler.core.importer.ModelImport;
@@ -41,14 +42,14 @@ public class MessageFlowShapeHandler extends AbstractEdgeHandler<MessageFlow> {
 			source = bpmnElement.getSourceRef();
 			
 		} catch (ClassCastException e) {
-			modelImport.log(new InvalidContentException("Invalid source referenced, not displaying message flow", bpmnElement));
+			modelImport.log(new InvalidContentException(Messages.MessageFlowShapeHandler_0, bpmnElement));
 			return null;
 		}
 
 		try {
 			target = bpmnElement.getTargetRef();
 		} catch (ClassCastException e) {
-			modelImport.log(new InvalidContentException("Invalid target referenced, not displaying message flow", bpmnElement));
+			modelImport.log(new InvalidContentException(Messages.MessageFlowShapeHandler_1, bpmnElement));
 			return null;
 		}
 		
@@ -59,7 +60,7 @@ public class MessageFlowShapeHandler extends AbstractEdgeHandler<MessageFlow> {
 			Connection connection = createConnectionAndSetBendpoints(edge, sourcePictogram, targetPictogram);
 			return connection;
 		}else {
-			modelImport.log(new ImportException("Source or target invalid", edge));
+			modelImport.log(new ImportException(Messages.MessageFlowShapeHandler_2, edge));
 			return null;
 		}
 

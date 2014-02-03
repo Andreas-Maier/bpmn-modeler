@@ -783,7 +783,7 @@ public interface DocumentRoot extends org.eclipse.bpmn2.DocumentRoot {
 	 * @see #setClientOperation(ClientOperation)
 	 * @see org.camunda.bpm.modeler.runtime.engine.model.ModelPackage#getDocumentRoot_ClientOperation()
 	 * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
-	 *        extendedMetaData="kind='element' name='clientOperation' namespace='http://www.cas.de/open'"
+	 *        extendedMetaData="kind='element' name='operation' namespace='http://www.cas.de/open'"
 	 * @generated
 	 */
 	ClientOperation getClientOperation();
@@ -810,7 +810,7 @@ public interface DocumentRoot extends org.eclipse.bpmn2.DocumentRoot {
 	 * @see #setServiceOperation(ServiceOperation)
 	 * @see org.camunda.bpm.modeler.runtime.engine.model.ModelPackage#getDocumentRoot_ServiceOperation()
 	 * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
-	 *        extendedMetaData="kind='element' name='serviceOperation' namespace='http://www.cas.de/open'"
+	 *        extendedMetaData="kind='element' name='operation' namespace='http://www.cas.de/open'"
 	 * @generated
 	 */
 	ServiceOperation getServiceOperation();

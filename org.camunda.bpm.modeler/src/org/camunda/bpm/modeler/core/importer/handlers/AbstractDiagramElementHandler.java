@@ -10,6 +10,7 @@
 
 package org.camunda.bpm.modeler.core.importer.handlers;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.importer.ImportException;
 import org.camunda.bpm.modeler.core.importer.ModelImport;
 import org.camunda.bpm.modeler.core.importer.UnmappedElementException;
@@ -57,7 +58,7 @@ public abstract class AbstractDiagramElementHandler<T extends BaseElement> {
 			return modelImport.getPictogramElement((BaseElement) node);
 		} else {
 			// Must be a unresolvable proxy
-			modelImport.logAndThrow(new UnmappedElementException("Failed to resolve element"));
+			modelImport.logAndThrow(new UnmappedElementException(Messages.AbstractDiagramElementHandler_0));
 			return null;
 		}
 	}
@@ -79,7 +80,7 @@ public abstract class AbstractDiagramElementHandler<T extends BaseElement> {
 		}
 		
 		if (node.eIsProxy()) {
-			modelImport.logAndThrow(new UnmappedElementException("Failed to resolve proxy: " + node));
+			modelImport.logAndThrow(new UnmappedElementException(Messages.AbstractDiagramElementHandler_1 + node));
 		}
 		
 		return node;

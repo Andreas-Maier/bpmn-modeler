@@ -10,6 +10,7 @@
 
 package org.camunda.bpm.modeler.core.importer;
 
+import org.camunda.bpm.modeler.Messages;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 
 
@@ -35,6 +36,6 @@ public class ResourceImportException extends ImportException {
 
 	@Override
 	public String getMessage() {
-		return super.getMessage() + " : " + diagnostic.toString();
+		return super.getMessage() + Messages.ResourceImportException_0 + diagnostic.toString();
 	}
 }

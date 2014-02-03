@@ -1,5 +1,6 @@
 package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
 import org.eclipse.bpmn2.Task;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
@@ -14,9 +15,9 @@ public class AdvancedServiceTaskPropertiesBuilder extends AbstractExtensionAware
 	
 	@Override
 	public void create() {
-		final Text text = PropertyUtil.createUnboundText(section, parent, "Service Operation");
+		final Text text = PropertyUtil.createUnboundText(section, parent, Messages.AdvancedServiceTaskPropertiesBuilder_0);
 		
-		addConfigureOperationButton(text, "Configure Service Operation");
+		addConfigureOperationButton(text, Messages.AdvancedServiceTaskPropertiesBuilder_1);
 		text.setEnabled(false);
 	}
 }

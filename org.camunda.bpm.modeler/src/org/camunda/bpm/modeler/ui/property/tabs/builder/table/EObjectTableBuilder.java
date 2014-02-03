@@ -8,12 +8,12 @@ import org.camunda.bpm.modeler.ui.property.tabs.binding.change.EObjectChangeSupp
 import org.camunda.bpm.modeler.ui.property.tabs.tables.EObjectAttributeTableColumnDescriptor;
 import org.camunda.bpm.modeler.ui.property.tabs.tables.EObjectAttributeTableColumnDescriptor.EditingSupportProvider;
 import org.camunda.bpm.modeler.ui.property.tabs.tables.EditableTableDescriptor;
+import org.camunda.bpm.modeler.ui.property.tabs.tables.EditableTableDescriptor.CellEditingStrategy;
 import org.camunda.bpm.modeler.ui.property.tabs.tables.EditableTableDescriptor.ElementFactory;
 import org.camunda.bpm.modeler.ui.property.tabs.tables.TableColumnDescriptor;
 import org.camunda.bpm.modeler.ui.property.tabs.util.Events;
 import org.camunda.bpm.modeler.ui.property.tabs.util.Events.DeleteRow;
 import org.camunda.bpm.modeler.ui.property.tabs.util.Events.RowDeleted;
-import org.camunda.bpm.modeler.ui.property.tabs.util.HelpText;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -53,55 +53,55 @@ public class EObjectTableBuilder<T extends EObject> {
 	
 	protected Class<T> genericTypeCls;
 	
-	public EObjectTableBuilder(GFPropertySection section, Composite parent, Class<T> genericTypeCls) {
+	public EObjectTableBuilder(final GFPropertySection section, final Composite parent, final Class<T> genericTypeCls) {
 		this.section = section;
 		this.parent = parent;
 		
 		this.genericTypeCls = genericTypeCls;
 	}
 	
-	public EObjectTableBuilder<T> deleteRowHandler(DeleteRowHandler<T> deleteRowHandler) {
+	public EObjectTableBuilder<T> deleteRowHandler(final DeleteRowHandler<T> deleteRowHandler) {
 		this.deleteRowHandler = deleteRowHandler;
 		
 		return this;
 	}
 	
-	public EObjectTableBuilder<T> selectedRowHandler(SelectedRowHandler<T> selectHandler) {
+	public EObjectTableBuilder<T> selectedRowHandler(final SelectedRowHandler<T> selectHandler) {
 		this.selectHandler = selectHandler;
 		
 		return this;
 	}
 
-	public EObjectTableBuilder<T> addedRowHandler(AddedRowHandler<T> addHandler) {
+	public EObjectTableBuilder<T> addedRowHandler(final AddedRowHandler<T> addHandler) {
 		this.addHandler = addHandler;
 		
 		return this;
 	}
 	
-	public EObjectTableBuilder<T> elementFactory(ElementFactory<T> elementFactory) {
+	public EObjectTableBuilder<T> elementFactory(final ElementFactory<T> elementFactory) {
 		this.elementFactory = elementFactory;
 		return this;
 	}
 
-	public EObjectTableBuilder<T> columnFeatures(EStructuralFeature ... columnFeatures) {
+	public EObjectTableBuilder<T> columnFeatures(final EStructuralFeature ... columnFeatures) {
 		this.columnFeatures = columnFeatures;
 		
 		return this;
 	}
 
-	public EObjectTableBuilder<T> columnLabels(String ... columnLabels) {
+	public EObjectTableBuilder<T> columnLabels(final String ... columnLabels) {
 		this.columnLabels = columnLabels;
 		
 		return this;
 	}
 
-	public EObjectTableBuilder<T> model(EObject model) {
+	public EObjectTableBuilder<T> model(final EObject model) {
 		this.model = model;
 		
 		return this;
 	}
 
-	public EObjectTableBuilder<T> editingSupportProvider(EditingSupportProvider editingSupportProvider) {
+	public EObjectTableBuilder<T> editingSupportProvider(final EditingSupportProvider editingSupportProvider) {
 		this.editingSupportProvider = editingSupportProvider;
 		
 		return this;
@@ -109,12 +109,16 @@ public class EObjectTableBuilder<T extends EObject> {
 	
 	protected EditableTableDescriptor<T> createTableDescriptor() {
 		EditableTableDescriptor<T> tableDescriptor = new EditableTableDescriptor<T>();
-		tableDescriptor.setElementFactory(elementFactory);
-		
+		if (elementFactory != null) {
+			tableDescriptor.setElementFactory(elementFactory);
+		} else {
+			tableDescriptor.setCellEditingStrategy(CellEditingStrategy.NO_EDIT);
+			tableDescriptor.setElementFactory(elementFactory);
+		}
 		return tableDescriptor;
 	}
 	
-	protected EObjectAttributeTableColumnDescriptor<T> createAttributeTableColumnDescriptor(EStructuralFeature columnFeature, String columnLabel, int weight) {
+	protected EObjectAttributeTableColumnDescriptor<T> createAttributeTableColumnDescriptor(final EStructuralFeature columnFeature, final String columnLabel, final int weight) {
 		EObjectAttributeTableColumnDescriptor<T> columnDescriptor = new EObjectAttributeTableColumnDescriptor<T>(columnFeature, columnLabel, 30);
 		columnDescriptor.setEditingSupportProvider(editingSupportProvider);
 		
@@ -170,7 +174,7 @@ public class EObjectTableBuilder<T extends EObject> {
 		return tableViewer;
 	}
 
-	protected void establishModelViewBinding(EObject model, final TableViewer tableViewer) {
+	protected void establishModelViewBinding(final EObject model, final TableViewer tableViewer) {
 		
 		Table table = tableViewer.getTable();
 		
@@ -178,39 +182,40 @@ public class EObjectTableBuilder<T extends EObject> {
 		changeSupport.setFilter(changeFilter);
 		changeSupport.register();
 
-		table.addListener(Events.DELETE_ROW, new Listener() {
-			@Override
-			public void handleEvent(Event e) {
-				Events.DeleteRow<T> event = (DeleteRow<T>) e;
-
-				T removedElement = event.getRemovedElement();
-
-				if (deleteRowHandler != null) {
-					boolean canDelete = deleteRowHandler.canDelete(removedElement);
-					if (!canDelete) {
-						event.setRejected();
+		if (deleteRowHandler != null) {
+			table.addListener(Events.DELETE_ROW, new Listener() {
+				@Override
+				public void handleEvent(final Event e) {
+					Events.DeleteRow<T> event = (DeleteRow<T>) e;
+	
+					T removedElement = event.getRemovedElement();
+	
+					if (deleteRowHandler != null) {
+						boolean canDelete = deleteRowHandler.canDelete(removedElement);
+						if (!canDelete) {
+							event.setRejected();
+						}
 					}
 				}
-			}
-		});
-
-		table.addListener(Events.ROW_DELETED, new Listener() {
-
-			@Override
-			public void handleEvent(Event e) {
-				Events.RowDeleted<T> event = (RowDeleted<T>) e;
-				
-				T removedElement = event.getRemovedElement();
-
-				if (deleteRowHandler != null) {
-					deleteRowHandler.rowDeleted(removedElement);
-				}
-			}
-		});
+			});
 		
+			table.addListener(Events.ROW_DELETED, new Listener() {
+	
+				@Override
+				public void handleEvent(final Event e) {
+					Events.RowDeleted<T> event = (RowDeleted<T>) e;
+					
+					T removedElement = event.getRemovedElement();
+	
+					if (deleteRowHandler != null) {
+						deleteRowHandler.rowDeleted(removedElement);
+					}
+				}
+			});
+		}
 		tableViewer.addPostSelectionChangedListener(new ISelectionChangedListener() {
 			@Override
-			public void selectionChanged(SelectionChangedEvent event) {
+			public void selectionChanged(final SelectionChangedEvent event) {
 				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 				T element = (T) selection.getFirstElement();
 				
@@ -223,14 +228,14 @@ public class EObjectTableBuilder<T extends EObject> {
 		table.addListener(Events.MODEL_CHANGED, new Listener() {
 
 			@Override
-			public void handleEvent(Event e) {
+			public void handleEvent(final Event e) {
 				ModelChangedEvent event = (ModelChangedEvent) e;
 				updateViewerContents(tableViewer);
 			}
 		});
 	}
 
-	protected void updateViewerContents(TableViewer viewer) {
+	protected void updateViewerContents(final TableViewer viewer) {
 		List<T> contents = contentProvider.getContents();
 		
 		viewer.setInput(contents);
@@ -242,17 +247,17 @@ public class EObjectTableBuilder<T extends EObject> {
 	 * 
 	 * @param tableViewer
 	 */
-	protected void configureViewer(TableViewer tableViewer) {
+	protected void configureViewer(final TableViewer tableViewer) {
 		
 	}
 
-	public EObjectTableBuilder<T> changeFilter(NotificationFilter changeFilter) {
+	public EObjectTableBuilder<T> changeFilter(final NotificationFilter changeFilter) {
 		this.changeFilter = changeFilter;
 		
 		return this;
 	}
 	
-	public EObjectTableBuilder<T> contentProvider(ContentProvider<T> contentProvider) {
+	public EObjectTableBuilder<T> contentProvider(final ContentProvider<T> contentProvider) {
 		this.contentProvider = contentProvider;
 		return this;
 	}
@@ -265,7 +270,7 @@ public class EObjectTableBuilder<T extends EObject> {
 		
 		tableComposite.setLayoutData(tableCompositeFormData);
 
-		PropertyUtil.attachNote(tableComposite, HelpText.TABLE_HELP);
+//		PropertyUtil.attachNote(tableComposite, HelpText.TABLE_HELP);
 		
 		return tableComposite;
 	}
@@ -286,7 +291,7 @@ public class EObjectTableBuilder<T extends EObject> {
 	public static abstract class AbstractDeleteRowHandler<T> implements DeleteRowHandler<T> {
 
 		@Override
-		public boolean canDelete(T element) {
+		public boolean canDelete(final T element) {
 			return true;
 		}
 	}

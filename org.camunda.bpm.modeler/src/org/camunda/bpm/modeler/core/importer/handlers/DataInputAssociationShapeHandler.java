@@ -12,6 +12,7 @@ package org.camunda.bpm.modeler.core.importer.handlers;
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.importer.InvalidContentException;
 import org.camunda.bpm.modeler.core.importer.ModelImport;
 import org.camunda.bpm.modeler.core.importer.UnmappedElementException;
@@ -41,11 +42,11 @@ public class DataInputAssociationShapeHandler extends DataAssociationShapeHandle
 		List<ItemAwareElement> sourceRefs = bpmnElement.getSourceRef();
 		
 		if (sourceRefs == null || sourceRefs.isEmpty()) {
-			modelImport.logAndThrow(new InvalidContentException("No source references specified", bpmnElement));
+			modelImport.logAndThrow(new InvalidContentException(Messages.DataInputAssociationShapeHandler_0, bpmnElement));
 		}
 		
 		if (sourceRefs.size() > 1) {
-			modelImport.log(new UnsupportedFeatureException("Multiple source references", bpmnElement));
+			modelImport.log(new UnsupportedFeatureException(Messages.DataInputAssociationShapeHandler_1, bpmnElement));
 		}
 		
 		ItemAwareElement sourceRef = sourceRefs.get(0);
@@ -59,7 +60,7 @@ public class DataInputAssociationShapeHandler extends DataAssociationShapeHandle
 		ItemAwareElement targetRef = bpmnElement.getTargetRef();
 
 		if (targetRef != null) {
-			modelImport.log(new UnsupportedFeatureException("Target reference not supported", bpmnElement));
+			modelImport.log(new UnsupportedFeatureException(Messages.DataInputAssociationShapeHandler_2, bpmnElement));
 		}
 		
 		PictogramElement sourcePictogram = resolvePictogramElement((EObject) sourceRef);
@@ -68,7 +69,7 @@ public class DataInputAssociationShapeHandler extends DataAssociationShapeHandle
 		PictogramElement targetPictogram = getPictogramElement(bpmnElement.eContainer());
 		
 		if (sourcePictogram == null) {
-			modelImport.logAndThrow(new UnmappedElementException("Could not resolve", sourceRef));
+			modelImport.logAndThrow(new UnmappedElementException(Messages.DataInputAssociationShapeHandler_3, sourceRef));
 		}
 		
 		Connection connection = createConnectionAndSetBendpoints(edge, sourcePictogram, targetPictogram);

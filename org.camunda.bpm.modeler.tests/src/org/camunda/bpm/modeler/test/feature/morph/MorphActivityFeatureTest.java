@@ -263,7 +263,7 @@ public class MorphActivityFeatureTest extends AbstractFeatureTest {
 		shouldContainRightOptions("CallActivity_1");
 	}
 	
-	private void shouldContainRightOptions(String elementId) {
+	private void shouldContainRightOptions(final String elementId) {
 		Activity activity = (Activity) Util.findBusinessObjectById(diagram, elementId);
 		Shape shape = Util.findShapeByBusinessObjectId(diagram, elementId);
 		
@@ -282,10 +282,10 @@ public class MorphActivityFeatureTest extends AbstractFeatureTest {
 		}
 	}
 	
-	private List<EClass> getExpectedList(EClass cls) {
+	private List<EClass> getExpectedList(final EClass cls) {
 		EClass taskClass = Bpmn2Package.eINSTANCE.getTask();
 		EClass manualTaskClass = Bpmn2Package.eINSTANCE.getManualTask();
-		EClass userTaskClass = ModelPackage.eINSTANCE.getUserTask();
+		EClass userTaskClass = Bpmn2Package.eINSTANCE.getUserTask();
 		EClass scriptTaskClass = Bpmn2Package.eINSTANCE.getScriptTask();
 		EClass businessRuleTaskClass = Bpmn2Package.eINSTANCE.getBusinessRuleTask();
 		EClass serviceTaskClass = Bpmn2Package.eINSTANCE.getServiceTask();

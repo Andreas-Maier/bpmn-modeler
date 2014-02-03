@@ -13,6 +13,7 @@ package org.camunda.bpm.modeler.core.importer;
 import java.util.Collections;
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.eclipse.bpmn2.util.Bpmn2Resource;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -45,7 +46,7 @@ public class ModelImportCommand extends RecordingCommand {
 		} catch (ImportException e) {
 			recordedException = e;
 		} catch (Exception e) {
-			recordedException = new ImportException("Unhandled exception during import", e);
+			recordedException = new ImportException(Messages.ModelImportCommand_0, e);
 			modelImport.log(recordedException);
 		}
 	}

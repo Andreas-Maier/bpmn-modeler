@@ -46,7 +46,7 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 	
 	private ElementFactory<T> elementFactory;
 	
-	public void setElementFactory(ElementFactory<T> elementFactory) {
+	public void setElementFactory(final ElementFactory<T> elementFactory) {
 		this.elementFactory = elementFactory;
 	}
 
@@ -54,7 +54,7 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 	 * Sets the strategy to edit the table
 	 * @param strategy
 	 */
-	public void setCellEditingStrategy(CellEditingStrategy strategy) {
+	public void setCellEditingStrategy(final CellEditingStrategy strategy) {
 		if (strategy == null) {
 			throw new IllegalArgumentException("strategy may not be null");
 		}
@@ -66,7 +66,7 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 	 * Sets the strategy to edit the table
 	 * @param strategy
 	 */
-	public void setPostAddAction(PostAddAction postAddAction) {
+	public void setPostAddAction(final PostAddAction postAddAction) {
 		if (postAddAction == null) {
 			throw new IllegalArgumentException("post add action may not be null");
 		}
@@ -83,12 +83,14 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 	}
 	
 	@Override
-	public void configureViewer(TableViewer viewer) {
+	public void configureViewer(final TableViewer viewer) {
 		super.configureViewer(viewer);
 		
-		addEditingCapabilities(viewer);
-		addAddCapability(viewer);
-		addMenu(viewer);
+		if (cellEditingStrategy != CellEditingStrategy.NO_EDIT) {
+			addEditingCapabilities(viewer);
+			addAddCapability(viewer);
+			addMenu(viewer);
+		}
 	}
 	
 	/**
@@ -105,12 +107,12 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 		viewer.getTable().addKeyListener(new KeyListener() {
 			
 			@Override
-			public void keyReleased(KeyEvent e) {
+			public void keyReleased(final KeyEvent e) {
 				
 			}
 			
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(final KeyEvent e) {
 				if (!viewer.isCellEditorActive()) {
 					if (e.character == SWT.CR) {
 					    Table table = viewer.getTable();
@@ -127,7 +129,7 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 		});
 	}
 
-	protected AddStrategy<T> createAddStrategy(TableViewer viewer, ElementFactory<T> elementFactory) {
+	protected AddStrategy<T> createAddStrategy(final TableViewer viewer, final ElementFactory<T> elementFactory) {
 		switch (postAddAction) {
 		case EDIT:
 			return new AddAndEditStrategy<T>(viewer, elementFactory);
@@ -159,7 +161,7 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			
 			@Override
-			public void selectionChanged(SelectionChangedEvent event) {
+			public void selectionChanged(final SelectionChangedEvent event) {
 				ISelection selection = event.getSelection();
 
 				deleteEntryMenuItem.setEnabled(!selection.isEmpty());
@@ -168,7 +170,8 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 		});
 		
 		deleteEntryMenuItem.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event event) {
+			@Override
+			public void handleEvent(final Event event) {
 				IStructuredSelection selection = (IStructuredSelection) viewer.getSelection();
 				if (!selection.isEmpty()) {
 					Object element = selection.getFirstElement();
@@ -193,7 +196,8 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 		});
 
 		addEntryMenuItem.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event event) {
+			@Override
+			public void handleEvent(final Event event) {
 				if (addStrategy != null) {
 					addStrategy.performAdd();
 				}
@@ -207,7 +211,7 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 	 * Adds editing capabilities to the viewer
 	 * @param viewer
 	 */
-	protected void addEditingCapabilities(TableViewer viewer) {
+	protected void addEditingCapabilities(final TableViewer viewer) {
 
 		ColumnViewerEditorActivationStrategy activationStrategy;
 		
@@ -261,7 +265,7 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 		protected TableViewer viewer;
 		protected ElementFactory<T> factory;
 		
-		public DefaultAddStrategy(TableViewer viewer, ElementFactory<T> factory) {
+		public DefaultAddStrategy(final TableViewer viewer, final ElementFactory<T> factory) {
 			this.viewer = viewer;
 			this.factory = factory;
 		}
@@ -283,7 +287,7 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 	 */
 	private static class AddAndEditStrategy<T> extends DefaultAddStrategy<T> {
 		
-		public AddAndEditStrategy(TableViewer viewer, ElementFactory<T> factory) {
+		public AddAndEditStrategy(final TableViewer viewer, final ElementFactory<T> factory) {
 			super(viewer, factory);
 		}
 		
@@ -310,7 +314,7 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 	 */
 	private static class AddAndFocusStrategy<T> extends DefaultAddStrategy<T> {
 		
-		public AddAndFocusStrategy(TableViewer viewer, ElementFactory<T> factory) {
+		public AddAndFocusStrategy(final TableViewer viewer, final ElementFactory<T> factory) {
 			super(viewer, factory);
 		}
 		
@@ -337,12 +341,12 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 	 */
 	private static class NoActivationStrategy extends ColumnViewerEditorActivationStrategy {
 
-		public NoActivationStrategy(ColumnViewer viewer) {
+		public NoActivationStrategy(final ColumnViewer viewer) {
 			super(viewer);
 		}
 		
 		@Override
-		protected boolean isEditorActivationEvent(ColumnViewerEditorActivationEvent event) {
+		protected boolean isEditorActivationEvent(final ColumnViewerEditorActivationEvent event) {
 			return false;
 		}
 	}
@@ -354,7 +358,7 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 	 */
 	private static class DoubleClickActivationStrategy extends ColumnViewerEditorActivationStrategy {
 		
-		public DoubleClickActivationStrategy(ColumnViewer viewer) {
+		public DoubleClickActivationStrategy(final ColumnViewer viewer) {
 			super(viewer);
 		}
 
@@ -363,7 +367,8 @@ public class EditableTableDescriptor<T> extends TableDescriptor<T> {
 		 *            the event triggering the action
 		 * @return <code>true</code> if this event should open the editor
 		 */
-		protected boolean isEditorActivationEvent(ColumnViewerEditorActivationEvent event) {
+		@Override
+		protected boolean isEditorActivationEvent(final ColumnViewerEditorActivationEvent event) {
 			
 			boolean singleSelect = ((IStructuredSelection)getViewer().getSelection()).size() == 1;
 			boolean isLeftMouseSelect = event.eventType == ColumnViewerEditorActivationEvent.MOUSE_DOUBLE_CLICK_SELECTION && ((MouseEvent)event.sourceEvent).button == 1;

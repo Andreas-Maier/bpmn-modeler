@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.AbstractBpmn2CreateFeature;
 import org.camunda.bpm.modeler.core.features.DefaultBpmn2MoveShapeFeature;
 import org.camunda.bpm.modeler.core.features.activity.MoveActivityFeature;
@@ -63,7 +64,7 @@ public class CreateParticipantFeature extends AbstractBpmn2CreateFeature<Partici
 	private static final int marginX = 40;
 	
 	public CreateParticipantFeature(final IFeatureProvider fp) {
-	    super(fp, "Pool", "Container for partitioning a set of activities");
+	    super(fp, Messages.CreateParticipantFeature_0, Messages.CreateParticipantFeature_1);
     }
 
 	@Override
@@ -80,7 +81,7 @@ public class CreateParticipantFeature extends AbstractBpmn2CreateFeature<Partici
 		BPMNDiagram bpmnDiagram = BusinessObjectUtil.getFirstElementOfType(context.getTargetContainer(), BPMNDiagram.class);
 		
 		if (bpmnDiagram == null) {
-			throw new IllegalStateException("Target container not linked to BPMNDiagram");
+			throw new IllegalStateException(Messages.CreateParticipantFeature_2);
 		}
 		
 		Definitions definitions = (Definitions) bpmnDiagram.eContainer();
@@ -88,7 +89,7 @@ public class CreateParticipantFeature extends AbstractBpmn2CreateFeature<Partici
 		Participant newParticipant;
 
 		if (rootElement == null) {
-			throw new IllegalStateException("Diagram not liked to Process or Collaboration");
+			throw new IllegalStateException(Messages.CreateParticipantFeature_3);
 		} else
 		
 		// existing collaboration?
@@ -111,10 +112,10 @@ public class CreateParticipantFeature extends AbstractBpmn2CreateFeature<Partici
 			link(diagram, new Object[] { newCollaboration, bpmnDiagram });
 			
 			// create graphiti representation
-			newParticipant.setName("Pool ohne Namen");
+			newParticipant.setName(Messages.CreateParticipantFeature_4);
 			createGraphitiRepresentation(context, newParticipant);
 		} else {
-			throw new IllegalStateException("Diagram liked to unrecognized element: " + rootElement);
+			throw new IllegalStateException(Messages.CreateParticipantFeature_5 + rootElement);
 		}
 		
 		ScrollUtil.addScrollShape(getDiagram());

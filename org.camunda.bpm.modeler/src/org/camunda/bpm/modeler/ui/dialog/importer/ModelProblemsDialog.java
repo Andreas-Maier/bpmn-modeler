@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.importer.ImportException;
 import org.camunda.bpm.modeler.ui.util.Browser;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -55,14 +56,14 @@ public class ModelProblemsDialog extends TitleAreaDialog {
 	private ImportException exception;
 	private List<ImportException> warnings;
 
-	private static final String FILE_BUG_REPORTS_LINK = "https://app.camunda.com/jira/secure/CreateIssue.jspa?pid=10111&issuetype=1&Create=Create";
+	private static final String FILE_BUG_REPORTS_LINK = "https://app.camunda.com/jira/secure/CreateIssue.jspa?pid=10111&issuetype=1&Create=Create"; //$NON-NLS-1$
 
-	private static final String FILE_BUG_REPORTS_NOTES = "If you exported this diagram from another modeling tool, "
-			+ "the cause of this problem may be related to "
-			+ "the export functionality of that tool. If not, please file a <a href=\"" + FILE_BUG_REPORTS_LINK
-			+ "\">bug report</a>.";
+	private static final String FILE_BUG_REPORTS_NOTES = Messages.ModelProblemsDialog_1
+			+ Messages.ModelProblemsDialog_2
+			+ Messages.ModelProblemsDialog_3 + FILE_BUG_REPORTS_LINK
+			+ Messages.ModelProblemsDialog_4;
 
-	private static final String DETAILS_NOTES = "Refer to the error log for details or use the context menu to copy the stack traces of an issue.";
+	private static final String DETAILS_NOTES = Messages.ModelProblemsDialog_5;
 
 	public ModelProblemsDialog(Shell parentShell) {
 		super(parentShell);
@@ -83,7 +84,7 @@ public class ModelProblemsDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 
 		// Set the dialog header
-		getShell().setText("Some problems occured");
+		getShell().setText(Messages.ModelProblemsDialog_6);
 
 		// top level composite for the dialog area
 		Composite outerComposite = createOuterComposite(parent);
@@ -173,7 +174,7 @@ public class ModelProblemsDialog extends TitleAreaDialog {
 
 		Menu menu = new Menu(parent.getShell(), SWT.POP_UP);
 		final MenuItem copyItem = new MenuItem(menu, SWT.PUSH);
-		copyItem.setText("Copy Stacktrace to Clipboard");
+		copyItem.setText(Messages.ModelProblemsDialog_7);
 
 		String imageName = ISharedImages.IMG_TOOL_COPY;
 		copyItem.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(imageName));
@@ -201,7 +202,7 @@ public class ModelProblemsDialog extends TitleAreaDialog {
 	private void createIntroducingLable(Composite innerComposite) {
 		Label exceptionSummary = new Label(innerComposite, SWT.NONE);
 		exceptionSummary.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-		exceptionSummary.setText("Identified issues: ");
+		exceptionSummary.setText(Messages.ModelProblemsDialog_8);
 	}
 
 	private Composite createInnerComposite(Composite outerComposite) {
@@ -226,7 +227,7 @@ public class ModelProblemsDialog extends TitleAreaDialog {
 		super.create();
 
 		// Set the title
-		setTitle("One or more problems found while opening the BPMN 2.0 model");
+		setTitle(Messages.ModelProblemsDialog_9);
 
 		// Set the message
 		String summaryMessage = createSummaryMessage(exception, warnings);
@@ -284,12 +285,12 @@ public class ModelProblemsDialog extends TitleAreaDialog {
 	private String createSummaryMessage(ImportException exception, List<ImportException> warnings) {
 		StringBuilder builder = new StringBuilder();
 
-		builder.append("Found ");
+		builder.append(Messages.ModelProblemsDialog_10);
 
 		if (exception != null) {
-			builder.append(" 1 error");
+			builder.append(Messages.ModelProblemsDialog_11);
 			if (!warnings.isEmpty()) {
-				builder.append(" and ");
+				builder.append(Messages.ModelProblemsDialog_12);
 			}
 		}
 
@@ -298,9 +299,9 @@ public class ModelProblemsDialog extends TitleAreaDialog {
 			builder.append(size);
 
 			if (size > 1) {
-				builder.append(" warnings");
+				builder.append(Messages.ModelProblemsDialog_13);
 			} else {
-				builder.append(" warning");
+				builder.append(Messages.ModelProblemsDialog_14);
 			}
 		}
 

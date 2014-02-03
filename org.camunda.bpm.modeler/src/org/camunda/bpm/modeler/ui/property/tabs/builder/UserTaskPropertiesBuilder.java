@@ -1,5 +1,6 @@
 package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
 import org.eclipse.bpmn2.UserTask;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
@@ -26,8 +27,8 @@ public class UserTaskPropertiesBuilder extends AbstractExtensionAwarePropertiesB
 //		
 //		PropertyUtil.createText(section, parent, "Priority", ModelPackage.eINSTANCE.getDocumentRoot_Priority(), bo);
 	
-		final Text text = PropertyUtil.createUnboundText(section, parent, "User Operation");
+		final Text text = PropertyUtil.createUnboundText(section, parent, Messages.UserTaskPropertiesBuilder_0);
 		text.setEnabled(false);
-		addConfigureOperationButton(text, "Configure Client Operation");
+		addConfigureOperationButton(text, Messages.UserTaskPropertiesBuilder_1);
 	}
 }

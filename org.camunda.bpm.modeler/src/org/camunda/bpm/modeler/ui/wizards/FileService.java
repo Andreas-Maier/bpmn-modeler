@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.model.Bpmn2ModelerResourceSetImpl;
 import org.camunda.bpm.modeler.ui.diagram.editor.Bpmn2DiagramEditorInput;
 import org.camunda.bpm.modeler.ui.diagram.editor.Bpmn2Editor;
@@ -167,9 +168,9 @@ public class FileService {
 	}
 
 	private static String createMessage(final Map<URI, Throwable> failedSaves) {
-		final StringBuilder buf = new StringBuilder("The following resources could not be saved:");
+		final StringBuilder buf = new StringBuilder(Messages.FileService_0);
 		for (final Entry<URI, Throwable> entry : failedSaves.entrySet()) {
-			buf.append("\nURI: ").append(entry.getKey().toString()).append(", cause: \n")
+			buf.append("\nURI: ").append(entry.getKey().toString()).append(Messages.FileService_2) //$NON-NLS-1$
 					.append(getExceptionAsString(entry.getValue()));
 		}
 		return buf.toString();
@@ -247,15 +248,15 @@ public class FileService {
 	}
 	
 	public static String createTempName(final String name) {
-		String tempDir = System.getProperty("java.io.tmpdir");
-		String tempName = tempDir + File.separatorChar + name + "." + EcoreUtil.generateUUID();
+		String tempDir = System.getProperty("java.io.tmpdir"); //$NON-NLS-1$
+		String tempName = tempDir + File.separatorChar + name + "." + EcoreUtil.generateUUID(); //$NON-NLS-1$
 		return tempName;
 	}
 	
 	public static File createTempFile(final String name, final InputStream istream) {
 		File tempFile = null;
 		try {
-			tempFile = File.createTempFile(name, ".bpmn");
+			tempFile = File.createTempFile(name, ".bpmn"); //$NON-NLS-1$
 			if (istream!=null) {
 				OutputStream ostream = new FileOutputStream(tempFile);
 	

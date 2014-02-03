@@ -16,6 +16,7 @@ import static org.camunda.bpm.modeler.core.layout.util.ConversionUtil.point;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.Activator;
 import org.camunda.bpm.modeler.core.di.DIUtils;
 import org.camunda.bpm.modeler.core.features.PropertyNames;
@@ -69,7 +70,7 @@ public abstract class AbstractEdgeHandler<T extends BaseElement> extends Abstrac
 		if (diagramElement instanceof BPMNEdge) {
 			return handleEdge(bpmnElement, (BPMNEdge) diagramElement, container);
 		} else {
-			throw new IllegalArgumentException("Handling instances of BPMNEdge only");
+			throw new IllegalArgumentException(Messages.AbstractEdgeHandler_0);
 		}
 	}
 	
@@ -80,7 +81,7 @@ public abstract class AbstractEdgeHandler<T extends BaseElement> extends Abstrac
 		if (source != null) {
 			DiagramElement sourceElement = getDiagramElement(source);
 			if (sourceElement == null) {
-				throw new RuntimeException("No BPMN DI element for " + source);
+				throw new RuntimeException(Messages.AbstractEdgeHandler_1 + source);
 			}
 			
 			bpmnEdge.setSourceElement(sourceElement);
@@ -89,7 +90,7 @@ public abstract class AbstractEdgeHandler<T extends BaseElement> extends Abstrac
 		if (target != null) {
 			DiagramElement targetElement = getDiagramElement(target);
 			if (targetElement == null) {
-				throw new RuntimeException("No BPMN DI element for " + target);
+				throw new RuntimeException(Messages.AbstractEdgeHandler_2 + target);
 			}
 			
 			bpmnEdge.setTargetElement(targetElement);
@@ -117,7 +118,7 @@ public abstract class AbstractEdgeHandler<T extends BaseElement> extends Abstrac
 			
 			return connection;
 		} else {
-			Activator.logStatus(new Status(IStatus.WARNING, Activator.PLUGIN_ID, "Unsupported feature "
+			Activator.logStatus(new Status(IStatus.WARNING, Activator.PLUGIN_ID, Messages.AbstractEdgeHandler_3
 					+ ((EObject) context.getNewObject()).eClass().getName()));
 		}
 		return null;
@@ -245,7 +246,7 @@ public abstract class AbstractEdgeHandler<T extends BaseElement> extends Abstrac
 		if (cls.isInstance(o)) {
 			// ok
 		} else {
-			throw new IllegalArgumentException(String.format("Can handle instances of %s only", cls.getName()));
+			throw new IllegalArgumentException(String.format(Messages.AbstractEdgeHandler_4, cls.getName()));
 		}
 	}
 	

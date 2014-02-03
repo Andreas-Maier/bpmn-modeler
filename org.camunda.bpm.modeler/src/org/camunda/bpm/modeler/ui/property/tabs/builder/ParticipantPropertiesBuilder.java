@@ -1,5 +1,6 @@
 package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
+import org.camunda.bpm.modeler.Messages;
 import org.eclipse.bpmn2.Participant;
 import org.eclipse.bpmn2.Process;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
@@ -22,7 +23,7 @@ public class ParticipantPropertiesBuilder extends AbstractPropertiesBuilder<Part
 		
 		if (process != null) { // empty participant must not have a process
 			new ProcessIdPropertyBuilder(parent, section, process).create();
-			new NamePropertyBuilder(parent, section, process, "Process Name").create();
+			new NamePropertyBuilder(parent, section, process, Messages.ParticipantPropertiesBuilder_0).create();
 			
 			new ProcessPropertiesBuilder(parent, section, process).create();
 		}

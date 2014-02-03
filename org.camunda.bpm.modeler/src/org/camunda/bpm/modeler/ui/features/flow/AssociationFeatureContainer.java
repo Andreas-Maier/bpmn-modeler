@@ -14,6 +14,7 @@ package org.camunda.bpm.modeler.ui.features.flow;
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.ModelHandler;
 import org.camunda.bpm.modeler.core.features.container.BaseElementConnectionFeatureContainer;
 import org.camunda.bpm.modeler.core.features.flow.AbstractAddFlowFeature;
@@ -154,7 +155,7 @@ public class AssociationFeatureContainer extends BaseElementConnectionFeatureCon
 	public class CreateAssociationFeature extends AbstractCreateFlowFeature<Association, BaseElement, BaseElement> {
 
 		public CreateAssociationFeature(IFeatureProvider fp) {
-			super(fp, "Association", "Associate information with artifacts and flow objects");
+			super(fp, Messages.AssociationFeatureContainer_0, Messages.AssociationFeatureContainer_1);
 		}
 
 		@Override

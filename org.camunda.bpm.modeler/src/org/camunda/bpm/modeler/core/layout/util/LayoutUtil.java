@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.layout.Docking;
 import org.camunda.bpm.modeler.core.utils.ScrollUtil;
 import org.camunda.bpm.modeler.ui.features.event.BoundaryAttachment;
@@ -72,11 +73,11 @@ public class LayoutUtil {
 
 		private Sector(boolean left, boolean right, boolean above, boolean bottom) {
 			if (left && right) {
-				throw new IllegalArgumentException("Cannot be left and right at the same time");
+				throw new IllegalArgumentException(Messages.LayoutUtil_0);
 			}
 			
 			if (above && bottom) {
-				throw new IllegalArgumentException("Cannot be top and bottom at the same time");
+				throw new IllegalArgumentException(Messages.LayoutUtil_1);
 			}
 			
 			this.left = left;
@@ -319,7 +320,7 @@ public class LayoutUtil {
 	public static Sector getBoundaryRelativeSector(Shape boundaryShape) {
 		BoundaryAttachment attachment = BoundaryEventUtil.getStoredBoundaryAttachment(boundaryShape);
 		if (attachment == null) {
-			throw new IllegalArgumentException(String.format("Shape %s has no attachment", boundaryShape));
+			throw new IllegalArgumentException(String.format(Messages.LayoutUtil_2, boundaryShape));
 		}
 		
 		return attachment.getSector();
@@ -367,7 +368,7 @@ public class LayoutUtil {
 		}
 
 		if (!(some instanceof FixPointAnchor)) {
-			throw new IllegalArgumentException("Can only compare " + FixPointAnchor.class.getName());
+			throw new IllegalArgumentException(Messages.LayoutUtil_3 + FixPointAnchor.class.getName());
 		}
 		
 		FixPointAnchor someFixAnchor = (FixPointAnchor) some;
@@ -645,7 +646,7 @@ public class LayoutUtil {
 		
 		AnchorContainer container = anchor.getParent();
 		if (container == null || !(container instanceof Shape)) {
-			throw new IllegalArgumentException("Need anchor connected to shape");
+			throw new IllegalArgumentException(Messages.LayoutUtil_4);
 		}
 		
 		Shape shape = (Shape) container;
@@ -820,7 +821,7 @@ public class LayoutUtil {
 	public static ILocation getFirstConnectionWaypoint(ChopboxAnchor anchor, Connection connection) {
 		
 		if (!(connection instanceof FreeFormConnection)) {
-			throw new IllegalArgumentException("Can handle instances of " + FreeFormConnection.class.getName() + " only");
+			throw new IllegalArgumentException(Messages.LayoutUtil_5 + FreeFormConnection.class.getName() + Messages.LayoutUtil_6);
 		}
 		
 		FreeFormConnection ffconnection = (FreeFormConnection) connection;
@@ -845,7 +846,7 @@ public class LayoutUtil {
 			}
 		}
 		
-		throw new IllegalArgumentException("Anchor not connected to connection: " + anchor + " / " + connection);
+		throw new IllegalArgumentException(Messages.LayoutUtil_7 + anchor + Messages.LayoutUtil_8 + connection);
 	}
 	
 	/**

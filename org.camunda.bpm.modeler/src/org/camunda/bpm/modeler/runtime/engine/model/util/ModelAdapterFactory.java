@@ -146,10 +146,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createConstraintTypeAdapter();
 			}
 			@Override
-			public Adapter caseUserTask(UserTask object) {
-				return createUserTaskAdapter();
-			}
-			@Override
 			public Adapter caseFormDataContainer(FormDataContainer object) {
 				return createFormDataContainerAdapter();
 			}
@@ -196,14 +192,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseBpmn2_BoundaryEvent(org.eclipse.bpmn2.BoundaryEvent object) {
 				return createBpmn2_BoundaryEventAdapter();
-			}
-			@Override
-			public Adapter caseTask(Task object) {
-				return createTaskAdapter();
-			}
-			@Override
-			public Adapter caseBpmn2_UserTask(org.eclipse.bpmn2.UserTask object) {
-				return createBpmn2_UserTaskAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -464,20 +452,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 		/**
-	 * Creates a new adapter for an object of class '{@link org.camunda.bpm.modeler.runtime.engine.model.UserTask <em>User Task</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.UserTask
-	 * @generated
-	 */
-	public Adapter createUserTaskAdapter() {
-		return null;
-	}
-
-		/**
 	 * Creates a new adapter for an object of class '{@link org.camunda.bpm.modeler.runtime.engine.model.FormDataContainer <em>Form Data Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -646,34 +620,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
   /**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.bpmn2.Task <em>Task</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.bpmn2.Task
-	 * @generated
-	 */
-	public Adapter createTaskAdapter() {
-		return null;
-	}
-
-		/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.bpmn2.UserTask <em>User Task</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.bpmn2.UserTask
-	 * @generated
-	 */
-	public Adapter createBpmn2_UserTaskAdapter() {
-		return null;
-	}
-
-		/**
 	 * Creates a new adapter for the default case.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null.

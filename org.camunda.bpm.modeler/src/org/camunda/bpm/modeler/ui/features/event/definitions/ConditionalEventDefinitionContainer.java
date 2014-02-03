@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.event.definitions;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.event.definitions.AbstractEventDefinitionFeatureContainer;
 import org.camunda.bpm.modeler.core.features.event.definitions.CreateEventDefinition;
 import org.camunda.bpm.modeler.core.features.event.definitions.DecorationAlgorithm;
@@ -89,7 +90,7 @@ public class ConditionalEventDefinitionContainer extends AbstractEventDefinition
 		}
 
 		public CreateConditionalEventDefinition(IFeatureProvider fp) {
-			super(fp, "Conditional Event Definition", "Conditional trigger");
+			super(fp, Messages.ConditionalEventDefinitionContainer_0, Messages.ConditionalEventDefinitionContainer_1);
 		}
 
 		@Override

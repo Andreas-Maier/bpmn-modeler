@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.Activator;
 import org.camunda.bpm.modeler.core.model.Bpmn2ModelerResourceImpl;
 import org.camunda.bpm.modeler.ui.diagram.editor.Bpmn2Editor;
@@ -64,12 +65,12 @@ public class DiagramExport extends AbstractCustomFeature {
 	@Override
 
 	public String getDescription() {
-		return "Export Diagram image";
+		return Messages.DiagramExport_0;
 	}
 
 	@Override
 	public String getName() {
-		return "&Preview";
+		return Messages.DiagramExport_1;
 	}
 
 	///////////////////////
@@ -79,7 +80,7 @@ public class DiagramExport extends AbstractCustomFeature {
 	//
 	///////////////////////
 	
-	protected static final String[] BPMN_RESOURCE_SUFFIXES = new String[] { ".bpmn20", ".bpmn", ".bpmn20.xml" };
+	protected static final String[] BPMN_RESOURCE_SUFFIXES = new String[] { ".bpmn20", ".bpmn", ".bpmn20.xml" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
   
 	protected String stripBpmnFileSuffix(String bpmnFileResource) {
 		for (String suffix : BPMN_RESOURCE_SUFFIXES) {
@@ -94,13 +95,13 @@ public class DiagramExport extends AbstractCustomFeature {
 		
 		Resource diagramResource = getDiagramResoure();
 		if (diagramResource == null) {
-			logStatus(Status.WARNING, "Could not export diagram image: Could not determine diagram resource", null);
+			logStatus(Status.WARNING, Messages.DiagramExport_5, null);
 			return;
 		}
 		
 		IFile diagramImageFile = createDiagramImageFile(diagramResource);
 		if (diagramImageFile == null) {
-			logStatus(Status.WARNING, "Could not export diagram image: Could not determine diagram file", null);
+			logStatus(Status.WARNING, Messages.DiagramExport_6, null);
 			return;
 		}
 		
@@ -165,13 +166,13 @@ public class DiagramExport extends AbstractCustomFeature {
 		
 		String pictureFileName = stripBpmnFileSuffix(resourceName);
 		
-		return createDirectoryResource(diagramResource, "").getFile(new Path(pictureFileName + ".png"));
+		return createDirectoryResource(diagramResource, "").getFile(new Path(pictureFileName + ".png")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private String decodeUri(String uri) {
 		// decode uri and include handling of %20 (white space)
 		// because eclipse emf utilities cannot do it
-		return URI.decode(uri).replaceAll("%20", " ");
+		return URI.decode(uri).replaceAll("%20", " "); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -224,7 +225,7 @@ public class DiagramExport extends AbstractCustomFeature {
 			try {
 				project.open(null);
 			} catch (CoreException e) {
-				throw new IllegalStateException("Cannot open project", e);
+				throw new IllegalStateException(Messages.DiagramExport_11, e);
 			}
 		}
 
@@ -312,7 +313,7 @@ public class DiagramExport extends AbstractCustomFeature {
 					// convert exceptions to CoreExceptions
 					Status status = new Status(
 							IStatus.ERROR,
-							"Diagram Export", IStatus.ERROR, "Can not save image as file: " //$NON-NLS-1$
+							"Diagram Export", IStatus.ERROR, Messages.DiagramExport_12 //$NON-NLS-1$
 									+ e.getMessage(), e);
 					throw new CoreException(status);
 				}

@@ -21,6 +21,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.google.common.base.Strings;
+
 public abstract class AbstractExtensionAwarePropertiesBuilder extends
 		AbstractPropertiesBuilder<BaseElement> {
 
@@ -77,7 +79,7 @@ public abstract class AbstractExtensionAwarePropertiesBuilder extends
 	 */
 	protected Button addConfigureOperationButton(final Text operationText, final String buttonText) {
 
-		operationText.setText(wizard.getTextToShow());
+		operationText.setText(Strings.nullToEmpty(wizard.getTextToShow()));
 
 		// monkey patching for the win!
 		Composite comp = PropertyUtil.createStandardComposite(section, parent);

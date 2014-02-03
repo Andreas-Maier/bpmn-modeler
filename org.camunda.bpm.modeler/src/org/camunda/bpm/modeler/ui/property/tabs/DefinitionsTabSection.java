@@ -1,8 +1,6 @@
 package org.camunda.bpm.modeler.ui.property.tabs;
 
 import org.camunda.bpm.modeler.core.property.AbstractTabSection;
-import org.camunda.bpm.modeler.core.utils.ModelUtil;
-import org.eclipse.bpmn2.Definitions;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 
@@ -14,9 +12,9 @@ import org.eclipse.swt.widgets.Composite;
 public class DefinitionsTabSection extends AbstractTabSection {
 
 	@Override
-	protected Composite createCompositeForObject(Composite parent, EObject businessObject) {
-		Definitions definitions = ModelUtil.getDefinitions(businessObject);
-		new DefinitionsTabCompositeFactory(this, parent).createCompositeForBusinessObject(definitions);
+	protected Composite createCompositeForObject(final Composite parent, final EObject businessObject) {
+//		Definitions definitions = ModelUtil.getDefinitions(businessObject);
+//		new DefinitionsTabCompositeFactory(this, parent).createCompositeForBusinessObject(definitions);
 		
 		return parent;
 	}

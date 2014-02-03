@@ -21,7 +21,7 @@ public abstract class TableDescriptor<T> {
 	 * 
 	 * @param columns
 	 */
-	public void setColumns(TableColumnDescriptor ... columns) {
+	public void setColumns(final TableColumnDescriptor ... columns) {
 		this.columns = Arrays.asList(columns);
 	}
 	
@@ -30,7 +30,7 @@ public abstract class TableDescriptor<T> {
 	 * 
 	 * @param columns
 	 */
-	public void setColumns(List<TableColumnDescriptor> columns) { 
+	public void setColumns(final List<TableColumnDescriptor> columns) { 
 		this.columns = columns;
 	}
 	
@@ -52,12 +52,12 @@ public abstract class TableDescriptor<T> {
 		return ArrayContentProvider.getInstance();
 	}
 	
-	public void configure(Table table) {
+	public void configure(final Table table) {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 	}
 	
-	public void configureViewer(TableViewer viewer) {
+	public void configureViewer(final TableViewer viewer) {
 		viewer.setContentProvider(getContentProvider());
 		configure(viewer.getTable());
 	}
@@ -67,7 +67,7 @@ public abstract class TableDescriptor<T> {
 	 * 
 	 * @return
 	 */
-	public TableViewer createTableViewer(Composite parent) {
+	public TableViewer createTableViewer(final Composite parent) {
 		return createTableViewer(parent, this);
 	}
 
@@ -79,14 +79,14 @@ public abstract class TableDescriptor<T> {
 	 * @param tableDescriptor
 	 * @return
 	 */
-	private TableViewer createTableViewer(Composite parent, TableDescriptor<?> tableDescriptor) {
+	private TableViewer createTableViewer(final Composite parent, final TableDescriptor<?> tableDescriptor) {
 		
 		TableColumnLayout2 tableColumnLayout = new TableColumnLayout2();
 		
 		parent.setLayout(tableColumnLayout);
 		
-		TableViewer viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
-				| SWT.FULL_SELECTION | SWT.BORDER);
+		TableViewer viewer = new TableViewer(parent, SWT.H_SCROLL | SWT.V_SCROLL
+				| SWT.BORDER);
 		
 		tableDescriptor.configureViewer(viewer);
 		
@@ -102,8 +102,8 @@ public abstract class TableDescriptor<T> {
 	 * @param layout 
 	 * @param tableColumnDescriptors
 	 */
-	private void createColumns(TableViewer viewer,
-			TableColumnLayout2 layout, List<TableColumnDescriptor> tableColumnDescriptors) {
+	private void createColumns(final TableViewer viewer,
+			final TableColumnLayout2 layout, final List<TableColumnDescriptor> tableColumnDescriptors) {
 
 		for (TableColumnDescriptor descriptor : tableColumnDescriptors) {
 			createColumn(viewer, layout, descriptor);
@@ -117,7 +117,7 @@ public abstract class TableDescriptor<T> {
 	 * @param layout
 	 * @param descriptor
 	 */
-	protected TableViewerColumn createColumn(TableViewer viewer, TableColumnLayout2 layout, TableColumnDescriptor descriptor) {
+	protected TableViewerColumn createColumn(final TableViewer viewer, final TableColumnLayout2 layout, final TableColumnDescriptor descriptor) {
 		TableViewerColumn viewerColumn = new TableViewerColumn(viewer, SWT.NONE);
 		
 		descriptor.configureViewer(viewer, viewerColumn, layout);

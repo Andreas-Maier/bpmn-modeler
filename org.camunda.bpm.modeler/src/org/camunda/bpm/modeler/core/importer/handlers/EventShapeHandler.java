@@ -12,6 +12,7 @@ package org.camunda.bpm.modeler.core.importer.handlers;
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.importer.ModelImport;
 import org.camunda.bpm.modeler.core.utils.GraphicsUtil;
 import org.eclipse.bpmn2.CatchEvent;
@@ -45,7 +46,7 @@ public class EventShapeHandler extends FlowNodeShapeHandler {
 	  } else if (event instanceof ThrowEvent) {
 	    eventDefinitions = ((ThrowEvent) event).getEventDefinitions();
 	  } else {
-	    throw new IllegalArgumentException("Impossible to handle event");
+	    throw new IllegalArgumentException(Messages.EventShapeHandler_0);
 	  }
 	  
 	  ContainerShape eventContainer = (ContainerShape) super.handleShape(bpmnElement, shape, container);

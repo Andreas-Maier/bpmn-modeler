@@ -199,20 +199,6 @@ public class ModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.USER_TASK: {
-				UserTask userTask = (UserTask)theEObject;
-				T result = caseUserTask(userTask);
-				if (result == null) result = caseBpmn2_UserTask(userTask);
-				if (result == null) result = caseFormDataContainer(userTask);
-				if (result == null) result = caseTask(userTask);
-				if (result == null) result = caseActivity(userTask);
-				if (result == null) result = caseInteractionNode(userTask);
-				if (result == null) result = caseFlowNode(userTask);
-				if (result == null) result = caseFlowElement(userTask);
-				if (result == null) result = caseBaseElement(userTask);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ModelPackage.FORM_DATA_CONTAINER: {
 				FormDataContainer formDataContainer = (FormDataContainer)theEObject;
 				T result = caseFormDataContainer(formDataContainer);
@@ -479,21 +465,6 @@ public class ModelSwitch<T> extends Switch<T> {
 	}
 
 		/**
-	 * Returns the result of interpreting the object as an instance of '<em>User Task</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>User Task</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUserTask(UserTask object) {
-		return null;
-	}
-
-		/**
 	 * Returns the result of interpreting the object as an instance of '<em>Form Data Container</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -674,36 +645,6 @@ public class ModelSwitch<T> extends Switch<T> {
 	}
 
   /**
-	 * Returns the result of interpreting the object as an instance of '<em>Task</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Task</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTask(Task object) {
-		return null;
-	}
-
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>User Task</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>User Task</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBpmn2_UserTask(org.eclipse.bpmn2.UserTask object) {
-		return null;
-	}
-
-		/**
 	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;

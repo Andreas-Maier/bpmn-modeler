@@ -2,6 +2,7 @@ package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.ui.property.tabs.EventTabCompositeFactory;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
 import org.eclipse.bpmn2.BoundaryEvent;
@@ -31,7 +32,7 @@ public class BoundaryEventDefinitionComposite extends AbstractPropertiesBuilder<
 			getEventDefinition(EscalationEventDefinition.class, eventDefinitions) != null ||
 			getEventDefinition(SignalEventDefinition.class, eventDefinitions) != null) {
 			
-			PropertyUtil.createCheckbox(section, parent, "Cancel Activity",
+			PropertyUtil.createCheckbox(section, parent, Messages.BoundaryEventDefinitionComposite_0,
 					Bpmn2Package.eINSTANCE.getBoundaryEvent_CancelActivity(), bo);
 		}
 	}

@@ -12,6 +12,7 @@ package org.camunda.bpm.modeler.core.validation;
 
 import java.io.IOException;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.Activator;
 import org.camunda.bpm.modeler.core.ProxyURIConverterImplExtension;
 import org.camunda.bpm.modeler.core.model.Bpmn2ModelerResourceImpl;
@@ -61,7 +62,7 @@ import org.eclipse.wst.validation.ValidatorMessage;
 public class Bpmn2ProjectValidator extends AbstractValidator {
 
 	/** ID for BPMN2 specific problem markers. */
-	public static final String BPMN2_MARKER_ID = "org.camunda.bpm.modeler.problemMarker";
+	public static final String BPMN2_MARKER_ID = "org.camunda.bpm.modeler.problemMarker"; //$NON-NLS-1$
 
 	@Override
 	public ValidationResult validate(final ValidationEvent event, final ValidationState state, final IProgressMonitor monitor) {
@@ -87,13 +88,13 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 			resource.load(null);
 		
 			if (resource.getContents().isEmpty()) {
-				result.add(createValidatorMessage("Failed to load resource", file));
+				result.add(createValidatorMessage(Messages.Bpmn2ProjectValidator_1, file));
 			} else {
 				IBatchValidator validator = ModelValidationService.getInstance().newValidator(EvaluationMode.BATCH);
 				processStatus(validator.validate(resource.getContents(), monitor), file, result);
 			}
 		} catch (IOException e) {
-			result.add(createValidatorMessage("Failed to load resource", file));
+			result.add(createValidatorMessage(Messages.Bpmn2ProjectValidator_2, file));
 		}
 		
 		return result;
@@ -110,7 +111,7 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 			// delete validation markers
 			file.deleteMarkers(BPMN2_MARKER_ID, false, IProject.DEPTH_INFINITE);
 		} catch (CoreException e) {
-			Activator.logStatus(new Status(Status.WARNING, Activator.PLUGIN_ID, "Could not delete validation markers", e));
+			Activator.logStatus(new Status(Status.WARNING, Activator.PLUGIN_ID, Messages.Bpmn2ProjectValidator_3, e));
 		}
 	}
 
@@ -192,14 +193,14 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 					Bpmn2Preferences preferences = Bpmn2Preferences.getInstance(project);
 					if (preferences.getCheckProjectNature()) {
 						Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-						String title = "Configure BPMN2 Project Nature";
-						String message = "The project '" + project.getName()
-								+ "' has not been configured with the BPMN2 Project Nature.\n\n"
-								+ "Adding the BPMN2 Project Nature will cause all BPMN2 files in this project "
-								+ "to be validated automatically whenever the project is built.\n\n"
-								+ "Do you want to add this Nature to the Project now?";
+						String title = Messages.Bpmn2ProjectValidator_4;
+						String message = Messages.Bpmn2ProjectValidator_5 + project.getName()
+								+ Messages.Bpmn2ProjectValidator_6
+								+ Messages.Bpmn2ProjectValidator_7
+								+ Messages.Bpmn2ProjectValidator_8
+								+ Messages.Bpmn2ProjectValidator_9;
 						MessageDialogWithToggle result = MessageDialogWithToggle.open(MessageDialog.QUESTION, shell, title,
-								message, "Don't ask me again", // toggle message
+								message, Messages.Bpmn2ProjectValidator_10, // toggle message
 								false, // toggle state
 								null, // pref store
 								null, // pref key
@@ -273,7 +274,7 @@ public class Bpmn2ProjectValidator extends AbstractValidator {
 			if (ics.getResultLocus().size() > 0) {
 				StringBuffer relatedUris = new StringBuffer();
 				for (EObject eobject : ics.getResultLocus()) {
-					relatedUris.append(EcoreUtil.getURI(eobject).toString()).append(" ");
+					relatedUris.append(EcoreUtil.getURI(eobject).toString()).append(" "); //$NON-NLS-1$
 				}
 				relatedUris.deleteCharAt(relatedUris.length() - 1);
 				String uris = relatedUris.toString();

@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.lane;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.ModelHandler;
 import org.camunda.bpm.modeler.core.features.AbstractBpmn2CreateFeature;
 import org.camunda.bpm.modeler.core.utils.FeatureSupport;
@@ -27,7 +28,7 @@ public class CreateLaneFeature extends AbstractBpmn2CreateFeature<Lane> {
 	private static int index = 1;
 
 	public CreateLaneFeature(final IFeatureProvider fp) {
-		super(fp, "Lane", "A sub-partition in a process that helps to organize and categorize activities");
+		super(fp, Messages.CreateLaneFeature_0, Messages.CreateLaneFeature_1);
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class CreateLaneFeature extends AbstractBpmn2CreateFeature<Lane> {
 	@Override
 	public Object[] create(final ICreateContext context) {
 		Lane lane = createBusinessObject(context);
-		lane.setName("Lane ohne Namen");
+		lane.setName(Messages.CreateLaneFeature_2);
 		addGraphicalRepresentation(context, lane);
 		return new Object[] { lane };
 	}

@@ -177,13 +177,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass userTaskEClass = null;
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass formDataContainerEClass = null;
 
 		/**
@@ -1400,16 +1393,6 @@ public EAttribute getValueType_Name() {
 	 * @generated
 	 */
 	@Override
-	public EClass getUserTask() {
-		return userTaskEClass;
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getFormDataContainer() {
 		return formDataContainerEClass;
 	}
@@ -1675,8 +1658,6 @@ public ModelFactory getModelFactory() {
 		createEAttribute(constraintTypeEClass, CONSTRAINT_TYPE__NAME);
 		createEAttribute(constraintTypeEClass, CONSTRAINT_TYPE__CONFIG);
 
-		userTaskEClass = createEClass(USER_TASK);
-
 		formDataContainerEClass = createEClass(FORM_DATA_CONTAINER);
 
 		// Create enums
@@ -1738,8 +1719,6 @@ public ModelFactory getModelFactory() {
 		startEventEClass.getESuperTypes().add(this.getFormDataContainer());
 		callActivityEClass.getESuperTypes().add(theBpmn2Package.getCallActivity());
 		boundaryEventEClass.getESuperTypes().add(theBpmn2Package.getBoundaryEvent());
-		userTaskEClass.getESuperTypes().add(theBpmn2Package.getUserTask());
-		userTaskEClass.getESuperTypes().add(this.getFormDataContainer());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(documentRootEClass, DocumentRoot.class, "DocumentRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1863,8 +1842,6 @@ public ModelFactory getModelFactory() {
 		initEClass(constraintTypeEClass, ConstraintType.class, "ConstraintType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getConstraintType_Name(), ecorePackage.getEString(), "name", null, 0, 1, ConstraintType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConstraintType_Config(), ecorePackage.getEString(), "config", null, 0, 1, ConstraintType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(userTaskEClass, UserTask.class, "UserTask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(formDataContainerEClass, FormDataContainer.class, "FormDataContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2126,7 +2103,7 @@ public ModelFactory getModelFactory() {
 		   source, 
 		   new String[] {
 			 "kind", "element",
-			 "name", "clientOperation",
+			 "name", "operation",
 			 "namespace", "http://www.cas.de/open"
 		   });		
 		addAnnotation
@@ -2134,7 +2111,7 @@ public ModelFactory getModelFactory() {
 		   source, 
 		   new String[] {
 			 "kind", "element",
-			 "name", "serviceOperation",
+			 "name", "operation",
 			 "namespace", "http://www.cas.de/open"
 		   });		
 		addAnnotation
@@ -2745,14 +2722,6 @@ public ModelFactory getModelFactory() {
 		   new String[] {
 			 "kind", "attribute",
 			 "name", "config"
-		   });		
-		addAnnotation
-		  (userTaskEClass, 
-		   source, 
-		   new String[] {
-			 "name", "",
-			 "kind", "mixed",
-			 "namespace", "##targetNamespace"
 		   });
 	}
 

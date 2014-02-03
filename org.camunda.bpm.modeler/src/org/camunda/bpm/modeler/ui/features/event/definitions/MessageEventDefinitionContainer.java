@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.event.definitions;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.event.definitions.AbstractEventDefinitionFeatureContainer;
 import org.camunda.bpm.modeler.core.features.event.definitions.CreateEventDefinition;
 import org.camunda.bpm.modeler.core.features.event.definitions.DecorationAlgorithm;
@@ -93,7 +94,7 @@ public class MessageEventDefinitionContainer extends AbstractEventDefinitionFeat
 	public static class CreateMessageEventDefinition extends CreateEventDefinition<MessageEventDefinition> {
 
 		public CreateMessageEventDefinition(IFeatureProvider fp) {
-			super(fp, "Message Definition", "Marks that event expects a message");
+			super(fp, Messages.MessageEventDefinitionContainer_0, Messages.MessageEventDefinitionContainer_1);
 		}
 
 		@Override

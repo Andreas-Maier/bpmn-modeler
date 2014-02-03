@@ -3,6 +3,7 @@ package org.camunda.bpm.modeler.ui.property.tabs.builder;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.ui.property.tabs.binding.NameAttributeComboBinding;
 import org.camunda.bpm.modeler.ui.property.tabs.binding.StringTextBinding;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
@@ -109,13 +110,13 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 	}
 
 	private void createParticipantNameCombo() {
-		CCombo participantNameCombo = PropertyUtil.createDropDown(section, parent, "Name");
+		CCombo participantNameCombo = PropertyUtil.createDropDown(section, parent, Messages.NamePropertyBuilder_1);
 		// Add elements
 		List<String> participantNames = new LinkedList<>();
 		try {
 			participantNames = EIMInterfaceHolder.getAllClients();
 		} catch (DataLayerException | BusinessException | ServerException e) {
-			MessageDialog.openError(parent.getShell(), "No clients available", "There are currently no clients available!");
+			MessageDialog.openError(parent.getShell(), Messages.NamePropertyBuilder_2, Messages.NamePropertyBuilder_3);
 			return;
 		}
 		for (String userGroupName : participantNames) {
@@ -136,7 +137,7 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 		try {
 			userGroupNames = EIMInterfaceHolder.getAllUserGroups();
 		} catch (DataLayerException | BusinessException | ServerException e) {
-			MessageDialog.openError(parent.getShell(), "No groups available", "There are currently no groups available!");
+			MessageDialog.openError(parent.getShell(), Messages.NamePropertyBuilder_5, Messages.NamePropertyBuilder_6);
 			return;
 		}
 		for (String userGroupName : userGroupNames) {

@@ -15,6 +15,7 @@ package org.camunda.bpm.modeler.core.validation;
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.Activator;
 import org.camunda.bpm.modeler.core.utils.ErrorUtils;
 import org.eclipse.core.runtime.IStatus;
@@ -30,7 +31,7 @@ import org.eclipse.emf.validation.service.ValidationEvent;
  */
 public class ProblemsReporter implements IValidationListener {
 	public void validationOccurred(ValidationEvent event) {
-		ErrorUtils.showErrorMessage("");
+		ErrorUtils.showErrorMessage(""); //$NON-NLS-1$
 		// only report Live validation events here
 		// Batch validation is done by the WST project validator during building.
 		if (event.getEvaluationMode() == EvaluationMode.LIVE) {
@@ -38,7 +39,7 @@ public class ProblemsReporter implements IValidationListener {
 				// fabricate a multi-errorList for the MarkerUtil to consume
 				List<IConstraintStatus> results = event.getValidationResults();
 				MultiStatus multi = new MultiStatus(Activator.PLUGIN_ID, 1,
-						(IStatus[]) results.toArray(new IStatus[results.size()]), "OCL validation errors found", null);
+						(IStatus[]) results.toArray(new IStatus[results.size()]), Messages.ProblemsReporter_1, null);
 
 				for (IStatus s : results) {
 					ErrorUtils.showErrorMessage(s.getMessage());

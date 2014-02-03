@@ -12,6 +12,7 @@ package org.camunda.bpm.modeler.core.importer.handlers;
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.importer.ModelImport;
 import org.camunda.bpm.modeler.core.importer.UnmappedElementException;
 import org.camunda.bpm.modeler.core.importer.UnsupportedFeatureException;
@@ -45,13 +46,13 @@ public class DataOutputAssociationShapeHandler extends DataAssociationShapeHandl
 		
 		// instead, we log an error if someone wants to use it
 		if (sourceRefs != null && !sourceRefs.isEmpty()) {
-			modelImport.log(new UnsupportedFeatureException("Source references not supported", bpmnElement));
+			modelImport.log(new UnsupportedFeatureException(Messages.DataOutputAssociationShapeHandler_0, bpmnElement));
 		}
 		
 		ItemAwareElement targetRef = bpmnElement.getTargetRef();
 
 		if (targetRef == null || targetRef.eIsProxy()) {
-			modelImport.logAndThrow(new UnsupportedFeatureException("Target reference not specified", bpmnElement));
+			modelImport.logAndThrow(new UnsupportedFeatureException(Messages.DataOutputAssociationShapeHandler_1, bpmnElement));
 		}
 
 		// we use the bpmn elements container (task, event...) as the source
@@ -61,7 +62,7 @@ public class DataOutputAssociationShapeHandler extends DataAssociationShapeHandl
 		if (targetPictogram == null) {
 			// some modelers like Visual Paradigm are doing it wrong, so the target might be in bpmn model
 			// but cant be drawn, we are just warning in this case
-			modelImport.log(new UnmappedElementException("Target of Data Output Association is not drawn, it might be invalid.", targetRef));
+			modelImport.log(new UnmappedElementException(Messages.DataOutputAssociationShapeHandler_2, targetRef));
 			return null;
 		}
 		

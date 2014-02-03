@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.Activator;
 import org.camunda.bpm.modeler.core.Bpmn2TabbedPropertySheetPage;
 import org.camunda.bpm.modeler.core.ModelHandler;
@@ -119,8 +120,8 @@ import org.eclipse.ui.views.properties.tabbed.ITabDescriptorProvider;
  */
 public class Bpmn2Editor extends DiagramEditor implements IPropertyChangeListener, IGotoMarker {
 
-	public static final String EDITOR_ID = "org.camunda.bpm.modeler.ui.bpmn2editor";
-	public static final String CONTRIBUTOR_ID = "org.camunda.bpm.modeler.ui.PropertyContributor";
+	public static final String EDITOR_ID = "org.camunda.bpm.modeler.ui.bpmn2editor"; //$NON-NLS-1$
+	public static final String CONTRIBUTOR_ID = "org.camunda.bpm.modeler.ui.PropertyContributor"; //$NON-NLS-1$
 
 	private ModelHandler modelHandler;
 	private URI modelUri;
@@ -282,7 +283,7 @@ public class Bpmn2Editor extends DiagramEditor implements IPropertyChangeListene
 			return openDiagramEditorInput.getUri().toPlatformString(true);
 		}else if (input instanceof FileEditorInput) {
 			FileEditorInput openFileEditorInput = (FileEditorInput) input;
-			return "/" + openFileEditorInput.getFile().getLocation().makeRelativeTo(ResourcesPlugin.getWorkspace().getRoot().getLocation()).toString();
+			return "/" + openFileEditorInput.getFile().getLocation().makeRelativeTo(ResourcesPlugin.getWorkspace().getRoot().getLocation()).toString(); //$NON-NLS-1$
 		}
 		 return null;
 	}
@@ -502,7 +503,7 @@ public class Bpmn2Editor extends DiagramEditor implements IPropertyChangeListene
 		if (required == ITabDescriptorProvider.class) {
 			if (tabDescriptorProvider == null) {
 				IWorkbenchPage page = getEditorSite().getPage();
-				String viewID = "org.eclipse.ui.views.PropertySheet";
+				String viewID = "org.eclipse.ui.views.PropertySheet"; //$NON-NLS-1$
 				try {
 					page.showView(viewID, null, IWorkbenchPage.VIEW_CREATE);
 					page.showView(viewID, null, IWorkbenchPage.VIEW_ACTIVATE);
@@ -549,7 +550,7 @@ public class Bpmn2Editor extends DiagramEditor implements IPropertyChangeListene
 		try {
 			cleanupDiagramFile(diagramEditorInput);
 		} catch (Exception e) {
-			Activator.logStatus(new Status(IStatus.WARNING, Activator.PLUGIN_ID, "Could not clean up diagram file: "
+			Activator.logStatus(new Status(IStatus.WARNING, Activator.PLUGIN_ID, Messages.Bpmn2Editor_4
 					+ e.getMessage(), e));
 		}
 
@@ -600,7 +601,10 @@ public class Bpmn2Editor extends DiagramEditor implements IPropertyChangeListene
 		if (getModelFile() != null) {
 			return getModelFile().getFullPath();
 		} else if (bpmnResource != null) {
-			return ResourcesPlugin.getWorkspace().getRoot().findMember(bpmnResource.getURI().toPlatformString(true)).getFullPath();
+			final IResource foundMember = ResourcesPlugin.getWorkspace().getRoot().findMember(bpmnResource.getURI().toPlatformString(true));
+			if (foundMember != null) {
+				return foundMember.getFullPath();
+			}
 		}
 		return null;
 	}
@@ -747,7 +751,7 @@ public class Bpmn2Editor extends DiagramEditor implements IPropertyChangeListene
 					try {
 						getSite().getPage().openEditor(Bpmn2DiagramCreator.createDiagramInput(path, Bpmn2DiagramType.COLLABORATION, ModelPackage.eNS_URI), EDITOR_ID);
 					} catch (CoreException e) {
-						MessageDialog.openError(getSite().getShell(), "Reopening editor failed!", "Reopening editor failed. Please reopen editor for resource " + path.toString() + " manually.");
+						MessageDialog.openError(getSite().getShell(), Messages.Bpmn2Editor_5, Messages.Bpmn2Editor_6 + path.toString() + Messages.Bpmn2Editor_7);
 					} finally {
 						setRestartEditor(false);
 					}
@@ -755,9 +759,11 @@ public class Bpmn2Editor extends DiagramEditor implements IPropertyChangeListene
 				if (!closed) {
 					// If close editor fails, try again with explicit editorpart
 					// of the old file
-					IFile oldFile = ResourcesPlugin.getWorkspace().getRoot().getFile(getModelPath());
-					IEditorPart editorPart = ResourceUtil.findEditor(getSite().getPage(), oldFile);
-					closed = getSite().getPage().closeEditor(editorPart, false);
+					if (getModelPath() != null) {
+						IFile oldFile = ResourcesPlugin.getWorkspace().getRoot().getFile(getModelPath());
+						IEditorPart editorPart = ResourceUtil.findEditor(getSite().getPage(), oldFile);
+						closed = getSite().getPage().closeEditor(editorPart, false);
+					}
 				}
 			}
 		});

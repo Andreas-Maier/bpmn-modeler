@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.Activator;
 import org.camunda.bpm.modeler.core.property.AbstractTabSection;
 import org.camunda.bpm.modeler.core.property.SectionDescriptor;
@@ -31,14 +32,8 @@ import org.camunda.bpm.modeler.ui.property.tabs.FormFieldsTabSection;
 import org.camunda.bpm.modeler.ui.property.tabs.GeneralTabSection;
 import org.camunda.bpm.modeler.ui.property.tabs.ListenerTabSection;
 import org.camunda.bpm.modeler.ui.property.tabs.MultiInstanceTabSection;
-import org.eclipse.bpmn2.Activity;
 import org.eclipse.bpmn2.Event;
-import org.eclipse.bpmn2.Gateway;
-import org.eclipse.bpmn2.Participant;
-import org.eclipse.bpmn2.Process;
-import org.eclipse.bpmn2.SequenceFlow;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.ISectionDescriptor;
@@ -48,7 +43,7 @@ import org.eclipse.ui.views.properties.tabbed.ITabDescriptorProvider;
 public class PropertiesTabDescriptorProvider implements ITabDescriptorProvider {
 
 	@Override
-	public ITabDescriptor[] getTabDescriptors(IWorkbenchPart part, ISelection selection) {
+	public ITabDescriptor[] getTabDescriptors(final IWorkbenchPart part, final ISelection selection) {
 		List<ITabDescriptor> tabs = new ArrayList<ITabDescriptor>();
 		
 		Object model = getSelectedModel(selection);
@@ -62,34 +57,34 @@ public class PropertiesTabDescriptorProvider implements ITabDescriptorProvider {
 			}
 			
 			// add definitions tab for errors, messages and signals
-			if (model instanceof Diagram) {
-				tabs.add(createDefinitionsTabDescriptor());
-				tabs.add(createDocumentTabDescriptor());
-			}
+//			if (model instanceof Diagram) {
+//				tabs.add(createDefinitionsTabDescriptor());
+//				tabs.add(createDocumentTabDescriptor());
+//			}
 			
 			// add multi instance tabs to activities
-			if (businessObject instanceof Activity) {
-				tabs.add(createMultiInstanceTabDescriptor());
-			}
+//			if (businessObject instanceof Activity) {
+//				tabs.add(createMultiInstanceTabDescriptor());
+//			}
 			
 			// add execution listener tabs
-			if (businessObject instanceof Activity ||
-				businessObject instanceof Gateway ||
-				businessObject instanceof SequenceFlow || 
-				businessObject instanceof Event || 
-				businessObject instanceof Process) {
-				
-				tabs.add(createListenerTabDescriptor());
-			}
+//			if (businessObject instanceof Activity ||
+//				businessObject instanceof Gateway ||
+//				businessObject instanceof SequenceFlow || 
+//				businessObject instanceof Event || 
+//				businessObject instanceof Process) {
+//				
+//				tabs.add(createListenerTabDescriptor());
+//			}
 			
 			// for participant, too
-			if (businessObject instanceof Participant) {
-				Participant participant = (Participant) businessObject;
-				
-				if (participant.getProcessRef() != null) {
-					tabs.add(createListenerTabDescriptor());
-				}
-			}
+//			if (businessObject instanceof Participant) {
+//				Participant participant = (Participant) businessObject;
+//				
+//				if (participant.getProcessRef() != null) {
+//					tabs.add(createListenerTabDescriptor());
+//				}
+//			}
 
 			// TODO: uncomment when camunda engine release exists to support this feature
 //			if (businessObject instanceof UserTask ||
@@ -103,7 +98,7 @@ public class PropertiesTabDescriptorProvider implements ITabDescriptorProvider {
 		return tabs.toArray(new ITabDescriptor[]{});
 	}
 
-	private void addCustomTabs(EObject businessObject, List<ITabDescriptor> tabs) {
+	private void addCustomTabs(final EObject businessObject, final List<ITabDescriptor> tabs) {
 		
 		for (ICustomTaskProvider provider: Activator.getExtensions().getCustomTaskProviders()) {
 			if (provider.appliesTo(businessObject)) {
@@ -116,31 +111,31 @@ public class PropertiesTabDescriptorProvider implements ITabDescriptorProvider {
 	}
 
 	private ITabDescriptor createMultiInstanceTabDescriptor() {
-		return createTabDescriptor("multiInstanceTab", "Multi Instance", new MultiInstanceTabSection());
+		return createTabDescriptor("multiInstanceTab", Messages.PropertiesTabDescriptorProvider_1, new MultiInstanceTabSection()); //$NON-NLS-1$
 	}
 
 	private ITabDescriptor createEventTabDescriptor() {
-		return createTabDescriptor("eventTab", "Event", new EventTabSection());
+		return createTabDescriptor("eventTab", Messages.PropertiesTabDescriptorProvider_3, new EventTabSection()); //$NON-NLS-1$
 	}
 	
 	private ITabDescriptor createListenerTabDescriptor() {
-		return createTabDescriptor("listenerTab", "Listener", new ListenerTabSection());
+		return createTabDescriptor("listenerTab", Messages.PropertiesTabDescriptorProvider_5, new ListenerTabSection()); //$NON-NLS-1$
 	}
 
 	private ITabDescriptor createGeneralTabDescriptor() {
-		return createTabDescriptor("generalTab", "General", new GeneralTabSection());
+		return createTabDescriptor("generalTab", Messages.PropertiesTabDescriptorProvider_7, new GeneralTabSection()); //$NON-NLS-1$
 	}
 
 	private ITabDescriptor createDefinitionsTabDescriptor() {
-		return createTabDescriptor("definitionsTab", "Definitions", new DefinitionsTabSection());
+		return createTabDescriptor("definitionsTab", Messages.PropertiesTabDescriptorProvider_9, new DefinitionsTabSection()); //$NON-NLS-1$
 	}
 
 	private ITabDescriptor createDocumentTabDescriptor() {
-		return createTabDescriptor("documentTab", "Document", new DocumentTabSection());
+		return createTabDescriptor("documentTab", Messages.PropertiesTabDescriptorProvider_11, new DocumentTabSection()); //$NON-NLS-1$
 	}
 
 	private ITabDescriptor createFormTabDescriptor() {
-		return createTabDescriptor("formFieldsTab", "Form Fields", new FormFieldsTabSection());
+		return createTabDescriptor("formFieldsTab", Messages.PropertiesTabDescriptorProvider_13, new FormFieldsTabSection()); //$NON-NLS-1$
 	}
 	
 	/**
@@ -152,10 +147,10 @@ public class PropertiesTabDescriptorProvider implements ITabDescriptorProvider {
 	 * @param tabSection
 	 * @return
 	 */
-	public static ITabDescriptor createTabDescriptor(String id, String name, AbstractTabSection tabSection) {
+	public static ITabDescriptor createTabDescriptor(final String id, final String name, final AbstractTabSection tabSection) {
 
 		TabDescriptor tabDescriptor = new TabDescriptor(id, name, name);
-		ISectionDescriptor sectionDescriptor = new SectionDescriptor(id + ".section", tabSection);
+		ISectionDescriptor sectionDescriptor = new SectionDescriptor(id + ".section", tabSection); //$NON-NLS-1$
 		tabDescriptor.setSectionDescriptors(Arrays.asList(new ISectionDescriptor[] { sectionDescriptor }));
 		
 		return tabDescriptor;

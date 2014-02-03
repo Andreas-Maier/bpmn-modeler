@@ -2,6 +2,7 @@ package org.camunda.bpm.modeler.core.validation;
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.CallActivity;
 import org.eclipse.bpmn2.CatchEvent;
@@ -41,8 +42,8 @@ import org.eclipse.emf.validation.IValidationContext;
 
 public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 
-	public final static String ERROR_ID = "org.camunda.bpm.modeler.validation.error";
-	public final static String WARNING_ID = "org.camunda.bpm.modeler.validation.warning";
+	public final static String ERROR_ID = "org.camunda.bpm.modeler.validation.error"; //$NON-NLS-1$
+	public final static String WARNING_ID = "org.camunda.bpm.modeler.validation.warning"; //$NON-NLS-1$
 	
 	private boolean warnings = false;
 	
@@ -102,18 +103,18 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 					}
 					if (!foundStartEvent) {
 						ctx.addResult(root);
-						return ctx.createFailureStatus("Process has no Start Event");
+						return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_2);
 					}
 					if (!foundEndEvent) {
 						ctx.addResult(root);
-						return ctx.createFailureStatus("Process has no End Event");
+						return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_3);
 					}
 				}
 				else {
 					// report errors only
 					if (isEmpty(process.getName())) {
 						ctx.addResult(root);
-						return ctx.createFailureStatus("Process has no name");
+						return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_4);
 					}
 				}
 			}
@@ -121,7 +122,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 				if (warnings) {
 					if (((Error)root).getStructureRef()==null) {
 						ctx.addResult(root);
-						return ctx.createFailureStatus("Error has no type definition");
+						return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_5);
 					}
 				}
 			}
@@ -129,7 +130,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 				if (warnings) {
 					if (((Escalation)root).getStructureRef()==null) {
 						ctx.addResult(root);
-						return ctx.createFailureStatus("Escalation has no type definition");
+						return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_6);
 					}
 				}
 			}
@@ -137,7 +138,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 				if (warnings) {
 					if (((Message)root).getItemRef()==null) {
 						ctx.addResult(root);
-						return ctx.createFailureStatus("Message has no type definition");
+						return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_7);
 					}
 				}
 			}
@@ -145,7 +146,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 				if (warnings) {
 					if (((Signal)root).getStructureRef()==null) {
 						ctx.addResult(root);
-						return ctx.createFailureStatus("Signal has no type definition");
+						return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_8);
 					}
 				}
 			}
@@ -153,7 +154,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 				if (!warnings) {
 					if (((ItemDefinition)root).getStructureRef()==null) {
 						ctx.addResult(root);
-						return ctx.createFailureStatus("Item Definition has no structure");
+						return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_9);
 					}
 				}
 			}
@@ -168,7 +169,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 			
 			if (!warnings) {
 				if (se.getOutgoing() == null || se.getOutgoing().size() < 1) {
-					return ctx.createFailureStatus("Start Event has no outgoing connections");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_10);
 				}
 			}
 		}
@@ -177,7 +178,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 			
 			if (!warnings) {
 				if (ee.getIncoming() == null || ee.getIncoming().size() < 1) {
-					return ctx.createFailureStatus("End Event has no incoming connections");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_11);
 				}
 			}
 		}
@@ -186,10 +187,10 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 			
 			if (warnings) {
 				if (isEmpty(st.getScript())) {
-					return ctx.createFailureStatus("Script Task has no script");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_12);
 				}
 				if (isEmpty(st.getScriptFormat())) {
-					return ctx.createFailureStatus("Script Task has no script format");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_13);
 				}
 			}
 		}
@@ -198,10 +199,10 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 
 			if (!warnings) {
 				if (st.getOperationRef() == null) {
-					return ctx.createFailureStatus("Send Task has no operation");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_14);
 				}
 				if (st.getMessageRef() == null) {
-					return ctx.createFailureStatus("Send Task has no message");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_15);
 				}
 			}
 		}
@@ -211,7 +212,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 			if (!warnings) {
 				List<EventDefinition> eventdefs = event.getEventDefinitions();
 				if (eventdefs.size()==0) {
-					return ctx.createFailureStatus("Catch Event has no event definitions");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_16);
 				}
 				
 				for (EventDefinition ed : eventdefs) {
@@ -221,34 +222,34 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 								&& ted.getTimeDuration() == null
 								&& ted.getTimeCycle() == null
 						) {
-							return ctx.createFailureStatus("Timer Event has no timer definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_17);
 						}
 					} else if (ed instanceof SignalEventDefinition) {
 						if (((SignalEventDefinition) ed).getSignalRef() == null) {
-							return ctx.createFailureStatus("Signal Event has no signal definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_18);
 						}
 					} else if (ed instanceof ErrorEventDefinition) {
 						if (((ErrorEventDefinition) ed).getErrorRef() == null
 								|| ((ErrorEventDefinition) ed).getErrorRef().getErrorCode() == null) {
-							return ctx.createFailureStatus("Error Event has no error definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_19);
 						}
 					} else if (ed instanceof ConditionalEventDefinition) {
 						FormalExpression conditionalExp = (FormalExpression) ((ConditionalEventDefinition) ed)
 								.getCondition();
 						if (conditionalExp.getBody() == null) {
-							return ctx.createFailureStatus("Conditional Event has no condition expression");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_20);
 						}
 					} else if (ed instanceof EscalationEventDefinition) {
 						if (((EscalationEventDefinition) ed).getEscalationRef() == null) {
-							return ctx.createFailureStatus("Escalation Event has no escalation definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_21);
 						}
 					} else if (ed instanceof MessageEventDefinition) {
 						if (((MessageEventDefinition) ed).getMessageRef() == null) {
-							return ctx.createFailureStatus("Message Event has no message definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_22);
 						}
 					} else if (ed instanceof CompensateEventDefinition) {
 						if (((CompensateEventDefinition) ed).getActivityRef() == null) {
-							return ctx.createFailureStatus("Compensate Event has no activity definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_23);
 						}
 					}
 				}
@@ -260,7 +261,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 			if (!warnings) {
 				List<EventDefinition> eventdefs = event.getEventDefinitions();
 				if (eventdefs.size()==0) {
-					return ctx.createFailureStatus("Throw Event has no event definitions");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_24);
 				}
 
 				for (EventDefinition ed : eventdefs) {
@@ -270,34 +271,34 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 								&& ted.getTimeDuration() == null
 								&& ted.getTimeCycle() == null
 						) {
-							return ctx.createFailureStatus("Timer Event has no timer definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_25);
 						}
 					} else if (ed instanceof SignalEventDefinition) {
 						if (((SignalEventDefinition) ed).getSignalRef() == null) {
-							return ctx.createFailureStatus("Signal Event has no signal definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_26);
 						}
 					} else if (ed instanceof ErrorEventDefinition) {
 						if (((ErrorEventDefinition) ed).getErrorRef() == null
 								|| ((ErrorEventDefinition) ed).getErrorRef().getErrorCode() == null) {
-							return ctx.createFailureStatus("Error Event has no error definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_27);
 						}
 					} else if (ed instanceof ConditionalEventDefinition) {
 						FormalExpression conditionalExp = (FormalExpression) ((ConditionalEventDefinition) ed)
 								.getCondition();
 						if (conditionalExp.getBody() == null) {
-							return ctx.createFailureStatus("Conditional Event has no condition expression");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_28);
 						}
 					} else if (ed instanceof EscalationEventDefinition) {
 						if (((EscalationEventDefinition) ed).getEscalationRef() == null) {
-							return ctx.createFailureStatus("Escalation Event has no conditional escalation definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_29);
 						}
 					} else if (ed instanceof MessageEventDefinition) {
 						if (((MessageEventDefinition) ed).getMessageRef() == null) {
-							return ctx.createFailureStatus("Message Event has no conditional message definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_30);
 						}
 					} else if (ed instanceof CompensateEventDefinition) {
 						if (((CompensateEventDefinition) ed).getActivityRef() == null) {
-							return ctx.createFailureStatus("Compensate Event has no conditional activity definition");
+							return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_31);
 						}
 					}
 				}
@@ -308,10 +309,10 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 
 			if (!warnings) {
 				if (sf.getSourceRef() == null) {
-					return ctx.createFailureStatus("Sequence Flow is not connected to a source");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_32);
 				}
 				if (sf.getTargetRef() == null) {
-					return ctx.createFailureStatus("Sequence Flow is not connected to a target");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_33);
 				}
 			}
 		}
@@ -366,7 +367,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 			if (!warnings) {
 				if (ca.getCalledElementRef() == null) {
 					return ctx.createFailureStatus(
-							"Reusable Subprocess has no called element specified");
+							Messages.Bpmn2BatchValidationConstraint_34);
 				}
 			}
 		}
@@ -375,7 +376,7 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 
 			if (!warnings) {
 				if (dao.getName() == null || dao.getName().length() < 1) {
-					return ctx.createFailureStatus("Data Object has no name");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_35);
 				}
 			}
 		}
@@ -399,12 +400,12 @@ public class Bpmn2BatchValidationConstraint extends AbstractModelConstraint {
 			
 			if (needOutgoing) {
 				if ((fn.getOutgoing() == null || fn.getOutgoing().size() < 1)) {
-					return ctx.createFailureStatus("Node has no outgoing connections");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_36);
 				}
 			}
 			if (needIncoming) {
 				if ((fn.getIncoming() == null || fn.getIncoming().size() < 1)) {
-					return ctx.createFailureStatus("Node has no incoming connections");
+					return ctx.createFailureStatus(Messages.Bpmn2BatchValidationConstraint_37);
 				}
 			}
 		}

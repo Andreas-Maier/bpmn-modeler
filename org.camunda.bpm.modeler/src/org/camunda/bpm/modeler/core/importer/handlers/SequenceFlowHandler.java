@@ -10,6 +10,7 @@
 
 package org.camunda.bpm.modeler.core.importer.handlers;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.importer.ImportException;
 import org.camunda.bpm.modeler.core.importer.InvalidContentException;
 import org.camunda.bpm.modeler.core.importer.ModelImport;
@@ -36,13 +37,13 @@ public class SequenceFlowHandler extends AbstractEdgeHandler<SequenceFlow> {
 		
 		FlowNode source = bpmnElement.getSourceRef();
 		if (source == null) {
-			InvalidContentException exception = new InvalidContentException("Could not resolve source", bpmnElement);
+			InvalidContentException exception = new InvalidContentException(Messages.SequenceFlowHandler_0, bpmnElement);
 			modelImport.log(exception);
 		}
 
 		FlowNode target = bpmnElement.getTargetRef();
 		if (target == null) {
-			InvalidContentException exception = new InvalidContentException("Could not resolve target", bpmnElement);
+			InvalidContentException exception = new InvalidContentException(Messages.SequenceFlowHandler_1, bpmnElement);
 			modelImport.log(exception);
 		}
 		
@@ -53,7 +54,7 @@ public class SequenceFlowHandler extends AbstractEdgeHandler<SequenceFlow> {
 			Connection connection = createConnectionAndSetBendpoints(edge, sourcePictogram, targetPictogram);
 			return connection;	
 		} else {
-			modelImport.log(new ImportException("Source or target invalid", edge));
+			modelImport.log(new ImportException(Messages.SequenceFlowHandler_2, edge));
 			return null;
 		}
 		

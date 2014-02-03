@@ -15,11 +15,11 @@ import org.eclipse.jface.viewers.TableViewer;
  */
 public class EObjectAttributeTableColumnDescriptor<T extends EObject> extends TableColumnDescriptor {
 
-	private EStructuralFeature feature;
+	private final EStructuralFeature feature;
 
 	private EditingSupportProvider editingSupportProvider;
 	
-	public EObjectAttributeTableColumnDescriptor(EStructuralFeature feature, String title, int weight) {
+	public EObjectAttributeTableColumnDescriptor(final EStructuralFeature feature, final String title, final int weight) {
 		super(title, weight);
 
 		this.feature = feature;
@@ -30,11 +30,12 @@ public class EObjectAttributeTableColumnDescriptor<T extends EObject> extends Ta
 	 * 
 	 * @return
 	 */
+	@Override
 	public ColumnLabelProvider getColumnLabelProvider() {
 		ColumnLabelProvider labelProvider = new TypedColumnLabelProvider<T>() {
 
 			@Override
-			public String getText(T element) {
+			public String getText(final T element) {
 				Object value = element.eGet(feature);
 				if (value == null) {
 					return "";
@@ -48,11 +49,12 @@ public class EObjectAttributeTableColumnDescriptor<T extends EObject> extends Ta
 	}
 	
 	@Override
-	public EditingSupport getEditingSupport(TableViewer viewer) {
+	public EditingSupport getEditingSupport(final TableViewer viewer) {
 		if (editingSupportProvider != null) {
 			return editingSupportProvider.getEditingSupport(viewer, feature);
 		} else {
-			return new EObjectAttributeEditingSupport<EObject>(viewer, feature);
+//			return new EObjectAttributeEditingSupport<EObject>(viewer, feature);
+			return null;
 		}
 	}
 
@@ -61,7 +63,7 @@ public class EObjectAttributeTableColumnDescriptor<T extends EObject> extends Ta
 	 * 
 	 * @param editingSupportProvider
 	 */
-	public void setEditingSupportProvider(EditingSupportProvider editingSupportProvider) {
+	public void setEditingSupportProvider(final EditingSupportProvider editingSupportProvider) {
 		this.editingSupportProvider = editingSupportProvider;
 	}
 	

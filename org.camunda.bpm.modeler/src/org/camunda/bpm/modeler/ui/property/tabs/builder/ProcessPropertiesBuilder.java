@@ -2,20 +2,18 @@ package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.utils.ModelUtil;
 import org.camunda.bpm.modeler.ui.change.filter.FeatureChangeFilter;
 import org.camunda.bpm.modeler.ui.change.filter.IsManyAttributeAnyChildChangeFilter;
+import org.camunda.bpm.modeler.ui.property.tabs.builder.table.EObjectTableBuilder;
 import org.camunda.bpm.modeler.ui.property.tabs.builder.table.EObjectTableBuilder.ContentProvider;
-import org.camunda.bpm.modeler.ui.property.tabs.builder.table.EObjectTableBuilder.DeleteRowHandler;
-import org.camunda.bpm.modeler.ui.property.tabs.builder.table.EditableEObjectTableBuilder;
-import org.camunda.bpm.modeler.ui.property.tabs.tables.EditableTableDescriptor.ElementFactory;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.Bpmn2Package;
-import org.eclipse.bpmn2.DataObject;
 import org.eclipse.bpmn2.DataObjectReference;
-import org.eclipse.bpmn2.FlowElement;
 import org.eclipse.bpmn2.Process;
+import org.eclipse.bpmn2.Property;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -34,93 +32,91 @@ import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.MessageBox;
 
 public class ProcessPropertiesBuilder extends AbstractPropertiesBuilder<Process> {
 
 	private static final EStructuralFeature IS_EXECUTABLE = Bpmn2Package.eINSTANCE.getProcess_IsExecutable();
 
-	private static final EStructuralFeature FLOW_ELEMENTS_FEATURE = Bpmn2Package.eINSTANCE.getFlowElementsContainer_FlowElements();
+	private static final EStructuralFeature FLOW_ELEMENTS_FEATURE = Bpmn2Package.eINSTANCE.getProcess_Properties();
 
-	private static final String[] DATA_OBJECT_TABLE_HEADERS = { "name" };
+	private static final String[] DATA_OBJECT_TABLE_HEADERS = { "Name" }; //$NON-NLS-1$
 
 	private static final EStructuralFeature[] DATA_OBJECT_FEATURES = {
-		Bpmn2Package.eINSTANCE.getFlowElement_Name() };
+		Bpmn2Package.eINSTANCE.getProperty_Name() };
 
-	public ProcessPropertiesBuilder(Composite parent, GFPropertySection section, Process bo) {
+	public ProcessPropertiesBuilder(final Composite parent, final GFPropertySection section, final Process bo) {
 		super(parent, section, bo);
 	}
 
 	@Override
 	public void create() {
-		PropertyUtil.createCheckbox(section, parent, "Is Executable", IS_EXECUTABLE, bo);
+		PropertyUtil.createCheckbox(section, parent, Messages.ProcessPropertiesBuilder_1, IS_EXECUTABLE, bo);
 		
 		createDataObjectMappingsTable();
 	}
 
 	public void createDataObjectMappingsTable() {
-		EClass dataObjectECls = Bpmn2Package.eINSTANCE.getDataObject();
-		createMappingsTable(section, parent, DataObject.class, "Data Objects", dataObjectECls, FLOW_ELEMENTS_FEATURE, DATA_OBJECT_FEATURES, DATA_OBJECT_TABLE_HEADERS);
+		EClass dataObjectECls = Bpmn2Package.eINSTANCE.getProperty();
+		createMappingsTable(section, parent, Property.class, Messages.ProcessPropertiesBuilder_2, dataObjectECls, FLOW_ELEMENTS_FEATURE, DATA_OBJECT_FEATURES, DATA_OBJECT_TABLE_HEADERS);
 	}
 
 	protected <T extends EObject> void createMappingsTable(
-			GFPropertySection section, final Composite parent,
-			final Class<T> typeCls, String label, final EClass typeECls,
-			final EStructuralFeature feature, EStructuralFeature[] columnFeatures, String[] columnLabels) {
+			final GFPropertySection section, final Composite parent,
+			final Class<T> typeCls, final String label, final EClass typeECls,
+			final EStructuralFeature feature, final EStructuralFeature[] columnFeatures, final String[] columnLabels) {
 
 		// composite for mappings table
 		final Composite composite = PropertyUtil.createStandardComposite(section, parent);
 
-		ElementFactory<T> elementFactory = new ElementFactory<T>() {
-
-			@Override
-			public T create() {
-				T instance = (T) transactionalCreateType(typeECls, feature);
-				return instance;
-			}
-		};
+//		ElementFactory<T> elementFactory = new ElementFactory<T>() {
+//
+//			@Override
+//			public T create() {
+//				T instance = (T) transactionalCreateType(typeECls, feature);
+//				return instance;
+//			}
+//		};
 
 		final ContentProvider<T> contentProvider = new ContentProvider<T>() {
 
 			@Override
 			public List<T> getContents() {
-				return typeCls != DataObject.class ? ModelUtil.getAllFlowElements(bo, typeCls) : ModelUtil.getAllReachableObjects(bo, typeCls);
+				return (List<T>) ModelUtil.getAllProperties(bo);
 			}
 		};
 
-		DeleteRowHandler<T> deleteHandler = new DeleteRowHandler<T>() {
+//		DeleteRowHandler<T> deleteHandler = new DeleteRowHandler<T>() {
+//
+//			@Override
+//			public void rowDeleted(final T element) {
+//				transactionalRemoveMapping(element, feature);
+//			}
+//
+//			@Override
+//			public boolean canDelete(final T element) {
+//				// create dialog with ok and cancel button and warning icon
+//				MessageBox dialog = new MessageBox(parent.getShell(), SWT.ICON_WARNING | SWT.OK| SWT.CANCEL);
+//				dialog.setMessage(Messages.ProcessPropertiesBuilder_3);
+//
+//				// open dialog and await user selection
+//				int returnCode = dialog.open();
+//				if (returnCode == SWT.OK) {
+//					return true;
+//				}
+//
+//				return false;
+//			}
+//		};
 
-			@Override
-			public void rowDeleted(T element) {
-				transactionalRemoveMapping(element, feature);
-			}
-
-			@Override
-			public boolean canDelete(T element) {
-				// create dialog with ok and cancel button and warning icon
-				MessageBox dialog = new MessageBox(parent.getShell(), SWT.ICON_WARNING | SWT.OK| SWT.CANCEL);
-				dialog.setMessage("Do you really want to delete this data object? If you delete it, all data object references referencing this data object will be deleted, too!");
-
-				// open dialog and await user selection
-				int returnCode = dialog.open();
-				if (returnCode == SWT.OK) {
-					return true;
-				}
-
-				return false;
-			}
-		};
-
-		EditableEObjectTableBuilder<T> builder = new EditableEObjectTableBuilder<T>(section, composite, typeCls);
+		EObjectTableBuilder<T> builder = new EObjectTableBuilder<T>(section, composite, typeCls);
 
 		builder
-			.elementFactory(elementFactory)
+//			.elementFactory(elementFactory)
 			.contentProvider(contentProvider)
 			.columnFeatures(columnFeatures)
 			.columnLabels(columnLabels)
-			.deleteRowHandler(deleteHandler)
+//			.deleteRowHandler(deleteHandler)
 			.model(bo)
 			.changeFilter(
 				new IsManyAttributeAnyChildChangeFilter(bo, feature)
@@ -154,8 +150,8 @@ public class ProcessPropertiesBuilder extends AbstractPropertiesBuilder<Process>
 		});
 	}
 
-	private EObject transactionalCreateType(EClass typeCls, final EStructuralFeature feature) {
-		final FlowElement instance = (FlowElement) Bpmn2Factory.eINSTANCE.create(typeCls);
+	private EObject transactionalCreateType(final EClass typeCls, final EStructuralFeature feature) {
+		final Property instance = (Property) Bpmn2Factory.eINSTANCE.create(typeCls);
 
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(bo);
 		editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
@@ -172,7 +168,7 @@ public class ProcessPropertiesBuilder extends AbstractPropertiesBuilder<Process>
 		return instance;
 	}
 
-	private void removeDangelingObjectRefs(EObject element) {
+	private void removeDangelingObjectRefs(final EObject element) {
 		// get the DiagramEditor to be able to get the feature provider
 		DiagramEditor editor = ModelUtil.getEditor(bo);
 		IDiagramTypeProvider diagramTypeProvider = editor.getDiagramTypeProvider();

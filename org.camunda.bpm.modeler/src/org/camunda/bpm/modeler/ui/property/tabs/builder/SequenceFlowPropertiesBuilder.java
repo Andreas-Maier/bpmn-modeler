@@ -1,5 +1,6 @@
 package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.ui.property.tabs.radio.Radio.RadioGroup;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
 import org.eclipse.bpmn2.Bpmn2Package;
@@ -20,7 +21,7 @@ public class SequenceFlowPropertiesBuilder extends
 		AbstractExtensionAwarePropertiesBuilder {
 
 	private static final String[] TYPE_NAMES = new String[] {
-			"User Expression", "Service Expression" };
+			Messages.SequenceFlowPropertiesBuilder_0, Messages.SequenceFlowPropertiesBuilder_1 };
 
 	private static final EStructuralFeature CONDITION_EXPRESSION_FEATURE = Bpmn2Package.eINSTANCE
 			.getSequenceFlow_ConditionExpression();
@@ -44,7 +45,7 @@ public class SequenceFlowPropertiesBuilder extends
 	public void create() {
 
 		userControl = PropertyUtil.createRadioText(section, parent, TYPE_NAMES[0], CONDITION_EXPRESSION_FEATURE, radioGroup, bo);
-		PropertyUtil.createToolTipFor(userControl, "Only possible in conbination with an exclusive user decision gateway. Enter an answer possibility.");
+		PropertyUtil.createToolTipFor(userControl, Messages.SequenceFlowPropertiesBuilder_2);
 		userControl.setEnabled(false);
 		for (Control control : userControl.getParent().getChildren()) {
 			if (control instanceof Button) {
@@ -67,7 +68,7 @@ public class SequenceFlowPropertiesBuilder extends
 		
 		serviceControl = PropertyUtil.createUnboundRadioText(section, parent, TYPE_NAMES[1], CONDITION_EXPRESSION_FEATURE, radioGroup);
 		serviceControl.setEnabled(false);
-		PropertyUtil.createToolTipFor(serviceControl, "Configure an expression evaluated by the process engine. When the expression evaluates to true, the sequence flow will be processed.");
+		PropertyUtil.createToolTipFor(serviceControl, Messages.SequenceFlowPropertiesBuilder_3);
 		for (Control control : serviceControl.getParent().getChildren()) {
 			if (control instanceof Button) {
 				serviceRadio = (Button) control;
@@ -86,12 +87,12 @@ public class SequenceFlowPropertiesBuilder extends
 				});
 			}
 		}
-		serviceConfigurationButton = addConfigureOperationButton(serviceControl, "Configure Condition");
+		serviceConfigurationButton = addConfigureOperationButton(serviceControl, Messages.SequenceFlowPropertiesBuilder_4);
 		serviceConfigurationButton.setEnabled(false);
 		final FormData layoutData = new FormData();
 		layoutData.left = new FormAttachment(serviceControl, 122, SWT.BOTTOM);
 		serviceConfigurationButton.setLayoutData(layoutData);
-		serviceConfigurationButton.setToolTipText("Configure a service condition, evaluable by the process engine.");
+		serviceConfigurationButton.setToolTipText(Messages.SequenceFlowPropertiesBuilder_5);
 	}
 
 }

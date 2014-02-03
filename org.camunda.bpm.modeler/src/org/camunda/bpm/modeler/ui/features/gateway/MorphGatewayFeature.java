@@ -1,5 +1,6 @@
 package org.camunda.bpm.modeler.ui.features.gateway;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
 import org.camunda.bpm.modeler.ui.diagram.Bpmn2FeatureProvider;
 import org.camunda.bpm.modeler.ui.features.AbstractMorphNodeFeature;
@@ -23,12 +24,12 @@ public class MorphGatewayFeature extends AbstractMorphNodeFeature<Gateway> {
 	
 	@Override
 	public String getName() {
-		return "Morph Gateway";
+		return Messages.MorphGatewayFeature_0;
 	}
 
 	@Override
 	public String getDescription() {
-		return "Change the Gateway type";
+		return Messages.MorphGatewayFeature_1;
 	}
 
 	@Override

@@ -175,15 +175,6 @@ public interface ModelFactory extends EFactory {
 	ConstraintType createConstraintType();
 
 		/**
-	 * Returns a new object of class '<em>User Task</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>User Task</em>'.
-	 * @generated
-	 */
-	UserTask createUserTask();
-
-		/**
 	 * Returns a new object of class '<em>Form Data Container</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

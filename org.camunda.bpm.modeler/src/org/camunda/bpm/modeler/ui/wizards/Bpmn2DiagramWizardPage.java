@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.wizards;
 
+import org.camunda.bpm.modeler.Messages;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -52,9 +53,9 @@ public class Bpmn2DiagramWizardPage extends WizardPage {
 	 * @param pageName
 	 */
 	public Bpmn2DiagramWizardPage(ISelection selection) {
-		super("wizardPage2");
-		setTitle("BPMN 2.0 Diagram File");
-		setDescription("Select file name.");
+		super("wizardPage2"); //$NON-NLS-1$
+		setTitle(Messages.Bpmn2DiagramWizardPage_1);
+		setDescription(Messages.Bpmn2DiagramWizardPage_2);
 		this.selection = selection;
 	}
 
@@ -69,7 +70,7 @@ public class Bpmn2DiagramWizardPage extends WizardPage {
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
 		Label label = new Label(container, SWT.NULL);
-		label.setText("&Location:");
+		label.setText(Messages.Bpmn2DiagramWizardPage_3);
 
 		containerText = new Text(container, SWT.BORDER | SWT.SINGLE);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -82,7 +83,7 @@ public class Bpmn2DiagramWizardPage extends WizardPage {
 		});
 
 		Button button = new Button(container, SWT.PUSH);
-		button.setText("Browse...");
+		button.setText(Messages.Bpmn2DiagramWizardPage_4);
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -90,7 +91,7 @@ public class Bpmn2DiagramWizardPage extends WizardPage {
 			}
 		});
 		label = new Label(container, SWT.NULL);
-		label.setText("&File name:");
+		label.setText(Messages.Bpmn2DiagramWizardPage_5);
 
 		fileText = new Text(container, SWT.BORDER | SWT.SINGLE);
 		fileText.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false, 2, 1));
@@ -112,12 +113,12 @@ public class Bpmn2DiagramWizardPage extends WizardPage {
 	 */
 
 	private void updatePageDescription() {
-		setDescription("Enter a file name for the new diagram");
+		setDescription(Messages.Bpmn2DiagramWizardPage_6);
 	}
 	
 	private void updateFilename() {
-		String fileType = "newDiagram";
-		String filename = fileType+".bpmn";
+		String fileType = Messages.Bpmn2DiagramWizardPage_7;
+		String filename = fileType+".bpmn"; //$NON-NLS-1$
 		
 		IContainer container = getFileContainer();
 		if (container!=null) {
@@ -125,7 +126,7 @@ public class Bpmn2DiagramWizardPage extends WizardPage {
 			if (text!=null && !text.equals(containerText.getText()))
 				containerText.setText(text);
 			for (int i=1; ; ++i) {
-				filename = fileType+"_" + i + ".bpmn";
+				filename = fileType+"_" + i + ".bpmn"; //$NON-NLS-1$ //$NON-NLS-2$
 				IResource file = container.findMember(filename);
 				if (file==null) {
 					break;
@@ -178,7 +179,7 @@ public class Bpmn2DiagramWizardPage extends WizardPage {
 
 	private void handleBrowse() {
 		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace()
-				.getRoot(), false, "Select Folder for the diagram");
+				.getRoot(), false, Messages.Bpmn2DiagramWizardPage_11);
 		if (dialog.open() == Window.OK) {
 			Object[] result = dialog.getResult();
 			if (result.length == 1) {
@@ -197,30 +198,30 @@ public class Bpmn2DiagramWizardPage extends WizardPage {
 		String fileName = getFileName();
 
 		if (getContainerName().length() == 0) {
-			updateStatus("Folder must be specified");
+			updateStatus(Messages.Bpmn2DiagramWizardPage_12);
 			return;
 		}
 		if (diagramContainer == null || (diagramContainer.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0) {
-			updateStatus("Folder must exist");
+			updateStatus(Messages.Bpmn2DiagramWizardPage_13);
 			return;
 		}
 		if (!diagramContainer.isAccessible()) {
-			updateStatus("Project must be writable");
+			updateStatus(Messages.Bpmn2DiagramWizardPage_14);
 			return;
 		}
 		if (fileName.length() == 0) {
-			updateStatus("Name must be specified");
+			updateStatus(Messages.Bpmn2DiagramWizardPage_15);
 			return;
 		}
 		if (fileName.replace('\\', '/').indexOf('/', 1) > 0) {
-			updateStatus("Name must be valid");
+			updateStatus(Messages.Bpmn2DiagramWizardPage_16);
 			return;
 		}
 		int dotLoc = fileName.lastIndexOf('.');
 		if (dotLoc != -1) {
 			String ext = fileName.substring(dotLoc + 1);
-			if (ext.equalsIgnoreCase("bpmn") == false && ext.equalsIgnoreCase("bpmn2") == false) {
-				updateStatus("File extension must be \"bpmn\" or \"bpmn2\"");
+			if (ext.equalsIgnoreCase("bpmn") == false && ext.equalsIgnoreCase("bpmn2") == false) { //$NON-NLS-1$ //$NON-NLS-2$
+				updateStatus(Messages.Bpmn2DiagramWizardPage_19);
 				return;
 			}
 		}
@@ -238,7 +239,7 @@ public class Bpmn2DiagramWizardPage extends WizardPage {
 				return true;
 			}
 			else
-				setErrorMessage("The file "+filename+" already exists in this project");
+				setErrorMessage(Messages.Bpmn2DiagramWizardPage_20+filename+Messages.Bpmn2DiagramWizardPage_21);
 		}
 		return false;
 	}

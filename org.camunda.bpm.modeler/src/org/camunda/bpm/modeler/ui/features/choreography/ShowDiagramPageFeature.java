@@ -1,5 +1,6 @@
 package org.camunda.bpm.modeler.ui.features.choreography;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.di.DIUtils;
 import org.camunda.bpm.modeler.ui.ImageProvider;
 import org.eclipse.bpmn2.BaseElement;
@@ -20,12 +21,12 @@ public class ShowDiagramPageFeature extends AbstractCustomFeature {
 
 	@Override
 	public String getName() {
-		return "Show Diagram";
+		return Messages.ShowDiagramPageFeature_0;
 	}
 
 	@Override
 	public String getDescription() {
-		return "Switch to the Diagram Page that contains the details of this activity";
+		return Messages.ShowDiagramPageFeature_1;
 	}
 
 	@Override

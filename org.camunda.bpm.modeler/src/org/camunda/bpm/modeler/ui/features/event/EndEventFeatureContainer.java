@@ -15,6 +15,7 @@ package org.camunda.bpm.modeler.ui.features.event;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.api.IDecorateFeature;
 import org.camunda.bpm.modeler.core.features.event.AbstractCreateEventFeature;
 import org.camunda.bpm.modeler.core.features.event.AddEventFeature;
@@ -67,7 +68,7 @@ public class EndEventFeatureContainer extends AbstractEventFeatureContainer {
 	public static class CreateEndEventFeature extends AbstractCreateEventFeature<EndEvent> {
 
 		public CreateEndEventFeature(IFeatureProvider fp) {
-			super(fp, "End Event", "Indicates the end of a process or choreography");
+			super(fp, Messages.EndEventFeatureContainer_0, Messages.EndEventFeatureContainer_1);
 		}
 
 		@Override

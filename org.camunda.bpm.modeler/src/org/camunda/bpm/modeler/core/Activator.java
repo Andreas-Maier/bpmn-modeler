@@ -16,6 +16,7 @@ import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.preferences.Bpmn2Preferences;
 import org.camunda.bpm.modeler.plugin.core.ExtensionRegistry;
 import org.camunda.bpm.modeler.plugin.core.Extensions;
@@ -40,7 +41,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// plugin id
-	public static final String PLUGIN_ID = "org.camunda.bpm.modeler"; 
+	public static final String PLUGIN_ID = "org.camunda.bpm.modeler";  //$NON-NLS-1$
 
 	// shared instance
 	private static Activator INSTANCE;
@@ -112,7 +113,7 @@ public class Activator extends AbstractUIPlugin {
 	public static void showErrorWithLogging(final Exception e){
 		Status s = createStatus(e);
 		logStatus(s);
-		ErrorDialog.openError(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "An error occured", null, s);
+		ErrorDialog.openError(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.Activator_ERROR_OCCURED, null, s);
 	}
 	
 	/**
@@ -133,7 +134,7 @@ public class Activator extends AbstractUIPlugin {
 				continue;
 			}
 			String name = f.getName();
-			if (name.startsWith("ICON_") || name.startsWith("CURSOR_") || name.startsWith("IMAGE_")) {   //$NON-NLS-1$ //$NON-NLS-2$
+			if (name.startsWith("ICON_") || name.startsWith("CURSOR_") || name.startsWith("IMAGE_")) {   //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				try {
 					String value = (String) f.get(null);
 					createImageDescriptor(registry, value, baseURL);

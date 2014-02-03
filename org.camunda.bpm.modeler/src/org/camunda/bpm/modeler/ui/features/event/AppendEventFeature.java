@@ -13,6 +13,7 @@
 
 package org.camunda.bpm.modeler.ui.features.event;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.ui.ImageProvider;
 import org.camunda.bpm.modeler.ui.features.AbstractAppendNodeNodeFeature;
 import org.eclipse.bpmn2.Bpmn2Package;
@@ -54,12 +55,12 @@ public class AppendEventFeature extends AbstractAppendNodeNodeFeature<Event> {
 
 	@Override
 	public String getName() {
-		return "Append Event";
+		return Messages.AppendEventFeature_0;
 	}
 
 	@Override
 	public String getDescription() {
-		return "Create a new Event and connect it to this item";
+		return Messages.AppendEventFeature_1;
 	}
 
 	@Override

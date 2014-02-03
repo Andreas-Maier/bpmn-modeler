@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.artifact;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.artifact.AbstractCreateArtifactFeature;
 import org.camunda.bpm.modeler.core.utils.FeatureSupport;
 import org.camunda.bpm.modeler.ui.ImageProvider;
@@ -24,7 +25,7 @@ import org.eclipse.graphiti.features.context.ICreateContext;
 public class CreateTextAnnotationFeature extends AbstractCreateArtifactFeature<TextAnnotation> {
 
 	public CreateTextAnnotationFeature(IFeatureProvider fp) {
-		super(fp, "Annotation", "Provide additional information");
+		super(fp, Messages.CreateTextAnnotationFeature_0, Messages.CreateTextAnnotationFeature_1);
 	}
 
 	@Override

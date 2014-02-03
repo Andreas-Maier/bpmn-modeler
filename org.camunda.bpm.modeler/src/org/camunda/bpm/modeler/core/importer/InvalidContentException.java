@@ -10,6 +10,7 @@
 
 package org.camunda.bpm.modeler.core.importer;
 
+import org.camunda.bpm.modeler.Messages;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -25,7 +26,7 @@ public class InvalidContentException extends ImportException {
 	}
 	
 	public InvalidContentException(EObject element) {
-		super("Element has invalid content", element);
+		super(Messages.InvalidContentException_0, element);
 	}
 	
 	public InvalidContentException(String message, EObject element) {

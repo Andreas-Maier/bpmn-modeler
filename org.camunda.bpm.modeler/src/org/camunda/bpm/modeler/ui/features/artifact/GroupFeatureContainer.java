@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.artifact;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.AbstractBpmn2AddShapeFeature;
 import org.camunda.bpm.modeler.core.features.DefaultBpmn2MoveShapeFeature;
 import org.camunda.bpm.modeler.core.features.DefaultBpmn2ResizeShapeFeature;
@@ -134,7 +135,7 @@ public class GroupFeatureContainer extends BaseElementFeatureContainer {
 	public static class CreateGroupFeature extends AbstractCreateArtifactFeature<Group> {
 
 		public CreateGroupFeature(IFeatureProvider fp) {
-			super(fp, "Group", "Visually groups elements");
+			super(fp, Messages.GroupFeatureContainer_0, Messages.GroupFeatureContainer_1);
 		}
 
 		@Override

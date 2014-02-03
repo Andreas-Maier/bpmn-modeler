@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.event.definitions;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.event.definitions.AbstractEventDefinitionFeatureContainer;
 import org.camunda.bpm.modeler.core.features.event.definitions.CreateEventDefinition;
 import org.camunda.bpm.modeler.core.features.event.definitions.DecorationAlgorithm;
@@ -79,7 +80,7 @@ public class TerminateEventDefinitionFeatureContainer extends AbstractEventDefin
 	public static class CreateTerminateEventDefinition extends CreateEventDefinition<TerminateEventDefinition> {
 
 		public CreateTerminateEventDefinition(IFeatureProvider fp) {
-			super(fp, "Terminate Definition", "Adds terminate trigger to event");
+			super(fp, Messages.TerminateEventDefinitionFeatureContainer_0, Messages.TerminateEventDefinitionFeatureContainer_1);
 		}
 
 		@Override

@@ -271,7 +271,7 @@
         containment="true" resolveProxies="false">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="element"/>
-        <details key="name" value="clientOperation"/>
+        <details key="name" value="operation"/>
         <details key="namespace" value="http://www.cas.de/open"/>
       </eAnnotations>
     </eStructuralFeatures>
@@ -280,7 +280,7 @@
         containment="true" resolveProxies="false">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="element"/>
-        <details key="name" value="serviceOperation"/>
+        <details key="name" value="operation"/>
         <details key="namespace" value="http://www.cas.de/open"/>
       </eAnnotations>
     </eStructuralFeatures>
@@ -920,13 +920,6 @@
         <details key="name" value="config"/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UserTask" eSuperTypes="../../org.eclipse.bpmn2/model/BPMN20.ecore#//UserTask #//FormDataContainer">
-    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details key="name" value=""/>
-      <details key="kind" value="mixed"/>
-      <details key="namespace" value="##targetNamespace"/>
-    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormDataContainer"/>
   <eSubpackages name="fox" nsURI="http://www.camunda.com/fox" nsPrefix="fox">

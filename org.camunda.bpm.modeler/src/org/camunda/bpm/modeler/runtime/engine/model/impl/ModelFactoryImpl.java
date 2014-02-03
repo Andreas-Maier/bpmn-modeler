@@ -77,7 +77,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.PROPERTY_TYPE: return createPropertyType();
 			case ModelPackage.VALIDATION_TYPE: return createValidationType();
 			case ModelPackage.CONSTRAINT_TYPE: return createConstraintType();
-			case ModelPackage.USER_TASK: return createUserTask();
 			case ModelPackage.FORM_DATA_CONTAINER: return createFormDataContainer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -322,16 +321,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public ConstraintType createConstraintType() {
 		ConstraintTypeImpl constraintType = new ConstraintTypeImpl();
 		return constraintType;
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UserTask createUserTask() {
-		UserTaskImpl userTask = new UserTaskImpl();
-		return userTask;
 	}
 
 		/**

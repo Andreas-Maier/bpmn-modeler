@@ -1,7 +1,6 @@
 package org.camunda.bpm.modeler.ui.features;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.camunda.bpm.modeler.core.features.AbstractBpmn2CreateFeature;
@@ -12,6 +11,7 @@ import org.camunda.bpm.modeler.core.utils.ContextUtil;
 import org.camunda.bpm.modeler.core.utils.Images;
 import org.camunda.bpm.modeler.core.utils.ModelUtil;
 import org.camunda.bpm.modeler.core.utils.transform.Transformer;
+import org.camunda.bpm.modeler.ui.FeatureMap;
 import org.camunda.bpm.modeler.ui.ImageProvider;
 import org.camunda.bpm.modeler.ui.diagram.Bpmn2FeatureProvider;
 import org.camunda.bpm.modeler.ui.diagram.editor.Bpmn2Editor;
@@ -49,12 +49,12 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 	protected boolean changed = false;
 	protected ILabelProvider labelProvider;
 	
-	public AbstractMorphNodeFeature(IFeatureProvider fp) {
+	public AbstractMorphNodeFeature(final IFeatureProvider fp) {
 		super(fp);
 	}
 
 	@Override
-	public boolean canExecute(ICustomContext context) {
+	public boolean canExecute(final ICustomContext context) {
 		PictogramElement[] pictogramElements = context.getPictogramElements();
 		
 		if (pictogramElements == null || pictogramElements.length != 1) {
@@ -83,7 +83,7 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 	}
 
 	@Override
-	public void execute(ICustomContext context) {
+	public void execute(final ICustomContext context) {
 		PictogramElement[] pictogramElements = context.getPictogramElements();
 		Shape oldShape = (Shape) pictogramElements[0];
 		
@@ -119,13 +119,14 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 	
 	public abstract EClass getBusinessObjectClass();
 	
-	public List<MorphOption> getOptions(EObject bo) {
+	public List<MorphOption> getOptions(final EObject bo) {
 		EClass newType = getBusinessObjectClass();
 		
 		List<MorphOption> availableTypes = new ArrayList<MorphOption>();
 		
 		List<EClassifier> classifiers = Bpmn2Package.eINSTANCE.getEClassifiers();
 		List<EClass> excludeTypes = excludeTypes(bo);
+		excludeTypes.addAll(excludeUnsupportedTypes());
 		
 		for (EClassifier classifier : classifiers) {
 			
@@ -152,11 +153,24 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 		
 	}
 	
-	protected List<EClass> excludeTypes(EObject bo) {
-		return Collections.emptyList();
+	protected List<EClass> excludeTypes(final EObject bo) {
+		// Don't return the emptyList. That would cause an unsupported operation exception
+		return new ArrayList<>();
 	}
 	
-	protected MorphOption selectOption(List<MorphOption> availableCls) {
+	private List<EClass> excludeUnsupportedTypes() {
+		List<EClass> excludes = new ArrayList<>();
+		excludes.addAll(FeatureMap.EXCLUDE_CONNECTORS);
+		excludes.addAll(FeatureMap.EXCLUDE_DATA);
+		excludes.addAll(FeatureMap.EXCLUDE_EVENT_DEFINITIONS);
+		excludes.addAll(FeatureMap.EXCLUDE_EVENTS);
+		excludes.addAll(FeatureMap.EXCLUDE_GATEWAYS);
+		excludes.addAll(FeatureMap.EXCLUDE_OTHER);
+		excludes.addAll(FeatureMap.EXCLUDE_TASKS);
+		return excludes;
+	}
+	
+	protected MorphOption selectOption(final List<MorphOption> availableCls) {
 		PopupMenu popupMenu = new PopupMenu(availableCls, getLabelProvider());
 		boolean showPopup = popupMenu.show(Display.getCurrent().getActiveShell());
 		if (showPopup) {
@@ -167,7 +181,7 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected T morph(EObject target, MorphOption option) {
+	protected T morph(final EObject target, final MorphOption option) {
 		EClass newType = option.getNewType();
 		
 		if (!newType.equals(target.eClass())) {
@@ -194,7 +208,7 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 	 * 
 	 * @param pictogramElement
 	 */
-	protected void cleanUp(PictogramElement pictogramElement) {
+	protected void cleanUp(final PictogramElement pictogramElement) {
 		
 	}
 	
@@ -205,7 +219,7 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 	 * @param oldShape
 	 * @param newShape
 	 */
-	protected final void reconnect(EObject bo, Shape oldShape, Shape newShape) {
+	protected final void reconnect(final EObject bo, final Shape oldShape, final Shape newShape) {
 		List<Anchor> oldAnchors = oldShape.getAnchors();
 		
 		for (Anchor anchor : oldAnchors) {	
@@ -214,15 +228,15 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 		}
 	}
 
-	protected void fixOutgoingConnections(EList<Connection> outgoingConnections, Shape newTarget) {
+	protected void fixOutgoingConnections(final EList<Connection> outgoingConnections, final Shape newTarget) {
 		fixConnections(outgoingConnections, newTarget, false);
 	}
 
-	protected void fixIncomingConnections(EList<Connection> incomingConnections, Shape newTarget) {
+	protected void fixIncomingConnections(final EList<Connection> incomingConnections, final Shape newTarget) {
 		fixConnections(incomingConnections, newTarget, true);
 	}
 
-	private void fixConnections(List<Connection> connections, Shape newTarget, boolean incoming) {
+	private void fixConnections(final List<Connection> connections, final Shape newTarget, final boolean incoming) {
 		
 		// create a copy to avoid concurent modification excpetion
 		List<Connection> connectionsCopy = new ArrayList<Connection>(connections);
@@ -236,7 +250,7 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 		}
 	}
 	
-	protected boolean isValidConnection(Connection connection, Shape newTarget, boolean incoming) {
+	protected boolean isValidConnection(final Connection connection, final Shape newTarget, final boolean incoming) {
 
 		CreateConnectionContext context = new CreateConnectionContext();
 		context.setSourceAnchor(connection.getStart());
@@ -251,17 +265,17 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 		return operation.canExecute(context);
 	}
 
-	protected final void removePictogramElement(PictogramElement pictogramElement) {
+	protected final void removePictogramElement(final PictogramElement pictogramElement) {
 		IRemoveContext context = new RemoveContext(pictogramElement);
 		IRemoveFeature removeFeature = getFeatureProvider().getRemoveFeature(context);
 		removeFeature.remove(context);
 	}
 
-	protected void deleteConnection(Connection connection) {
+	protected void deleteConnection(final Connection connection) {
 		deletePictogramElement(connection);
 	}
 	
-	protected final void deletePictogramElement(PictogramElement pictogramElement) {
+	protected final void deletePictogramElement(final PictogramElement pictogramElement) {
 		IDeleteContext context = new DeleteContext(pictogramElement);
 		IDeleteFeature deleteFeature = getFeatureProvider().getDeleteFeature(context);
 		deleteFeature.delete(context);		
@@ -276,14 +290,14 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 	
 	protected class CreateLabelProvider extends LabelProvider {
 		
-		private Bpmn2FeatureProvider fp;
+		private final Bpmn2FeatureProvider fp;
 
-		public CreateLabelProvider(Bpmn2FeatureProvider fp) {
+		public CreateLabelProvider(final Bpmn2FeatureProvider fp) {
 			this.fp = fp;
 		}
 
 		@Override
-		public Image getImage(Object element) {
+		public Image getImage(final Object element) {
 			if (!(element instanceof MorphOption)) {
 				return null;
 			}
@@ -306,7 +320,7 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 	protected class LabelProvider extends org.eclipse.jface.viewers.LabelProvider {
 		
 		@Override
-		public String getText(Object arg0) {
+		public String getText(final Object arg0) {
 			if (!(arg0 instanceof AbstractMorphNodeFeature.MorphOption)) {
 				return "";
 			}
@@ -314,17 +328,17 @@ public abstract class AbstractMorphNodeFeature<T extends FlowNode> extends Abstr
 			return option.getName();
 		}
 		
-		protected Image getImageForId(String imageId) {
+		protected Image getImageForId(final String imageId) {
 			return Images.getById(Bpmn2Editor.EDITOR_ID, imageId);
 		}
 	}
 	
 	public static class MorphOption {
 		
-		private String name;
-		private EClass newType;
+		private final String name;
+		private final EClass newType;
 		
-		public MorphOption(String name, EClass newType) {
+		public MorphOption(final String name, final EClass newType) {
 			this.name = name;
 			this.newType = newType;
 		}

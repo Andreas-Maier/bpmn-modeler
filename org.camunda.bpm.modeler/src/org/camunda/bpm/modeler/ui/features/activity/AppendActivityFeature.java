@@ -13,6 +13,7 @@
 
 package org.camunda.bpm.modeler.ui.features.activity;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.ui.ImageProvider;
 import org.camunda.bpm.modeler.ui.features.AbstractAppendNodeNodeFeature;
 import org.eclipse.bpmn2.Activity;
@@ -35,12 +36,12 @@ public class AppendActivityFeature extends AbstractAppendNodeNodeFeature<Activit
 
 	@Override
 	public String getName() {
-		return "Append Activity";
+		return Messages.AppendActivityFeature_0;
 	}
 
 	@Override
 	public String getDescription() {
-		return "Create a new Activity and connect it to this item";
+		return Messages.AppendActivityFeature_1;
 	}
 
 	@Override

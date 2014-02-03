@@ -10,6 +10,7 @@
 
 package org.camunda.bpm.modeler.core.importer.handlers;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.Activator;
 import org.camunda.bpm.modeler.core.di.DIUtils;
 import org.camunda.bpm.modeler.core.importer.ModelImport;
@@ -49,7 +50,7 @@ public abstract class AbstractShapeHandler<T extends BaseElement> extends Abstra
 		if (diagramElement instanceof BPMNShape) {
 			return handleShape(bpmnElement, (BPMNShape) diagramElement, container);
 		} else {
-			throw new IllegalArgumentException("Handling instances of BPMNShape only");
+			throw new IllegalArgumentException(Messages.AbstractShapeHandler_0);
 		}
 	}
 	
@@ -83,7 +84,7 @@ public abstract class AbstractShapeHandler<T extends BaseElement> extends Abstra
 			return pictogramElement;
 			
 		} else {
-			Activator.logStatus(new Status(IStatus.WARNING, Activator.PLUGIN_ID, "Element not supported: "
+			Activator.logStatus(new Status(IStatus.WARNING, Activator.PLUGIN_ID, Messages.AbstractShapeHandler_1
 					+ bpmnElement.eClass().getName()));
 			
 			return null;
@@ -148,7 +149,7 @@ public abstract class AbstractShapeHandler<T extends BaseElement> extends Abstra
 		if (addFeature.canAdd(context)) {
 			return createPictogramElement(context, addFeature);
 		} else { 
-			String message = String.format("Add feature <%s> cannot add context <%s>", addFeature.getClass().getName(), context);
+			String message = String.format(Messages.AbstractShapeHandler_2, addFeature.getClass().getName(), context);
 			
 			Activator.logStatus(new Status(IStatus.WARNING, Activator.PLUGIN_ID, message));
 			return null;

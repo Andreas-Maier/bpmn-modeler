@@ -1,4 +1,4 @@
-package org.camunda.bpm.modeler;
+package org.camunda.bpm.modeler.core;
 
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;

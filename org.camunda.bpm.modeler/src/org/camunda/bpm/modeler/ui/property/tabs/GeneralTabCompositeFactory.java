@@ -61,7 +61,10 @@ public class GeneralTabCompositeFactory extends AbstractTabCompositeFactory<Base
 	@Override
 	public Composite createCompositeForBusinessObject(final BaseElement businessObject) {
 		createIdField(businessObject);
-		createNameField(businessObject);
+		// Don't add a name field to a sequence flow .. that only confuses people...
+		if (!(businessObject instanceof SequenceFlow)) {
+			createNameField(businessObject);
+		}
 		
 		if (businessObject instanceof Participant) {
 			Participant participant = (Participant) businessObject;

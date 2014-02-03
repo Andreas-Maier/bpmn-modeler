@@ -1,5 +1,6 @@
 package org.camunda.bpm.modeler.ui.features.validation;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
 import org.camunda.bpm.modeler.core.validation.Bpmn2ProjectValidator;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -26,7 +27,7 @@ public class ValidateDiagramFeature extends AbstractCustomFeature {
 		
 	@Override
 	public String getName() {
-		return "Validate";
+		return Messages.ValidateDiagramFeature_0;
 	}
 	
 	@Override

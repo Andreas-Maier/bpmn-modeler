@@ -15,6 +15,7 @@ package org.camunda.bpm.modeler.core.features;
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.api.IBpmn2CreateFeature;
 import org.camunda.bpm.modeler.core.runtime.ModelEnablementDescriptor;
 import org.camunda.bpm.modeler.core.runtime.TargetRuntime;
@@ -40,7 +41,7 @@ public abstract class AbstractBpmn2CreateFeature<T extends BaseElement>
 		extends AbstractCreateFeature
 		implements IBpmn2CreateFeature<T, ICreateContext> {
 	
-	public static final String SKIP_ADD_GRAPHICS = "DONT_ADD";
+	public static final String SKIP_ADD_GRAPHICS = "DONT_ADD"; //$NON-NLS-1$
 	
 	/**
 	 * @param fp
@@ -76,7 +77,7 @@ public abstract class AbstractBpmn2CreateFeature<T extends BaseElement>
 	 */
 	@Override
 	public String getCreateDescription() {
-		return "Create " + ModelUtil.toDisplayName(getBusinessObjectClass().getName());
+		return Messages.AbstractBpmn2CreateFeature_CREATE + ModelUtil.toDisplayName(getBusinessObjectClass().getName());
 	}
 	
 	@Override

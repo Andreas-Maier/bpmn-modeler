@@ -13,6 +13,7 @@
 
 package org.camunda.bpm.modeler.ui.features.gateway;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.ui.ImageProvider;
 import org.camunda.bpm.modeler.ui.features.AbstractAppendNodeNodeFeature;
 import org.eclipse.bpmn2.Bpmn2Package;
@@ -54,12 +55,12 @@ public class AppendGatewayFeature extends AbstractAppendNodeNodeFeature<Gateway>
 
 	@Override
 	public String getName() {
-		return "Append Gateway";
+		return Messages.AppendGatewayFeature_0;
 	}
 
 	@Override
 	public String getDescription() {
-		return "Create a new Gateway and connect it to this item";
+		return Messages.AppendGatewayFeature_1;
 	}
 
 	@Override

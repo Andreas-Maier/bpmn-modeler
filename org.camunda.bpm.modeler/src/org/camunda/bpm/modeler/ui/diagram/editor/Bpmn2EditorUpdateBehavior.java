@@ -45,10 +45,11 @@ public class Bpmn2EditorUpdateBehavior extends DefaultUpdateBehavior {
 	/**
 	 * @param diagramEditor
 	 */
-	public Bpmn2EditorUpdateBehavior(DiagramEditor diagramEditor) {
+	public Bpmn2EditorUpdateBehavior(final DiagramEditor diagramEditor) {
 		super(diagramEditor);
 	}
 
+	@Override
 	public TransactionalEditingDomain getEditingDomain() {
 		if (editingDomain == null)
 			createEditingDomain();
@@ -79,16 +80,28 @@ public class Bpmn2EditorUpdateBehavior extends DefaultUpdateBehavior {
 		return editingDomain;
 	}
 	
-	protected void initializeEditingDomain(TransactionalEditingDomain domain) {
+	@Override
+	protected void initializeEditingDomain(final TransactionalEditingDomain domain) {
 		// we want first crack at these notifications!
 		workspaceSynchronizer = new WorkspaceSynchronizer(getEditingDomain(),
 				new BPMN2EditorWorkspaceSynchronizerDelegate(diagramEditor));
 		super.initializeEditingDomain(domain);
 	}
 	
+	@Override
 	public void dispose() {
 		super.dispose();
 		workspaceSynchronizer.dispose();
+	}
+	
+	/**
+	 * Handles what to do with changed resources on editor activation.
+	 */
+	@Override
+	protected void handleChangedResources() {
+		if (getEditingDomain() != null && getEditingDomain().getCommandStack() != null) {
+			super.handleChangedResources();
+		}
 	}
 	
 	public class BPMN2EditorWorkspaceSynchronizerDelegate implements WorkspaceSynchronizer.Delegate {
@@ -99,23 +112,27 @@ public class Bpmn2EditorUpdateBehavior extends DefaultUpdateBehavior {
 		 * The DiagramEditorBehavior reacts on a setResourceChanged(true) if he gets
 		 * activated.
 		 */
-		public BPMN2EditorWorkspaceSynchronizerDelegate(DiagramEditor diagramEditor) {
+		public BPMN2EditorWorkspaceSynchronizerDelegate(final DiagramEditor diagramEditor) {
 			this.bpmnEditor = (Bpmn2Editor)diagramEditor;
 		}
 
+		@Override
 		public void dispose() { 
 			bpmnEditor = null;
 		}
 
-		public boolean handleResourceChanged(Resource resource) {
+		@Override
+		public boolean handleResourceChanged(final Resource resource) {
 			return bpmnEditor.handleResourceChanged(resource);
 		}
 
-		public boolean handleResourceDeleted(Resource resource) {
+		@Override
+		public boolean handleResourceDeleted(final Resource resource) {
 			return bpmnEditor.handleResourceDeleted(resource);
 		}
 
-		public boolean handleResourceMoved(Resource resource, URI newURI) {
+		@Override
+		public boolean handleResourceMoved(final Resource resource, final URI newURI) {
 			return bpmnEditor.handleResourceMoved(resource, newURI);
 		}
 

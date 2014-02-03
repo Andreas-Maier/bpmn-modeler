@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.event;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.MoveFlowNodeFeature;
 import org.camunda.bpm.modeler.core.features.MultiUpdateFeature;
 import org.camunda.bpm.modeler.core.features.event.AbstractCreateEventFeature;
@@ -44,7 +45,7 @@ import org.eclipse.graphiti.services.IPeService;
 
 public class StartEventFeatureContainer extends AbstractEventFeatureContainer {
 
-	static final String INTERRUPTING = "interrupting";
+	static final String INTERRUPTING = "interrupting"; //$NON-NLS-1$
 
 	@Override
 	public boolean canApplyTo(Object o) {
@@ -68,7 +69,7 @@ public class StartEventFeatureContainer extends AbstractEventFeatureContainer {
 				
 				// set to default so that property change is picked up in update
 				// and event is decorated accordingly
-				peService.setPropertyValue(newShape, INTERRUPTING, "true");
+				peService.setPropertyValue(newShape, INTERRUPTING, "true"); //$NON-NLS-1$
 			}
 		};
 	}
@@ -100,7 +101,7 @@ public class StartEventFeatureContainer extends AbstractEventFeatureContainer {
 	public static class CreateStartEventFeature extends AbstractCreateEventFeature<StartEvent> {
 
 		public CreateStartEventFeature(IFeatureProvider fp) {
-			super(fp, "Start Event", "Indicates the start of a process or choreography");
+			super(fp, Messages.StartEventFeatureContainer_2, Messages.StartEventFeatureContainer_3);
 		}
 
 		@Override

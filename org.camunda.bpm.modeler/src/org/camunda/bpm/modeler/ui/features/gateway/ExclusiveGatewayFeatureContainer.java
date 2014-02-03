@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.gateway;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.api.IDecorateFeature;
 import org.camunda.bpm.modeler.core.features.gateway.AbstractCreateGatewayFeature;
 import org.camunda.bpm.modeler.core.features.gateway.AddGatewayFeature;
@@ -70,7 +71,7 @@ public class ExclusiveGatewayFeatureContainer extends AbstractGatewayFeatureCont
 	public static class CreateExclusiveGatewayFeature extends AbstractCreateGatewayFeature<ExclusiveGateway> {
 
 		public CreateExclusiveGatewayFeature(IFeatureProvider fp) {
-			super(fp, "Exclusive Gateway", "Exclusive decision and merging");
+			super(fp, Messages.ExclusiveGatewayFeatureContainer_0, Messages.ExclusiveGatewayFeatureContainer_1);
 		}
 
 		@Override

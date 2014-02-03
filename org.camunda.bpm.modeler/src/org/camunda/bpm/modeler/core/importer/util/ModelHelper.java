@@ -9,6 +9,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.core.importer.util;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.ModelHandler;
 import org.camunda.bpm.modeler.core.model.Bpmn2ModelerFactory;
 import org.camunda.bpm.modeler.core.utils.ModelUtil;
@@ -82,11 +83,11 @@ public class ModelHelper {
 	public static void initialize(Resource resource, EObject newObject) {
 		
 		if (resource == null) {
-			throw new IllegalArgumentException("resource is null");
+			throw new IllegalArgumentException(Messages.ModelHelper_0);
 		}
 		
 		if (newObject == null) {
-			throw new IllegalArgumentException("newObject is null");
+			throw new IllegalArgumentException(Messages.ModelHelper_1);
 		}
 		
 		if (newObject.eClass().getEPackage() == Bpmn2Package.eINSTANCE) {

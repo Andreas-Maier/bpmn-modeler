@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.camunda.bpm.modeler.ui.features.activity.task;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.activity.task.AbstractCreateTaskFeature;
 import org.camunda.bpm.modeler.core.features.api.IDecorateFeature;
 import org.camunda.bpm.modeler.ui.ImageProvider;
@@ -46,7 +47,7 @@ public class ServiceTaskFeatureContainer extends AbstractTaskFeatureContainer {
 	public static class CreateServiceTaskFeature extends AbstractCreateTaskFeature<ServiceTask> {
 
 		public CreateServiceTaskFeature(IFeatureProvider fp) {
-			super(fp, "Service Task", "Task that uses some kind of service");
+			super(fp, Messages.ServiceTaskFeatureContainer_0, Messages.ServiceTaskFeatureContainer_1);
 		}
 
 		@Override

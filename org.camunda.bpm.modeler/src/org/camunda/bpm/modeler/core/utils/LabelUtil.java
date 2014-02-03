@@ -9,6 +9,7 @@ import static org.camunda.bpm.modeler.core.utils.PictogramElementPropertyUtil.se
 
 import java.util.List;
 
+import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.features.PropertyNames;
 import org.camunda.bpm.modeler.core.layout.util.LayoutUtil;
 import org.camunda.bpm.modeler.ui.features.context.RepositionContext;
@@ -97,7 +98,7 @@ public class LabelUtil {
 	public static AbstractText getLabelShapeText(Shape labelShape) {
 		
 		if (!(labelShape instanceof ContainerShape)) {
-			throw new IllegalArgumentException("Expected argument to be a container shape");
+			throw new IllegalArgumentException(Messages.LabelUtil_0);
 		}
 		
 		ContainerShape containerLabelShape = (ContainerShape) labelShape;
@@ -129,7 +130,7 @@ public class LabelUtil {
 	 */
 	public static PictogramElement getNonLabelPictogramElement(BaseElement bpmnElement, Diagram diagram) {
 		if (bpmnElement == null || diagram == null) {
-			throw new IllegalArgumentException("Arguments may not be null");
+			throw new IllegalArgumentException(Messages.LabelUtil_1);
 		}
 		
 		List<PictogramElement> linkedPictogramElements = Graphiti.getLinkService().getPictogramElements(diagram, bpmnElement);
@@ -154,7 +155,7 @@ public class LabelUtil {
 	 */
 	public static ContainerShape getLabelShape(BaseElement bpmnElement, Diagram diagram) {
 		if (bpmnElement == null || diagram == null) {
-			throw new IllegalArgumentException("Arguments may not be null");
+			throw new IllegalArgumentException(Messages.LabelUtil_2);
 		}
 		
 		List<PictogramElement> linkedPictogramElements = Graphiti.getLinkService().getPictogramElements(diagram, bpmnElement);
@@ -184,7 +185,7 @@ public class LabelUtil {
 	 * @param textContainerShape
 	 */
 	public static void makeLabel(PictogramElement element) {
-		Graphiti.getPeService().setPropertyValue(element, GraphicsUtil.LABEL_PROPERTY, "true");
+		Graphiti.getPeService().setPropertyValue(element, GraphicsUtil.LABEL_PROPERTY, "true"); //$NON-NLS-1$
 	}
 
 	/**
@@ -198,7 +199,7 @@ public class LabelUtil {
 		Integer y = get(labelShape, PropertyNames.OFFSET_Y, Integer.class);
 		
 		if (x == null || y == null) {
-			throw new IllegalArgumentException(String.format("No LABEL_OFFSET set for shape <%s>", labelShape));
+			throw new IllegalArgumentException(String.format(Messages.LabelUtil_4, labelShape));
 		}
 		
 		return point(x, y);
@@ -227,7 +228,7 @@ public class LabelUtil {
 			Point diff = getLabelOffset(labelShape, (Shape) pictogramElement);			
 			storeLabelOffset(labelShape, diff);
 		} else {
-			throw new IllegalArgumentException(String.format("Labeled element referenced by label <%s> is not a shape", labelShape));
+			throw new IllegalArgumentException(String.format(Messages.LabelUtil_5, labelShape));
 		}
 	}
 
