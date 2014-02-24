@@ -21,8 +21,14 @@ public interface IOperationWizard {
 	 */
 	void setModelElement(BaseElement element);
 
+	/**
+	 * Retrieves the {@link BaseElement} associated with the Instance of the
+	 * {@link IOperationWizard}.
+	 * 
+	 * @return the {@link BaseElement}.
+	 */
 	BaseElement getModelElement();
-	
+
 	/**
 	 * Retrieves if the implementing {@link IOperationWizard} is responsible for
 	 * {@link BaseElement} of the current passed instance.

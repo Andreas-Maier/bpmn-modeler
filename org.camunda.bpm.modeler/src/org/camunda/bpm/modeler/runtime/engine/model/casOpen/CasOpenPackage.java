@@ -59,14 +59,14 @@ public interface CasOpenPackage extends EPackage {
 	CasOpenPackage eINSTANCE = org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.ClientOperationImpl <em>Client Operation</em>}' class.
+	 * The meta object id for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OperationImpl <em>Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.ClientOperationImpl
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getClientOperation()
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OperationImpl
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getOperation()
 	 * @generated
 	 */
-	int CLIENT_OPERATION = 0;
+	int OPERATION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Action</b></em>' attribute.
@@ -75,7 +75,7 @@ public interface CasOpenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLIENT_OPERATION__ACTION = 0;
+	int OPERATION__ACTION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' containment reference list.
@@ -84,7 +84,7 @@ public interface CasOpenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLIENT_OPERATION__PARAMETER = 1;
+	int OPERATION__PARAMETER = 1;
 
 	/**
 	 * The feature id for the '<em><b>Result</b></em>' containment reference.
@@ -93,7 +93,7 @@ public interface CasOpenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLIENT_OPERATION__RESULT = 2;
+	int OPERATION__RESULT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Operation Type</b></em>' attribute.
@@ -102,16 +102,16 @@ public interface CasOpenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLIENT_OPERATION__OPERATION_TYPE = 3;
+	int OPERATION__OPERATION_TYPE = 3;
 
 	/**
-	 * The number of structural features of the '<em>Client Operation</em>' class.
+	 * The number of structural features of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLIENT_OPERATION_FEATURE_COUNT = 4;
+	int OPERATION_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OperationParameterImpl <em>Operation Parameter</em>}' class.
@@ -1675,22 +1675,13 @@ public interface CasOpenPackage extends EPackage {
 	int DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE = ModelPackage.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE;
 
 	/**
-	 * The feature id for the '<em><b>Client Operation</b></em>' containment reference.
+	 * The feature id for the '<em><b>CAS Operation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__CLIENT_OPERATION = ModelPackage.DOCUMENT_ROOT__CLIENT_OPERATION;
-
-	/**
-	 * The feature id for the '<em><b>Service Operation</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOCUMENT_ROOT__SERVICE_OPERATION = ModelPackage.DOCUMENT_ROOT__SERVICE_OPERATION;
+	int DOCUMENT_ROOT__CAS_OPERATION = ModelPackage.DOCUMENT_ROOT__CAS_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>Form Data</b></em>' containment reference.
@@ -1894,52 +1885,6 @@ public interface CasOpenPackage extends EPackage {
 	int PROPERTY_FEATURE_COUNT = Bpmn2Package.PROPERTY_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.ServiceOperationImpl <em>Service Operation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.ServiceOperationImpl
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getServiceOperation()
-	 * @generated
-	 */
-	int SERVICE_OPERATION = 6;
-
-	/**
-	 * The feature id for the '<em><b>Action</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_OPERATION__ACTION = 0;
-
-	/**
-	 * The feature id for the '<em><b>Parameter</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_OPERATION__PARAMETER = 1;
-
-	/**
-	 * The feature id for the '<em><b>Operation Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_OPERATION__OPERATION_TYPE = 2;
-
-	/**
-	 * The number of structural features of the '<em>Service Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_OPERATION_FEATURE_COUNT = 3;
-
-	/**
 	 * The meta object id for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.RequestObjectImpl <em>Request Object</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1947,7 +1892,7 @@ public interface CasOpenPackage extends EPackage {
 	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getRequestObject()
 	 * @generated
 	 */
-	int REQUEST_OBJECT = 7;
+	int REQUEST_OBJECT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Clazz</b></em>' attribute.
@@ -1984,7 +1929,7 @@ public interface CasOpenPackage extends EPackage {
 	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getRequestParameter()
 	 * @generated
 	 */
-	int REQUEST_PARAMETER = 8;
+	int REQUEST_PARAMETER = 7;
 
 	/**
 	 * The feature id for the '<em><b>Field Name</b></em>' attribute.
@@ -2039,7 +1984,7 @@ public interface CasOpenPackage extends EPackage {
 	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getResponseObject()
 	 * @generated
 	 */
-	int RESPONSE_OBJECT = 9;
+	int RESPONSE_OBJECT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Clazz</b></em>' attribute.
@@ -2076,7 +2021,7 @@ public interface CasOpenPackage extends EPackage {
 	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getResponseParameter()
 	 * @generated
 	 */
-	int RESPONSE_PARAMETER = 10;
+	int RESPONSE_PARAMETER = 9;
 
 	/**
 	 * The feature id for the '<em><b>Field Name</b></em>' attribute.
@@ -2122,61 +2067,61 @@ public interface CasOpenPackage extends EPackage {
 	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getConditionComparators()
 	 * @generated
 	 */
-	int CONDITION_COMPARATORS = 11;
+	int CONDITION_COMPARATORS = 10;
 
 	/**
-	 * Returns the meta object for class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation <em>Client Operation</em>}'.
+	 * Returns the meta object for class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Client Operation</em>'.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation
+	 * @return the meta object for class '<em>Operation</em>'.
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation
 	 * @generated
 	 */
-	EClass getClientOperation();
+	EClass getOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getAction <em>Action</em>}'.
+	 * Returns the meta object for the attribute '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getAction <em>Action</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Action</em>'.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getAction()
-	 * @see #getClientOperation()
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getAction()
+	 * @see #getOperation()
 	 * @generated
 	 */
-	EAttribute getClientOperation_Action();
+	EAttribute getOperation_Action();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getParameter <em>Parameter</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getParameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Parameter</em>'.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getParameter()
-	 * @see #getClientOperation()
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getParameter()
+	 * @see #getOperation()
 	 * @generated
 	 */
-	EReference getClientOperation_Parameter();
+	EReference getOperation_Parameter();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getResult <em>Result</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getResult <em>Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Result</em>'.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getResult()
-	 * @see #getClientOperation()
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getResult()
+	 * @see #getOperation()
 	 * @generated
 	 */
-	EReference getClientOperation_Result();
+	EReference getOperation_Result();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getOperationType <em>Operation Type</em>}'.
+	 * Returns the meta object for the attribute '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getOperationType <em>Operation Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Operation Type</em>'.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getOperationType()
-	 * @see #getClientOperation()
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getOperationType()
+	 * @see #getOperation()
 	 * @generated
 	 */
-	EAttribute getClientOperation_OperationType();
+	EAttribute getOperation_OperationType();
 
 	/**
 	 * Returns the meta object for class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.OperationParameter <em>Operation Parameter</em>}'.
@@ -2337,49 +2282,6 @@ public interface CasOpenPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getProperty_PropertyType();
-
-	/**
-	 * Returns the meta object for class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation <em>Service Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Service Operation</em>'.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation
-	 * @generated
-	 */
-	EClass getServiceOperation();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation#getAction <em>Action</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Action</em>'.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation#getAction()
-	 * @see #getServiceOperation()
-	 * @generated
-	 */
-	EAttribute getServiceOperation_Action();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation#getParameter <em>Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameter</em>'.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation#getParameter()
-	 * @see #getServiceOperation()
-	 * @generated
-	 */
-	EReference getServiceOperation_Parameter();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation#getOperationType <em>Operation Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Operation Type</em>'.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation#getOperationType()
-	 * @see #getServiceOperation()
-	 * @generated
-	 */
-	EAttribute getServiceOperation_OperationType();
 
 	/**
 	 * Returns the meta object for class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.RequestObject <em>Request Object</em>}'.
@@ -2575,14 +2477,14 @@ public interface CasOpenPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.ClientOperationImpl <em>Client Operation</em>}' class.
+		 * The meta object literal for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OperationImpl <em>Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.ClientOperationImpl
-		 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getClientOperation()
+		 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OperationImpl
+		 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getOperation()
 		 * @generated
 		 */
-		EClass CLIENT_OPERATION = eINSTANCE.getClientOperation();
+		EClass OPERATION = eINSTANCE.getOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Action</b></em>' attribute feature.
@@ -2590,7 +2492,7 @@ public interface CasOpenPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CLIENT_OPERATION__ACTION = eINSTANCE.getClientOperation_Action();
+		EAttribute OPERATION__ACTION = eINSTANCE.getOperation_Action();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameter</b></em>' containment reference list feature.
@@ -2598,7 +2500,7 @@ public interface CasOpenPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLIENT_OPERATION__PARAMETER = eINSTANCE.getClientOperation_Parameter();
+		EReference OPERATION__PARAMETER = eINSTANCE.getOperation_Parameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Result</b></em>' containment reference feature.
@@ -2606,7 +2508,7 @@ public interface CasOpenPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLIENT_OPERATION__RESULT = eINSTANCE.getClientOperation_Result();
+		EReference OPERATION__RESULT = eINSTANCE.getOperation_Result();
 
 		/**
 		 * The meta object literal for the '<em><b>Operation Type</b></em>' attribute feature.
@@ -2614,7 +2516,7 @@ public interface CasOpenPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CLIENT_OPERATION__OPERATION_TYPE = eINSTANCE.getClientOperation_OperationType();
+		EAttribute OPERATION__OPERATION_TYPE = eINSTANCE.getOperation_OperationType();
 
 		/**
 		 * The meta object literal for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OperationParameterImpl <em>Operation Parameter</em>}' class.
@@ -2745,40 +2647,6 @@ public interface CasOpenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROPERTY__PROPERTY_TYPE = eINSTANCE.getProperty_PropertyType();
-
-		/**
-		 * The meta object literal for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.ServiceOperationImpl <em>Service Operation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.ServiceOperationImpl
-		 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getServiceOperation()
-		 * @generated
-		 */
-		EClass SERVICE_OPERATION = eINSTANCE.getServiceOperation();
-
-		/**
-		 * The meta object literal for the '<em><b>Action</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE_OPERATION__ACTION = eINSTANCE.getServiceOperation_Action();
-
-		/**
-		 * The meta object literal for the '<em><b>Parameter</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SERVICE_OPERATION__PARAMETER = eINSTANCE.getServiceOperation_Parameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Operation Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE_OPERATION__OPERATION_TYPE = eINSTANCE.getServiceOperation_OperationType();
 
 		/**
 		 * The meta object literal for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.RequestObjectImpl <em>Request Object</em>}' class.

@@ -69,9 +69,9 @@ public class CasOpenSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case CasOpenPackage.CLIENT_OPERATION: {
-				ClientOperation clientOperation = (ClientOperation)theEObject;
-				T result = caseClientOperation(clientOperation);
+			case CasOpenPackage.OPERATION: {
+				Operation operation = (Operation)theEObject;
+				T result = caseOperation(operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -110,12 +110,6 @@ public class CasOpenSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CasOpenPackage.SERVICE_OPERATION: {
-				ServiceOperation serviceOperation = (ServiceOperation)theEObject;
-				T result = caseServiceOperation(serviceOperation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case CasOpenPackage.REQUEST_OBJECT: {
 				RequestObject requestObject = (RequestObject)theEObject;
 				T result = caseRequestObject(requestObject);
@@ -145,17 +139,17 @@ public class CasOpenSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Client Operation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Client Operation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClientOperation(ClientOperation object) {
+	public T caseOperation(Operation object) {
 		return null;
 	}
 
@@ -231,21 +225,6 @@ public class CasOpenSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseProperty(Property object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Service Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Service Operation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseServiceOperation(ServiceOperation object) {
 		return null;
 	}
 

@@ -606,18 +606,8 @@ public EReference getDocumentRoot_FailedJobRetryTimeCycle() {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EReference getDocumentRoot_ClientOperation() {
+	public EReference getDocumentRoot_CASOperation() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(25);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDocumentRoot_ServiceOperation() {
-		return (EReference)documentRootEClass.getEStructuralFeatures().get(26);
 	}
 
 		/**
@@ -627,7 +617,7 @@ public EReference getDocumentRoot_FailedJobRetryTimeCycle() {
 	 */
 	@Override
 	public EReference getDocumentRoot_FormData() {
-		return (EReference)documentRootEClass.getEStructuralFeatures().get(27);
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(26);
 	}
 
 		/**
@@ -636,7 +626,7 @@ public EReference getDocumentRoot_FailedJobRetryTimeCycle() {
 	 * @generated
 	 */
 	public EReference getDocumentRoot_DocumentMetaData() {
-		return (EReference)documentRootEClass.getEStructuralFeatures().get(28);
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(27);
 	}
 
 		/**
@@ -645,7 +635,7 @@ public EReference getDocumentRoot_FailedJobRetryTimeCycle() {
 	 * @generated
 	 */
 	public EReference getDocumentRoot_RequestObject() {
-		return (EReference)documentRootEClass.getEStructuralFeatures().get(29);
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(28);
 	}
 
 		/**
@@ -654,7 +644,7 @@ public EReference getDocumentRoot_FailedJobRetryTimeCycle() {
 	 * @generated
 	 */
 	public EReference getDocumentRoot_ResponseObject() {
-		return (EReference)documentRootEClass.getEStructuralFeatures().get(30);
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(29);
 	}
 
 		/**
@@ -1562,8 +1552,7 @@ public ModelFactory getModelFactory() {
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__PRIORITY);
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__RESULT_VARIABLE_NAME);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE);
-		createEReference(documentRootEClass, DOCUMENT_ROOT__CLIENT_OPERATION);
-		createEReference(documentRootEClass, DOCUMENT_ROOT__SERVICE_OPERATION);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__CAS_OPERATION);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__FORM_DATA);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__DOCUMENT_META_DATA);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__REQUEST_OBJECT);
@@ -1747,8 +1736,7 @@ public ModelFactory getModelFactory() {
 		initEAttribute(getDocumentRoot_Priority(), ecorePackage.getEString(), "priority", "", 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDocumentRoot_ResultVariableName(), ecorePackage.getEString(), "resultVariableName", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_FailedJobRetryTimeCycle(), theFoxPackage.getFailedJobRetryTimeCycleType(), null, "failedJobRetryTimeCycle", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getDocumentRoot_ClientOperation(), theCasOpenPackage.getClientOperation(), null, "clientOperation", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getDocumentRoot_ServiceOperation(), theCasOpenPackage.getServiceOperation(), null, "serviceOperation", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_CASOperation(), theCasOpenPackage.getOperation(), null, "CASOperation", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_FormData(), this.getFormDataType(), null, "formData", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_DocumentMetaData(), theCasOpenPackage.getDocumentMetaData(), null, "documentMetaData", null, 0, 1, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_RequestObject(), theCasOpenPackage.getRequestObject(), null, "requestObject", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -2099,15 +2087,7 @@ public ModelFactory getModelFactory() {
 			 "namespace", "http://www.camunda.com/fox"
 		   });		
 		addAnnotation
-		  (getDocumentRoot_ClientOperation(), 
-		   source, 
-		   new String[] {
-			 "kind", "element",
-			 "name", "operation",
-			 "namespace", "http://www.cas.de/open"
-		   });		
-		addAnnotation
-		  (getDocumentRoot_ServiceOperation(), 
+		  (getDocumentRoot_CASOperation(), 
 		   source, 
 		   new String[] {
 			 "kind", "element",

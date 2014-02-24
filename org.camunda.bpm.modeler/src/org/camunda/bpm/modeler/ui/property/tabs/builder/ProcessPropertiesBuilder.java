@@ -1,6 +1,9 @@
 package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.core.utils.ModelUtil;
@@ -82,7 +85,16 @@ public class ProcessPropertiesBuilder extends AbstractPropertiesBuilder<Process>
 
 			@Override
 			public List<T> getContents() {
-				return (List<T>) ModelUtil.getAllProperties(bo);
+				List<Property> properties = ModelUtil.getAllProperties(bo);;
+				List<Property> uniqueProperties = new ArrayList<>();
+				Set<String> uniquePropertyNames = new HashSet<>();
+				for (Property property : properties) {
+					if (!uniquePropertyNames.contains(property.getName())) {
+						uniquePropertyNames.add(property.getName());
+						uniqueProperties.add(property);
+					}
+				}
+				return (List<T>) uniqueProperties;
 			}
 		};
 

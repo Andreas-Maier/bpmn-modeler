@@ -22,19 +22,22 @@ public class IdPropertyBuilder extends AbstractPropertiesBuilder<BaseElement> {
 
 	private ValidatingStringTextBinding binding;
 
-	public IdPropertyBuilder(Composite parent, GFPropertySection section, BaseElement bo, String label) {
+	public IdPropertyBuilder(final Composite parent, final GFPropertySection section, final BaseElement bo, final String label) {
 		super(parent, section, bo);
 		
 		this.label = label;
 	}
 	
-	public IdPropertyBuilder(Composite parent, GFPropertySection section, BaseElement bo) {
+	public IdPropertyBuilder(final Composite parent, final GFPropertySection section, final BaseElement bo) {
 		this(parent, section, bo, "Id");
 	}
 
 	@Override
 	public void create() {
 		final Text idText = PropertyUtil.createUnboundText(section, parent, label);
+		
+		idText.setEditable(false);
+		idText.setEnabled(false);
 		
 		binding = new ValidatingStringTextBinding(bo, BASE_ELEMENT_ID_FEATURE, idText);
 		// validate unique id

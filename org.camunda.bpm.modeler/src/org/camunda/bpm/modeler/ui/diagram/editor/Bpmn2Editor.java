@@ -31,6 +31,7 @@ import org.camunda.bpm.modeler.core.preferences.Bpmn2Preferences;
 import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
 import org.camunda.bpm.modeler.core.utils.DiagramEditorAdapter;
 import org.camunda.bpm.modeler.core.utils.ErrorUtils;
+import org.camunda.bpm.modeler.core.utils.ExtensionUtil;
 import org.camunda.bpm.modeler.core.utils.ModelUtil;
 import org.camunda.bpm.modeler.core.utils.ModelUtil.Bpmn2DiagramType;
 import org.camunda.bpm.modeler.core.utils.ScrollUtil;
@@ -38,6 +39,9 @@ import org.camunda.bpm.modeler.core.utils.StyleUtil;
 import org.camunda.bpm.modeler.core.validation.Bpmn2ProjectValidator;
 import org.camunda.bpm.modeler.core.validation.BpmnValidationStatusLoader;
 import org.camunda.bpm.modeler.runtime.engine.model.ModelPackage;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.Property;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.Result;
 import org.camunda.bpm.modeler.runtime.engine.model.util.ModelResourceFactoryImpl;
 import org.camunda.bpm.modeler.ui.dialog.importer.ModelProblemsDialog;
 import org.camunda.bpm.modeler.ui.views.outline.BaseElementTreeEditPart;
@@ -46,6 +50,8 @@ import org.camunda.bpm.modeler.ui.views.outline.FlowElementTreeEditPart;
 import org.camunda.bpm.modeler.ui.wizards.Bpmn2DiagramCreator;
 import org.camunda.bpm.modeler.ui.wizards.FileService;
 import org.eclipse.bpmn2.BaseElement;
+import org.eclipse.bpmn2.Process;
+import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.di.BPMNDiagram;
 import org.eclipse.bpmn2.util.Bpmn2Resource;
 import org.eclipse.bpmn2.util.Bpmn2ResourceImpl;
@@ -74,6 +80,7 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Lifecycle;
 import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.ui.parts.SelectionSynchronizer;
@@ -667,11 +674,52 @@ public class Bpmn2Editor extends DiagramEditor implements IPropertyChangeListene
 	
 	@Override
 	public void doSave(final IProgressMonitor monitor) {
-		super.doSave(monitor);
-
 		Resource resource = getResourceSet().getResource(((Bpmn2DiagramEditorInput) getEditorInput()).getModelUri(), false);
 
+		cleanupProperties(resource);
+		
+		super.doSave(monitor);
+
 		Bpmn2ProjectValidator.validateResource(resource, monitor);
+	}
+
+	private void cleanupProperties(final Resource resource) {
+		List<Property> properties = ModelHandler.getAll(resource, Property.class);
+		final List<Property> propertiesToRemove = new ArrayList<>();
+		for (Property property : properties) {
+			
+			Task definingElement = property.getDefiningElement();
+			boolean found = false;
+			if (definingElement != null) {
+				List<Operation> operations = ExtensionUtil.getExtensions(definingElement, Operation.class);
+				if (operations != null && !operations.isEmpty()) {
+					Operation operation = operations.get(0);
+					Result result = operation.getResult();
+					if (result != null) {
+						if (property.getName().equals(result.getResultVariableName())) {
+							found = true;
+						}
+					}
+				}
+			}
+			if (!found) {
+				propertiesToRemove.add(property);
+			}
+		}
+		if (!propertiesToRemove.isEmpty()) {
+			TransactionalEditingDomain domain = TransactionUtil
+					.getEditingDomain(resource);
+			domain.getCommandStack().execute(new RecordingCommand(domain) {
+	
+				@Override
+				protected void doExecute() {
+					Process process = (Process) propertiesToRemove.get(0).eContainer();
+					for (Property propertyToRemove : propertiesToRemove) {
+						process.getProperties().remove(propertyToRemove);
+					}
+				}
+			});
+		}
 	}
 
 	@Override
@@ -968,6 +1016,13 @@ public class Bpmn2Editor extends DiagramEditor implements IPropertyChangeListene
 	 */
 	public void setRestartEditor(final boolean restartEditor) {
 		this.restartEditor = restartEditor;
+	}
+
+	/**
+	 * @return the bpmnResource
+	 */
+	public Bpmn2ResourceImpl getBpmnResource() {
+		return bpmnResource;
 	}
 
 	/**

@@ -12,6 +12,7 @@ import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.CallableElement;
 import org.eclipse.bpmn2.Collaboration;
 import org.eclipse.bpmn2.FlowElement;
+import org.eclipse.bpmn2.Gateway;
 import org.eclipse.bpmn2.Lane;
 import org.eclipse.bpmn2.LinkEventDefinition;
 import org.eclipse.bpmn2.Message;
@@ -101,6 +102,15 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 			createLaneNameCombo();
 		} else if (bo instanceof Participant) {
 			createParticipantNameCombo();
+		} else if (bo instanceof Gateway) {
+			createAutoResizingMultiText(section, parent, "Frage", NAME_FEATURE, bo);
+		} else if (bo instanceof org.eclipse.bpmn2.Process) {
+			Text text = PropertyUtil.createText(section, parent, label, NAME_FEATURE, bo);
+			text.setEditable(false);
+			text.setEnabled(false);
+			String processName = bo.eResource().getURI().lastSegment();
+			processName = processName.replace("." + bo.eResource().getURI().fileExtension(), "");
+			text.setText(processName);
 		} else if (NAME_FEATURE != null) {
 			final Text multiText = createAutoResizingMultiText(section, parent, label, NAME_FEATURE, bo);
 			if (helpText != null) {

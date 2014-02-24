@@ -4,10 +4,6 @@ import java.util.List;
 
 import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
-import org.camunda.bpm.modeler.ui.property.tabs.binding.BaseElementIdComboBinding;
-import org.camunda.bpm.modeler.ui.property.tabs.binding.change.EAttributeChangeSupport;
-import org.camunda.bpm.modeler.ui.property.tabs.binding.change.EObjectChangeSupport.ModelChangedEvent;
-import org.camunda.bpm.modeler.ui.property.tabs.util.Events;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.ExclusiveGateway;
@@ -19,8 +15,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
 
 /**
  * Decision gateway specific stuff
@@ -48,36 +42,36 @@ public class DecisionGatewayPropertiesBuilder extends AbstractPropertiesBuilder<
 
 	@Override
 	public void create() {
-		final CCombo dropDown = PropertyUtil.createDropDown(section, parent, Messages.DecisionGatewayPropertiesBuilder_1);
-		
-		// register change support
-		EAttributeChangeSupport.ensureAdded(bo, FLOW_NODE_OUTGOING, dropDown);
-		
-		dropDown.addListener(Events.MODEL_CHANGED, new Listener() {
-			
-			@Override
-			public void handleEvent(final Event e) {
-				ModelChangedEvent event = (ModelChangedEvent) e;
-				if (FLOW_NODE_OUTGOING.equals(event.getFeature())) {
-					updateDropdownLabels(dropDown);
-				}
-			}
-		});
-		
-		BaseElementIdComboBinding<SequenceFlow> dropDownBinding = new BaseElementIdComboBinding<SequenceFlow>(bo, DEFAULT_FLOW_FEATURE, dropDown) {
-			@Override
-			protected SequenceFlow getModelById(final String id) {
-				return getSequenceFlowById(id);
-			}
-		};
-		
-		dropDownBinding.establish();
-		
-		updateDropdownLabels(dropDown);
-		
 		if (bo instanceof ExclusiveGateway) {
 			PropertyUtil.createCheckbox(section, parent, Messages.DecisionGatewayPropertiesBuilder_2, CasOpenPackage.eINSTANCE.getDocumentRoot_IsUserInteractable(), bo);
 		}
+		
+//		final CCombo dropDown = PropertyUtil.createDropDown(section, parent, Messages.DecisionGatewayPropertiesBuilder_1);
+//		
+//		// register change support
+//		EAttributeChangeSupport.ensureAdded(bo, FLOW_NODE_OUTGOING, dropDown);
+//		
+//		dropDown.addListener(Events.MODEL_CHANGED, new Listener() {
+//			
+//			@Override
+//			public void handleEvent(final Event e) {
+//				ModelChangedEvent event = (ModelChangedEvent) e;
+//				if (FLOW_NODE_OUTGOING.equals(event.getFeature())) {
+//					updateDropdownLabels(dropDown);
+//				}
+//			}
+//		});
+//		
+//		BaseElementIdComboBinding<SequenceFlow> dropDownBinding = new BaseElementIdComboBinding<SequenceFlow>(bo, DEFAULT_FLOW_FEATURE, dropDown) {
+//			@Override
+//			protected SequenceFlow getModelById(final String id) {
+//				return getSequenceFlowById(id);
+//			}
+//		};
+//		
+//		dropDownBinding.establish();
+//		
+//		updateDropdownLabels(dropDown);
 	}
 	
 	/**

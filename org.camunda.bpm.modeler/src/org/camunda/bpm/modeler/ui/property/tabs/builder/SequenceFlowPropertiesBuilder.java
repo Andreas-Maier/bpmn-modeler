@@ -17,6 +17,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 
+import com.google.common.base.Strings;
+
 public class SequenceFlowPropertiesBuilder extends
 		AbstractExtensionAwarePropertiesBuilder {
 
@@ -93,6 +95,25 @@ public class SequenceFlowPropertiesBuilder extends
 		layoutData.left = new FormAttachment(serviceControl, 122, SWT.BOTTOM);
 		serviceConfigurationButton.setLayoutData(layoutData);
 		serviceConfigurationButton.setToolTipText(Messages.SequenceFlowPropertiesBuilder_5);
+		
+		handleDefaultSelection();
+	}
+
+	private void handleDefaultSelection() {
+		String expression = userControl.getText();
+		if (!Strings.isNullOrEmpty(expression)) {
+			if (expression.contains("$")) {
+				serviceRadio.setSelection(true);
+				serviceConfigurationButton.setEnabled(true);
+				userRadio.setSelection(false);
+				userControl.setEnabled(false);
+			} else {
+				serviceRadio.setSelection(false);
+				serviceConfigurationButton.setEnabled(false);
+				userRadio.setSelection(true);
+				userControl.setEnabled(true);
+			}
+		}
 	}
 
 }

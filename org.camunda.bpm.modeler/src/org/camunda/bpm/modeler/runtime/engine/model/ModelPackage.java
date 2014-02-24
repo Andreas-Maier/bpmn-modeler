@@ -1540,22 +1540,13 @@ public interface ModelPackage extends EPackage {
   int DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 24;
 
   /**
-	 * The feature id for the '<em><b>Client Operation</b></em>' containment reference.
+	 * The feature id for the '<em><b>CAS Operation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__CLIENT_OPERATION = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 25;
-
-		/**
-	 * The feature id for the '<em><b>Service Operation</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOCUMENT_ROOT__SERVICE_OPERATION = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 26;
+	int DOCUMENT_ROOT__CAS_OPERATION = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 25;
 
 		/**
 	 * The feature id for the '<em><b>Form Data</b></em>' containment reference.
@@ -1564,7 +1555,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__FORM_DATA = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 27;
+	int DOCUMENT_ROOT__FORM_DATA = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 26;
 
 		/**
 	 * The feature id for the '<em><b>Document Meta Data</b></em>' containment reference.
@@ -1573,7 +1564,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__DOCUMENT_META_DATA = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 28;
+	int DOCUMENT_ROOT__DOCUMENT_META_DATA = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 27;
 
 		/**
 	 * The feature id for the '<em><b>Request Object</b></em>' containment reference.
@@ -1582,7 +1573,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__REQUEST_OBJECT = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 29;
+	int DOCUMENT_ROOT__REQUEST_OBJECT = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 28;
 
 		/**
 	 * The feature id for the '<em><b>Response Object</b></em>' containment reference.
@@ -1591,7 +1582,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__RESPONSE_OBJECT = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 30;
+	int DOCUMENT_ROOT__RESPONSE_OBJECT = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 29;
 
 		/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
@@ -1600,7 +1591,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-  int DOCUMENT_ROOT_FEATURE_COUNT = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 31;
+  int DOCUMENT_ROOT_FEATURE_COUNT = Bpmn2Package.DOCUMENT_ROOT_FEATURE_COUNT + 30;
 
   /**
 	 * The meta object id for the '{@link org.camunda.bpm.modeler.runtime.engine.model.impl.StartEventImpl <em>Start Event</em>}' class.
@@ -3456,26 +3447,15 @@ public interface ModelPackage extends EPackage {
   EReference getDocumentRoot_FailedJobRetryTimeCycle();
 
   /**
-	 * Returns the meta object for the containment reference '{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getClientOperation <em>Client Operation</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getCASOperation <em>CAS Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Client Operation</em>'.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getClientOperation()
+	 * @return the meta object for the containment reference '<em>CAS Operation</em>'.
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getCASOperation()
 	 * @see #getDocumentRoot()
 	 * @generated
 	 */
-	EReference getDocumentRoot_ClientOperation();
-
-		/**
-	 * Returns the meta object for the containment reference '{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getServiceOperation <em>Service Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Service Operation</em>'.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getServiceOperation()
-	 * @see #getDocumentRoot()
-	 * @generated
-	 */
-	EReference getDocumentRoot_ServiceOperation();
+	EReference getDocumentRoot_CASOperation();
 
 		/**
 	 * Returns the meta object for the containment reference '{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getFormData <em>Form Data</em>}'.
@@ -4675,20 +4655,12 @@ public interface ModelPackage extends EPackage {
     EReference DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE = eINSTANCE.getDocumentRoot_FailedJobRetryTimeCycle();
 
     /**
-		 * The meta object literal for the '<em><b>Client Operation</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>CAS Operation</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOCUMENT_ROOT__CLIENT_OPERATION = eINSTANCE.getDocumentRoot_ClientOperation();
-
-				/**
-		 * The meta object literal for the '<em><b>Service Operation</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DOCUMENT_ROOT__SERVICE_OPERATION = eINSTANCE.getDocumentRoot_ServiceOperation();
+		EReference DOCUMENT_ROOT__CAS_OPERATION = eINSTANCE.getDocumentRoot_CASOperation();
 
 				/**
 		 * The meta object literal for the '<em><b>Form Data</b></em>' containment reference feature.

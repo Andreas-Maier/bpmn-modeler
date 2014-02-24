@@ -62,9 +62,13 @@ public class Bpmn2ModelerResourceFactoryImpl extends ResourceFactoryImpl {
      * @generated NOT
      */
     @Override
-    public Resource createResource(URI uri) {
+    public Resource createResource(final URI uri) {
         Bpmn2ModelerResourceImpl result = new Bpmn2ModelerResourceImpl(uri);
         ExtendedMetaData extendedMetadata = new XmlExtendedMetadata();
+        
+        result.getDefaultSaveOptions().put(XMLResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
+        result.getDefaultLoadOptions().put(XMLResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
+        
         result.getDefaultSaveOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadata);
         result.getDefaultLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadata);
 
@@ -95,7 +99,7 @@ public class Bpmn2ModelerResourceFactoryImpl extends ResourceFactoryImpl {
      * mandatory.
      */
 
-    public Definitions createAndInitResource(URI uri) {
+    public Definitions createAndInitResource(final URI uri) {
         Resource resource = createResource(uri);
         Definitions definitions = Bpmn2ModelerFactory.create(Definitions.class);
         DocumentRoot docummentRoot = Bpmn2ModelerFactory.create(DocumentRoot.class);

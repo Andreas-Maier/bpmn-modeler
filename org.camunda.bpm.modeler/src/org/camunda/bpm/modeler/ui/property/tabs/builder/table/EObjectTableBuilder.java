@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.camunda.bpm.modeler.ui.property.tabs.binding.change.EObjectChangeSupport;
-import org.camunda.bpm.modeler.ui.property.tabs.binding.change.EObjectChangeSupport.ModelChangedEvent;
 import org.camunda.bpm.modeler.ui.property.tabs.tables.EObjectAttributeTableColumnDescriptor;
 import org.camunda.bpm.modeler.ui.property.tabs.tables.EObjectAttributeTableColumnDescriptor.EditingSupportProvider;
 import org.camunda.bpm.modeler.ui.property.tabs.tables.EditableTableDescriptor;
@@ -229,7 +228,6 @@ public class EObjectTableBuilder<T extends EObject> {
 
 			@Override
 			public void handleEvent(final Event e) {
-				ModelChangedEvent event = (ModelChangedEvent) e;
 				updateViewerContents(tableViewer);
 			}
 		});

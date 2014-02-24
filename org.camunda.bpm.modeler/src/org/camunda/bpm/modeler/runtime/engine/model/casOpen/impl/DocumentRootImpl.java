@@ -4,14 +4,8 @@ package org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl;
 
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentRoot;
-
-import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -36,7 +30,7 @@ public class DocumentRootImpl extends org.camunda.bpm.modeler.runtime.engine.mod
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_USER_INTERACTABLE_EDEFAULT = false;
+	protected static final boolean IS_USER_INTERACTABLE_EDEFAULT = true;
 
 	/**
 	 * The cached value of the '{@link #isIsUserInteractable() <em>Is User Interactable</em>}' attribute.
@@ -72,6 +66,7 @@ public class DocumentRootImpl extends org.camunda.bpm.modeler.runtime.engine.mod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsUserInteractable() {
 		return isUserInteractable;
 	}
@@ -81,6 +76,7 @@ public class DocumentRootImpl extends org.camunda.bpm.modeler.runtime.engine.mod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsUserInteractable(boolean newIsUserInteractable) {
 		boolean oldIsUserInteractable = isUserInteractable;
 		isUserInteractable = newIsUserInteractable;

@@ -57,13 +57,12 @@ public class CasOpenFactoryImpl extends EFactoryImpl implements CasOpenFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CasOpenPackage.CLIENT_OPERATION: return createClientOperation();
+			case CasOpenPackage.OPERATION: return createOperation();
 			case CasOpenPackage.OPERATION_PARAMETER: return createOperationParameter();
 			case CasOpenPackage.RESULT: return createResult();
 			case CasOpenPackage.DOCUMENT_ROOT: return createDocumentRoot();
 			case CasOpenPackage.DOCUMENT_META_DATA: return createDocumentMetaData();
 			case CasOpenPackage.PROPERTY: return createProperty();
-			case CasOpenPackage.SERVICE_OPERATION: return createServiceOperation();
 			case CasOpenPackage.REQUEST_OBJECT: return createRequestObject();
 			case CasOpenPackage.REQUEST_PARAMETER: return createRequestParameter();
 			case CasOpenPackage.RESPONSE_OBJECT: return createResponseObject();
@@ -108,9 +107,9 @@ public class CasOpenFactoryImpl extends EFactoryImpl implements CasOpenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClientOperation createClientOperation() {
-		ClientOperationImpl clientOperation = new ClientOperationImpl();
-		return clientOperation;
+	public Operation createOperation() {
+		OperationImpl operation = new OperationImpl();
+		return operation;
 	}
 
 	/**
@@ -161,16 +160,6 @@ public class CasOpenFactoryImpl extends EFactoryImpl implements CasOpenFactory {
 	public Property createProperty() {
 		PropertyImpl property = new PropertyImpl();
 		return property;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ServiceOperation createServiceOperation() {
-		ServiceOperationImpl serviceOperation = new ServiceOperationImpl();
-		return serviceOperation;
 	}
 
 	/**

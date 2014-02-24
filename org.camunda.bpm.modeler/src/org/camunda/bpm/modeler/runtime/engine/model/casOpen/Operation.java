@@ -2,31 +2,30 @@
  */
 package org.camunda.bpm.modeler.runtime.engine.model.casOpen;
 
-import org.eclipse.bpmn2.ExtensionAttributeValue;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Client Operation</b></em>'.
+ * A representation of the model object '<em><b>Operation</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getAction <em>Action</em>}</li>
- *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getParameter <em>Parameter</em>}</li>
- *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getResult <em>Result</em>}</li>
- *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getOperationType <em>Operation Type</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getAction <em>Action</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getResult <em>Result</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getOperationType <em>Operation Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getClientOperation()
+ * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getOperation()
  * @model extendedMetaData="namespace='http://www.cas.de/open'"
  * @generated
  */
-public interface ClientOperation extends EObject {
+public interface Operation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Action</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -37,7 +36,7 @@ public interface ClientOperation extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Action</em>' attribute.
 	 * @see #setAction(String)
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getClientOperation_Action()
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getOperation_Action()
 	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' namespace='http://www.cas.de/open'"
 	 * @generated
@@ -45,7 +44,7 @@ public interface ClientOperation extends EObject {
 	String getAction();
 
 	/**
-	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getAction <em>Action</em>}' attribute.
+	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getAction <em>Action</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Action</em>' attribute.
@@ -64,7 +63,7 @@ public interface ClientOperation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter</em>' containment reference list.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getClientOperation_Parameter()
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getOperation_Parameter()
 	 * @model containment="true"
 	 *        extendedMetaData="kind='element' namespace='http://www.cas.de/open'"
 	 * @generated
@@ -75,13 +74,13 @@ public interface ClientOperation extends EObject {
 	 * Returns the value of the '<em><b>Result</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Result</em>' reference isn't clear,
+	 * If the meaning of the '<em>Result</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Result</em>' containment reference.
 	 * @see #setResult(Result)
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getClientOperation_Result()
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getOperation_Result()
 	 * @model containment="true"
 	 *        extendedMetaData="kind='element' namespace='http://www.cas.de/open'"
 	 * @generated
@@ -89,7 +88,7 @@ public interface ClientOperation extends EObject {
 	Result getResult();
 
 	/**
-	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getResult <em>Result</em>}' containment reference.
+	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getResult <em>Result</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Result</em>' containment reference.
@@ -108,14 +107,14 @@ public interface ClientOperation extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Operation Type</em>' attribute.
 	 * @see #setOperationType(String)
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getClientOperation_OperationType()
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getOperation_OperationType()
 	 * @model extendedMetaData="kind='attribute' name='operationType' namespace='http://www.cas.de/open'"
 	 * @generated
 	 */
 	String getOperationType();
 
 	/**
-	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation#getOperationType <em>Operation Type</em>}' attribute.
+	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation#getOperationType <em>Operation Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Operation Type</em>' attribute.
@@ -124,4 +123,4 @@ public interface ClientOperation extends EObject {
 	 */
 	void setOperationType(String value);
 
-} // ClientOperation
+} // Operation

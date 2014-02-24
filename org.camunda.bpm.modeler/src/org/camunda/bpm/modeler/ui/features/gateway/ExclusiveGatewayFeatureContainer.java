@@ -19,6 +19,7 @@ import org.camunda.bpm.modeler.core.features.gateway.AddGatewayFeature;
 import org.camunda.bpm.modeler.core.features.gateway.GatewayDecorateFeature;
 import org.camunda.bpm.modeler.core.utils.BusinessObjectUtil;
 import org.camunda.bpm.modeler.core.utils.GraphicsUtil;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
 import org.camunda.bpm.modeler.ui.ImageProvider;
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.ExclusiveGateway;
@@ -28,31 +29,32 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.context.ICreateContext;
 import org.eclipse.graphiti.mm.algorithms.Polygon;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 
 public class ExclusiveGatewayFeatureContainer extends AbstractGatewayFeatureContainer {
 
 	@Override
-	public boolean canApplyTo(Object o) {
+	public boolean canApplyTo(final Object o) {
 		return super.canApplyTo(o) && o instanceof ExclusiveGateway;
 	}
 
 	@Override
-	public IAddFeature getAddFeature(IFeatureProvider fp) {
+	public IAddFeature getAddFeature(final IFeatureProvider fp) {
 		return new AddGatewayFeature<ExclusiveGateway>(fp);
 	}
 
 	@Override
-	public ICreateFeature getCreateFeature(IFeatureProvider fp) {
+	public ICreateFeature getCreateFeature(final IFeatureProvider fp) {
 		return new CreateExclusiveGatewayFeature(fp);
 	}
 
 	@Override
-	public IDecorateFeature getDecorateFeature(IFeatureProvider fp) {
+	public IDecorateFeature getDecorateFeature(final IFeatureProvider fp) {
 		return new GatewayDecorateFeature(fp) {
 			@Override
-			protected void decorate(Shape shape, Polygon decorateContainer) {
+			protected void decorate(final Shape shape, final Polygon decorateContainer) {
 				super.decorate(shape, decorateContainer);
 				
 				BPMNShape bpmnShape = BusinessObjectUtil.getFirstElementOfType(shape, BPMNShape.class);
@@ -70,10 +72,20 @@ public class ExclusiveGatewayFeatureContainer extends AbstractGatewayFeatureCont
 
 	public static class CreateExclusiveGatewayFeature extends AbstractCreateGatewayFeature<ExclusiveGateway> {
 
-		public CreateExclusiveGatewayFeature(IFeatureProvider fp) {
+		public CreateExclusiveGatewayFeature(final IFeatureProvider fp) {
 			super(fp, Messages.ExclusiveGatewayFeatureContainer_0, Messages.ExclusiveGatewayFeatureContainer_1);
 		}
 
+		@Override
+		public Object[] create(final ICreateContext context) {
+			Object[] result = super.create(context);
+			for (Object gateWay : result) {
+				ExclusiveGateway exclusiveGateway = (ExclusiveGateway) gateWay;
+				exclusiveGateway.eSet(CasOpenPackage.eINSTANCE.getDocumentRoot_IsUserInteractable(), CasOpenPackage.eINSTANCE.getDocumentRoot_IsUserInteractable().getDefaultValue());
+			}
+			return result;
+		}
+		
 		@Override
 		protected String getStencilImageId() {
 			return ImageProvider.IMG_16_EXCLUSIVE_GATEWAY;

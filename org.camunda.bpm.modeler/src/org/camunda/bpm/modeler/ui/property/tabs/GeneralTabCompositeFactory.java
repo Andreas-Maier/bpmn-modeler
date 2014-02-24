@@ -102,8 +102,9 @@ public class GeneralTabCompositeFactory extends AbstractTabCompositeFactory<Base
 		if (businessObject instanceof Gateway) {
 			createGatewayComposite((Gateway) businessObject);
 		}
-		
-		createDocumentationField(businessObject);
+		if (!(businessObject instanceof Gateway || businessObject instanceof SequenceFlow)) {
+			createDocumentationField(businessObject);
+		}
 		
 		return parent;
 	}

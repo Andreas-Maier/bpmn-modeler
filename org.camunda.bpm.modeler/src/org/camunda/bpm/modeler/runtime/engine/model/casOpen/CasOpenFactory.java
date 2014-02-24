@@ -22,13 +22,13 @@ public interface CasOpenFactory extends EFactory {
 	CasOpenFactory eINSTANCE = org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Client Operation</em>'.
+	 * Returns a new object of class '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Client Operation</em>'.
+	 * @return a new object of class '<em>Operation</em>'.
 	 * @generated
 	 */
-	ClientOperation createClientOperation();
+	Operation createOperation();
 
 	/**
 	 * Returns a new object of class '<em>Operation Parameter</em>'.
@@ -74,15 +74,6 @@ public interface CasOpenFactory extends EFactory {
 	 * @generated
 	 */
 	Property createProperty();
-
-	/**
-	 * Returns a new object of class '<em>Service Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Service Operation</em>'.
-	 * @generated
-	 */
-	ServiceOperation createServiceOperation();
 
 	/**
 	 * Returns a new object of class '<em>Request Object</em>'.

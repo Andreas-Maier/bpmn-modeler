@@ -57,7 +57,7 @@ public class ModelResourceFactoryImpl extends Bpmn2ModelerResourceFactoryImpl {
 	 * @generated NOT
 	 */
     @Override
-    public Resource createResource(URI uri) {
+    public Resource createResource(final URI uri) {
     	ModelResourceImpl result = new ModelResourceImpl(uri);
         ExtendedMetaData extendedMetadata = new XmlExtendedMetadata(){
         	@Override
@@ -66,7 +66,7 @@ public class ModelResourceFactoryImpl extends Bpmn2ModelerResourceFactoryImpl {
         	}
         	
         	@Override
-        	public EStructuralFeature getAttribute(EClass eClass, String namespace, String name) {
+        	public EStructuralFeature getAttribute(final EClass eClass, final String namespace, final String name) {
 				List<EStructuralFeature> classAttributes = getAttributes(eClass);
 				for (Iterator<EStructuralFeature> iterator = classAttributes.iterator(); iterator.hasNext();) {
 					EStructuralFeature eStructuralFeature = iterator.next();
@@ -77,6 +77,9 @@ public class ModelResourceFactoryImpl extends Bpmn2ModelerResourceFactoryImpl {
 				return super.getAttribute(eClass, namespace, name);
 			}
         };
+        
+        result.getDefaultSaveOptions().put(XMLResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
+		result.getDefaultLoadOptions().put(XMLResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
         
         result.getDefaultSaveOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadata);
         result.getDefaultLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadata);

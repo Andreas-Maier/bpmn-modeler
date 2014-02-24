@@ -23,7 +23,6 @@ import org.camunda.bpm.modeler.core.importer.handlers.AssociationShapeHandler;
 import org.camunda.bpm.modeler.core.importer.handlers.DataInputAssociationShapeHandler;
 import org.camunda.bpm.modeler.core.importer.handlers.DataInputShapeHandler;
 import org.camunda.bpm.modeler.core.importer.handlers.DataObjectReferenceShapeHandler;
-import org.camunda.bpm.modeler.core.importer.handlers.DataObjectShapeHandler;
 import org.camunda.bpm.modeler.core.importer.handlers.DataOutputAssociationShapeHandler;
 import org.camunda.bpm.modeler.core.importer.handlers.DataOutputShapeHandler;
 import org.camunda.bpm.modeler.core.importer.handlers.DatastoreReferenceShapeHandler;
@@ -142,12 +141,12 @@ public class ModelImport {
 	// flag to decide if the import should add a scroll shape
 	protected boolean withScrollShape = true;
 	
-	public ModelImport(IDiagramTypeProvider diagramTypeProvider, Bpmn2Resource resource, boolean withScrollShape) {
+	public ModelImport(final IDiagramTypeProvider diagramTypeProvider, final Bpmn2Resource resource, final boolean withScrollShape) {
 		this(diagramTypeProvider, resource);
 		this.withScrollShape = withScrollShape;
 	}
 	
-	public ModelImport(IDiagramTypeProvider diagramTypeProvider, Bpmn2Resource resource) {
+	public ModelImport(final IDiagramTypeProvider diagramTypeProvider, final Bpmn2Resource resource) {
 		
 		this.diagramTypeProvider = diagramTypeProvider;
 		this.resource = resource;
@@ -183,7 +182,7 @@ public class ModelImport {
 		}
 	}
 		
-	protected void handleDocumentRoot(DocumentRoot documentRoot) {
+	protected void handleDocumentRoot(final DocumentRoot documentRoot) {
 		Definitions definitions = documentRoot.getDefinitions();
 		if (definitions == null) {
 			throw new InvalidContentException(Messages.ModelImport_2, documentRoot);
@@ -192,7 +191,7 @@ public class ModelImport {
 		}
 	}
 
-	protected void handleDefinitions(Definitions definitions) {
+	protected void handleDefinitions(final Definitions definitions) {
 		// first we get the root elements
 		
 		List<RootElement> rootElements = definitions.getRootElements();
@@ -286,7 +285,7 @@ public class ModelImport {
 	 * @param collaboration
 	 * @param processes
 	 */
-	protected void ensureDiagramLinked(BPMNDiagram bpmnDiagram, Collaboration collaboration, List<Process> processes) {
+	protected void ensureDiagramLinked(final BPMNDiagram bpmnDiagram, final Collaboration collaboration, final List<Process> processes) {
 		BPMNPlane bpmnPlane = bpmnDiagram.getPlane();
 		
 		BaseElement bpmnElement = bpmnPlane.getBpmnElement();
@@ -303,7 +302,7 @@ public class ModelImport {
 		}
 	}
 	
-	protected BPMNDiagram getOrCreateDiagram(List<BPMNDiagram> diagrams) {
+	protected BPMNDiagram getOrCreateDiagram(final List<BPMNDiagram> diagrams) {
 
 		if (diagrams.isEmpty()) {
 			BPMNDiagram newDiagram = ModelHelper.create(resource, BPMNDiagram.class);
@@ -321,7 +320,7 @@ public class ModelImport {
 		return bpmnDiagram;
 	}
 
-	protected Process createDefaultDiagramContent(Definitions definitions, BPMNDiagram bpmnDiagram) {
+	protected Process createDefaultDiagramContent(final Definitions definitions, final BPMNDiagram bpmnDiagram) {
 
 		// create process
 		Process process = ModelHelper.create(resource, Process.class);
@@ -333,7 +332,7 @@ public class ModelImport {
 		return process;
 	}
 
-	protected Diagram createEditorRootDiagram(BPMNDiagram bpmnDiagram, Collaboration collaboration, List<Process> processes, Definitions definitions) {
+	protected Diagram createEditorRootDiagram(final BPMNDiagram bpmnDiagram, final Collaboration collaboration, final List<Process> processes, final Definitions definitions) {
 		IDiagramEditor diagramEditor = diagramTypeProvider.getDiagramEditor();
 		
 		Diagram diagram = DIUtils.getOrCreateDiagram(diagramEditor, bpmnDiagram);
@@ -355,7 +354,7 @@ public class ModelImport {
 	
 	// handling of BPMN Model Elements ///////////////////////////////////////////////////////////////
 	
-	protected void handleCollaboration(Collaboration collaboration, ContainerShape container) {
+	protected void handleCollaboration(final Collaboration collaboration, final ContainerShape container) {
 		List<Participant> participants = collaboration.getParticipants();
 		
 		if (participants.isEmpty()) {
@@ -378,7 +377,7 @@ public class ModelImport {
 	 * @param participant
 	 * @param container
 	 */
-	protected void handleParticipant(Participant participant, ContainerShape container) {
+	protected void handleParticipant(final Participant participant, final ContainerShape container) {
 		
 		Process process = participant.getProcessRef();
 		if (process != null && process.eIsProxy()) {
@@ -398,7 +397,7 @@ public class ModelImport {
 		}
 	}
 
-	protected void handleExpandedParticipant(Participant participant, Process process, ContainerShape container) {
+	protected void handleExpandedParticipant(final Participant participant, final Process process, final ContainerShape container) {
 		
 		// draw the participant (pool)
 		ParticipantShapeHandler shapeHander = new ParticipantShapeHandler(this);
@@ -433,7 +432,7 @@ public class ModelImport {
 		}
 	}
 
-	protected void handleUnreferencedFlowElements(ContainerShape containerShape, List<FlowElement> flowElements) {
+	protected void handleUnreferencedFlowElements(final ContainerShape containerShape, final List<FlowElement> flowElements) {
 		List<FlowElement> unreferencedFlowElements = new ArrayList<FlowElement>();
 		
 		for (FlowElement e: flowElements) {
@@ -455,13 +454,13 @@ public class ModelImport {
 		handleFlowElements(containerShape, unreferencedFlowElements);
 	}
 
-	protected void handleCollapsedParticipant(Participant participant, ContainerShape container) {
+	protected void handleCollapsedParticipant(final Participant participant, final ContainerShape container) {
 		// draw the participant (pool)
 		ParticipantShapeHandler shapeHander = new ParticipantShapeHandler(this);
 		handleDiagramElement(participant, container, shapeHander);
 	}
 
-	protected void handleSequenceFlows(ContainerShape participantContainer, List<FlowElement> flowElements) {
+	protected void handleSequenceFlows(final ContainerShape participantContainer, final List<FlowElement> flowElements) {
 		for (FlowElement flowElement : flowElements) {
 			if (flowElement instanceof SequenceFlow) {
 				handleSequenceFlow((SequenceFlow) flowElement, participantContainer);				
@@ -469,27 +468,27 @@ public class ModelImport {
 		}
 	}
 
-	protected void handleDataOutputAssociations(List<DataOutputAssociation> dataOutputAssociations, ContainerShape container) {
+	protected void handleDataOutputAssociations(final List<DataOutputAssociation> dataOutputAssociations, final ContainerShape container) {
 		for (DataOutputAssociation outputAssociation: dataOutputAssociations) {
 			handleDataOutputAssociation(outputAssociation, container);
 		}
 	}
 
-	private void handleDataOutputAssociation(DataOutputAssociation flowElement, ContainerShape container) {
+	private void handleDataOutputAssociation(final DataOutputAssociation flowElement, final ContainerShape container) {
 		handleLater(new DeferredAction<DataOutputAssociation>(flowElement, container, new DataOutputAssociationShapeHandler(this)));
 	}
 
-	protected void handleDataInputAssociations(List<DataInputAssociation> dataInputAssociations, ContainerShape container) {
+	protected void handleDataInputAssociations(final List<DataInputAssociation> dataInputAssociations, final ContainerShape container) {
 		for (DataInputAssociation inputAssociation: dataInputAssociations) {
 			handleDataInputAssociation(inputAssociation, container);
 		}
 	}
 	
-	private void handleDataInputAssociation(DataInputAssociation flowElement, ContainerShape container) {
+	private void handleDataInputAssociation(final DataInputAssociation flowElement, final ContainerShape container) {
 		handleLater(new DeferredAction<DataInputAssociation>(flowElement, container, new DataInputAssociationShapeHandler(this)));
 	}
 
-	protected void handleLaneSet(LaneSet laneSet, FlowElementsContainer scope, ContainerShape container) {
+	protected void handleLaneSet(final LaneSet laneSet, final FlowElementsContainer scope, final ContainerShape container) {
 		
 		List<Lane> lanes = laneSet.getLanes();
 		if (lanes.isEmpty()) {
@@ -501,7 +500,7 @@ public class ModelImport {
 		}
 	}
 
-	protected void handleLane(Lane lane, FlowElementsContainer scope, ContainerShape container) {
+	protected void handleLane(final Lane lane, final FlowElementsContainer scope, final ContainerShape container) {
 		AbstractShapeHandler<Lane> shapeHandler = new LaneShapeHandler(this);
 		
 		// TODO: Draw lane the right way
@@ -522,7 +521,7 @@ public class ModelImport {
 		}
 	}
 
-	protected void handleProcess(Process process, ContainerShape container) {
+	protected void handleProcess(final Process process, final ContainerShape container) {
 		
 		// handle direct children of the process element (not displaying lanes)
 		List<FlowElement> flowElements = process.getFlowElements();
@@ -538,21 +537,21 @@ public class ModelImport {
 		handleArtifacts(container, artifacts);
 	}
 	
-	protected void handleInputOutputSpecification(Process process, ContainerShape container) {
+	protected void handleInputOutputSpecification(final Process process, final ContainerShape container) {
 		InputOutputSpecification inputOutputSpecification = process.getIoSpecification();
 		if (inputOutputSpecification != null) {
 			handleInputOutputSpecification(inputOutputSpecification, container);
 		}
 	}
 
-	protected void handleInputOutputSpecification(Activity activity, ContainerShape container) {
+	protected void handleInputOutputSpecification(final Activity activity, final ContainerShape container) {
 		InputOutputSpecification inputOutputSpecification = activity.getIoSpecification();
 		if (inputOutputSpecification != null) {
 			handleInputOutputSpecification(inputOutputSpecification, container);
 		}
 	}
 	
-	private void handleInputOutputSpecification(InputOutputSpecification inputOutputSpecification, ContainerShape container) {
+	private void handleInputOutputSpecification(final InputOutputSpecification inputOutputSpecification, final ContainerShape container) {
 		
 		// handle data inputs
 		handleDataInputs(container, inputOutputSpecification.getDataInputs());
@@ -561,7 +560,7 @@ public class ModelImport {
 		handleDataOutputs(container, inputOutputSpecification.getDataOutputs());
 	}
 
-	protected void handleDataOutputs(ContainerShape container, List<DataOutput> dataOutputs) {
+	protected void handleDataOutputs(final ContainerShape container, final List<DataOutput> dataOutputs) {
 		if (dataOutputs == null) {
 			return;
 		}
@@ -571,11 +570,11 @@ public class ModelImport {
 		}
 	}
 
-	protected void handleDataOutput(DataOutput output, ContainerShape container) {
+	protected void handleDataOutput(final DataOutput output, final ContainerShape container) {
 		handleDiagramElement(output, container, new DataOutputShapeHandler(this));
 	}
 
-	protected void handleDataInputs(ContainerShape container, List<DataInput> dataInputs) {
+	protected void handleDataInputs(final ContainerShape container, final List<DataInput> dataInputs) {
 		if (dataInputs == null) {
 			return;
 		}
@@ -585,11 +584,11 @@ public class ModelImport {
 		}
 	}
 
-	private void handleDataInput(DataInput input, ContainerShape container) {
+	private void handleDataInput(final DataInput input, final ContainerShape container) {
 		handleDiagramElement(input, container, new DataInputShapeHandler(this));
 	}
 
-	protected void handleArtifacts(ContainerShape container, List<Artifact> artifacts) {
+	protected void handleArtifacts(final ContainerShape container, final List<Artifact> artifacts) {
 
 		for (Artifact artifact: artifacts) {
 			if (artifact instanceof Association) {
@@ -601,7 +600,7 @@ public class ModelImport {
 		}
 	}
 	
-	protected void handleAssociation(Association association, ContainerShape container) {
+	protected void handleAssociation(final Association association, final ContainerShape container) {
 		
 		handleLater(new DeferredAction<Association>(association, container, new AssociationShapeHandler(this)));
 	}
@@ -612,7 +611,7 @@ public class ModelImport {
 	 * @param container
 	 * @param flowElementsToBeDrawn
 	 */
-	protected void handleFlowElements(ContainerShape container, List<FlowElement> flowElementsToBeDrawn) {
+	protected void handleFlowElements(final ContainerShape container, final List<FlowElement> flowElementsToBeDrawn) {
 
 		List<BoundaryEvent> boundaryEvents = new ArrayList<BoundaryEvent>();
 		List<DataObject> dataObjects = new ArrayList<DataObject>();
@@ -681,12 +680,12 @@ public class ModelImport {
 		}
 	}
 
-	private void handleDataObjectReference(DataObjectReference flowElement, ContainerShape container) {
+	private void handleDataObjectReference(final DataObjectReference flowElement, final ContainerShape container) {
 		
 		handleDiagramElement(flowElement, container, new DataObjectReferenceShapeHandler(this));
 	}
 
-	private void handleDataObject(DataObject dataObject, ContainerShape container) {
+	private void handleDataObject(final DataObject dataObject, final ContainerShape container) {
 
 		// import only data objects for which actual DI data exists 
 		// (all others must have been referenced by dataObjectReferences)
@@ -723,7 +722,7 @@ public class ModelImport {
 		}
 	}
 
-	protected void handleSubProcess(SubProcess subProcess, ContainerShape container) {
+	protected void handleSubProcess(final SubProcess subProcess, final ContainerShape container) {
 		
 		// draw subprocess shape
 		ContainerShape subProcessContainer = (ContainerShape) handleDiagramElement(subProcess, container, new SubProcessShapeHandler(this));
@@ -740,40 +739,40 @@ public class ModelImport {
 		// TODO: handle artifacts?
 	}
 	
-	protected void handleArtifact(Artifact artifact, ContainerShape container) {
+	protected void handleArtifact(final Artifact artifact, final ContainerShape container) {
 		handleDiagramElement(artifact, container, new ArtifactShapeHandler(this));
 	}
 
-	protected void handleGateway(Gateway flowElement, ContainerShape container) {
+	protected void handleGateway(final Gateway flowElement, final ContainerShape container) {
 		handleDiagramElement(flowElement, container, new GatewayShapeHandler(this));
 	}
 
-	protected void handleMessageFlow(MessageFlow flowElement, ContainerShape container) {
+	protected void handleMessageFlow(final MessageFlow flowElement, final ContainerShape container) {
 		handleDiagramElement(flowElement, container, new MessageFlowShapeHandler(this));
 	}
 	
-	protected void handleSequenceFlow(SequenceFlow flowElement, ContainerShape container) {
+	protected void handleSequenceFlow(final SequenceFlow flowElement, final ContainerShape container) {
 		handleDiagramElement(flowElement, container, new SequenceFlowHandler(this));
 	}
 
-	protected void handleEvent(Event flowElement, ContainerShape container) {
+	protected void handleEvent(final Event flowElement, final ContainerShape container) {
 		handleDiagramElement(flowElement, container, new EventShapeHandler(this));
 	}
 	
-	protected void handleCallActivity(CallActivity flowElement, ContainerShape container) {
+	protected void handleCallActivity(final CallActivity flowElement, final ContainerShape container) {
 		handleDiagramElement(flowElement, container, new FlowNodeShapeHandler(this));		
 	}
 
-	protected void handleTask(Task flowElement, ContainerShape container) {
+	protected void handleTask(final Task flowElement, final ContainerShape container) {
 		handleDiagramElement(flowElement, container, new TaskShapeHandler(this));
 	}
 	
-	protected void handleDataStoreReference(DataStoreReference flowElement, ContainerShape container) {
+	protected void handleDataStoreReference(final DataStoreReference flowElement, final ContainerShape container) {
 		handleDiagramElement(flowElement, container, new DatastoreReferenceShapeHandler(this));
 	}
 	
-	public <T extends BaseElement> PictogramElement handleDiagramElement(T flowElement, ContainerShape container,
-			AbstractDiagramElementHandler<T> flowNodeShapeHandler) {
+	public <T extends BaseElement> PictogramElement handleDiagramElement(final T flowElement, final ContainerShape container,
+			final AbstractDiagramElementHandler<T> flowNodeShapeHandler) {
 		
 		DiagramElement diagramElement = getDiagramElement(flowElement);
 		
@@ -790,13 +789,13 @@ public class ModelImport {
 		return pictogramElement;
 	}
 
-	protected void handleLater(DeferredAction<?> deferredAction) {
+	protected void handleLater(final DeferredAction<?> deferredAction) {
 		deferredActions.add(deferredAction);
 	}
 	
 	// handling of DI Elements ///////////////////////////////////////////////////////////////
 
-	protected void handleDIBpmnDiagram(BPMNDiagram bpmnDiagram) {
+	protected void handleDIBpmnDiagram(final BPMNDiagram bpmnDiagram) {
 		
 		BPMNPlane plane = bpmnDiagram.getPlane();
 		if (plane == null) {
@@ -806,7 +805,7 @@ public class ModelImport {
 		}
 	}
 
-	protected void handleDIBpmnPlane(BPMNPlane plane) {
+	protected void handleDIBpmnPlane(final BPMNPlane plane) {
 		
 		BaseElement bpmnElement = plane.getBpmnElement();
 		if (bpmnElement == null || bpmnElement.eIsProxy()) {
@@ -825,7 +824,7 @@ public class ModelImport {
 				
 	}
 
-	protected void handleDIDiagramElement(DiagramElement diagramElement) {
+	protected void handleDIDiagramElement(final DiagramElement diagramElement) {
 		if (diagramElement instanceof BPMNShape) {
 			handleDIShape((BPMNShape) diagramElement);			
 		} else if(diagramElement instanceof BPMNEdge) {
@@ -836,7 +835,7 @@ public class ModelImport {
 	}
 
 
-	protected void handleDIEdge(BPMNEdge diagramElement) {
+	protected void handleDIEdge(final BPMNEdge diagramElement) {
 		BaseElement bpmnElement = diagramElement.getBpmnElement();
 		if (bpmnElement == null || bpmnElement.eIsProxy()) {
 			ImportException exception = new UnmappedElementException(Messages.ModelImport_13, diagramElement);
@@ -846,7 +845,7 @@ public class ModelImport {
 		}
 	}
 
-	protected void handleDIShape(BPMNShape diagramElement) {
+	protected void handleDIShape(final BPMNShape diagramElement) {
 		BaseElement bpmnElement = diagramElement.getBpmnElement();
 		if (bpmnElement == null || bpmnElement.eIsProxy()) {
 			ImportException exception = new UnmappedElementException(Messages.ModelImport_14, diagramElement);
@@ -865,7 +864,7 @@ public class ModelImport {
 		}
 	}
 	
-	protected void linkInDiagramElementMap(DiagramElement diagramElement, BaseElement bpmnElement) {
+	protected void linkInDiagramElementMap(final DiagramElement diagramElement, final BaseElement bpmnElement) {
 		// if it does not have a id, it can't be shown
 		if (bpmnElement.getId() == null) {
 			return;
@@ -876,7 +875,7 @@ public class ModelImport {
 	
 	// Error logging ////////////////////////////////////////////
 	
-	public void log(ImportException e) {
+	public void log(final ImportException e) {
 		warnings.add(e);
 		ErrorLogger.log(e);
 	}
@@ -885,15 +884,15 @@ public class ModelImport {
 	 * Log without outputting to eclipse console
 	 * @param e
 	 */
-	public void logSilently(ImportException e) {
+	public void logSilently(final ImportException e) {
 		warnings.add(e);
 	}
 	
-	public void logAndThrow(ImportException e) throws ImportException {
+	public void logAndThrow(final ImportException e) throws ImportException {
 		ErrorLogger.logAndThrow(e);
 	}
 	
-	public void logResourceErrors(Bpmn2Resource resource) {
+	public void logResourceErrors(final Bpmn2Resource resource) {
 		List<Diagnostic> resourceErrors = resource.getErrors();
 		
 		// scan for xml load error
@@ -925,7 +924,7 @@ public class ModelImport {
 	 * @param bpmnElement
 	 * @return null if no diagram element was found, a warning will be added in this case
 	 */
-	public DiagramElement getDiagramElement(BaseElement bpmnElement) {
+	public DiagramElement getDiagramElement(final BaseElement bpmnElement) {
 		DiagramElement element = diagramElementMap.get(bpmnElement.getId());
 		if (element == null) {
 			UnmappedElementException exception = new UnmappedElementException(Messages.ModelImport_17, bpmnElement);
@@ -959,11 +958,11 @@ public class ModelImport {
 		return warnings;
 	}
 	
-	public PictogramElement getPictogramElementOrNull(BaseElement node) {
+	public PictogramElement getPictogramElementOrNull(final BaseElement node) {
 		return pictogramElements.get(node);
 	}
 	
-	public PictogramElement getPictogramElement(BaseElement node) {
+	public PictogramElement getPictogramElement(final BaseElement node) {
 		PictogramElement element = getPictogramElementOrNull(node);
 		if (element == null) {
 			UnmappedElementException exception = new UnmappedElementException(Messages.ModelImport_18, node);
@@ -978,11 +977,11 @@ public class ModelImport {
 	
 	public class DeferredAction<T extends BaseElement>  {
 
-		private T flowElement;
-		private ContainerShape container;
-		private AbstractDiagramElementHandler<T> handler;
+		private final T flowElement;
+		private final ContainerShape container;
+		private final AbstractDiagramElementHandler<T> handler;
 
-		public DeferredAction(T flowElement, ContainerShape container, AbstractDiagramElementHandler<T> handler) {
+		public DeferredAction(final T flowElement, final ContainerShape container, final AbstractDiagramElementHandler<T> handler) {
 			
 			this.flowElement = flowElement;
 			this.container = container;

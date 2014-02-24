@@ -22,6 +22,7 @@ package org.camunda.bpm.modeler.runtime.engine.model.casOpen;
 public interface DocumentRoot extends org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot {
 	/**
 	 * Returns the value of the '<em><b>Is User Interactable</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is User Interactable</em>' attribute isn't clear,
@@ -31,7 +32,8 @@ public interface DocumentRoot extends org.camunda.bpm.modeler.runtime.engine.mod
 	 * @return the value of the '<em>Is User Interactable</em>' attribute.
 	 * @see #setIsUserInteractable(boolean)
 	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getDocumentRoot_IsUserInteractable()
-	 * @model extendedMetaData="kind='attribute' name='isUserInteractable' namespace='http://www.cas.de/open'"
+	 * @model default="true"
+	 *        extendedMetaData="kind='attribute' name='isUserInteractable' namespace='http://www.cas.de/open'"
 	 * @generated
 	 */
 	boolean isIsUserInteractable();

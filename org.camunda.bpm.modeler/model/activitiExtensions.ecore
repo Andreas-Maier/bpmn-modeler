@@ -266,17 +266,8 @@
         <details key="namespace" value="http://www.camunda.com/fox"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="clientOperation" upperBound="-2"
-        eType="#//casOpen/ClientOperation" volatile="true" transient="true" derived="true"
-        containment="true" resolveProxies="false">
-      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="kind" value="element"/>
-        <details key="name" value="operation"/>
-        <details key="namespace" value="http://www.cas.de/open"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceOperation" upperBound="-2"
-        eType="#//casOpen/ServiceOperation" volatile="true" transient="true" derived="true"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CASOperation" upperBound="-2"
+        eType="#//casOpen/Operation" volatile="true" transient="true" derived="true"
         containment="true" resolveProxies="false">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="element"/>
@@ -941,7 +932,7 @@
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="casOpen" nsURI="http://www.cas.de/open" nsPrefix="casOpen">
-    <eClassifiers xsi:type="ecore:EClass" name="ClientOperation">
+    <eClassifiers xsi:type="ecore:EClass" name="Operation">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="namespace" value="http://www.cas.de/open"/>
       </eAnnotations>
@@ -1029,7 +1020,8 @@
         <details key="kind" value="mixed"/>
         <details key="namespace" value="##targetNamespace"/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUserInteractable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUserInteractable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true">
         <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
           <details key="kind" value="attribute"/>
           <details key="name" value="isUserInteractable"/>
@@ -1075,32 +1067,6 @@
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-          <details key="namespace" value="http://www.cas.de/open"/>
-        </eAnnotations>
-      </eStructuralFeatures>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ServiceOperation">
-      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="namespace" value="http://www.cas.de/open"/>
-      </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-        <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-          <details key="kind" value="attribute"/>
-          <details key="namespace" value="http://www.cas.de/open"/>
-        </eAnnotations>
-      </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1"
-          eType="#//casOpen/OperationParameter" containment="true">
-        <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-          <details key="kind" value="element"/>
-          <details key="namespace" value="http://www.cas.de/open"/>
-        </eAnnotations>
-      </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-        <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-          <details key="kind" value="attribute"/>
-          <details key="name" value="operationType"/>
           <details key="namespace" value="http://www.cas.de/open"/>
         </eAnnotations>
       </eStructuralFeatures>

@@ -2,7 +2,6 @@
  */
 package org.camunda.bpm.modeler.runtime.engine.model.impl;
 
-import java.util.Collection;
 import org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot;
 import org.camunda.bpm.modeler.runtime.engine.model.ExecutionListenerType;
 import org.camunda.bpm.modeler.runtime.engine.model.FieldType;
@@ -14,25 +13,17 @@ import org.camunda.bpm.modeler.runtime.engine.model.ModelPackage;
 import org.camunda.bpm.modeler.runtime.engine.model.OutType;
 import org.camunda.bpm.modeler.runtime.engine.model.TaskListenerType;
 import org.camunda.bpm.modeler.runtime.engine.model.TypeType;
-
-import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentMetaData;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.RequestObject;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ResponseObject;
-import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation;
 import org.camunda.bpm.modeler.runtime.engine.model.fox.FailedJobRetryTimeCycleType;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.FeatureMap;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,8 +57,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getPriority <em>Priority</em>}</li>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getResultVariableName <em>Result Variable Name</em>}</li>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getFailedJobRetryTimeCycle <em>Failed Job Retry Time Cycle</em>}</li>
- *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getClientOperation <em>Client Operation</em>}</li>
- *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getServiceOperation <em>Service Operation</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getCASOperation <em>CAS Operation</em>}</li>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getFormData <em>Form Data</em>}</li>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getDocumentMetaData <em>Document Meta Data</em>}</li>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.impl.DocumentRootImpl#getRequestObject <em>Request Object</em>}</li>
@@ -490,7 +480,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public ExecutionListenerType getExecutionListener() {
+  @Override
+public ExecutionListenerType getExecutionListener() {
 		return (ExecutionListenerType)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__EXECUTION_LISTENER, true);
 	}
 
@@ -508,7 +499,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setExecutionListener(ExecutionListenerType newExecutionListener) {
+  @Override
+public void setExecutionListener(ExecutionListenerType newExecutionListener) {
 		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__EXECUTION_LISTENER, newExecutionListener);
 	}
 
@@ -517,7 +509,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public FieldType getField() {
+  @Override
+public FieldType getField() {
 		return (FieldType)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__FIELD, true);
 	}
 
@@ -535,7 +528,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setField(FieldType newField) {
+  @Override
+public void setField(FieldType newField) {
 		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__FIELD, newField);
 	}
 
@@ -544,7 +538,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public FormPropertyType getFormProperty() {
+  @Override
+public FormPropertyType getFormProperty() {
 		return (FormPropertyType)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__FORM_PROPERTY, true);
 	}
 
@@ -562,7 +557,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setFormProperty(FormPropertyType newFormProperty) {
+  @Override
+public void setFormProperty(FormPropertyType newFormProperty) {
 		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__FORM_PROPERTY, newFormProperty);
 	}
 
@@ -571,7 +567,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public InType getIn() {
+  @Override
+public InType getIn() {
 		return (InType)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__IN, true);
 	}
 
@@ -589,7 +586,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setIn(InType newIn) {
+  @Override
+public void setIn(InType newIn) {
 		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__IN, newIn);
 	}
 
@@ -598,7 +596,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public OutType getOut() {
+  @Override
+public OutType getOut() {
 		return (OutType)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__OUT, true);
 	}
 
@@ -616,7 +615,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setOut(OutType newOut) {
+  @Override
+public void setOut(OutType newOut) {
 		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__OUT, newOut);
 	}
 
@@ -625,7 +625,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TaskListenerType getTaskListener() {
+  @Override
+public TaskListenerType getTaskListener() {
 		return (TaskListenerType)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__TASK_LISTENER, true);
 	}
 
@@ -643,7 +644,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setTaskListener(TaskListenerType newTaskListener) {
+  @Override
+public void setTaskListener(TaskListenerType newTaskListener) {
 		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__TASK_LISTENER, newTaskListener);
 	}
 
@@ -652,7 +654,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getAssignee() {
+  @Override
+public String getAssignee() {
 		return assignee;
 	}
 
@@ -661,7 +664,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setAssignee(String newAssignee) {
+  @Override
+public void setAssignee(String newAssignee) {
 		String oldAssignee = assignee;
 		assignee = newAssignee;
 		if (eNotificationRequired())
@@ -673,7 +677,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getCandidateGroups() {
+  @Override
+public String getCandidateGroups() {
 		return candidateGroups;
 	}
 
@@ -682,7 +687,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setCandidateGroups(String newCandidateGroups) {
+  @Override
+public void setCandidateGroups(String newCandidateGroups) {
 		String oldCandidateGroups = candidateGroups;
 		candidateGroups = newCandidateGroups;
 		if (eNotificationRequired())
@@ -694,7 +700,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getCandidateUsers() {
+  @Override
+public String getCandidateUsers() {
 		return candidateUsers;
 	}
 
@@ -703,7 +710,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setCandidateUsers(String newCandidateUsers) {
+  @Override
+public void setCandidateUsers(String newCandidateUsers) {
 		String oldCandidateUsers = candidateUsers;
 		candidateUsers = newCandidateUsers;
 		if (eNotificationRequired())
@@ -715,7 +723,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getClass_() {
+  @Override
+public String getClass_() {
 		return class_;
 	}
 
@@ -724,7 +733,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setClass(String newClass) {
+  @Override
+public void setClass(String newClass) {
 		String oldClass = class_;
 		class_ = newClass;
 		if (eNotificationRequired())
@@ -736,7 +746,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getCollection() {
+  @Override
+public String getCollection() {
 		return collection;
 	}
 
@@ -745,7 +756,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setCollection(String newCollection) {
+  @Override
+public void setCollection(String newCollection) {
 		String oldCollection = collection;
 		collection = newCollection;
 		if (eNotificationRequired())
@@ -757,7 +769,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Object getDelegateExpression() {
+  @Override
+public Object getDelegateExpression() {
 		return delegateExpression;
 	}
 
@@ -766,7 +779,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setDelegateExpression(Object newDelegateExpression) {
+  @Override
+public void setDelegateExpression(Object newDelegateExpression) {
 		Object oldDelegateExpression = delegateExpression;
 		delegateExpression = newDelegateExpression;
 		if (eNotificationRequired())
@@ -778,7 +792,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getDueDate() {
+  @Override
+public String getDueDate() {
 		return dueDate;
 	}
 
@@ -787,7 +802,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setDueDate(String newDueDate) {
+  @Override
+public void setDueDate(String newDueDate) {
 		String oldDueDate = dueDate;
 		dueDate = newDueDate;
 		if (eNotificationRequired())
@@ -799,7 +815,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getElementVariable() {
+  @Override
+public String getElementVariable() {
 		return elementVariable;
 	}
 
@@ -808,7 +825,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setElementVariable(String newElementVariable) {
+  @Override
+public void setElementVariable(String newElementVariable) {
 		String oldElementVariable = elementVariable;
 		elementVariable = newElementVariable;
 		if (eNotificationRequired())
@@ -820,7 +838,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getFormHandlerClass() {
+  @Override
+public String getFormHandlerClass() {
 		return formHandlerClass;
 	}
 
@@ -829,7 +848,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setFormHandlerClass(String newFormHandlerClass) {
+  @Override
+public void setFormHandlerClass(String newFormHandlerClass) {
 		String oldFormHandlerClass = formHandlerClass;
 		formHandlerClass = newFormHandlerClass;
 		if (eNotificationRequired())
@@ -841,7 +861,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getFormKey() {
+  @Override
+public String getFormKey() {
 		return formKey;
 	}
 
@@ -850,7 +871,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setFormKey(String newFormKey) {
+  @Override
+public void setFormKey(String newFormKey) {
 		String oldFormKey = formKey;
 		formKey = newFormKey;
 		if (eNotificationRequired())
@@ -862,7 +884,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public HistoryType getHistory() {
+  @Override
+public HistoryType getHistory() {
 		return history;
 	}
 
@@ -871,7 +894,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setHistory(HistoryType newHistory) {
+  @Override
+public void setHistory(HistoryType newHistory) {
 		HistoryType oldHistory = history;
 		history = newHistory == null ? HISTORY_EDEFAULT : newHistory;
 		boolean oldHistoryESet = historyESet;
@@ -885,7 +909,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void unsetHistory() {
+  @Override
+public void unsetHistory() {
 		HistoryType oldHistory = history;
 		boolean oldHistoryESet = historyESet;
 		history = HISTORY_EDEFAULT;
@@ -899,7 +924,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public boolean isSetHistory() {
+  @Override
+public boolean isSetHistory() {
 		return historyESet;
 	}
 
@@ -908,7 +934,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getInitiator() {
+  @Override
+public String getInitiator() {
 		return initiator;
 	}
 
@@ -917,7 +944,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setInitiator(String newInitiator) {
+  @Override
+public void setInitiator(String newInitiator) {
 		String oldInitiator = initiator;
 		initiator = newInitiator;
 		if (eNotificationRequired())
@@ -929,7 +957,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getResultVariable() {
+  @Override
+public String getResultVariable() {
 		return resultVariable;
 	}
 
@@ -938,7 +967,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setResultVariable(String newResultVariable) {
+  @Override
+public void setResultVariable(String newResultVariable) {
 		String oldResultVariable = resultVariable;
 		resultVariable = newResultVariable;
 		if (eNotificationRequired())
@@ -950,7 +980,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeType getType() {
+  @Override
+public TypeType getType() {
 		return type;
 	}
 
@@ -959,7 +990,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setType(TypeType newType) {
+  @Override
+public void setType(TypeType newType) {
 		TypeType oldType = type;
 		type = newType == null ? TYPE_EDEFAULT : newType;
 		boolean oldTypeESet = typeESet;
@@ -973,7 +1005,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void unsetType() {
+  @Override
+public void unsetType() {
 		TypeType oldType = type;
 		boolean oldTypeESet = typeESet;
 		type = TYPE_EDEFAULT;
@@ -987,7 +1020,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public boolean isSetType() {
+  @Override
+public boolean isSetType() {
 		return typeESet;
 	}
 
@@ -996,7 +1030,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public boolean isAsync() {
+  @Override
+public boolean isAsync() {
 		return async;
 	}
 
@@ -1005,7 +1040,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setAsync(boolean newAsync) {
+  @Override
+public void setAsync(boolean newAsync) {
 		boolean oldAsync = async;
 		async = newAsync;
 		if (eNotificationRequired())
@@ -1017,7 +1053,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getActExpression() {
+  @Override
+public String getActExpression() {
 		return actExpression;
 	}
 
@@ -1026,7 +1063,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setActExpression(String newActExpression) {
+  @Override
+public void setActExpression(String newActExpression) {
 		String oldActExpression = actExpression;
 		actExpression = newActExpression;
 		if (eNotificationRequired())
@@ -1038,7 +1076,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getPriority() {
+  @Override
+public String getPriority() {
 		return priority;
 	}
 
@@ -1047,7 +1086,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setPriority(String newPriority) {
+  @Override
+public void setPriority(String newPriority) {
 		String oldPriority = priority;
 		priority = newPriority;
 		if (eNotificationRequired())
@@ -1059,7 +1099,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getResultVariableName() {
+  @Override
+public String getResultVariableName() {
 		return resultVariableName;
 	}
 
@@ -1068,7 +1109,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setResultVariableName(String newResultVariableName) {
+  @Override
+public void setResultVariableName(String newResultVariableName) {
 		String oldResultVariableName = resultVariableName;
 		resultVariableName = newResultVariableName;
 		if (eNotificationRequired())
@@ -1080,7 +1122,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public FailedJobRetryTimeCycleType getFailedJobRetryTimeCycle() {
+  @Override
+public FailedJobRetryTimeCycleType getFailedJobRetryTimeCycle() {
 		return (FailedJobRetryTimeCycleType)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE, true);
 	}
 
@@ -1098,7 +1141,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setFailedJobRetryTimeCycle(FailedJobRetryTimeCycleType newFailedJobRetryTimeCycle) {
+  @Override
+public void setFailedJobRetryTimeCycle(FailedJobRetryTimeCycleType newFailedJobRetryTimeCycle) {
 		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE, newFailedJobRetryTimeCycle);
 	}
 
@@ -1107,8 +1151,9 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClientOperation getClientOperation() {
-		return (ClientOperation)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__CLIENT_OPERATION, true);
+	@Override
+	public Operation getCASOperation() {
+		return (Operation)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__CAS_OPERATION, true);
 	}
 
 		/**
@@ -1116,8 +1161,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetClientOperation(ClientOperation newClientOperation, NotificationChain msgs) {
-		return ((FeatureMap.Internal)getMixed()).basicAdd(ModelPackage.Literals.DOCUMENT_ROOT__CLIENT_OPERATION, newClientOperation, msgs);
+	public NotificationChain basicSetCASOperation(Operation newCASOperation, NotificationChain msgs) {
+		return ((FeatureMap.Internal)getMixed()).basicAdd(ModelPackage.Literals.DOCUMENT_ROOT__CAS_OPERATION, newCASOperation, msgs);
 	}
 
 		/**
@@ -1125,8 +1170,9 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setClientOperation(ClientOperation newClientOperation) {
-		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__CLIENT_OPERATION, newClientOperation);
+	@Override
+	public void setCASOperation(Operation newCASOperation) {
+		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__CAS_OPERATION, newCASOperation);
 	}
 
 		/**
@@ -1134,33 +1180,7 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ServiceOperation getServiceOperation() {
-		return (ServiceOperation)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__SERVICE_OPERATION, true);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetServiceOperation(ServiceOperation newServiceOperation, NotificationChain msgs) {
-		return ((FeatureMap.Internal)getMixed()).basicAdd(ModelPackage.Literals.DOCUMENT_ROOT__SERVICE_OPERATION, newServiceOperation, msgs);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setServiceOperation(ServiceOperation newServiceOperation) {
-		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__SERVICE_OPERATION, newServiceOperation);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@Override
 	public FormDataType getFormData() {
 		return formData;
 	}
@@ -1185,6 +1205,7 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFormData(FormDataType newFormData) {
 		if (newFormData != formData) {
 			NotificationChain msgs = null;
@@ -1204,6 +1225,7 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DocumentMetaData getDocumentMetaData() {
 		return (DocumentMetaData)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__DOCUMENT_META_DATA, true);
 	}
@@ -1222,6 +1244,7 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDocumentMetaData(DocumentMetaData newDocumentMetaData) {
 		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__DOCUMENT_META_DATA, newDocumentMetaData);
 	}
@@ -1231,6 +1254,7 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RequestObject getRequestObject() {
 		return (RequestObject)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__REQUEST_OBJECT, true);
 	}
@@ -1249,6 +1273,7 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRequestObject(RequestObject newRequestObject) {
 		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__REQUEST_OBJECT, newRequestObject);
 	}
@@ -1258,6 +1283,7 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResponseObject getResponseObject() {
 		return (ResponseObject)getMixed().get(ModelPackage.Literals.DOCUMENT_ROOT__RESPONSE_OBJECT, true);
 	}
@@ -1276,6 +1302,7 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResponseObject(ResponseObject newResponseObject) {
 		((FeatureMap.Internal)getMixed()).set(ModelPackage.Literals.DOCUMENT_ROOT__RESPONSE_OBJECT, newResponseObject);
 	}
@@ -1302,10 +1329,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 				return basicSetTaskListener(null, msgs);
 			case ModelPackage.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE:
 				return basicSetFailedJobRetryTimeCycle(null, msgs);
-			case ModelPackage.DOCUMENT_ROOT__CLIENT_OPERATION:
-				return basicSetClientOperation(null, msgs);
-			case ModelPackage.DOCUMENT_ROOT__SERVICE_OPERATION:
-				return basicSetServiceOperation(null, msgs);
+			case ModelPackage.DOCUMENT_ROOT__CAS_OPERATION:
+				return basicSetCASOperation(null, msgs);
 			case ModelPackage.DOCUMENT_ROOT__FORM_DATA:
 				return basicSetFormData(null, msgs);
 			case ModelPackage.DOCUMENT_ROOT__DOCUMENT_META_DATA:
@@ -1376,10 +1401,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 				return getResultVariableName();
 			case ModelPackage.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE:
 				return getFailedJobRetryTimeCycle();
-			case ModelPackage.DOCUMENT_ROOT__CLIENT_OPERATION:
-				return getClientOperation();
-			case ModelPackage.DOCUMENT_ROOT__SERVICE_OPERATION:
-				return getServiceOperation();
+			case ModelPackage.DOCUMENT_ROOT__CAS_OPERATION:
+				return getCASOperation();
 			case ModelPackage.DOCUMENT_ROOT__FORM_DATA:
 				return getFormData();
 			case ModelPackage.DOCUMENT_ROOT__DOCUMENT_META_DATA:
@@ -1476,11 +1499,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 			case ModelPackage.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE:
 				setFailedJobRetryTimeCycle((FailedJobRetryTimeCycleType)newValue);
 				return;
-			case ModelPackage.DOCUMENT_ROOT__CLIENT_OPERATION:
-				setClientOperation((ClientOperation)newValue);
-				return;
-			case ModelPackage.DOCUMENT_ROOT__SERVICE_OPERATION:
-				setServiceOperation((ServiceOperation)newValue);
+			case ModelPackage.DOCUMENT_ROOT__CAS_OPERATION:
+				setCASOperation((Operation)newValue);
 				return;
 			case ModelPackage.DOCUMENT_ROOT__FORM_DATA:
 				setFormData((FormDataType)newValue);
@@ -1581,11 +1601,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 			case ModelPackage.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE:
 				setFailedJobRetryTimeCycle((FailedJobRetryTimeCycleType)null);
 				return;
-			case ModelPackage.DOCUMENT_ROOT__CLIENT_OPERATION:
-				setClientOperation((ClientOperation)null);
-				return;
-			case ModelPackage.DOCUMENT_ROOT__SERVICE_OPERATION:
-				setServiceOperation((ServiceOperation)null);
+			case ModelPackage.DOCUMENT_ROOT__CAS_OPERATION:
+				setCASOperation((Operation)null);
 				return;
 			case ModelPackage.DOCUMENT_ROOT__FORM_DATA:
 				setFormData((FormDataType)null);
@@ -1661,10 +1678,8 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 				return RESULT_VARIABLE_NAME_EDEFAULT == null ? resultVariableName != null : !RESULT_VARIABLE_NAME_EDEFAULT.equals(resultVariableName);
 			case ModelPackage.DOCUMENT_ROOT__FAILED_JOB_RETRY_TIME_CYCLE:
 				return getFailedJobRetryTimeCycle() != null;
-			case ModelPackage.DOCUMENT_ROOT__CLIENT_OPERATION:
-				return getClientOperation() != null;
-			case ModelPackage.DOCUMENT_ROOT__SERVICE_OPERATION:
-				return getServiceOperation() != null;
+			case ModelPackage.DOCUMENT_ROOT__CAS_OPERATION:
+				return getCASOperation() != null;
 			case ModelPackage.DOCUMENT_ROOT__FORM_DATA:
 				return formData != null;
 			case ModelPackage.DOCUMENT_ROOT__DOCUMENT_META_DATA:

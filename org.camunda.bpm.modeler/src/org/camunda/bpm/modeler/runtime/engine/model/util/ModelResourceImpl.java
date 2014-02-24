@@ -133,7 +133,7 @@ public class ModelResourceImpl extends Bpmn2ModelerResourceImpl {
 
 					return true;
 				}
-
+				
 				if (o instanceof Point) {
 					return true;
 				}
@@ -307,7 +307,7 @@ public class ModelResourceImpl extends Bpmn2ModelerResourceImpl {
 				// The incorrect type causes the interpretation as xsd:anytype
 				// when loading the resource, what causes the loading of the
 				// extension to fail.
-			    if (shouldSaveType || eClass.getName().equalsIgnoreCase("clientoperation"))
+			    if (shouldSaveType || eClass.getName().equalsIgnoreCase("operation"))
 			    {
 			      if (eDataType != null)
 			      {

@@ -71,8 +71,8 @@ public class CasOpenAdapterFactory extends AdapterFactoryImpl {
 	protected CasOpenSwitch<Adapter> modelSwitch =
 		new CasOpenSwitch<Adapter>() {
 			@Override
-			public Adapter caseClientOperation(ClientOperation object) {
-				return createClientOperationAdapter();
+			public Adapter caseOperation(Operation object) {
+				return createOperationAdapter();
 			}
 			@Override
 			public Adapter caseOperationParameter(OperationParameter object) {
@@ -93,10 +93,6 @@ public class CasOpenAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseProperty(Property object) {
 				return createPropertyAdapter();
-			}
-			@Override
-			public Adapter caseServiceOperation(ServiceOperation object) {
-				return createServiceOperationAdapter();
 			}
 			@Override
 			public Adapter caseRequestObject(RequestObject object) {
@@ -155,16 +151,16 @@ public class CasOpenAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation <em>Client Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation
 	 * @generated
 	 */
-	public Adapter createClientOperationAdapter() {
+	public Adapter createOperationAdapter() {
 		return null;
 	}
 
@@ -235,20 +231,6 @@ public class CasOpenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPropertyAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation <em>Service Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation
-	 * @generated
-	 */
-	public Adapter createServiceOperationAdapter() {
 		return null;
 	}
 

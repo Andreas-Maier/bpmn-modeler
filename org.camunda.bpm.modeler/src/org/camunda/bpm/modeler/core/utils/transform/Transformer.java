@@ -6,8 +6,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.camunda.bpm.modeler.core.utils.ExtensionUtil;
+import org.camunda.bpm.modeler.core.utils.ModelUtil;
 import org.camunda.bpm.modeler.runtime.engine.model.ModelPackage;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
+import org.eclipse.bpmn2.Definitions;
+import org.eclipse.bpmn2.Process;
+import org.eclipse.bpmn2.Property;
+import org.eclipse.bpmn2.RootElement;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -117,25 +122,42 @@ public class Transformer {
 	 * @return
 	 */
 	public EObject copyChangeCls(final EClass newCls) {
-		ExtensionUtil.removeExtensionByFeature(target, ModelPackage.eINSTANCE.getDocumentRoot_ClientOperation());
-		ExtensionUtil.removeExtensionByFeature(target, ModelPackage.eINSTANCE.getDocumentRoot_ServiceOperation());
+		ExtensionUtil.removeExtensionByFeature(target, ModelPackage.eINSTANCE.getDocumentRoot_CASOperation());
 		ExtensionUtil.removeExtensionByFeature(target, ModelPackage.eINSTANCE.getDocumentRoot_RequestObject());
 		ExtensionUtil.removeExtensionByFeature(target, ModelPackage.eINSTANCE.getDocumentRoot_ResponseObject());
 		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getDocumentRoot_IsUserInteractable());
-		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getClientOperation_Parameter());
-		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getClientOperation_Result());
+		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getOperation_Parameter());
+		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getOperation_Result());
 		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getProperty_DefiningElement());
 		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getRequestObject_Parameters());
 		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getRequestParameter_ValueReference());
 		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getResponseObject_ResponseParameters());
 		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getResponseParameter_ResponseParameters());
-		ExtensionUtil.removeExtensionByFeature(target, CasOpenPackage.eINSTANCE.getServiceOperation_Parameter());
+		
+		removePropertiesIfNecessary();
 		
 		// morph-copy object and all attributes
 		MorphingCopier copier = new MorphingCopier(target, newCls);
 		copier.setWarningHandler(log);
 
 		return copier.copy(target);
+	}
+
+	private void removePropertiesIfNecessary() {
+		Definitions defs = ModelUtil.getDefinitions(target);
+		for (RootElement root : defs.getRootElements()) {
+			if (root instanceof Process) {
+				List<Property> propertiesToDelete = new ArrayList<>();
+				Process process = (Process) root;
+				for (Property property : process.getProperties()) {
+					org.camunda.bpm.modeler.runtime.engine.model.casOpen.Property prop = (org.camunda.bpm.modeler.runtime.engine.model.casOpen.Property) property;
+					if (prop.getDefiningElement().equals(target)) {
+						propertiesToDelete.add(property);
+					}
+				}
+				process.getProperties().removeAll(propertiesToDelete);
+			}
+		}
 	}
 	
 	protected void replace(final EObject object, final EObject replacement) {

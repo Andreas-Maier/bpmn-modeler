@@ -5,8 +5,9 @@ package org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl;
 import java.util.Collection;
 
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.OperationParameter;
-import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.Result;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -24,20 +25,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Service Operation</b></em>'.
+ * An implementation of the model object '<em><b>Operation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.ServiceOperationImpl#getAction <em>Action</em>}</li>
- *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.ServiceOperationImpl#getParameter <em>Parameter</em>}</li>
- *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.ServiceOperationImpl#getOperationType <em>Operation Type</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OperationImpl#getAction <em>Action</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OperationImpl#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OperationImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OperationImpl#getOperationType <em>Operation Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ServiceOperationImpl extends EObjectImpl implements ServiceOperation {
+public class OperationImpl extends EObjectImpl implements Operation {
 	/**
 	 * The default value of the '{@link #getAction() <em>Action</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -69,6 +71,16 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 	protected EList<OperationParameter> parameter;
 
 	/**
+	 * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResult()
+	 * @generated
+	 * @ordered
+	 */
+	protected Result result;
+
+	/**
 	 * The default value of the '{@link #getOperationType() <em>Operation Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,7 +105,7 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ServiceOperationImpl() {
+	protected OperationImpl() {
 		super();
 	}
 
@@ -104,7 +116,7 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CasOpenPackage.Literals.SERVICE_OPERATION;
+		return CasOpenPackage.Literals.OPERATION;
 	}
 
 	/**
@@ -125,7 +137,7 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 		String oldAction = action;
 		action = newAction;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CasOpenPackage.SERVICE_OPERATION__ACTION, oldAction, action));
+			eNotify(new ENotificationImpl(this, Notification.SET, CasOpenPackage.OPERATION__ACTION, oldAction, action));
 	}
 
 	/**
@@ -135,9 +147,52 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 	 */
 	public EList<OperationParameter> getParameter() {
 		if (parameter == null) {
-			parameter = new EObjectContainmentEList<OperationParameter>(OperationParameter.class, this, CasOpenPackage.SERVICE_OPERATION__PARAMETER);
+			parameter = new EObjectContainmentEList<OperationParameter>(OperationParameter.class, this, CasOpenPackage.OPERATION__PARAMETER);
 		}
 		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Result getResult() {
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetResult(Result newResult, NotificationChain msgs) {
+		Result oldResult = result;
+		result = newResult;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CasOpenPackage.OPERATION__RESULT, oldResult, newResult);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResult(Result newResult) {
+		if (newResult != result) {
+			NotificationChain msgs = null;
+			if (result != null)
+				msgs = ((InternalEObject)result).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CasOpenPackage.OPERATION__RESULT, null, msgs);
+			if (newResult != null)
+				msgs = ((InternalEObject)newResult).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CasOpenPackage.OPERATION__RESULT, null, msgs);
+			msgs = basicSetResult(newResult, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CasOpenPackage.OPERATION__RESULT, newResult, newResult));
 	}
 
 	/**
@@ -158,7 +213,7 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 		String oldOperationType = operationType;
 		operationType = newOperationType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CasOpenPackage.SERVICE_OPERATION__OPERATION_TYPE, oldOperationType, operationType));
+			eNotify(new ENotificationImpl(this, Notification.SET, CasOpenPackage.OPERATION__OPERATION_TYPE, oldOperationType, operationType));
 	}
 
 	/**
@@ -169,8 +224,10 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CasOpenPackage.SERVICE_OPERATION__PARAMETER:
+			case CasOpenPackage.OPERATION__PARAMETER:
 				return ((InternalEList<?>)getParameter()).basicRemove(otherEnd, msgs);
+			case CasOpenPackage.OPERATION__RESULT:
+				return basicSetResult(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -183,11 +240,13 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CasOpenPackage.SERVICE_OPERATION__ACTION:
+			case CasOpenPackage.OPERATION__ACTION:
 				return getAction();
-			case CasOpenPackage.SERVICE_OPERATION__PARAMETER:
+			case CasOpenPackage.OPERATION__PARAMETER:
 				return getParameter();
-			case CasOpenPackage.SERVICE_OPERATION__OPERATION_TYPE:
+			case CasOpenPackage.OPERATION__RESULT:
+				return getResult();
+			case CasOpenPackage.OPERATION__OPERATION_TYPE:
 				return getOperationType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -202,14 +261,17 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CasOpenPackage.SERVICE_OPERATION__ACTION:
+			case CasOpenPackage.OPERATION__ACTION:
 				setAction((String)newValue);
 				return;
-			case CasOpenPackage.SERVICE_OPERATION__PARAMETER:
+			case CasOpenPackage.OPERATION__PARAMETER:
 				getParameter().clear();
 				getParameter().addAll((Collection<? extends OperationParameter>)newValue);
 				return;
-			case CasOpenPackage.SERVICE_OPERATION__OPERATION_TYPE:
+			case CasOpenPackage.OPERATION__RESULT:
+				setResult((Result)newValue);
+				return;
+			case CasOpenPackage.OPERATION__OPERATION_TYPE:
 				setOperationType((String)newValue);
 				return;
 		}
@@ -224,13 +286,16 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CasOpenPackage.SERVICE_OPERATION__ACTION:
+			case CasOpenPackage.OPERATION__ACTION:
 				setAction(ACTION_EDEFAULT);
 				return;
-			case CasOpenPackage.SERVICE_OPERATION__PARAMETER:
+			case CasOpenPackage.OPERATION__PARAMETER:
 				getParameter().clear();
 				return;
-			case CasOpenPackage.SERVICE_OPERATION__OPERATION_TYPE:
+			case CasOpenPackage.OPERATION__RESULT:
+				setResult((Result)null);
+				return;
+			case CasOpenPackage.OPERATION__OPERATION_TYPE:
 				setOperationType(OPERATION_TYPE_EDEFAULT);
 				return;
 		}
@@ -245,11 +310,13 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CasOpenPackage.SERVICE_OPERATION__ACTION:
+			case CasOpenPackage.OPERATION__ACTION:
 				return ACTION_EDEFAULT == null ? action != null : !ACTION_EDEFAULT.equals(action);
-			case CasOpenPackage.SERVICE_OPERATION__PARAMETER:
+			case CasOpenPackage.OPERATION__PARAMETER:
 				return parameter != null && !parameter.isEmpty();
-			case CasOpenPackage.SERVICE_OPERATION__OPERATION_TYPE:
+			case CasOpenPackage.OPERATION__RESULT:
+				return result != null;
+			case CasOpenPackage.OPERATION__OPERATION_TYPE:
 				return OPERATION_TYPE_EDEFAULT == null ? operationType != null : !OPERATION_TYPE_EDEFAULT.equals(operationType);
 		}
 		return super.eIsSet(featureID);
@@ -273,4 +340,4 @@ public class ServiceOperationImpl extends EObjectImpl implements ServiceOperatio
 		return result.toString();
 	}
 
-} //ServiceOperationImpl
+} //OperationImpl

@@ -5,10 +5,10 @@ package org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl;
 import org.camunda.bpm.modeler.runtime.engine.model.ModelPackage;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenFactory;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
-import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ClientOperation;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ConditionComparators;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentMetaData;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentRoot;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.OperationParameter;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.Property;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.RequestObject;
@@ -16,7 +16,6 @@ import org.camunda.bpm.modeler.runtime.engine.model.casOpen.RequestParameter;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ResponseObject;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ResponseParameter;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.Result;
-import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ServiceOperation;
 import org.camunda.bpm.modeler.runtime.engine.model.fox.FoxPackage;
 import org.camunda.bpm.modeler.runtime.engine.model.fox.impl.FoxPackageImpl;
 import org.camunda.bpm.modeler.runtime.engine.model.impl.ModelPackageImpl;
@@ -43,7 +42,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass clientOperationEClass = null;
+	private EClass operationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -79,13 +78,6 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * @generated
 	 */
 	private EClass propertyEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass serviceOperationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,8 +195,8 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getClientOperation() {
-		return clientOperationEClass;
+	public EClass getOperation() {
+		return operationEClass;
 	}
 
 	/**
@@ -213,8 +205,8 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getClientOperation_Action() {
-		return (EAttribute)clientOperationEClass.getEStructuralFeatures().get(0);
+	public EAttribute getOperation_Action() {
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -223,8 +215,8 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getClientOperation_Parameter() {
-		return (EReference)clientOperationEClass.getEStructuralFeatures().get(1);
+	public EReference getOperation_Parameter() {
+		return (EReference)operationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -233,8 +225,8 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getClientOperation_Result() {
-		return (EReference)clientOperationEClass.getEStructuralFeatures().get(2);
+	public EReference getOperation_Result() {
+		return (EReference)operationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -243,8 +235,8 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getClientOperation_OperationType() {
-		return (EAttribute)clientOperationEClass.getEStructuralFeatures().get(3);
+	public EAttribute getOperation_OperationType() {
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -372,6 +364,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProperty() {
 		return propertyEClass;
 	}
@@ -381,6 +374,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProperty_DefiningElement() {
 		return (EReference)propertyEClass.getEStructuralFeatures().get(0);
 	}
@@ -390,6 +384,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProperty_PropertyType() {
 		return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
 	}
@@ -399,42 +394,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getServiceOperation() {
-		return serviceOperationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getServiceOperation_Action() {
-		return (EAttribute)serviceOperationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getServiceOperation_Parameter() {
-		return (EReference)serviceOperationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getServiceOperation_OperationType() {
-		return (EAttribute)serviceOperationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@Override
 	public EClass getRequestObject() {
 		return requestObjectEClass;
 	}
@@ -444,6 +404,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRequestObject_Clazz() {
 		return (EAttribute)requestObjectEClass.getEStructuralFeatures().get(0);
 	}
@@ -453,6 +414,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRequestObject_Parameters() {
 		return (EReference)requestObjectEClass.getEStructuralFeatures().get(1);
 	}
@@ -462,6 +424,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRequestParameter() {
 		return requestParameterEClass;
 	}
@@ -471,6 +434,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRequestParameter_FieldName() {
 		return (EAttribute)requestParameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -480,6 +444,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRequestParameter_Expression() {
 		return (EAttribute)requestParameterEClass.getEStructuralFeatures().get(1);
 	}
@@ -489,6 +454,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRequestParameter_Value() {
 		return (EAttribute)requestParameterEClass.getEStructuralFeatures().get(2);
 	}
@@ -498,6 +464,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRequestParameter_ValueReference() {
 		return (EReference)requestParameterEClass.getEStructuralFeatures().get(3);
 	}
@@ -507,6 +474,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getResponseObject() {
 		return responseObjectEClass;
 	}
@@ -516,6 +484,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getResponseObject_Clazz() {
 		return (EAttribute)responseObjectEClass.getEStructuralFeatures().get(0);
 	}
@@ -525,6 +494,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getResponseObject_ResponseParameters() {
 		return (EReference)responseObjectEClass.getEStructuralFeatures().get(1);
 	}
@@ -534,6 +504,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getResponseParameter() {
 		return responseParameterEClass;
 	}
@@ -543,6 +514,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getResponseParameter_FieldName() {
 		return (EAttribute)responseParameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -552,6 +524,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getResponseParameter_VariableName() {
 		return (EAttribute)responseParameterEClass.getEStructuralFeatures().get(1);
 	}
@@ -561,6 +534,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getResponseParameter_ResponseParameters() {
 		return (EReference)responseParameterEClass.getEStructuralFeatures().get(2);
 	}
@@ -570,6 +544,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getConditionComparators() {
 		return conditionComparatorsEEnum;
 	}
@@ -603,11 +578,11 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		clientOperationEClass = createEClass(CLIENT_OPERATION);
-		createEAttribute(clientOperationEClass, CLIENT_OPERATION__ACTION);
-		createEReference(clientOperationEClass, CLIENT_OPERATION__PARAMETER);
-		createEReference(clientOperationEClass, CLIENT_OPERATION__RESULT);
-		createEAttribute(clientOperationEClass, CLIENT_OPERATION__OPERATION_TYPE);
+		operationEClass = createEClass(OPERATION);
+		createEAttribute(operationEClass, OPERATION__ACTION);
+		createEReference(operationEClass, OPERATION__PARAMETER);
+		createEReference(operationEClass, OPERATION__RESULT);
+		createEAttribute(operationEClass, OPERATION__OPERATION_TYPE);
 
 		operationParameterEClass = createEClass(OPERATION_PARAMETER);
 		createEAttribute(operationParameterEClass, OPERATION_PARAMETER__PARAMETER_TYPE);
@@ -628,11 +603,6 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 		propertyEClass = createEClass(PROPERTY);
 		createEReference(propertyEClass, PROPERTY__DEFINING_ELEMENT);
 		createEAttribute(propertyEClass, PROPERTY__PROPERTY_TYPE);
-
-		serviceOperationEClass = createEClass(SERVICE_OPERATION);
-		createEAttribute(serviceOperationEClass, SERVICE_OPERATION__ACTION);
-		createEReference(serviceOperationEClass, SERVICE_OPERATION__PARAMETER);
-		createEAttribute(serviceOperationEClass, SERVICE_OPERATION__OPERATION_TYPE);
 
 		requestObjectEClass = createEClass(REQUEST_OBJECT);
 		createEAttribute(requestObjectEClass, REQUEST_OBJECT__CLAZZ);
@@ -693,11 +663,11 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 		propertyEClass.getESuperTypes().add(theBpmn2Package.getProperty());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(clientOperationEClass, ClientOperation.class, "ClientOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getClientOperation_Action(), ecorePackage.getEString(), "action", null, 1, 1, ClientOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClientOperation_Parameter(), this.getOperationParameter(), null, "parameter", null, 0, -1, ClientOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClientOperation_Result(), this.getResult(), null, "result", null, 0, 1, ClientOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClientOperation_OperationType(), ecorePackage.getEString(), "operationType", null, 0, 1, ClientOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOperation_Action(), ecorePackage.getEString(), "action", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOperation_Parameter(), this.getOperationParameter(), null, "parameter", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOperation_Result(), this.getResult(), null, "result", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperation_OperationType(), ecorePackage.getEString(), "operationType", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationParameterEClass, OperationParameter.class, "OperationParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperationParameter_ParameterType(), ecorePackage.getEString(), "parameterType", null, 1, 1, OperationParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -709,7 +679,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 		initEAttribute(getResult_ResultType(), ecorePackage.getEString(), "resultType", null, 0, 1, Result.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(documentRootEClass, DocumentRoot.class, "DocumentRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDocumentRoot_IsUserInteractable(), ecorePackage.getEBoolean(), "isUserInteractable", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDocumentRoot_IsUserInteractable(), ecorePackage.getEBoolean(), "isUserInteractable", "true", 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(documentMetaDataEClass, DocumentMetaData.class, "DocumentMetaData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDocumentMetaData_DocumentVersion(), ecorePackage.getEIntegerObject(), "documentVersion", null, 1, 1, DocumentMetaData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -718,11 +688,6 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProperty_DefiningElement(), theBpmn2Package.getTask(), null, "definingElement", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_PropertyType(), ecorePackage.getEString(), "propertyType", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(serviceOperationEClass, ServiceOperation.class, "ServiceOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getServiceOperation_Action(), ecorePackage.getEString(), "action", null, 1, 1, ServiceOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getServiceOperation_Parameter(), this.getOperationParameter(), null, "parameter", null, 0, -1, ServiceOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getServiceOperation_OperationType(), ecorePackage.getEString(), "operationType", null, 0, 1, ServiceOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(requestObjectEClass, RequestObject.class, "RequestObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRequestObject_Clazz(), ecorePackage.getEString(), "clazz", null, 0, 1, RequestObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -766,34 +731,34 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	protected void createExtendedMetaDataAnnotations() {
 		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
 		addAnnotation
-		  (clientOperationEClass, 
+		  (operationEClass, 
 		   source, 
 		   new String[] {
 			 "namespace", "http://www.cas.de/open"
 		   });		
 		addAnnotation
-		  (getClientOperation_Action(), 
+		  (getOperation_Action(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute",
 			 "namespace", "http://www.cas.de/open"
 		   });		
 		addAnnotation
-		  (getClientOperation_Parameter(), 
+		  (getOperation_Parameter(), 
 		   source, 
 		   new String[] {
 			 "kind", "element",
 			 "namespace", "http://www.cas.de/open"
 		   });		
 		addAnnotation
-		  (getClientOperation_Result(), 
+		  (getOperation_Result(), 
 		   source, 
 		   new String[] {
 			 "kind", "element",
 			 "namespace", "http://www.cas.de/open"
 		   });		
 		addAnnotation
-		  (getClientOperation_OperationType(), 
+		  (getOperation_OperationType(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute",
@@ -906,34 +871,6 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 		  (getProperty_PropertyType(), 
 		   source, 
 		   new String[] {
-			 "namespace", "http://www.cas.de/open"
-		   });		
-		addAnnotation
-		  (serviceOperationEClass, 
-		   source, 
-		   new String[] {
-			 "namespace", "http://www.cas.de/open"
-		   });		
-		addAnnotation
-		  (getServiceOperation_Action(), 
-		   source, 
-		   new String[] {
-			 "kind", "attribute",
-			 "namespace", "http://www.cas.de/open"
-		   });		
-		addAnnotation
-		  (getServiceOperation_Parameter(), 
-		   source, 
-		   new String[] {
-			 "kind", "element",
-			 "namespace", "http://www.cas.de/open"
-		   });		
-		addAnnotation
-		  (getServiceOperation_OperationType(), 
-		   source, 
-		   new String[] {
-			 "kind", "attribute",
-			 "name", "operationType",
 			 "namespace", "http://www.cas.de/open"
 		   });		
 		addAnnotation
