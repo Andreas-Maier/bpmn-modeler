@@ -62,8 +62,9 @@ public class FeatureMap {
 		features = new ArrayList<EClass>();
 		features.add(Bpmn2Package.eINSTANCE.getStartEvent());
 		features.add(Bpmn2Package.eINSTANCE.getEndEvent());
-		features.add(Bpmn2Package.eINSTANCE.getIntermediateThrowEvent());
-		features.add(Bpmn2Package.eINSTANCE.getIntermediateCatchEvent());
+//		features.add(Bpmn2Package.eINSTANCE.getImplicitThrowEvent());
+//		features.add(Bpmn2Package.eINSTANCE.getIntermediateThrowEvent());
+//		features.add(Bpmn2Package.eINSTANCE.getIntermediateCatchEvent());
 //		features.add(Bpmn2Package.eINSTANCE.getBoundaryEvent());
 		EVENTS = Collections.unmodifiableList(features);
 
@@ -134,8 +135,9 @@ public class FeatureMap {
 		excludeFeatures = new ArrayList<EClass>();
 //		excludeFeatures.add(Bpmn2Package.eINSTANCE.getStartEvent());
 //		excludeFeatures.add(Bpmn2Package.eINSTANCE.getEndEvent());
-//		excludeFeatures.add(Bpmn2Package.eINSTANCE.getIntermediateThrowEvent());
-//		excludeFeatures.add(Bpmn2Package.eINSTANCE.getIntermediateCatchEvent());
+		excludeFeatures.add(Bpmn2Package.eINSTANCE.getImplicitThrowEvent());
+		excludeFeatures.add(Bpmn2Package.eINSTANCE.getIntermediateThrowEvent());
+		excludeFeatures.add(Bpmn2Package.eINSTANCE.getIntermediateCatchEvent());
 		excludeFeatures.add(Bpmn2Package.eINSTANCE.getBoundaryEvent());
 		EXCLUDE_EVENTS = Collections.unmodifiableList(excludeFeatures);
 

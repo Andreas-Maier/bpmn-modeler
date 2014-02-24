@@ -194,13 +194,11 @@ public abstract class AbstractAppendNodeNodeFeature<T extends FlowNode> extends 
 		boolean doit = subtypes.size()>0;
 		if (doit) {
 			newType = subtypes.get(0);
-			if (subtypes.size()>1) {
-				PopupMenu popupMenu = new PopupMenu(subtypes, labelProvider);
-				doit = popupMenu.show(Display.getCurrent().getActiveShell());
-				if (doit) {
-					newType = (EClass) popupMenu.getResult();
-					return newType;
-				}
+			PopupMenu popupMenu = new PopupMenu(subtypes, labelProvider);
+			doit = popupMenu.show(Display.getCurrent().getActiveShell());
+			if (doit) {
+				newType = (EClass) popupMenu.getResult();
+				return newType;
 			}
 		}
 
