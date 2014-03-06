@@ -203,6 +203,8 @@
       <plugin id="org.eclipse.wst.xsd.core"/>
       <plugin id="org.eclipse.xsd"/>
       <plugin id="org.eclipse.xsd.edit"/>
+      <plugin id="org.hamcrest.core"/>
+      <plugin id="org.junit"/>
       <plugin id="org.slf4j.api"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.events"/>
