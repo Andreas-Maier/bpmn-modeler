@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.camunda.bpm.modeler.ui.property.tabs.tables.EObjectAttributeEditingSupport;
-import org.camunda.bpm.modeler.ui.property.tabs.tables.SimpleLabelProvider;
 import org.camunda.bpm.modeler.ui.property.tabs.tables.EObjectAttributeTableColumnDescriptor.EditingSupportProvider;
+import org.camunda.bpm.modeler.ui.property.tabs.tables.SimpleLabelProvider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -88,7 +88,7 @@ public class DefaultEditingSupportProvider implements EditingSupportProvider {
 	 *
 	 * @param <T>
 	 */
-	protected static class DropDownListCellEditor<T> extends ComboBoxCellEditor {
+	public static class DropDownListCellEditor<T> extends ComboBoxCellEditor {
 
 		private ILabelProvider labelProvider = new SimpleLabelProvider();
 		

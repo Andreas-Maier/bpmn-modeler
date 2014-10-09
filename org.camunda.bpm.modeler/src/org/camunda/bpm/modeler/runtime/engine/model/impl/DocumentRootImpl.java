@@ -76,7 +76,7 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String ASSIGNEE_EDEFAULT = null;
+  protected static final Integer ASSIGNEE_EDEFAULT = null;
 
   /**
 	 * The cached value of the '{@link #getAssignee() <em>Assignee</em>}' attribute.
@@ -86,7 +86,7 @@ public class DocumentRootImpl extends org.eclipse.bpmn2.impl.DocumentRootImpl im
 	 * @generated
 	 * @ordered
 	 */
-  protected String assignee = ASSIGNEE_EDEFAULT;
+  protected Integer assignee = ASSIGNEE_EDEFAULT;
 
   /**
 	 * The default value of the '{@link #getCandidateGroups() <em>Candidate Groups</em>}' attribute.
@@ -655,24 +655,23 @@ public void setTaskListener(TaskListenerType newTaskListener) {
 	 * @generated
 	 */
   @Override
-public String getAssignee() {
+public Integer getAssignee() {
 		return assignee;
 	}
 
   /**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-public void setAssignee(String newAssignee) {
-		String oldAssignee = assignee;
+	public void setAssignee(Integer newAssignee) {
+		Integer oldAssignee = assignee;
 		assignee = newAssignee;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOCUMENT_ROOT__ASSIGNEE, oldAssignee, assignee));
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -1443,7 +1442,7 @@ public void setFailedJobRetryTimeCycle(FailedJobRetryTimeCycleType newFailedJobR
 				setTaskListener((TaskListenerType)newValue);
 				return;
 			case ModelPackage.DOCUMENT_ROOT__ASSIGNEE:
-				setAssignee((String)newValue);
+				setAssignee((Integer)newValue);
 				return;
 			case ModelPackage.DOCUMENT_ROOT__CANDIDATE_GROUPS:
 				setCandidateGroups((String)newValue);

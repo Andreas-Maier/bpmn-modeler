@@ -1729,13 +1729,22 @@ public interface CasOpenPackage extends EPackage {
 	int DOCUMENT_ROOT__IS_USER_INTERACTABLE = ModelPackage.DOCUMENT_ROOT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Contains Responsibilities</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__CONTAINS_RESPONSIBILITIES = ModelPackage.DOCUMENT_ROOT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = ModelPackage.DOCUMENT_ROOT_FEATURE_COUNT + 1;
+	int DOCUMENT_ROOT_FEATURE_COUNT = ModelPackage.DOCUMENT_ROOT_FEATURE_COUNT + 2;
 
 
 	/**
@@ -2060,6 +2069,224 @@ public interface CasOpenPackage extends EPackage {
 	int RESPONSE_PARAMETER_FEATURE_COUNT = 3;
 
 	/**
+	 * The meta object id for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.InputPropertyImpl <em>Input Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.InputPropertyImpl
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getInputProperty()
+	 * @generated
+	 */
+	int INPUT_PROPERTY = 10;
+
+	/**
+	 * The feature id for the '<em><b>Extension Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_PROPERTY__EXTENSION_VALUES = Bpmn2Package.PROPERTY__EXTENSION_VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_PROPERTY__DOCUMENTATION = Bpmn2Package.PROPERTY__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Extension Definitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_PROPERTY__EXTENSION_DEFINITIONS = Bpmn2Package.PROPERTY__EXTENSION_DEFINITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_PROPERTY__ID = Bpmn2Package.PROPERTY__ID;
+
+	/**
+	 * The feature id for the '<em><b>Any Attribute</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_PROPERTY__ANY_ATTRIBUTE = Bpmn2Package.PROPERTY__ANY_ATTRIBUTE;
+
+	/**
+	 * The feature id for the '<em><b>Data State</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_PROPERTY__DATA_STATE = Bpmn2Package.PROPERTY__DATA_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Item Subject Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_PROPERTY__ITEM_SUBJECT_REF = Bpmn2Package.PROPERTY__ITEM_SUBJECT_REF;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_PROPERTY__NAME = Bpmn2Package.PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_PROPERTY__DESCRIPTION = Bpmn2Package.PROPERTY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Property Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_PROPERTY__PROPERTY_TYPE = Bpmn2Package.PROPERTY_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Input Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_PROPERTY_FEATURE_COUNT = Bpmn2Package.PROPERTY_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OutputPropertyImpl <em>Output Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OutputPropertyImpl
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getOutputProperty()
+	 * @generated
+	 */
+	int OUTPUT_PROPERTY = 11;
+
+	/**
+	 * The feature id for the '<em><b>Extension Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_PROPERTY__EXTENSION_VALUES = Bpmn2Package.PROPERTY__EXTENSION_VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_PROPERTY__DOCUMENTATION = Bpmn2Package.PROPERTY__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Extension Definitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_PROPERTY__EXTENSION_DEFINITIONS = Bpmn2Package.PROPERTY__EXTENSION_DEFINITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_PROPERTY__ID = Bpmn2Package.PROPERTY__ID;
+
+	/**
+	 * The feature id for the '<em><b>Any Attribute</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_PROPERTY__ANY_ATTRIBUTE = Bpmn2Package.PROPERTY__ANY_ATTRIBUTE;
+
+	/**
+	 * The feature id for the '<em><b>Data State</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_PROPERTY__DATA_STATE = Bpmn2Package.PROPERTY__DATA_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Item Subject Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_PROPERTY__ITEM_SUBJECT_REF = Bpmn2Package.PROPERTY__ITEM_SUBJECT_REF;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_PROPERTY__NAME = Bpmn2Package.PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_PROPERTY__DESCRIPTION = Bpmn2Package.PROPERTY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Property Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_PROPERTY__PROPERTY_TYPE = Bpmn2Package.PROPERTY_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Output Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_PROPERTY_FEATURE_COUNT = Bpmn2Package.PROPERTY_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ConditionComparators <em>Condition Comparators</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2067,7 +2294,7 @@ public interface CasOpenPackage extends EPackage {
 	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getConditionComparators()
 	 * @generated
 	 */
-	int CONDITION_COMPARATORS = 10;
+	int CONDITION_COMPARATORS = 12;
 
 	/**
 	 * Returns the meta object for class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation <em>Operation</em>}'.
@@ -2218,6 +2445,17 @@ public interface CasOpenPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDocumentRoot_IsUserInteractable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentRoot#isContainsResponsibilities <em>Contains Responsibilities</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Contains Responsibilities</em>'.
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentRoot#isContainsResponsibilities()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EAttribute getDocumentRoot_ContainsResponsibilities();
 
 	/**
 	 * Returns the meta object for class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentMetaData <em>Document Meta Data</em>}'.
@@ -2445,6 +2683,70 @@ public interface CasOpenPackage extends EPackage {
 	EReference getResponseParameter_ResponseParameters();
 
 	/**
+	 * Returns the meta object for class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.InputProperty <em>Input Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Input Property</em>'.
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.InputProperty
+	 * @generated
+	 */
+	EClass getInputProperty();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.InputProperty#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.InputProperty#getDescription()
+	 * @see #getInputProperty()
+	 * @generated
+	 */
+	EAttribute getInputProperty_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.InputProperty#getPropertyType <em>Property Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Property Type</em>'.
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.InputProperty#getPropertyType()
+	 * @see #getInputProperty()
+	 * @generated
+	 */
+	EAttribute getInputProperty_PropertyType();
+
+	/**
+	 * Returns the meta object for class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.OutputProperty <em>Output Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Output Property</em>'.
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.OutputProperty
+	 * @generated
+	 */
+	EClass getOutputProperty();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.OutputProperty#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.OutputProperty#getDescription()
+	 * @see #getOutputProperty()
+	 * @generated
+	 */
+	EAttribute getOutputProperty_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.OutputProperty#getPropertyType <em>Property Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Property Type</em>'.
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.OutputProperty#getPropertyType()
+	 * @see #getOutputProperty()
+	 * @generated
+	 */
+	EAttribute getOutputProperty_PropertyType();
+
+	/**
 	 * Returns the meta object for enum '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ConditionComparators <em>Condition Comparators</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2595,6 +2897,14 @@ public interface CasOpenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DOCUMENT_ROOT__IS_USER_INTERACTABLE = eINSTANCE.getDocumentRoot_IsUserInteractable();
+
+		/**
+		 * The meta object literal for the '<em><b>Contains Responsibilities</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOCUMENT_ROOT__CONTAINS_RESPONSIBILITIES = eINSTANCE.getDocumentRoot_ContainsResponsibilities();
 
 		/**
 		 * The meta object literal for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.DocumentMetaDataImpl <em>Document Meta Data</em>}' class.
@@ -2775,6 +3085,58 @@ public interface CasOpenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RESPONSE_PARAMETER__RESPONSE_PARAMETERS = eINSTANCE.getResponseParameter_ResponseParameters();
+
+		/**
+		 * The meta object literal for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.InputPropertyImpl <em>Input Property</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.InputPropertyImpl
+		 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getInputProperty()
+		 * @generated
+		 */
+		EClass INPUT_PROPERTY = eINSTANCE.getInputProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INPUT_PROPERTY__DESCRIPTION = eINSTANCE.getInputProperty_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Property Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INPUT_PROPERTY__PROPERTY_TYPE = eINSTANCE.getInputProperty_PropertyType();
+
+		/**
+		 * The meta object literal for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OutputPropertyImpl <em>Output Property</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.OutputPropertyImpl
+		 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.impl.CasOpenPackageImpl#getOutputProperty()
+		 * @generated
+		 */
+		EClass OUTPUT_PROPERTY = eINSTANCE.getOutputProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OUTPUT_PROPERTY__DESCRIPTION = eINSTANCE.getOutputProperty_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Property Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OUTPUT_PROPERTY__PROPERTY_TYPE = eINSTANCE.getOutputProperty_PropertyType();
 
 		/**
 		 * The meta object literal for the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.ConditionComparators <em>Condition Comparators</em>}' enum.

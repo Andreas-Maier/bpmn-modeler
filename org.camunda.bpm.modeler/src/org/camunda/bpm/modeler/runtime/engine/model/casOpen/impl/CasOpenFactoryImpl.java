@@ -67,6 +67,8 @@ public class CasOpenFactoryImpl extends EFactoryImpl implements CasOpenFactory {
 			case CasOpenPackage.REQUEST_PARAMETER: return createRequestParameter();
 			case CasOpenPackage.RESPONSE_OBJECT: return createResponseObject();
 			case CasOpenPackage.RESPONSE_PARAMETER: return createResponseParameter();
+			case CasOpenPackage.INPUT_PROPERTY: return createInputProperty();
+			case CasOpenPackage.OUTPUT_PROPERTY: return createOutputProperty();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -200,6 +202,26 @@ public class CasOpenFactoryImpl extends EFactoryImpl implements CasOpenFactory {
 	public ResponseParameter createResponseParameter() {
 		ResponseParameterImpl responseParameter = new ResponseParameterImpl();
 		return responseParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InputProperty createInputProperty() {
+		InputPropertyImpl inputProperty = new InputPropertyImpl();
+		return inputProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OutputProperty createOutputProperty() {
+		OutputPropertyImpl outputProperty = new OutputPropertyImpl();
+		return outputProperty;
 	}
 
 	/**

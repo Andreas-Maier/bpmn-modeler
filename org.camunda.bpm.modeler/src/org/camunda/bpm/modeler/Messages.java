@@ -311,6 +311,9 @@ public class Messages extends NLS {
 	public static String ProcessPropertiesBuilder_1;
 	public static String ProcessPropertiesBuilder_2;
 	public static String ProcessPropertiesBuilder_3;
+	public static String ProcessPropertiesBuilder_4;
+	public static String ProcessPropertiesBuilder_5;
+	public static String ProcessPropertiesBuilder_6;
 	public static String PropertiesTabDescriptorProvider_1;
 	public static String PropertiesTabDescriptorProvider_11;
 	public static String PropertiesTabDescriptorProvider_13;
@@ -345,6 +348,9 @@ public class Messages extends NLS {
 	public static String UserTaskPropertiesBuilder_0;
 	public static String UserTaskPropertiesBuilder_1;
 	public static String ValidateDiagramFeature_0;
+	public static String Assignee;
+	public static String CandidateGroups;
+	public static String CandidateUsers;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

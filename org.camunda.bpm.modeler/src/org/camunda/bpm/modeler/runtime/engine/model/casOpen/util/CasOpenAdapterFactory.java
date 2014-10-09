@@ -5,8 +5,11 @@ package org.camunda.bpm.modeler.runtime.engine.model.casOpen.util;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.*;
 
 import org.eclipse.bpmn2.BaseElement;
+import org.eclipse.bpmn2.CallableElement;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
+import org.eclipse.bpmn2.FlowElementsContainer;
 import org.eclipse.bpmn2.ItemAwareElement;
+import org.eclipse.bpmn2.RootElement;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -109,6 +112,14 @@ public class CasOpenAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseResponseParameter(ResponseParameter object) {
 				return createResponseParameterAdapter();
+			}
+			@Override
+			public Adapter caseInputProperty(InputProperty object) {
+				return createInputPropertyAdapter();
+			}
+			@Override
+			public Adapter caseOutputProperty(OutputProperty object) {
+				return createOutputPropertyAdapter();
 			}
 			@Override
 			public Adapter caseBpmn2_DocumentRoot(org.eclipse.bpmn2.DocumentRoot object) {
@@ -287,6 +298,34 @@ public class CasOpenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createResponseParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.InputProperty <em>Input Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.InputProperty
+	 * @generated
+	 */
+	public Adapter createInputPropertyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.OutputProperty <em>Output Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.OutputProperty
+	 * @generated
+	 */
+	public Adapter createOutputPropertyAdapter() {
 		return null;
 	}
 

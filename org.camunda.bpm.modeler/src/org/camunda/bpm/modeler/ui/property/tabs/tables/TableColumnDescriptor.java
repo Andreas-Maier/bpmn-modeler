@@ -23,7 +23,7 @@ public class TableColumnDescriptor {
 		this.weight = 33;
 	}
 
-	public EditingSupport getEditingSupport(TableViewer viewer) {
+	public EditingSupport getEditingSupport(TableViewer viewer, boolean editable) {
 		return null;
 	}
 
@@ -42,9 +42,9 @@ public class TableColumnDescriptor {
 	 * @param viewerColumn
 	 * @param layout
 	 */
-	public void configureViewer(TableViewer tableViewer, TableViewerColumn viewerColumn, TableColumnLayout2 layout) {
+	public void configureViewer(TableViewer tableViewer, TableViewerColumn viewerColumn, TableColumnLayout2 layout, boolean editable) {
 		viewerColumn.setLabelProvider(getColumnLabelProvider());
-		viewerColumn.setEditingSupport(getEditingSupport(tableViewer));
+		viewerColumn.setEditingSupport(getEditingSupport(tableViewer, editable));
 		
 		configure(viewerColumn.getColumn(), layout);
 	}

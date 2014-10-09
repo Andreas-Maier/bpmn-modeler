@@ -8,8 +8,10 @@ import org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.ConditionComparators;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentMetaData;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentRoot;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.InputProperty;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.Operation;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.OperationParameter;
+import org.camunda.bpm.modeler.runtime.engine.model.casOpen.OutputProperty;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.Property;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.RequestObject;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.RequestParameter;
@@ -106,6 +108,20 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * @generated
 	 */
 	private EClass responseParameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass inputPropertyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass outputPropertyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -334,6 +350,15 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDocumentRoot_ContainsResponsibilities() {
+		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getDocumentMetaData() {
 		return documentMetaDataEClass;
@@ -544,6 +569,60 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getInputProperty() {
+		return inputPropertyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getInputProperty_Description() {
+		return (EAttribute)inputPropertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getInputProperty_PropertyType() {
+		return (EAttribute)inputPropertyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOutputProperty() {
+		return outputPropertyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOutputProperty_Description() {
+		return (EAttribute)outputPropertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOutputProperty_PropertyType() {
+		return (EAttribute)outputPropertyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getConditionComparators() {
 		return conditionComparatorsEEnum;
@@ -595,6 +674,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 
 		documentRootEClass = createEClass(DOCUMENT_ROOT);
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__IS_USER_INTERACTABLE);
+		createEAttribute(documentRootEClass, DOCUMENT_ROOT__CONTAINS_RESPONSIBILITIES);
 
 		documentMetaDataEClass = createEClass(DOCUMENT_META_DATA);
 		createEAttribute(documentMetaDataEClass, DOCUMENT_META_DATA__DOCUMENT_VERSION);
@@ -622,6 +702,14 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 		createEAttribute(responseParameterEClass, RESPONSE_PARAMETER__FIELD_NAME);
 		createEAttribute(responseParameterEClass, RESPONSE_PARAMETER__VARIABLE_NAME);
 		createEReference(responseParameterEClass, RESPONSE_PARAMETER__RESPONSE_PARAMETERS);
+
+		inputPropertyEClass = createEClass(INPUT_PROPERTY);
+		createEAttribute(inputPropertyEClass, INPUT_PROPERTY__DESCRIPTION);
+		createEAttribute(inputPropertyEClass, INPUT_PROPERTY__PROPERTY_TYPE);
+
+		outputPropertyEClass = createEClass(OUTPUT_PROPERTY);
+		createEAttribute(outputPropertyEClass, OUTPUT_PROPERTY__DESCRIPTION);
+		createEAttribute(outputPropertyEClass, OUTPUT_PROPERTY__PROPERTY_TYPE);
 
 		// Create enums
 		conditionComparatorsEEnum = createEEnum(CONDITION_COMPARATORS);
@@ -661,6 +749,8 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 		// Add supertypes to classes
 		documentRootEClass.getESuperTypes().add(theModelPackage.getDocumentRoot());
 		propertyEClass.getESuperTypes().add(theBpmn2Package.getProperty());
+		inputPropertyEClass.getESuperTypes().add(theBpmn2Package.getProperty());
+		outputPropertyEClass.getESuperTypes().add(theBpmn2Package.getProperty());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -680,6 +770,7 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 
 		initEClass(documentRootEClass, DocumentRoot.class, "DocumentRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDocumentRoot_IsUserInteractable(), ecorePackage.getEBoolean(), "isUserInteractable", "true", 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDocumentRoot_ContainsResponsibilities(), ecorePackage.getEBoolean(), "containsResponsibilities", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(documentMetaDataEClass, DocumentMetaData.class, "DocumentMetaData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDocumentMetaData_DocumentVersion(), ecorePackage.getEIntegerObject(), "documentVersion", null, 1, 1, DocumentMetaData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -707,6 +798,14 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 		initEAttribute(getResponseParameter_FieldName(), ecorePackage.getEString(), "fieldName", null, 0, 1, ResponseParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResponseParameter_VariableName(), ecorePackage.getEString(), "variableName", null, 0, 1, ResponseParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getResponseParameter_ResponseParameters(), this.getResponseParameter(), null, "responseParameters", null, 0, -1, ResponseParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(inputPropertyEClass, InputProperty.class, "InputProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getInputProperty_Description(), ecorePackage.getEString(), "description", null, 0, 1, InputProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInputProperty_PropertyType(), ecorePackage.getEString(), "propertyType", null, 0, 1, InputProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(outputPropertyEClass, OutputProperty.class, "OutputProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOutputProperty_Description(), ecorePackage.getEString(), "description", null, 0, 1, OutputProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOutputProperty_PropertyType(), ecorePackage.getEString(), "propertyType", null, 0, 1, OutputProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(conditionComparatorsEEnum, ConditionComparators.class, "ConditionComparators");
@@ -836,6 +935,14 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 			 "namespace", "http://www.cas.de/open"
 		   });		
 		addAnnotation
+		  (getDocumentRoot_ContainsResponsibilities(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute",
+			 "name", "containsResponsibilities",
+			 "namespace", "http://www.cas.de/open"
+		   });		
+		addAnnotation
 		  (documentMetaDataEClass, 
 		   source, 
 		   new String[] {
@@ -948,6 +1055,42 @@ public class CasOpenPackageImpl extends EPackageImpl implements CasOpenPackage {
 		   source, 
 		   new String[] {
 			 "kind", "element",
+			 "namespace", "http://www.cas.de/open"
+		   });		
+		addAnnotation
+		  (inputPropertyEClass, 
+		   source, 
+		   new String[] {
+			 "namespace", "##targetNamespace"
+		   });		
+		addAnnotation
+		  (getInputProperty_Description(), 
+		   source, 
+		   new String[] {
+			 "namespace", "http://www.cas.de/open"
+		   });		
+		addAnnotation
+		  (getInputProperty_PropertyType(), 
+		   source, 
+		   new String[] {
+			 "namespace", "http://www.cas.de/open"
+		   });		
+		addAnnotation
+		  (outputPropertyEClass, 
+		   source, 
+		   new String[] {
+			 "namespace", "##targetNamespace"
+		   });		
+		addAnnotation
+		  (getOutputProperty_Description(), 
+		   source, 
+		   new String[] {
+			 "namespace", "http://www.cas.de/open"
+		   });		
+		addAnnotation
+		  (getOutputProperty_PropertyType(), 
+		   source, 
+		   new String[] {
 			 "namespace", "http://www.cas.de/open"
 		   });
 	}

@@ -2,6 +2,7 @@ package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.ui.property.tabs.binding.NameAttributeComboBinding;
@@ -33,6 +34,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 import de.cas.open.prozesse.modeler.server.eimInterface.EIMInterfaceHolder;
 import de.cas.open.prozesse.modeler.server.exceptions.ServerException;
@@ -143,13 +146,14 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 	private void createLaneNameCombo() {
 		CCombo laneNameCombo = PropertyUtil.createDropDown(section, parent, "Name");
 		// Add elements
-		List<String> userGroupNames = new LinkedList<>();
+		BiMap<Integer,String> userGroups = HashBiMap.create();
 		try {
-			userGroupNames = EIMInterfaceHolder.getAllUserGroups();
+			userGroups = EIMInterfaceHolder.getAllUserGroups();
 		} catch (DataLayerException | BusinessException | ServerException e) {
 			MessageDialog.openError(parent.getShell(), Messages.NamePropertyBuilder_5, Messages.NamePropertyBuilder_6);
 			return;
 		}
+		Set<String> userGroupNames = userGroups.values();
 		for (String userGroupName : userGroupNames) {
 			if (!Strings.isNullOrEmpty(userGroupName)) {
 				laneNameCombo.add(userGroupName);

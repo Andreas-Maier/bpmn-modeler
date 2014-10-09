@@ -222,24 +222,24 @@ public interface DocumentRoot extends org.eclipse.bpmn2.DocumentRoot {
 	 * User Task attribute to set the human performer of a user task. Also supports expressions that evaluate to a String.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Assignee</em>' attribute.
-	 * @see #setAssignee(String)
+	 * @see #setAssignee(Integer)
 	 * @see org.camunda.bpm.modeler.runtime.engine.model.ModelPackage#getDocumentRoot_Assignee()
 	 * @model extendedMetaData="kind='attribute' name='assignee' namespace='##targetNamespace'"
 	 * @generated
 	 */
-  String getAssignee();
+  Integer getAssignee();
 
   /**
 	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.DocumentRoot#getAssignee <em>Assignee</em>}' attribute.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Assignee</em>' attribute.
 	 * @see #getAssignee()
 	 * @generated
 	 */
-  void setAssignee(String value);
+	void setAssignee(Integer value);
 
-  /**
+		/**
 	 * Returns the value of the '<em><b>Candidate Groups</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -3,6 +3,7 @@ package org.camunda.bpm.modeler.ui.property.tabs.builder;
 import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.ui.property.tabs.radio.Radio.RadioGroup;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
+import org.camunda.bpm.modeler.ui.wizards.IOperationWizard;
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.SequenceFlow;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -89,7 +90,9 @@ public class SequenceFlowPropertiesBuilder extends
 				});
 			}
 		}
-		serviceConfigurationButton = addConfigureOperationButton(serviceControl, Messages.SequenceFlowPropertiesBuilder_4);
+		IOperationWizard initWizard = initWizard(bo, null);
+		serviceConfigurationButton = addConfigureOperationButton(serviceControl, Messages.SequenceFlowPropertiesBuilder_4, null, initWizard);
+		serviceConfigurationButton.addSelectionListener(new WizardSelectionAdapter(initWizard, bo, serviceControl));
 		serviceConfigurationButton.setEnabled(false);
 		final FormData layoutData = new FormData();
 		layoutData.left = new FormAttachment(serviceControl, 122, SWT.BOTTOM);

@@ -59,6 +59,13 @@
                </appinfo>
             </annotation>
          </attribute>
+         <attribute name="wizardType" type="string">
+            <annotation>
+               <documentation>
+                  Assignee, CandidateUsers, CandidateGroups
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 
