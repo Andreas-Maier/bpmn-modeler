@@ -111,7 +111,7 @@ public class TaskListenerPropertiesBuilder extends AbstractPropertiesBuilder<Use
 			.model(bo)
 			.changeFilter(new ExtensionChangeFilter(bo, feature));
 		
-		final TableViewer viewer = builder.build();
+		final TableViewer viewer = builder.build(false);
 		
 		// table composite ////////////
 		final Composite tableComposite = viewer.getTable().getParent();

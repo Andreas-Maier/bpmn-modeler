@@ -112,6 +112,24 @@ public interface CasOpenFactory extends EFactory {
 	ResponseParameter createResponseParameter();
 
 	/**
+	 * Returns a new object of class '<em>Input Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Input Property</em>'.
+	 * @generated
+	 */
+	InputProperty createInputProperty();
+
+	/**
+	 * Returns a new object of class '<em>Output Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Output Property</em>'.
+	 * @generated
+	 */
+	OutputProperty createOutputProperty();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

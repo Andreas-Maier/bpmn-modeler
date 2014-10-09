@@ -39,6 +39,8 @@ import org.eclipse.swt.widgets.ToolTip;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 
+import de.cas.open.commons.util.GenericTupel;
+
 /**
  * Using form data here for layouting.
  * 
@@ -60,6 +62,13 @@ public class PropertyUtil {
 
 		return text;
 	}
+	
+	public static GenericTupel<Text, CLabel> createTextAndLabel(final GFPropertySection section, final Composite parent, final String label,
+			final EStructuralFeature feature, final EObject bo) {
+		GenericTupel<Text, CLabel> textAndLabel = createUnboundTextAndLabel(section, parent, label);
+
+		return textAndLabel;
+	}
 
 	public static Text createUnboundText(final GFPropertySection section, final Composite parent, final String label) {
 		Composite composite = createStandardComposite(section, parent);
@@ -69,6 +78,18 @@ public class PropertyUtil {
 		return text;
 	}
 
+	public static GenericTupel<Text, CLabel> createUnboundTextAndLabel(final GFPropertySection section, final Composite parent, final String string) {
+		Composite composite = createStandardComposite(section, parent);
+		
+		Text text = createSimpleText(section, composite, "");
+		
+		CLabel label = createLabel(section, composite, string, text);
+		
+		GenericTupel<Text, CLabel> textAndLabel = new GenericTupel<Text, CLabel>(text, label);
+
+		return textAndLabel;
+	}
+	
 	public static CCombo createDropDown(final GFPropertySection section, final Composite parent, final String label) {
 		Composite composite = createStandardComposite(section, parent);
 		CCombo comboBox = createSimpleDropDown(section, composite);

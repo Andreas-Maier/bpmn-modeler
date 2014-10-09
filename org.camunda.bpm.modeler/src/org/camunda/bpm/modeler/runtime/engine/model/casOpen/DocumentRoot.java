@@ -12,6 +12,7 @@ package org.camunda.bpm.modeler.runtime.engine.model.casOpen;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentRoot#isIsUserInteractable <em>Is User Interactable</em>}</li>
+ *   <li>{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentRoot#isContainsResponsibilities <em>Contains Responsibilities</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,5 +48,32 @@ public interface DocumentRoot extends org.camunda.bpm.modeler.runtime.engine.mod
 	 * @generated
 	 */
 	void setIsUserInteractable(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Contains Responsibilities</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Contains Responsibilities</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Contains Responsibilities</em>' attribute.
+	 * @see #setContainsResponsibilities(boolean)
+	 * @see org.camunda.bpm.modeler.runtime.engine.model.casOpen.CasOpenPackage#getDocumentRoot_ContainsResponsibilities()
+	 * @model ordered="false"
+	 *        extendedMetaData="kind='attribute' name='containsResponsibilities' namespace='http://www.cas.de/open'"
+	 * @generated
+	 */
+	boolean isContainsResponsibilities();
+
+	/**
+	 * Sets the value of the '{@link org.camunda.bpm.modeler.runtime.engine.model.casOpen.DocumentRoot#isContainsResponsibilities <em>Contains Responsibilities</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Contains Responsibilities</em>' attribute.
+	 * @see #isContainsResponsibilities()
+	 * @generated
+	 */
+	void setContainsResponsibilities(boolean value);
 
 } // DocumentRoot

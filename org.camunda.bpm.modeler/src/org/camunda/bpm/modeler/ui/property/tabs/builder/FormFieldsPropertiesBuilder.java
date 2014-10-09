@@ -132,7 +132,7 @@ public class FormFieldsPropertiesBuilder extends AbstractPropertiesBuilder<BaseE
 			.model(bo)
 			.changeFilter(new AnyNestedChangeFilter(bo, feature));
 		
-		viewer = builder.build();
+		viewer = builder.build(false);
 			
 		// table composite ////////////
 		final Composite tableComposite = viewer.getTable().getParent();

@@ -5,8 +5,11 @@ package org.camunda.bpm.modeler.runtime.engine.model.casOpen.util;
 import org.camunda.bpm.modeler.runtime.engine.model.casOpen.*;
 
 import org.eclipse.bpmn2.BaseElement;
+import org.eclipse.bpmn2.CallableElement;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
+import org.eclipse.bpmn2.FlowElementsContainer;
 import org.eclipse.bpmn2.ItemAwareElement;
+import org.eclipse.bpmn2.RootElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -131,6 +134,24 @@ public class CasOpenSwitch<T> extends Switch<T> {
 			case CasOpenPackage.RESPONSE_PARAMETER: {
 				ResponseParameter responseParameter = (ResponseParameter)theEObject;
 				T result = caseResponseParameter(responseParameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CasOpenPackage.INPUT_PROPERTY: {
+				InputProperty inputProperty = (InputProperty)theEObject;
+				T result = caseInputProperty(inputProperty);
+				if (result == null) result = caseBpmn2_Property(inputProperty);
+				if (result == null) result = caseItemAwareElement(inputProperty);
+				if (result == null) result = caseBaseElement(inputProperty);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CasOpenPackage.OUTPUT_PROPERTY: {
+				OutputProperty outputProperty = (OutputProperty)theEObject;
+				T result = caseOutputProperty(outputProperty);
+				if (result == null) result = caseBpmn2_Property(outputProperty);
+				if (result == null) result = caseItemAwareElement(outputProperty);
+				if (result == null) result = caseBaseElement(outputProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -285,6 +306,36 @@ public class CasOpenSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseResponseParameter(ResponseParameter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Input Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Input Property</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInputProperty(InputProperty object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Output Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Output Property</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOutputProperty(OutputProperty object) {
 		return null;
 	}
 

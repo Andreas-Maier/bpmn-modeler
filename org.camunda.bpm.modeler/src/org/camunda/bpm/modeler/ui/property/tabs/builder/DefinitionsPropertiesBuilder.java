@@ -6,9 +6,9 @@ import org.camunda.bpm.modeler.core.ModelHandler;
 import org.camunda.bpm.modeler.core.utils.ModelUtil;
 import org.camunda.bpm.modeler.ui.change.filter.FeatureChangeFilter;
 import org.camunda.bpm.modeler.ui.change.filter.IsManyAttributeAnyChildChangeFilter;
+import org.camunda.bpm.modeler.ui.property.tabs.builder.table.EObjectTableBuilder.AbstractDeleteRowHandler;
 import org.camunda.bpm.modeler.ui.property.tabs.builder.table.EObjectTableBuilder.ContentProvider;
 import org.camunda.bpm.modeler.ui.property.tabs.builder.table.EObjectTableBuilder.DeleteRowHandler;
-import org.camunda.bpm.modeler.ui.property.tabs.builder.table.EObjectTableBuilder.AbstractDeleteRowHandler;
 import org.camunda.bpm.modeler.ui.property.tabs.builder.table.EditableEObjectTableBuilder;
 import org.camunda.bpm.modeler.ui.property.tabs.tables.EditableTableDescriptor.ElementFactory;
 import org.camunda.bpm.modeler.ui.property.tabs.util.PropertyUtil;
@@ -140,7 +140,7 @@ public class DefinitionsPropertiesBuilder extends AbstractPropertiesBuilder<Defi
 				new IsManyAttributeAnyChildChangeFilter(bo, feature)
 					.or(new FeatureChangeFilter(bo, feature)));
 		
-		final TableViewer viewer = builder.build();
+		final TableViewer viewer = builder.build(false);
 			
 		// table composite ////////////
 		final Composite tableComposite = viewer.getTable().getParent();

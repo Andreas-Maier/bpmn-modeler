@@ -237,7 +237,7 @@ public class FormFieldDetailsDialog extends Dialog {
 				new FeatureChangeFilter(formFieldType, containerFeature).or(new AnyNestedChangeFilter(formFieldType, containerFeature)));
 		}
 		
-		final TableViewer viewer = builder.build();
+		final TableViewer viewer = builder.build(false);
 			
 		// table composite ////////////
 		final Composite tableComposite = viewer.getTable().getParent();

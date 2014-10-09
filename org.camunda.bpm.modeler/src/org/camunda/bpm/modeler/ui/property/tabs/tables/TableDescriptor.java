@@ -67,8 +67,8 @@ public abstract class TableDescriptor<T> {
 	 * 
 	 * @return
 	 */
-	public TableViewer createTableViewer(final Composite parent) {
-		return createTableViewer(parent, this);
+	public TableViewer createTableViewer(final Composite parent,boolean editable) {
+		return createTableViewer(parent, this, editable);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public abstract class TableDescriptor<T> {
 	 * @param tableDescriptor
 	 * @return
 	 */
-	private TableViewer createTableViewer(final Composite parent, final TableDescriptor<?> tableDescriptor) {
+	private TableViewer createTableViewer(final Composite parent, final TableDescriptor<?> tableDescriptor,boolean editable) {
 		
 		TableColumnLayout2 tableColumnLayout = new TableColumnLayout2();
 		
@@ -90,7 +90,7 @@ public abstract class TableDescriptor<T> {
 		
 		tableDescriptor.configureViewer(viewer);
 		
-		createColumns(viewer, tableColumnLayout, tableDescriptor.getColumns());
+		createColumns(viewer, tableColumnLayout, tableDescriptor.getColumns(), editable);
 		
 		return viewer;
 	}
@@ -103,10 +103,10 @@ public abstract class TableDescriptor<T> {
 	 * @param tableColumnDescriptors
 	 */
 	private void createColumns(final TableViewer viewer,
-			final TableColumnLayout2 layout, final List<TableColumnDescriptor> tableColumnDescriptors) {
+			final TableColumnLayout2 layout, final List<TableColumnDescriptor> tableColumnDescriptors,boolean editable) {
 
 		for (TableColumnDescriptor descriptor : tableColumnDescriptors) {
-			createColumn(viewer, layout, descriptor);
+			createColumn(viewer, layout, descriptor, editable);
 		}
 	}
 
@@ -117,10 +117,10 @@ public abstract class TableDescriptor<T> {
 	 * @param layout
 	 * @param descriptor
 	 */
-	protected TableViewerColumn createColumn(final TableViewer viewer, final TableColumnLayout2 layout, final TableColumnDescriptor descriptor) {
+	protected TableViewerColumn createColumn(final TableViewer viewer, final TableColumnLayout2 layout, final TableColumnDescriptor descriptor, boolean editable) {
 		TableViewerColumn viewerColumn = new TableViewerColumn(viewer, SWT.NONE);
 		
-		descriptor.configureViewer(viewer, viewerColumn, layout);
+		descriptor.configureViewer(viewer, viewerColumn, layout, editable);
 		
 		return viewerColumn;
 	}
