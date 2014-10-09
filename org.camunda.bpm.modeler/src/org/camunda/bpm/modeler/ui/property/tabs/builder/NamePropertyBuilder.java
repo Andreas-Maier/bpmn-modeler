@@ -1,7 +1,9 @@
 package org.camunda.bpm.modeler.ui.property.tabs.builder;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.camunda.bpm.modeler.Messages;
 import org.camunda.bpm.modeler.ui.property.tabs.binding.NameAttributeComboBinding;
@@ -134,6 +136,7 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 				participantNameCombo.add(userGroupName);
 			}
 		}
+		participantNameCombo.add("CAS Cloud Ecosystems");
 		// Add binding
 		NameAttributeComboBinding binding = new NameAttributeComboBinding(bo, NAME_FEATURE, participantNameCombo);
 
@@ -143,9 +146,9 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 	private void createLaneNameCombo() {
 		CCombo laneNameCombo = PropertyUtil.createDropDown(section, parent, "Name");
 		// Add elements
-		List<String> userGroupNames = new LinkedList<>();
+		Set<String> userGroupNames = new HashSet<>();
 		try {
-			userGroupNames = EIMInterfaceHolder.getAllUserGroups();
+			userGroupNames = EIMInterfaceHolder.getAllUserGroups().values();
 		} catch (DataLayerException | BusinessException | ServerException e) {
 			MessageDialog.openError(parent.getShell(), Messages.NamePropertyBuilder_5, Messages.NamePropertyBuilder_6);
 			return;
@@ -155,6 +158,9 @@ public class NamePropertyBuilder extends AbstractPropertiesBuilder<BaseElement> 
 				laneNameCombo.add(userGroupName);
 			}
 		}
+		laneNameCombo.add("Mitarbeiter");
+		laneNameCombo.add("Vorgesetzter");
+		laneNameCombo.add("Rechtsabteilung");
 		// Add binding
 		NameAttributeComboBinding binding = new NameAttributeComboBinding(bo, NAME_FEATURE, laneNameCombo);
 

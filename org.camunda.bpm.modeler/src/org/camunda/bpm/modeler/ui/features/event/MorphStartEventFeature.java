@@ -73,20 +73,20 @@ public class MorphStartEventFeature extends AbstractMorphEventFeature {
 //			options.add(newOption);
 //		}
 
-		if (timerDef == null || eventDefinitions.size() > 1) {
-			MorphOption newOption = new MorphEventOption("Timer", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getTimerEventDefinition());
-			options.add(newOption);
-		}
+//		if (timerDef == null || eventDefinitions.size() > 1) {
+//			MorphOption newOption = new MorphEventOption("Timer", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getTimerEventDefinition());
+//			options.add(newOption);
+//		}
 
 //		if (signalDef == null || eventDefinitions.size() > 1) {
 //			MorphOption newOption = new MorphEventOption("Signal", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getSignalEventDefinition());
 //			options.add(newOption);
 //		}
 		
-		if (conditionDef == null || eventDefinitions.size() > 1) {
-			MorphOption newOption = new MorphEventOption("Conditional", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getConditionalEventDefinition());
-			options.add(newOption);
-		}
+//		if (conditionDef == null || eventDefinitions.size() > 1) {
+//			MorphOption newOption = new MorphEventOption("Conditional", Bpmn2Package.eINSTANCE.getStartEvent(), Bpmn2Package.eINSTANCE.getConditionalEventDefinition());
+//			options.add(newOption);
+//		}
 		
 //		if (subProcessContainer != null && subProcessContainer.isTriggeredByEvent()) {
 //			

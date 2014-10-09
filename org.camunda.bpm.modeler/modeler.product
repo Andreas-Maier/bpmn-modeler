@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="CAS-BPMN-Modeler" uid="camunda-modeler" id="org.camunda.bpm.modeler.bpmn_modeler" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+<product name="GloNet-BPMN-Modeler" uid="camunda-modeler" id="org.camunda.bpm.modeler.bpmn_modeler" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/org.camunda.bpm.modeler/icons/bpmn2_editor_16.png"/>

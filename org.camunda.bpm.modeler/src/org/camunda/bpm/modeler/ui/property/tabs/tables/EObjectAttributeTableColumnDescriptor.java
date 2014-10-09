@@ -53,8 +53,8 @@ public class EObjectAttributeTableColumnDescriptor<T extends EObject> extends Ta
 		if (editingSupportProvider != null) {
 			return editingSupportProvider.getEditingSupport(viewer, feature);
 		} else {
-//			return new EObjectAttributeEditingSupport<EObject>(viewer, feature);
-			return null;
+			return new EObjectAttributeEditingSupport<EObject>(viewer, feature);
+//			return null;
 		}
 	}
 

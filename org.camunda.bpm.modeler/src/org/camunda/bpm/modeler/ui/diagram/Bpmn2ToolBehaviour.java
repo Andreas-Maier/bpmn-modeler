@@ -104,7 +104,7 @@ public class Bpmn2ToolBehaviour extends DefaultToolBehaviorProvider implements I
 			createTasksCompartments(palette);
 			createGatewaysCompartments(palette);
 			createEventsCompartments(palette);
-			createEventDefinitionsCompartments(palette);
+//			createEventDefinitionsCompartments(palette);
 //			createDataCompartments(palette);
 			createOtherCompartments(palette);
 		}

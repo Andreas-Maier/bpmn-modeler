@@ -47,8 +47,8 @@ public class FeatureMap {
 		CONNECTORS = Collections.unmodifiableList(features);
 
 		features = new ArrayList<EClass>();
-		features.add(Bpmn2Package.eINSTANCE.getConditionalEventDefinition());
-		features.add(Bpmn2Package.eINSTANCE.getTimerEventDefinition());
+//		features.add(Bpmn2Package.eINSTANCE.getConditionalEventDefinition());
+//		features.add(Bpmn2Package.eINSTANCE.getTimerEventDefinition());
 //		features.add(Bpmn2Package.eINSTANCE.getSignalEventDefinition());
 //		features.add(Bpmn2Package.eINSTANCE.getMessageEventDefinition());
 //		features.add(Bpmn2Package.eINSTANCE.getEscalationEventDefinition());
@@ -56,7 +56,7 @@ public class FeatureMap {
 //		features.add(Bpmn2Package.eINSTANCE.getLinkEventDefinition());
 //		features.add(Bpmn2Package.eINSTANCE.getErrorEventDefinition());
 //		features.add(Bpmn2Package.eINSTANCE.getCancelEventDefinition());
-		features.add(Bpmn2Package.eINSTANCE.getTerminateEventDefinition());
+//		features.add(Bpmn2Package.eINSTANCE.getTerminateEventDefinition());
 		EVENT_DEFINITIONS = Collections.unmodifiableList(features);
 
 		features = new ArrayList<EClass>();
@@ -97,8 +97,8 @@ public class FeatureMap {
 		DATA = Collections.unmodifiableList(features);
 
 		features = new ArrayList<EClass>();
-		features.add(Bpmn2Package.eINSTANCE.getLane());
-		features.add(Bpmn2Package.eINSTANCE.getParticipant());
+//		features.add(Bpmn2Package.eINSTANCE.getLane());
+//		features.add(Bpmn2Package.eINSTANCE.getParticipant());
 		features.add(Bpmn2Package.eINSTANCE.getTextAnnotation());
 //		features.add(Bpmn2Package.eINSTANCE.getSubProcess());
 //		features.add(Bpmn2Package.eINSTANCE.getTransaction());
@@ -120,8 +120,8 @@ public class FeatureMap {
 		EXCLUDE_CONNECTORS = Collections.unmodifiableList(excludeFeatures);
 
 		excludeFeatures = new ArrayList<EClass>();
-//		excludeFeatures.add(Bpmn2Package.eINSTANCE.getConditionalEventDefinition());
-//		excludeFeatures.add(Bpmn2Package.eINSTANCE.getTimerEventDefinition());
+		excludeFeatures.add(Bpmn2Package.eINSTANCE.getConditionalEventDefinition());
+		excludeFeatures.add(Bpmn2Package.eINSTANCE.getTimerEventDefinition());
 		excludeFeatures.add(Bpmn2Package.eINSTANCE.getSignalEventDefinition());
 		excludeFeatures.add(Bpmn2Package.eINSTANCE.getMessageEventDefinition());
 		excludeFeatures.add(Bpmn2Package.eINSTANCE.getEscalationEventDefinition());
@@ -129,7 +129,7 @@ public class FeatureMap {
 		excludeFeatures.add(Bpmn2Package.eINSTANCE.getLinkEventDefinition());
 		excludeFeatures.add(Bpmn2Package.eINSTANCE.getErrorEventDefinition());
 		excludeFeatures.add(Bpmn2Package.eINSTANCE.getCancelEventDefinition());
-//		excludeFeatures.add(Bpmn2Package.eINSTANCE.getTerminateEventDefinition());
+		excludeFeatures.add(Bpmn2Package.eINSTANCE.getTerminateEventDefinition());
 		EXCLUDE_EVENT_DEFINITIONS = Collections.unmodifiableList(excludeFeatures);
 
 		excludeFeatures = new ArrayList<EClass>();

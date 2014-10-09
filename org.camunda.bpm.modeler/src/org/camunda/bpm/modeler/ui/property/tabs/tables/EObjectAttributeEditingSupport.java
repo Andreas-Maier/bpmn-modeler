@@ -20,10 +20,10 @@ import org.eclipse.jface.viewers.ViewerCell;
  */
 public class EObjectAttributeEditingSupport<T extends EObject> extends EditingSupport {
 
-	private TableViewer viewer;
-	private EStructuralFeature feature;
+	private final TableViewer viewer;
+	private final EStructuralFeature feature;
 
-	public EObjectAttributeEditingSupport(TableViewer viewer, EStructuralFeature feature) {
+	public EObjectAttributeEditingSupport(final TableViewer viewer, final EStructuralFeature feature) {
 		super(viewer);
 
 		this.viewer = viewer;
@@ -31,16 +31,16 @@ public class EObjectAttributeEditingSupport<T extends EObject> extends EditingSu
 	}
 
 	@Override
-	protected CellEditor getCellEditor(Object element) {
+	protected CellEditor getCellEditor(final Object element) {
 		return new TextCellEditor(viewer.getTable());
 	}
 
 	@Override
-	protected boolean canEdit(Object element) {
+	protected boolean canEdit(final Object element) {
 		return true;
 	}
 
-	protected String getValue(T element) {
+	protected String getValue(final T element) {
 		Object value = getEValue(element);
 		
 		if (value == null) {
@@ -50,11 +50,11 @@ public class EObjectAttributeEditingSupport<T extends EObject> extends EditingSu
 		}
 	}
 
-	protected Object getEValue(T element) {
+	protected Object getEValue(final T element) {
 		return element.eGet(feature);
 	}
 
-	protected void setValue(T element, Object value) {
+	protected void setValue(final T element, final Object value) {
 		Object val = toEValue(value);
 		Object oldVal = getEValue(element);
 		
@@ -78,7 +78,7 @@ public class EObjectAttributeEditingSupport<T extends EObject> extends EditingSu
 		viewer.update(element, null);
 	}
 	
-	protected Object toEValue(Object value) {
+	protected Object toEValue(final Object value) {
 		if (value instanceof String) {
 			String str = (String) value;
 
@@ -96,7 +96,7 @@ public class EObjectAttributeEditingSupport<T extends EObject> extends EditingSu
 	 * Provides update events for cell value
 	 */
 	@Override
-	protected void saveCellEditorValue(CellEditor cellEditor, ViewerCell cell) {
+	protected void saveCellEditorValue(final CellEditor cellEditor, final ViewerCell cell) {
 		if (!cellEditor.isDirty()) {
 			return;
 		}
@@ -112,12 +112,12 @@ public class EObjectAttributeEditingSupport<T extends EObject> extends EditingSu
 	}
 	
 	@Override
-	protected final void setValue(Object element, Object value) {
+	protected final void setValue(final Object element, final Object value) {
 		setValue((T) element, value);
 	}
 
 	@Override
-	protected final Object getValue(Object element) {
+	protected final Object getValue(final Object element) {
 		return getValue((T) element);
 	}
 

@@ -66,10 +66,10 @@ public class MorphEndEventFeature extends AbstractMorphEventFeature {
 //			options.add(newOption);
 //		}
 
-		if (terminateDef == null || eventDefinitions.size() > 1) {
-			MorphOption newOption = new MorphEventOption("Terminate", Bpmn2Package.eINSTANCE.getEndEvent(), Bpmn2Package.eINSTANCE.getTerminateEventDefinition());
-			options.add(newOption);
-		}
+//		if (terminateDef == null || eventDefinitions.size() > 1) {
+//			MorphOption newOption = new MorphEventOption("Terminate", Bpmn2Package.eINSTANCE.getEndEvent(), Bpmn2Package.eINSTANCE.getTerminateEventDefinition());
+//			options.add(newOption);
+//		}
 		
 //		if (compensateDef == null || eventDefinitions.size() > 1) {
 //			MorphOption newOption = new MorphEventOption("Compensate", Bpmn2Package.eINSTANCE.getEndEvent(), Bpmn2Package.eINSTANCE.getCompensateEventDefinition());

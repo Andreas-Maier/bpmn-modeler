@@ -365,7 +365,7 @@
        point="org.eclipse.core.runtime.products">
     <product
           application="org.eclipse.ui.ide.workbench"
-          name="CAS-BPMN-Modeler">
+          name="GloNet-BPMN-Modeler">
        <property
              name="windowImages"
              value="icons/bpmn2_editor_16.bmp,icons/bpmn2_editor_32.bmp,icons/bpmn2_editor_48.bmp,icons/bpmn2_editor_64.bmp,icons/bpmn2_editor_128.bmp">
@@ -380,7 +380,7 @@
        </property>
        <property
              name="appName"
-             value="CAS-BPMN-Modeler">
+             value="GloNet-BPMN-Modeler">
        </property>
        <property
              name="preferenceCustomization"
